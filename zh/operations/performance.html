@@ -1,0 +1,376 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>性能 - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/operations/performance.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="performance"><a class="header" href="performance.html#performance">性能</a></h1>
+<p>借助零拷贝共享内存 IPC、Apache Arrow 列式格式，以及 100% Rust 实现的内部机制，Dora 实现了比 ROS2 Python 低 10~17 倍的延迟。本文档介绍方法、复现步骤和调优方式。</p>
+<h2 id="architecture-advantages"><a class="header" href="performance.html#architecture-advantages">架构优势</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>层</th><th>Dora</th><th>ROS2（rclpy）</th></tr>
+</thead>
+<tbody>
+<tr><td>运行时</td><td>Rust 异步（tokio）</td><td>Python + C++ 中间件</td></tr>
+<tr><td>IPC（&gt;4KB）</td><td>Zenoh SHM 零拷贝</td><td>DDS 序列化 + 拷贝</td></tr>
+<tr><td>IPC（&lt;4KB）</td><td>使用 postcard 的 TCP</td><td>DDS 序列化 + 拷贝</td></tr>
+<tr><td>数据格式</td><td>Apache Arrow（零序列化）</td><td>CDR 序列化</td></tr>
+<tr><td>线程</td><td>无锁通道（flume）</td><td>受 GIL 约束的回调</td></tr>
+<tr><td>扇出</td><td>Arc 包装（每个接收者 O(1)）</td><td>按接收者逐一复制</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="benchmark-suite"><a class="header" href="performance.html#benchmark-suite">基准测试套件</a></h2>
+<h3 id="internal-benchmarks-examplesbenchmark"><a class="header" href="performance.html#internal-benchmarks-examplesbenchmark">内部基准测试（<code>examples/benchmark/</code>）</a></h3>
+<p>在 10 种负载大小（0B 到 4MB）下测量 Dora 自身的延迟和吞吐量。</p>
+<pre><code class="language-bash">cd examples/benchmark
+./compare.sh          # Rust vs Python sender comparison
+</code></pre>
+<p>报告的指标包括：平均值、p50、p95、p99、p99.9、最小、最大延迟；以及消息数/秒的吞吐量。</p>
+<h3 id="ros2-comparison-examplesros2-comparison"><a class="header" href="performance.html#ros2-comparison-examplesros2-comparison">ROS2 对比（<code>examples/ros2-comparison/</code>）</a></h3>
+<p>在两个框架上使用完全相同的 Python 工作负载，进行一一对应的对比。</p>
+<pre><code class="language-bash">cd examples/ros2-comparison
+./run_comparison.sh   # Requires ROS2 Humble+
+</code></pre>
+<p>双方都使用嵌入在负载前 8 字节中的 <code>time.perf_counter_ns()</code> 时间戳。相同的消息数量、大小和休眠间隔保证了结果的可比性。</p>
+<h3 id="criterion-micro-benchmarks"><a class="header" href="performance.html#criterion-micro-benchmarks">Criterion 微基准测试</a></h3>
+<p>针对内部热路径的独立基准测试：</p>
+<pre><code class="language-bash"># Daemon message routing (fan-out x payload size matrix)
+cargo bench -p dora-daemon
+
+# Message serialization/deserialization
+cargo bench -p dora-message
+</code></pre>
+<p>CI 通过 <code>benchmark-action/github-action-benchmark</code>（120% 告警阈值）来跟踪这些指标。</p>
+<h2 id="reproducing-results"><a class="header" href="performance.html#reproducing-results">复现结果</a></h2>
+<h3 id="requirements"><a class="header" href="performance.html#requirements">要求</a></h3>
+<ul>
+<li>Linux 或 macOS（共享内存 IPC）</li>
+<li>Rust 1.85+，使用 release 配置</li>
+<li>Python 3.10+，带 <code>numpy</code>、<code>pyarrow</code></li>
+<li>ROS2 Humble+（仅用于对比）</li>
+</ul>
+<h3 id="steps"><a class="header" href="performance.html#steps">步骤</a></h3>
+<ol>
+<li>
+<p>构建 Dora：</p>
+<pre><code class="language-bash">cargo install --path binaries/cli --locked
+</code></pre>
+</li>
+<li>
+<p>运行内部基准测试：</p>
+<pre><code class="language-bash">cd examples/benchmark
+BENCH_CSV=results/rust.csv dora run dataflow.yml
+</code></pre>
+</li>
+<li>
+<p>运行 ROS2 对比：</p>
+<pre><code class="language-bash">cd examples/ros2-comparison
+./run_comparison.sh
+</code></pre>
+</li>
+</ol>
+<h3 id="environment-notes"><a class="header" href="performance.html#environment-notes">环境说明</a></h3>
+<ul>
+<li>关闭后台应用程序以减少方差</li>
+<li>使用 <code>taskset</code> 或 <code>cpuset</code> 固定进程以获得一致的结果</li>
+<li>至少运行 3 次迭代并报告中位数</li>
+<li>共享内存的优势在负载 &gt;4KB 时才会显现</li>
+</ul>
+<h2 id="performance-tuning"><a class="header" href="performance.html#performance-tuning">性能调优</a></h2>
+<h3 id="queue-sizes"><a class="header" href="performance.html#queue-sizes">队列大小</a></h3>
+<p>默认队列大小为 10。对于高吞吐量输出，可以增大它：</p>
+<pre><code class="language-yaml">inputs:
+  data:
+    source: producer/output
+    queue_size: 1000
+</code></pre>
+<h3 id="payload-size"><a class="header" href="performance.html#payload-size">负载大小</a></h3>
+<p>对于大于 4KB 的消息，Dora 会自动使用共享内存，避免拷贝。当低延迟很重要时，应将数据结构设计为超过这一阈值。</p>
+<h3 id="arrow-format"><a class="header" href="performance.html#arrow-format">Arrow 格式</a></h3>
+<p>直接使用 Arrow 数组，而不是在 Python 列表之间来回转换：</p>
+<pre><code class="language-python"># Fast: pass Arrow array directly
+node.send_output("out", pa.array(data, type=pa.uint8()))
+
+# Slow: convert through Python list
+node.send_output("out", pa.array(list(data), type=pa.uint8()))
+</code></pre>
+<h3 id="operator-vs-node"><a class="header" href="performance.html#operator-vs-node">算子与节点</a></h3>
+<p>算子（Operator）与运行时在同一进程中运行（零 IPC 开销），但在 Python 中共享 GIL。计算密集型工作请使用 Rust 算子，胶水逻辑请使用 Python 算子。</p>
+<h3 id="distributed-deployment"><a class="header" href="performance.html#distributed-deployment">分布式部署</a></h3>
+<p>对于跨机器通信，Dora 使用 Zenoh 发布-订阅机制。延迟取决于网络质量。如果需要亚毫秒级延迟，请使用本地部署（单机）。</p>
+<h2 id="csv-output-format"><a class="header" href="performance.html#csv-output-format">CSV 输出格式</a></h2>
+<p>所有基准测试都支持 <code>BENCH_CSV</code> 环境变量，以生成机器可读的输出：</p>
+<pre><code>latency,&lt;bytes&gt;,&lt;label&gt;,&lt;n&gt;,&lt;avg_ns&gt;,&lt;p50_ns&gt;,&lt;p95_ns&gt;,&lt;p99_ns&gt;,&lt;p999_ns&gt;,&lt;min_ns&gt;,&lt;max_ns&gt;
+throughput,&lt;bytes&gt;,&lt;label&gt;,&lt;n&gt;,&lt;msg_per_sec&gt;,&lt;elapsed_ns&gt;,0,0,0,0,0
+</code></pre>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/operations/performance.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="distributed.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="realtime-tuning.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="distributed.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="realtime-tuning.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/operations/performance.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

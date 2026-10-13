@@ -1,0 +1,987 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="en">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>Distributed Deployment - Dora User Guide</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../searchindex-59461594.js";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+<div>
+<p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+<p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+<p>Press <kbd>?</kbd> to show this help</p>
+<p>Press <kbd>Esc</kbd> to hide this help</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="Table of contents" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="Toggle Table of Contents" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="Toggle Table of Contents">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="Change theme" class="icon-button" id="mdbook-theme-toggle" title="Change theme" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="Themes" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">Auto</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">Light</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="Toggle Searchbar" class="icon-button" id="mdbook-search-toggle" title="Search (`/`)" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora User Guide</h1>
+<div class="right-buttons">
+<a aria-label="Print this book" href="../print.html" title="Print this book">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git repository" href="https://github.com/dora-rs/dora" title="Git repository">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="Suggest an edit" href="https://github.com/dora-rs/dora/edit/main/guide/src/operations/distributed.md" rel="edit" title="Suggest an edit">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="distributed-deployment-guide"><a class="header" href="distributed.html#distributed-deployment-guide">Distributed Deployment Guide</a></h1>
+<p>Dora supports deploying dataflows across multiple machines for multi-robot fleets, edge AI pipelines, and distributed robotics systems. This guide covers cluster management, node scheduling, binary distribution, auto-recovery, and operational best practices.</p>
+<h2 id="table-of-contents"><a class="header" href="distributed.html#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="distributed.html#overview">Overview</a></li>
+<li><a href="distributed.html#quick-start">Quick Start</a></li>
+<li><a href="distributed.html#features-at-a-glance">Features at a Glance</a></li>
+<li><a href="distributed.html#cluster-configuration-reference">Cluster Configuration Reference</a></li>
+<li><a href="distributed.html#cluster-commands-reference">Cluster Commands Reference</a>
+<ul>
+<li><a href="distributed.html#dora-cluster-up">dora cluster up</a></li>
+<li><a href="distributed.html#dora-cluster-status">dora cluster status</a></li>
+<li><a href="distributed.html#dora-cluster-down">dora cluster down</a></li>
+<li><a href="distributed.html#dora-cluster-install">dora cluster install</a></li>
+<li><a href="distributed.html#dora-cluster-uninstall">dora cluster uninstall</a></li>
+<li><a href="distributed.html#dora-cluster-upgrade">dora cluster upgrade</a></li>
+<li><a href="distributed.html#dora-cluster-restart">dora cluster restart</a></li>
+</ul>
+</li>
+<li><a href="distributed.html#node-scheduling">Node Scheduling</a>
+<ul>
+<li><a href="distributed.html#machine-based-scheduling">Machine-based scheduling</a></li>
+<li><a href="distributed.html#label-based-scheduling">Label-based scheduling</a></li>
+<li><a href="distributed.html#how-resolve_daemon-works-internally">How resolve_daemon() works internally</a></li>
+</ul>
+</li>
+<li><a href="distributed.html#binary-distribution">Binary Distribution</a></li>
+<li><a href="distributed.html#systemd-service-management">systemd Service Management</a></li>
+<li><a href="distributed.html#auto-recovery">Auto-Recovery</a></li>
+<li><a href="distributed.html#rolling-upgrade">Rolling Upgrade</a></li>
+<li><a href="distributed.html#use-cases">Use Cases</a></li>
+<li><a href="distributed.html#operations-runbook">Operations Runbook</a></li>
+<li><a href="distributed.html#deployment-yaml-reference">Deployment YAML Reference</a></li>
+<li><a href="distributed.html#best-practices">Best Practices</a></li>
+</ul>
+<hr/>
+<h2 id="overview"><a class="header" href="distributed.html#overview">Overview</a></h2>
+<p>Dora’s distributed architecture has three tiers:</p>
+<pre><code>CLI  --&gt;  Coordinator  --&gt;  Daemon(s)  --&gt;  Nodes / Operators
+              (one)          (per machine)     (user code)
+</code></pre>
+<ul>
+<li><strong>CLI</strong> sends control commands (build, start, stop) to the coordinator.</li>
+<li><strong>Coordinator</strong> orchestrates daemons, resolves node placement, and manages dataflow lifecycle.</li>
+<li><strong>Daemons</strong> run on each machine, spawning and supervising node processes.</li>
+<li><strong>Nodes</strong> communicate via shared memory (same machine) or Zenoh pub-sub (cross-machine).</li>
+</ul>
+<p>There are two paths to distributed deployment:</p>
+<p><strong>Ad-hoc</strong> – manually start <code>dora daemon</code> on each machine, then use the coordinator for control. Good for development and testing. See <a href="cli.html#distributed-deployments">Distributed Deployments in the CLI reference</a>.</p>
+<p><strong>Managed (cluster.yml)</strong> – define your cluster topology in a YAML file, then use <code>dora cluster</code> commands for SSH-based lifecycle management. This guide focuses on the managed path.</p>
+<hr/>
+<h2 id="quick-start"><a class="header" href="distributed.html#quick-start">Quick Start</a></h2>
+<ol>
+<li>Create a <code>cluster.yml</code>:</li>
+</ol>
+<pre><code class="language-yaml">coordinator:
+  addr: 10.0.0.1
+machines:
+  - id: robot
+    host: 10.0.0.2
+    user: ubuntu
+  - id: gpu-server
+    host: 10.0.0.3
+    user: ubuntu
+</code></pre>
+<ol start="2">
+<li>Bring up the cluster:</li>
+</ol>
+<pre><code class="language-bash">dora cluster up cluster.yml
+</code></pre>
+<ol start="3">
+<li>Start a dataflow:</li>
+</ol>
+<pre><code class="language-bash">dora start dataflow.yml --name my-app --attach
+</code></pre>
+<ol start="4">
+<li>Check cluster health:</li>
+</ol>
+<pre><code class="language-bash">dora cluster status
+</code></pre>
+<ol start="5">
+<li>Tear down:</li>
+</ol>
+<pre><code class="language-bash">dora cluster down
+</code></pre>
+<hr/>
+<h2 id="features-at-a-glance"><a class="header" href="distributed.html#features-at-a-glance">Features at a Glance</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Feature</th><th>Command / Config</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>Cluster lifecycle</td><td><code>dora cluster up/status/down</code></td><td>SSH-based daemon management from a single machine</td></tr>
+<tr><td>Label scheduling</td><td><code>deploy.labels</code></td><td>Route nodes to daemons by key-value labels</td></tr>
+<tr><td>Binary distribution</td><td><code>deploy.distribute</code></td><td>local, scp, or http strategies</td></tr>
+<tr><td>systemd services</td><td><code>dora cluster install/uninstall</code></td><td>Persistent daemon services that survive reboots</td></tr>
+<tr><td>Auto-recovery</td><td>Automatic</td><td>Re-spawn nodes when a daemon reconnects</td></tr>
+<tr><td>Rolling upgrade</td><td><code>dora cluster upgrade</code></td><td>SCP binary + restart per-machine sequentially</td></tr>
+<tr><td>Dataflow restart</td><td><code>dora cluster restart</code></td><td>Restart a running dataflow by name or UUID</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="cluster-configuration-reference"><a class="header" href="distributed.html#cluster-configuration-reference">Cluster Configuration Reference</a></h2>
+<p>A <code>cluster.yml</code> file defines the coordinator address and the set of machines in the cluster.</p>
+<h3 id="full-schema"><a class="header" href="distributed.html#full-schema">Full Schema</a></h3>
+<pre><code class="language-yaml">coordinator:
+  addr: 10.0.0.1            # IP address the coordinator binds to (required)
+  port: 6013                 # WebSocket port (default: 6013)
+
+machines:
+  - id: edge-01              # Unique machine identifier (required)
+    host: 10.0.0.2           # SSH-reachable hostname or IP (required)
+    user: ubuntu              # SSH user (optional, defaults to current user)
+    labels:                   # Key-value labels for scheduling (optional)
+      gpu: "true"
+      arch: arm64
+
+  - id: edge-02
+    host: 10.0.0.3
+    labels:
+      arch: arm64
+</code></pre>
+<h3 id="fields"><a class="header" href="distributed.html#fields">Fields</a></h3>
+<p><strong>coordinator</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>addr</code></td><td>IP address</td><td>(required)</td><td>Address the coordinator binds to</td></tr>
+<tr><td><code>port</code></td><td>u16</td><td><code>6013</code></td><td>WebSocket port</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>machines[]</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>string</td><td>(required)</td><td>Unique machine identifier, used in <code>deploy.machine</code></td></tr>
+<tr><td><code>host</code></td><td>string</td><td>(required)</td><td>SSH-reachable hostname or IP address</td></tr>
+<tr><td><code>user</code></td><td>string</td><td>current user</td><td>SSH username</td></tr>
+<tr><td><code>labels</code></td><td>map</td><td>empty</td><td>Key-value pairs for label-based scheduling</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="validation-rules"><a class="header" href="distributed.html#validation-rules">Validation Rules</a></h3>
+<ul>
+<li>At least one machine must be defined.</li>
+<li>Machine IDs must be non-empty and unique.</li>
+<li>Machine hosts must be non-empty.</li>
+<li>Unknown fields are rejected (<code>deny_unknown_fields</code>).</li>
+</ul>
+<h3 id="example-3-machine-gpu-cluster"><a class="header" href="distributed.html#example-3-machine-gpu-cluster">Example: 3-Machine GPU Cluster</a></h3>
+<pre><code class="language-yaml">coordinator:
+  addr: 192.168.1.1
+
+machines:
+  - id: coordinator-host
+    host: 192.168.1.1
+    labels:
+      role: control
+
+  - id: gpu-a100
+    host: 192.168.1.10
+    user: ml
+    labels:
+      gpu: a100
+      arch: x86_64
+
+  - id: jetson-01
+    host: 192.168.1.20
+    user: nvidia
+    labels:
+      gpu: jetson
+      arch: arm64
+</code></pre>
+<hr/>
+<h2 id="cluster-commands-reference"><a class="header" href="distributed.html#cluster-commands-reference">Cluster Commands Reference</a></h2>
+<p>All <code>dora cluster</code> commands operate on a <code>cluster.yml</code> file and use SSH to manage remote machines.</p>
+<p>SSH options used: <code>BatchMode=yes</code>, <code>ConnectTimeout=10</code>, <code>StrictHostKeyChecking=accept-new</code>.</p>
+<h3 id="dora-cluster-up"><a class="header" href="distributed.html#dora-cluster-up">dora cluster up</a></h3>
+<p>Bring up a multi-machine cluster from a cluster.yml file. Starts the coordinator locally, then SSH-es into each machine to start a daemon.</p>
+<pre><code>dora cluster up &lt;PATH&gt;
+</code></pre>
+<p><strong>Arguments:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Argument</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>PATH</code></td><td>Path to the cluster configuration file</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Behavior:</strong></p>
+<ol>
+<li>Loads and validates the cluster config.</li>
+<li>Starts the coordinator locally on <code>addr:port</code>.</li>
+<li>For each machine, SSH-es in and runs <code>nohup dora daemon --machine-id &lt;id&gt; --coordinator-addr &lt;addr&gt; --coordinator-port &lt;port&gt; [--labels k1=v1,k2=v2] --quiet</code>.</li>
+<li>Polls until all expected daemons register with the coordinator (30s timeout).</li>
+</ol>
+<p><strong>Example:</strong></p>
+<pre><code class="language-bash">$ dora cluster up cluster.yml
+Starting coordinator on 10.0.0.1:6013...
+Starting daemon on robot (ubuntu@10.0.0.2)... OK
+Starting daemon on gpu-server (ubuntu@10.0.0.3)... OK
+All 2 daemons connected.
+</code></pre>
+<h3 id="dora-cluster-status"><a class="header" href="distributed.html#dora-cluster-status">dora cluster status</a></h3>
+<p>Show the current status of the cluster. Displays connected daemons and active dataflow count.</p>
+<pre><code>dora cluster status [--coordinator-addr ADDR] [--coordinator-port PORT]
+</code></pre>
+<p><strong>Flags:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--coordinator-addr</code></td><td><code>localhost</code></td><td>Coordinator hostname or IP</td></tr>
+<tr><td><code>--coordinator-port</code></td><td><code>6013</code></td><td>Coordinator WebSocket port</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example:</strong></p>
+<pre><code class="language-bash">$ dora cluster status
+DAEMON ID      LAST HEARTBEAT
+robot          2s ago
+gpu-server     1s ago
+
+Active dataflows: 1
+</code></pre>
+<h3 id="dora-cluster-down"><a class="header" href="distributed.html#dora-cluster-down">dora cluster down</a></h3>
+<p>Tear down the cluster (coordinator and all daemons).</p>
+<pre><code>dora cluster down [--coordinator-addr ADDR] [--coordinator-port PORT]
+</code></pre>
+<p>Terminates all daemons and the coordinator process.</p>
+<h3 id="dora-cluster-install"><a class="header" href="distributed.html#dora-cluster-install">dora cluster install</a></h3>
+<p>Install <code>dora-daemon</code> as a systemd service on each machine. SSH-es into each machine, writes a systemd unit file, and enables the service.</p>
+<pre><code>dora cluster install &lt;PATH&gt;
+</code></pre>
+<p><strong>Arguments:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Argument</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>PATH</code></td><td>Path to the cluster configuration file</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Behavior:</strong></p>
+<p>For each machine, creates and enables a systemd service named <code>dora-daemon-&lt;id&gt;</code>. The unit file:</p>
+<pre><code class="language-ini">[Unit]
+Description=Dora Daemon (&lt;id&gt;)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=dora daemon --machine-id &lt;id&gt; --coordinator-addr &lt;addr&gt; --coordinator-port &lt;port&gt; --labels k1=v1,k2=v2 --quiet
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-bash">$ dora cluster install cluster.yml
+Installing dora-daemon-robot on ubuntu@10.0.0.2... OK
+Installing dora-daemon-gpu-server on ubuntu@10.0.0.3... OK
+2/2 succeeded.
+</code></pre>
+<h3 id="dora-cluster-uninstall"><a class="header" href="distributed.html#dora-cluster-uninstall">dora cluster uninstall</a></h3>
+<p>Uninstall dora-daemon systemd services from each machine. Stops, disables, and removes the systemd unit.</p>
+<pre><code>dora cluster uninstall &lt;PATH&gt;
+</code></pre>
+<p><strong>Behavior:</strong></p>
+<p>For each machine, runs:</p>
+<pre><code class="language-bash">sudo systemctl stop dora-daemon-&lt;id&gt;
+sudo systemctl disable dora-daemon-&lt;id&gt;
+sudo rm -f /etc/systemd/system/dora-daemon-&lt;id&gt;.service
+sudo systemctl daemon-reload
+</code></pre>
+<h3 id="dora-cluster-upgrade"><a class="header" href="distributed.html#dora-cluster-upgrade">dora cluster upgrade</a></h3>
+<p>Rolling upgrade: SCP the local <code>dora</code> binary to each machine and restart daemons. Processes machines sequentially to maintain availability.</p>
+<pre><code>dora cluster upgrade &lt;PATH&gt;
+</code></pre>
+<p><strong>Behavior:</strong></p>
+<p>For each machine sequentially:</p>
+<ol>
+<li>SCP the local <code>dora</code> binary to <code>/usr/local/bin/dora</code> on the target machine.</li>
+<li>Restart the systemd service via <code>sudo systemctl restart dora-daemon-&lt;id&gt;</code>.</li>
+<li>Poll the coordinator until the daemon reconnects (30s timeout, 500ms intervals).</li>
+</ol>
+<p>Nodes on other machines continue running while each machine is being upgraded.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-bash">$ dora cluster upgrade cluster.yml
+Upgrading robot (ubuntu@10.0.0.2)...
+  SCP binary... OK
+  Restart service... OK
+  Waiting for reconnect... OK (3.2s)
+Upgrading gpu-server (ubuntu@10.0.0.3)...
+  SCP binary... OK
+  Restart service... OK
+  Waiting for reconnect... OK (2.8s)
+2/2 succeeded.
+</code></pre>
+<h3 id="dora-cluster-restart"><a class="header" href="distributed.html#dora-cluster-restart">dora cluster restart</a></h3>
+<p>Restart a running dataflow by name or UUID. Stops the dataflow and immediately re-starts it using the stored descriptor (no YAML path needed).</p>
+<pre><code>dora cluster restart &lt;DATAFLOW&gt;
+</code></pre>
+<p><strong>Arguments:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Argument</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DATAFLOW</code></td><td>Name or UUID of the dataflow to restart</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example:</strong></p>
+<pre><code class="language-bash">$ dora cluster restart my-app
+Restarting dataflow `my-app`
+dataflow restarted: a1b2c3d4-... -&gt; e5f6a7b8-...
+</code></pre>
+<hr/>
+<h2 id="node-scheduling"><a class="header" href="distributed.html#node-scheduling">Node Scheduling</a></h2>
+<p>When the coordinator receives a dataflow, it decides which daemon runs each node based on the <code>deploy</code> section in the dataflow YAML. Resolution priority: <strong>machine &gt; labels &gt; unnamed</strong>.</p>
+<h3 id="machine-based-scheduling"><a class="header" href="distributed.html#machine-based-scheduling">Machine-based scheduling</a></h3>
+<p>Assign a node to a specific machine by its <code>id</code> from <code>cluster.yml</code>:</p>
+<pre><code class="language-yaml">nodes:
+  - id: camera
+    deploy:
+      machine: robot
+    path: ./camera-driver
+    outputs:
+      - frames
+</code></pre>
+<p>The coordinator looks up the daemon whose <code>machine-id</code> matches. If no matching daemon is connected, the deployment fails with: <code>no matching daemon for machine id "robot"</code>.</p>
+<h3 id="label-based-scheduling"><a class="header" href="distributed.html#label-based-scheduling">Label-based scheduling</a></h3>
+<p>Assign a node by requiring specific labels on the target daemon:</p>
+<pre><code class="language-yaml">nodes:
+  - id: inference
+    deploy:
+      labels:
+        gpu: "true"
+    path: ./ml-model
+    inputs:
+      frames: camera/frames
+    outputs:
+      - predictions
+</code></pre>
+<p>The coordinator finds the first connected daemon whose labels are a <strong>superset</strong> of the required labels. All required key-value pairs must match exactly. If no daemon satisfies the requirements, deployment fails with: <code>no daemon matches labels {"gpu": "true"}</code>.</p>
+<h3 id="unassigned-nodes"><a class="header" href="distributed.html#unassigned-nodes">Unassigned nodes</a></h3>
+<p>Nodes without an <code>deploy</code> section (or with an empty one) are assigned to the first unnamed daemon – one that connected without a <code>--machine-id</code> flag.</p>
+<h3 id="how-resolve_daemon-works-internally"><a class="header" href="distributed.html#how-resolve_daemon-works-internally">How resolve_daemon() works internally</a></h3>
+<p>The coordinator resolves node placement in <code>coordinator/run/mod.rs</code>:</p>
+<pre><code>resolve_daemon(connections, deploy) -&gt; DaemonId
+  1. If deploy.machine is Some(id):
+       -&gt; look up daemon by machine-id
+  2. Else if deploy.labels is non-empty:
+       -&gt; find first daemon where all required labels match
+  3. Else:
+       -&gt; pick first unnamed daemon
+</code></pre>
+<p>The label matching function iterates over all connected daemons and checks that every required key-value pair exists in the daemon’s label set (<code>conn.labels.get(k) == Some(v)</code>). This is a superset check: a daemon with <code>{gpu: "true", arch: "arm64", role: "edge"}</code> satisfies the requirement <code>{gpu: "true"}</code>.</p>
+<hr/>
+<h2 id="binary-distribution"><a class="header" href="distributed.html#binary-distribution">Binary Distribution</a></h2>
+<p>Control how node binaries are delivered to remote daemons via the <code>distribute</code> field.</p>
+<h3 id="local-default"><a class="header" href="distributed.html#local-default">Local (default)</a></h3>
+<p>Each daemon builds from source on its own machine. This is the current default behavior.</p>
+<pre><code class="language-yaml">nodes:
+  - id: my-node
+    deploy:
+      machine: edge-01
+      distribute: local
+    path: ./my-node
+</code></pre>
+<h3 id="scp-mode"><a class="header" href="distributed.html#scp-mode">SCP mode</a></h3>
+<p>The CLI pushes the locally-built binary to the target machine via SSH/SCP before spawning.</p>
+<pre><code class="language-yaml">nodes:
+  - id: my-node
+    deploy:
+      machine: edge-01
+      distribute: scp
+    path: ./my-node
+</code></pre>
+<h3 id="http-mode"><a class="header" href="distributed.html#http-mode">HTTP mode</a></h3>
+<p>The coordinator runs an artifact store. Daemons pull binaries from the coordinator via HTTP before spawning.</p>
+<pre><code class="language-yaml">nodes:
+  - id: my-node
+    deploy:
+      machine: edge-01
+      distribute: http
+    path: ./my-node
+</code></pre>
+<p>Artifacts are served from <code>GET /api/artifacts/{build_id}/{node_id}</code> on the coordinator’s WebSocket port. The endpoint requires authentication (Bearer token) and sanitizes node IDs to prevent path traversal.</p>
+<h3 id="when-to-use-each-strategy"><a class="header" href="distributed.html#when-to-use-each-strategy">When to use each strategy</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Strategy</th><th>Best for</th><th>Tradeoffs</th></tr>
+</thead>
+<tbody>
+<tr><td><code>local</code></td><td>Homogeneous clusters, CI builds</td><td>Requires build toolchain on every machine</td></tr>
+<tr><td><code>scp</code></td><td>Heterogeneous clusters, cross-compiled binaries</td><td>Requires SSH access from CLI to all machines</td></tr>
+<tr><td><code>http</code></td><td>Air-gapped daemons, firewalled networks</td><td>Requires coordinator reachability from all daemons</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="systemd-service-management"><a class="header" href="distributed.html#systemd-service-management">systemd Service Management</a></h2>
+<p>For production deployments, install daemons as systemd services so they survive reboots and auto-restart on failure.</p>
+<h3 id="install"><a class="header" href="distributed.html#install">Install</a></h3>
+<pre><code class="language-bash">dora cluster install cluster.yml
+</code></pre>
+<p>Creates a systemd unit file on each machine (see <a href="distributed.html#dora-cluster-install">dora cluster install</a> for the full unit template). Key properties:</p>
+<ul>
+<li><strong>Restart=on-failure</strong> with <strong>RestartSec=5</strong>: daemon auto-restarts if it crashes.</li>
+<li><strong>After=network-online.target</strong>: waits for network before starting.</li>
+<li><strong>WantedBy=multi-user.target</strong>: starts on boot.</li>
+</ul>
+<h3 id="uninstall"><a class="header" href="distributed.html#uninstall">Uninstall</a></h3>
+<pre><code class="language-bash">dora cluster uninstall cluster.yml
+</code></pre>
+<p>Stops, disables, and removes the unit file from each machine, then reloads the systemd daemon.</p>
+<h3 id="verifying-service-status"><a class="header" href="distributed.html#verifying-service-status">Verifying service status</a></h3>
+<p>After install, check services directly:</p>
+<pre><code class="language-bash">ssh ubuntu@10.0.0.2 sudo systemctl status dora-daemon-robot
+</code></pre>
+<hr/>
+<h2 id="auto-recovery"><a class="header" href="distributed.html#auto-recovery">Auto-Recovery</a></h2>
+<p>When a daemon disconnects and reconnects (e.g., after a network blip, machine reboot, or service restart), the coordinator automatically re-spawns any missing dataflows on that daemon.</p>
+<h3 id="how-it-works"><a class="header" href="distributed.html#how-it-works">How it works</a></h3>
+<ol>
+<li>Daemon reconnects and sends a <code>StatusReport</code> listing its currently running dataflows.</li>
+<li>Coordinator compares the report against its expected state (dataflows that should have nodes on this daemon).</li>
+<li>For each running dataflow with nodes assigned to this daemon that the daemon did not report, the coordinator sends a <code>SpawnDataflowNodes</code> command to re-spawn the missing nodes.</li>
+</ol>
+<h3 id="30-second-backoff"><a class="header" href="distributed.html#30-second-backoff">30-second backoff</a></h3>
+<p>To prevent crash loops (e.g., a node that immediately crashes on spawn), recovery uses a per-daemon, per-dataflow backoff:</p>
+<ul>
+<li>After a recovery attempt, the coordinator records the timestamp.</li>
+<li>Subsequent recovery for the same daemon/dataflow pair is skipped until 30 seconds have elapsed.</li>
+<li>The backoff clears when the daemon reports the dataflow as running again.</li>
+</ul>
+<p>This means a node that crashes immediately will only be re-spawned once every 30 seconds, not in a tight loop.</p>
+<h3 id="limitations"><a class="header" href="distributed.html#limitations">Limitations</a></h3>
+<ul>
+<li>Auto-recovery only applies to dataflows started via <code>dora start</code> (coordinator-managed). Local <code>dora run</code> dataflows are not tracked by the coordinator.</li>
+<li>Recovery re-spawns all nodes assigned to the reconnecting daemon, not individual nodes. For per-node restart on crash, use <a href="fault-tolerance.html#restart-policies">restart policies</a>.</li>
+<li><strong>Known issue (<a href="https://github.com/dora-rs/dora/issues/1799">#1799</a>):</strong> when the daemon’s WebSocket connection to the coordinator drops, the daemon currently kills all running node processes before reconnecting. This means the coordinator’s auto-recovery path re-spawns the nodes from scratch rather than reclaiming still-running processes. The net effect is a brief disruption (nodes restart) rather than seamless continuity. A fix to preserve running processes across reconnect cycles is planned (see <a href="https://dora-rs.ai/docs/plan-coordinator-ha.html"><code>docs/plan-coordinator-ha.md</code></a> Phase 1.4).</li>
+</ul>
+<hr/>
+<h2 id="rolling-upgrade"><a class="header" href="distributed.html#rolling-upgrade">Rolling Upgrade</a></h2>
+<p>Upgrade the <code>dora</code> binary on all cluster machines with zero downtime using sequential per-machine upgrades.</p>
+<h3 id="process"><a class="header" href="distributed.html#process">Process</a></h3>
+<pre><code class="language-bash">dora cluster upgrade cluster.yml
+</code></pre>
+<p>For each machine, sequentially:</p>
+<ol>
+<li><strong>SCP</strong> the local <code>dora</code> binary to <code>/usr/local/bin/dora</code> on the target.</li>
+<li><strong>Restart</strong> the systemd service (<code>systemctl restart dora-daemon-&lt;id&gt;</code>).</li>
+<li><strong>Poll</strong> the coordinator until the daemon reconnects (30s timeout).</li>
+</ol>
+<p>Because machines are upgraded one at a time, nodes on other machines continue running. After the daemon reconnects, auto-recovery re-spawns any dataflow nodes that were running on that machine.</p>
+<h3 id="prerequisites"><a class="header" href="distributed.html#prerequisites">Prerequisites</a></h3>
+<ul>
+<li>Daemons must be installed as systemd services (<code>dora cluster install</code>).</li>
+<li>The local <code>dora</code> binary must be compatible with the cluster’s coordinator version.</li>
+<li>SSH access with <code>sudo</code> permissions on all target machines.</li>
+</ul>
+<hr/>
+<h2 id="use-cases"><a class="header" href="distributed.html#use-cases">Use Cases</a></h2>
+<h3 id="1-edge-ai-pipeline-robot--gpu-server"><a class="header" href="distributed.html#1-edge-ai-pipeline-robot--gpu-server">1. Edge AI Pipeline (Robot + GPU Server)</a></h3>
+<p>A camera node runs on the robot, sends frames to a GPU server for inference, and results flow back to an actuator on the robot.</p>
+<p><strong>cluster.yml:</strong></p>
+<pre><code class="language-yaml">coordinator:
+  addr: 192.168.1.1
+
+machines:
+  - id: robot
+    host: 192.168.1.10
+    user: ubuntu
+    labels:
+      role: edge
+  - id: gpu-server
+    host: 192.168.1.20
+    user: ml
+    labels:
+      gpu: "true"
+</code></pre>
+<p><strong>dataflow.yml:</strong></p>
+<pre><code class="language-yaml">nodes:
+  - id: camera
+    deploy:
+      machine: robot
+    path: ./camera-driver
+    outputs:
+      - frames
+
+  - id: inference
+    deploy:
+      labels:
+        gpu: "true"
+    path: ./ml-model
+    inputs:
+      frames: camera/frames
+    outputs:
+      - predictions
+
+  - id: actuator
+    deploy:
+      machine: robot
+    path: ./actuator-driver
+    inputs:
+      commands: inference/predictions
+</code></pre>
+<h3 id="2-multi-robot-fleet"><a class="header" href="distributed.html#2-multi-robot-fleet">2. Multi-Robot Fleet</a></h3>
+<p>A central coordinator manages N robots with heterogeneous hardware. Label scheduling routes nodes to the right machines without hardcoding machine IDs.</p>
+<p><strong>cluster.yml:</strong></p>
+<pre><code class="language-yaml">coordinator:
+  addr: 10.0.0.1
+
+machines:
+  - id: bot-01
+    host: 10.0.0.11
+    user: robot
+    labels:
+      fleet: warehouse
+      lidar: "true"
+
+  - id: bot-02
+    host: 10.0.0.12
+    user: robot
+    labels:
+      fleet: warehouse
+      camera: rgbd
+
+  - id: bot-03
+    host: 10.0.0.13
+    user: robot
+    labels:
+      fleet: warehouse
+      lidar: "true"
+      camera: rgbd
+</code></pre>
+<p><strong>dataflow.yml:</strong></p>
+<pre><code class="language-yaml">nodes:
+  - id: lidar-driver
+    deploy:
+      labels:
+        lidar: "true"
+    path: ./lidar-driver
+    outputs:
+      - scans
+
+  - id: camera-driver
+    deploy:
+      labels:
+        camera: rgbd
+    path: ./camera-driver
+    outputs:
+      - frames
+</code></pre>
+<p>With this configuration, <code>lidar-driver</code> runs on bot-01 or bot-03, and <code>camera-driver</code> runs on bot-02 or bot-03.</p>
+<h3 id="3-cicd-pipeline-for-robotics"><a class="header" href="distributed.html#3-cicd-pipeline-for-robotics">3. CI/CD Pipeline for Robotics</a></h3>
+<p>Automate cluster management in CI:</p>
+<pre><code class="language-bash"># Setup
+dora cluster install cluster.yml
+
+# Deploy new version
+dora cluster upgrade cluster.yml
+
+# Run integration tests
+dora start test-dataflow.yml --name integration-test --attach
+
+# Monitor
+dora cluster status
+dora top
+
+# Cleanup
+dora stop integration-test
+</code></pre>
+<h3 id="4-development-to-production"><a class="header" href="distributed.html#4-development-to-production">4. Development to Production</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Stage</th><th>Approach</th><th>Command</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Local dev</strong></td><td>Single-process, no coordinator</td><td><code>dora run dataflow.yml</code></td></tr>
+<tr><td><strong>Staging</strong></td><td>Ad-hoc daemons, manual setup</td><td><code>dora up</code> + <code>dora daemon</code> on each machine</td></tr>
+<tr><td><strong>Production</strong></td><td>Managed cluster, systemd services</td><td><code>dora cluster install cluster.yml</code></td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="operations-runbook"><a class="header" href="distributed.html#operations-runbook">Operations Runbook</a></h2>
+<h3 id="initial-setup-checklist"><a class="header" href="distributed.html#initial-setup-checklist">Initial Setup Checklist</a></h3>
+<ol>
+<li><strong>SSH keys</strong>: Distribute SSH keys so the CLI machine can reach all cluster machines without a password (<code>BatchMode=yes</code>).</li>
+<li><strong>Dora binary</strong>: Install the <code>dora</code> binary on all machines (same version).</li>
+<li><strong>Network</strong>: Ensure coordinator port (default 6013) is reachable from all machines. Ensure Zenoh ports are open between daemons for cross-machine node communication.</li>
+<li><strong>cluster.yml</strong>: Create the cluster configuration with correct IPs, users, and labels.</li>
+</ol>
+<h3 id="day-to-day-operations"><a class="header" href="distributed.html#day-to-day-operations">Day-to-Day Operations</a></h3>
+<pre><code class="language-bash"># Start a dataflow
+dora start dataflow.yml --name my-app --attach
+
+# List running dataflows
+dora list
+
+# Monitor resource usage
+dora top
+
+# View node logs
+dora logs my-app &lt;node-id&gt; --follow
+
+# Stop a dataflow
+dora stop my-app
+
+# Check cluster health
+dora cluster status
+</code></pre>
+<h3 id="upgrading"><a class="header" href="distributed.html#upgrading">Upgrading</a></h3>
+<ol>
+<li>Build or download the new <code>dora</code> binary locally.</li>
+<li>Run <code>dora cluster upgrade cluster.yml</code>.</li>
+<li>Verify with <code>dora cluster status</code> that all daemons reconnected.</li>
+<li>Running dataflows are automatically re-spawned via auto-recovery.</li>
+</ol>
+<h3 id="troubleshooting"><a class="header" href="distributed.html#troubleshooting">Troubleshooting</a></h3>
+<p><strong>Daemon not connecting</strong></p>
+<ul>
+<li>Verify the coordinator is running and reachable: <code>curl http://&lt;addr&gt;:6013/api/health</code> (or check coordinator logs).</li>
+<li>Check daemon logs: <code>journalctl -u dora-daemon-&lt;id&gt; -f</code> (systemd) or the daemon’s stderr output (ad-hoc).</li>
+<li>Confirm the <code>--coordinator-addr</code> and <code>--coordinator-port</code> match the coordinator’s actual bind address.</li>
+</ul>
+<p><strong>SSH failures during cluster commands</strong></p>
+<ul>
+<li>Ensure <code>ssh -o BatchMode=yes &lt;user&gt;@&lt;host&gt; echo ok</code> works from the CLI machine.</li>
+<li>Check that <code>StrictHostKeyChecking=accept-new</code> is acceptable for your environment (first connection auto-accepts the host key).</li>
+<li>Verify the <code>user</code> field in <code>cluster.yml</code> matches a valid SSH user on the target.</li>
+</ul>
+<p><strong>Label mismatch errors</strong></p>
+<ul>
+<li>Error: <code>no daemon matches labels {"gpu": "true"}</code>.</li>
+<li>Check that the daemon was started with the correct <code>--labels</code> flag.</li>
+<li>Run <code>dora cluster status</code> to see connected daemons. Labels are set at daemon startup from <code>cluster.yml</code> and cannot be changed at runtime.</li>
+</ul>
+<p><strong>Auto-recovery not triggering</strong></p>
+<ul>
+<li>Auto-recovery only applies to coordinator-managed dataflows (<code>dora start</code>), not <code>dora run</code>.</li>
+<li>Check coordinator logs for <code>auto-recovery: re-spawning</code> messages.</li>
+<li>If the node crashes immediately, recovery is throttled to once every 30 seconds per daemon per dataflow.</li>
+</ul>
+<hr/>
+<h2 id="deployment-yaml-reference"><a class="header" href="distributed.html#deployment-yaml-reference">Deployment YAML Reference</a></h2>
+<p>The <code>deploy</code> section on each node controls placement and distribution. All fields are optional.</p>
+<pre><code class="language-yaml">nodes:
+  - id: my-node
+    deploy:
+      machine: edge-01                # Target machine ID from cluster.yml
+      labels:                          # Label requirements (superset match)
+        gpu: "true"
+        arch: arm64
+      distribute: local                # local | scp | http
+      working_dir: /opt/my-app         # Working directory on the target machine
+    path: ./my-node
+</code></pre>
+<h3 id="fields-1"><a class="header" href="distributed.html#fields-1">Fields</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>machine</code></td><td>string</td><td>none</td><td>Target machine ID. Takes priority over labels.</td></tr>
+<tr><td><code>labels</code></td><td>map</td><td>empty</td><td>Required daemon labels. All key-value pairs must match.</td></tr>
+<tr><td><code>distribute</code></td><td>string</td><td><code>local</code></td><td>Binary distribution strategy: <code>local</code>, <code>scp</code>, or <code>http</code>.</td></tr>
+<tr><td><code>working_dir</code></td><td>path</td><td>none</td><td>Working directory on the target machine.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="resolution-priority"><a class="header" href="distributed.html#resolution-priority">Resolution priority</a></h3>
+<ol>
+<li><strong>machine</strong> – if set, the node is assigned to the daemon with that machine ID.</li>
+<li><strong>labels</strong> – if set (and machine is not), the node is assigned to the first daemon whose labels are a superset of the required labels.</li>
+<li><strong>Fallback</strong> – if neither is set, the node is assigned to the first unnamed (no machine-id) daemon.</li>
+</ol>
+<hr/>
+<h2 id="best-practices"><a class="header" href="distributed.html#best-practices">Best Practices</a></h2>
+<ul>
+<li><strong>Use labels over machine IDs</strong> for flexibility. Labels decouple your dataflow from specific machines, making it easier to add, remove, or replace hardware.</li>
+<li><strong>Use systemd install for production</strong>. Daemon services survive reboots and auto-restart on failure with <code>Restart=on-failure</code>.</li>
+<li><strong>Use coordinator persistence</strong> (<code>dora coordinator --store redb</code>) with clusters so the coordinator survives restarts. See <a href="fault-tolerance.html#coordinator-state-persistence">Coordinator State Persistence</a>.</li>
+<li><strong>Set restart policies on nodes</strong> for per-node resilience. Combine with auto-recovery for defense in depth. See <a href="fault-tolerance.html#restart-policies">Restart Policies</a>.</li>
+<li><strong>Monitor with multiple tools</strong>: <code>dora cluster status</code> for daemon health, <code>dora top</code> for resource usage, <code>dora logs</code> for node output.</li>
+<li><strong>Test locally first</strong>. Develop with <code>dora run dataflow.yml</code>, then deploy to a cluster. The same dataflow YAML works in both modes – <code>deploy</code> fields are ignored in local mode.</li>
+<li><strong>Use rolling upgrades</strong> instead of stopping the entire cluster. <code>dora cluster upgrade</code> processes one machine at a time to maintain availability.</li>
+<li><strong>Keep cluster.yml in version control</strong> alongside your dataflow definitions.</li>
+</ul>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">Unofficial copy of the dora documentation. See the <a href="https://dora-rs.ai/dora/operations/distributed.html" rel="noopener" target="_blank">official page</a>. Original © dora-rs contributors, licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a>.</p></main>
+<nav aria-label="Page navigation" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="mobile-nav-chapters previous" href="fault-tolerance.html" rel="prev" title="Previous chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="mobile-nav-chapters next" href="performance.html" rel="next prefetch" title="Next chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="Page navigation" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="nav-chapters previous" href="fault-tolerance.html" rel="prev" title="Previous chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="nav-chapters next" href="performance.html" rel="next prefetch" title="Next chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../searcher-09f2665d.js"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到中文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/operations/distributed.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">View official page</a></div>
+<button id="i18n-fab-btn" type="button" title="Language / official page (drag to move)" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">EN</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/en/","/zh/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/en/","/zh/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

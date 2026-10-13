@@ -1,0 +1,1036 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="en">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>Fault Tolerance - Dora User Guide</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../searchindex-59461594.js";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+<div>
+<p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+<p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+<p>Press <kbd>?</kbd> to show this help</p>
+<p>Press <kbd>Esc</kbd> to hide this help</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="Table of contents" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="Toggle Table of Contents" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="Toggle Table of Contents">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="Change theme" class="icon-button" id="mdbook-theme-toggle" title="Change theme" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="Themes" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">Auto</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">Light</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="Toggle Searchbar" class="icon-button" id="mdbook-search-toggle" title="Search (`/`)" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora User Guide</h1>
+<div class="right-buttons">
+<a aria-label="Print this book" href="../print.html" title="Print this book">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git repository" href="https://github.com/dora-rs/dora" title="Git repository">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="Suggest an edit" href="https://github.com/dora-rs/dora/edit/main/guide/src/operations/fault-tolerance.md" rel="edit" title="Suggest an edit">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="fault-tolerance"><a class="header" href="fault-tolerance.html#fault-tolerance">Fault Tolerance</a></h1>
+<p>Dora provides built-in fault tolerance for robotic and AI dataflows. Nodes can automatically restart on failure, detect stale upstream connections, gracefully degrade when inputs are unavailable, and the coordinator can persist state to disk so it survives crashes and restarts.</p>
+<h2 id="features-at-a-glance"><a class="header" href="fault-tolerance.html#features-at-a-glance">Features at a Glance</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Feature</th><th>Scope</th><th>Config</th></tr>
+</thead>
+<tbody>
+<tr><td>Restart policies</td><td>Per-node</td><td><code>restart_policy</code>, <code>max_restarts</code>, <code>restart_delay</code>, …</td></tr>
+<tr><td>Health monitoring</td><td>Per-node</td><td><code>health_check_timeout</code>, <code>health_check_interval</code> (dataflow-level)</td></tr>
+<tr><td>Input timeouts</td><td>Per-input</td><td><code>input_timeout</code></td></tr>
+<tr><td>Circuit breaker</td><td>Automatic</td><td>Triggered by <code>input_timeout</code>, auto-recovers</td></tr>
+<tr><td>NodeRestarted event</td><td>Downstream nodes</td><td>Automatic when upstream restarts</td></tr>
+<tr><td>InputTracker API</td><td>Rust nodes</td><td><code>dora_node_api::InputTracker</code></td></tr>
+<tr><td>Observability</td><td>Daemon-wide</td><td>Atomic counters logged periodically</td></tr>
+<tr><td>Distributed health</td><td>Multi-daemon</td><td>Coordinator heartbeat monitoring</td></tr>
+<tr><td>Coordinator state persistence</td><td>Coordinator</td><td><code>--store redb</code> (requires <code>redb-backend</code> feature)</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="restart-policies"><a class="header" href="fault-tolerance.html#restart-policies">Restart Policies</a></h2>
+<p>Control what happens when a node exits or crashes.</p>
+<h3 id="configuration"><a class="header" href="fault-tolerance.html#configuration">Configuration</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: my-node
+    path: ./target/debug/my-node
+    restart_policy: on-failure  # never | on-failure | always
+    max_restarts: 5             # 0 = unlimited (default: 0)
+    restart_delay: 1.0          # initial delay in seconds
+    max_restart_delay: 30.0     # cap for exponential backoff
+    restart_window: 300.0       # reset counter after this many seconds
+</code></pre>
+<h3 id="policy-types"><a class="header" href="fault-tolerance.html#policy-types">Policy Types</a></h3>
+<p><strong><code>never</code></strong> (default) – Node is not restarted. Failure propagates normally.</p>
+<p><strong><code>on-failure</code></strong> – Restart only when the node exits with a non-zero exit code. Clean exits (code 0) are not restarted.</p>
+<p><strong><code>always</code></strong> – Restart on any exit, except:</p>
+<ul>
+<li>The dataflow was stopped by the user (<code>dora stop</code> or Ctrl-C)</li>
+<li>All inputs were closed and the node exited with a non-zero code</li>
+</ul>
+<h3 id="how-restarts-work-internally"><a class="header" href="fault-tolerance.html#how-restarts-work-internally">How Restarts Work Internally</a></h3>
+<p>When a node process exits, the daemon evaluates the restart decision in this order:</p>
+<ol>
+<li><strong>Policy check</strong>: Does the restart policy allow it?
+<ul>
+<li><code>Never</code> -&gt; no restart</li>
+<li><code>OnFailure</code> -&gt; restart only if exit code != 0</li>
+<li><code>Always</code> -&gt; restart</li>
+</ul>
+</li>
+<li><strong>Disable check</strong>: Has <code>disable_restart</code> been set? (set when all inputs close or during manual stop via <code>stop_all</code>)</li>
+<li><strong>Window check</strong>: If <code>restart_window</code> is set and the window has elapsed since the first restart, reset the counter to 0</li>
+<li><strong>Limit check</strong>: If <code>max_restarts &gt; 0</code> and the window counter exceeds it, give up permanently</li>
+<li><strong>Backoff</strong>: If <code>restart_delay</code> is set, sleep for the computed delay (re-checking <code>disable_restart</code> after waking)</li>
+<li><strong>Respawn</strong>: The node process is spawned fresh with the same configuration</li>
+</ol>
+<p>The daemon tracks restart state per node instance in the <code>spawn/prepared.rs</code> lifecycle loop. Each node runs in its own tokio task, so restarts don’t block other nodes.</p>
+<h3 id="backoff"><a class="header" href="fault-tolerance.html#backoff">Backoff</a></h3>
+<p>When <code>restart_delay</code> is set, the daemon waits before restarting. The delay doubles on each attempt (exponential backoff) and is capped by <code>max_restart_delay</code>.</p>
+<p>The backoff exponent is capped at 16 internally to prevent overflow (<code>2^16 = 65536x multiplier</code>).</p>
+<p>Example with <code>restart_delay: 1.0</code> and <code>max_restart_delay: 10.0</code>:</p>
+<pre><code>Attempt 1: wait 1s    (1.0 * 2^0)
+Attempt 2: wait 2s    (1.0 * 2^1)
+Attempt 3: wait 4s    (1.0 * 2^2)
+Attempt 4: wait 8s    (1.0 * 2^3)
+Attempt 5: wait 10s   (capped at max_restart_delay)
+Attempt 6: wait 10s   (capped)
+</code></pre>
+<p>During the backoff sleep, the daemon continuously monitors the <code>disable_restart</code> flag. If all inputs close while the node is waiting to restart, the restart is cancelled with the log message: “restart cancelled: inputs closed during backoff wait”.</p>
+<h3 id="restart-window"><a class="header" href="fault-tolerance.html#restart-window">Restart Window</a></h3>
+<p>When <code>restart_window</code> is set, the restart counter resets after the window elapses (measured from the first restart in the current window). This enables “N restarts per M seconds” semantics.</p>
+<p>Example: <code>max_restarts: 5</code>, <code>restart_window: 300.0</code> means “at most 5 restarts per 5 minutes”. If the window elapses without hitting the limit, the counter resets and the node gets another 5 attempts.</p>
+<h3 id="restart-disable-during-shutdown"><a class="header" href="fault-tolerance.html#restart-disable-during-shutdown">Restart Disable During Shutdown</a></h3>
+<p>When the daemon stops a dataflow (via <code>stop_all</code>), it calls <code>disable_restart()</code> on every node <strong>before</strong> sending Stop events. This prevents the restart mechanism from fighting the shutdown process. The <code>disable_restart</code> flag is an <code>Arc&lt;AtomicBool&gt;</code> shared between the daemon event loop and the node’s spawn lifecycle task.</p>
+<h3 id="noderestarted-event"><a class="header" href="fault-tolerance.html#noderestarted-event">NodeRestarted Event</a></h3>
+<p>When a node restarts, the daemon sends a <code>NodeRestarted</code> event to all downstream nodes that consume its outputs. This allows downstream nodes to:</p>
+<ul>
+<li>Reset internal state or caches</li>
+<li>Log the upstream recovery</li>
+<li>Re-initialize connections or sessions</li>
+</ul>
+<p>The event carries the <code>NodeId</code> of the restarting node. Downstream nodes receive it automatically via the event stream:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match event {
+    Event::NodeRestarted { id } =&gt; {
+        println!("upstream node {id} restarted, resetting state");
+        // Clear any cached state from the old node instance
+    }
+    _ =&gt; {}
+}
+<span class="boring">}</span></code></pre>
+<p>The daemon finds downstream nodes via <code>dataflow.mappings</code>, which maps each node’s outputs to all subscribing (receiver_node, input_id) pairs. Each unique receiver gets one <code>NodeRestarted</code> event per restart.</p>
+<hr/>
+<h2 id="health-monitoring"><a class="header" href="fault-tolerance.html#health-monitoring">Health Monitoring</a></h2>
+<p>Passive monitoring detects hung nodes that stop communicating with the daemon.</p>
+<pre><code class="language-yaml">health_check_interval: 2.0  # seconds (default: 5.0, dataflow-level)
+nodes:
+  - id: my-node
+    path: ./target/debug/my-node
+    health_check_timeout: 30.0  # seconds (per-node)
+    restart_policy: on-failure
+</code></pre>
+<h3 id="configurable-health-check-interval"><a class="header" href="fault-tolerance.html#configurable-health-check-interval">Configurable Health Check Interval</a></h3>
+<p>The <code>health_check_interval</code> is a <strong>dataflow-level</strong> setting that controls how often the daemon checks node health. Default is 5.0 seconds. Lower values detect hung nodes faster but add more overhead. Set this at the top level of your dataflow YAML, not per-node.</p>
+<h3 id="how-it-works-internally"><a class="header" href="fault-tolerance.html#how-it-works-internally">How It Works Internally</a></h3>
+<p>The daemon runs a health check sweep at the configured <code>health_check_interval</code> (via a tokio interval stream emitting <code>Event::NodeHealthCheckInterval</code>).</p>
+<p>Each <code>RunningNode</code> has a <code>last_activity: Arc&lt;AtomicU64&gt;</code> field storing the timestamp (milliseconds since epoch) of the last communication. This is updated atomically by the node’s communication handler (<code>node_communication/mod.rs</code>) every time the node sends any request to the daemon (event subscriptions, output sends, etc.).</p>
+<p>The health check function (<code>check_node_health</code>) iterates all running nodes:</p>
+<ol>
+<li>Skip nodes without <code>health_check_timeout</code> set</li>
+<li>Skip nodes that have not connected yet (not in <code>connected_nodes</code>)</li>
+<li>Compute <code>elapsed_ms = now - last_activity</code></li>
+<li>If <code>elapsed_ms &gt; timeout_ms</code>, log a warning and <strong>kill</strong> the node process</li>
+</ol>
+<p>After killing, the normal exit handling runs, which evaluates the restart policy. This means <code>health_check_timeout</code> combined with <code>restart_policy: on-failure</code> automatically recovers hung nodes.</p>
+<h3 id="post-connection-liveness-only"><a class="header" href="fault-tolerance.html#post-connection-liveness-only">Post-Connection Liveness Only</a></h3>
+<p>Step 2 above means <code>health_check_timeout</code> bounds <strong>post-connection</strong> liveness, not
+total startup time. A node joins <code>connected_nodes</code> when it first subscribes to
+events (inside <code>Node::init</code> / <code>DoraNode::init_from_env</code>), and the timeout clock is
+only consulted from that point on.</p>
+<p>This is deliberate: <code>last_activity</code> is seeded to the spawn timestamp, so without
+the connection gate a node whose legitimate cold start (Python imports,
+model-weight loading) exceeds <code>health_check_timeout</code> would be SIGKILLed
+mid-startup – and under <code>restart_policy: always</code>/<code>on-failure</code> that becomes an
+unescapable restart loop.</p>
+<p>The tradeoff is that a node that hangs <strong>before</strong> it ever subscribes – a
+deadlock in import or init code that never reaches <code>Node::init</code> – is not
+reaped by this watchdog, and the dataflow stays in its pending state waiting
+for that node. Slow-but-legitimate startup and hung startup are
+indistinguishable before the node connects, so bounding them needs a separate
+startup deadline rather than this timeout.</p>
+<h3 id="what-counts-as-activity"><a class="header" href="fault-tolerance.html#what-counts-as-activity">What Counts as “Activity”</a></h3>
+<p>Any message from the node to the daemon counts:</p>
+<ul>
+<li>Event subscription requests</li>
+<li>Output data sends (via shared memory or TCP)</li>
+<li>Timer tick acknowledgments</li>
+</ul>
+<p>Normal input data received from other nodes does <strong>not</strong> reset the timer – the node must actively communicate with the daemon.</p>
+<hr/>
+<h2 id="input-timeouts-and-circuit-breaker"><a class="header" href="fault-tolerance.html#input-timeouts-and-circuit-breaker">Input Timeouts and Circuit Breaker</a></h2>
+<p>Per-input timeouts detect when an upstream node stops producing data.</p>
+<h3 id="configuration-1"><a class="header" href="fault-tolerance.html#configuration-1">Configuration</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: downstream-node
+    path: ./target/debug/downstream
+    inputs:
+      sensor_data:
+        source: camera-node/frames
+        input_timeout: 5.0  # seconds
+</code></pre>
+<p>The <code>input_timeout</code> is set per input, not per node. Different inputs can have different timeouts.</p>
+<h3 id="how-it-works-internally-1"><a class="header" href="fault-tolerance.html#how-it-works-internally-1">How It Works Internally</a></h3>
+<p>The daemon maintains an <code>InputDeadline</code> for each input with a timeout:</p>
+<pre><code>struct InputDeadline {
+    timeout: Duration,        // configured timeout
+    last_received: Instant,   // last time data arrived
+}
+</code></pre>
+<p>These are stored in <code>RunningDataflow.input_deadlines</code> keyed by <code>(NodeId, DataId)</code>.</p>
+<p><strong>Timeout detection</strong> runs during the same 5-second health check interval. The <code>check_input_timeouts</code> function:</p>
+<ol>
+<li>Scans all <code>input_deadlines</code> entries</li>
+<li>If <code>last_received.elapsed() &gt; timeout</code>, the input is “broken”</li>
+<li>The <code>(node_id, input_id)</code> pair is moved from <code>input_deadlines</code> to <code>broken_inputs</code></li>
+<li>The daemon calls <code>break_input()</code> which sends <code>InputClosed { id }</code> to the downstream node</li>
+<li>If all of a node’s inputs are now closed (and none are broken/recoverable), <code>AllInputsClosed</code> is sent and the node’s restart is disabled</li>
+</ol>
+<p><strong>Deadline reset</strong>: Every time data arrives on an input, its <code>last_received</code> is reset to <code>Instant::now()</code>.</p>
+<h3 id="circuit-breaker-auto-recovery"><a class="header" href="fault-tolerance.html#circuit-breaker-auto-recovery">Circuit Breaker: Auto-Recovery</a></h3>
+<p>The circuit breaker tracks broken inputs in <code>RunningDataflow.broken_inputs</code>. When new data arrives on a broken input:</p>
+<ol>
+<li>The data is delivered to the node normally</li>
+<li>The <code>broken_inputs</code> entry is removed</li>
+<li>The input is re-added to <code>open_inputs</code></li>
+<li>A new <code>InputDeadline</code> is created (restarting the timeout)</li>
+<li>An <code>InputRecovered { id }</code> event is sent to the node</li>
+<li>The <code>circuit_breaker_recoveries</code> counter is incremented</li>
+</ol>
+<p>This means recovery is fully automatic. If the upstream node restarts (via restart policy) and begins producing data again, downstream nodes seamlessly resume receiving it.</p>
+<h3 id="node-side-handling"><a class="header" href="fault-tolerance.html#node-side-handling">Node-Side Handling</a></h3>
+<p>In Rust nodes, handle these events in your event loop:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+while let Some(event) = events.recv() {
+    match event {
+        Event::Input { id, data, .. } =&gt; {
+            // Normal processing
+        }
+        Event::InputClosed { id } =&gt; {
+            // Upstream stopped producing on this input.
+            // You can: use cached data, skip processing, alert operator, etc.
+        }
+        Event::InputRecovered { id } =&gt; {
+            // Upstream is back online for this input.
+            // Resume normal processing.
+        }
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+}
+<span class="boring">}</span></code></pre>
+<hr/>
+<h2 id="inputtracker-api-rust"><a class="header" href="fault-tolerance.html#inputtracker-api-rust">InputTracker API (Rust)</a></h2>
+<p>The <code>InputTracker</code> helper tracks input health and caches the last received value per input, making graceful degradation easy.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event, InputTracker, InputState};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+let mut tracker = InputTracker::new();
+
+while let Some(event) = events.recv() {
+    tracker.process_event(&amp;event);
+
+    match event {
+        Event::Input { id, data, .. } =&gt; {
+            // Fresh data available
+        }
+        Event::InputClosed { id } =&gt; {
+            // Input timed out -- fall back to cached data
+            if let Some(stale_data) = tracker.last_value(&amp;id) {
+                // Use stale_data as fallback
+            }
+        }
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+
+    // Check overall health
+    if tracker.any_closed() {
+        let closed: Vec&lt;_&gt; = tracker.closed_inputs();
+        // Log or adjust behavior
+    }
+}
+<span class="boring">}</span></code></pre>
+<h3 id="internal-design"><a class="header" href="fault-tolerance.html#internal-design">Internal Design</a></h3>
+<p><code>InputTracker</code> maintains two <code>HashMap</code>s:</p>
+<ul>
+<li><code>states: HashMap&lt;DataId, InputState&gt;</code> – current state per input (Healthy or Closed)</li>
+<li><code>cache: HashMap&lt;DataId, ArrowData&gt;</code> – last received value per input</li>
+</ul>
+<p>On <code>Event::Input</code>, both maps are updated (state = Healthy, cache = data clone). On <code>Event::InputClosed</code>, only state changes (cache is preserved). On <code>Event::InputRecovered</code>, state is set back to Healthy. The cache is never cleared, so <code>last_value()</code> always returns the most recent data even after the input closes.</p>
+<p>Note: <code>ArrowData</code> wraps <code>Arc&lt;dyn arrow::array::Array&gt;</code>, so the cache clone is reference-counted (cheap).</p>
+<h3 id="api-reference"><a class="header" href="fault-tolerance.html#api-reference">API Reference</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>new()</code></td><td><code>InputTracker</code></td><td>Create empty tracker</td></tr>
+<tr><td><code>process_event(&amp;Event)</code></td><td><code>bool</code></td><td>Update state. Returns true if event was relevant</td></tr>
+<tr><td><code>state(&amp;DataId)</code></td><td><code>Option&lt;InputState&gt;</code></td><td>Current state (Healthy or Closed)</td></tr>
+<tr><td><code>is_closed(&amp;DataId)</code></td><td><code>bool</code></td><td>Check if input is closed</td></tr>
+<tr><td><code>last_value(&amp;DataId)</code></td><td><code>Option&lt;&amp;ArrowData&gt;</code></td><td>Last received value (available even when closed)</td></tr>
+<tr><td><code>closed_inputs()</code></td><td><code>Vec&lt;&amp;DataId&gt;</code></td><td>All currently closed inputs</td></tr>
+<tr><td><code>any_closed()</code></td><td><code>bool</code></td><td>True if any tracked input is closed</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="observability"><a class="header" href="fault-tolerance.html#observability">Observability</a></h2>
+<p>The daemon tracks fault tolerance events with atomic counters (<code>FaultToleranceStats</code>) and logs a summary every 5 seconds during the health check interval.</p>
+<h3 id="counters"><a class="header" href="fault-tolerance.html#counters">Counters</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Counter</th><th>Type</th><th>Incremented when</th></tr>
+</thead>
+<tbody>
+<tr><td><code>restarts</code></td><td><code>AtomicU64</code></td><td>A node restart is initiated (in spawn lifecycle)</td></tr>
+<tr><td><code>health_check_kills</code></td><td><code>AtomicU64</code></td><td>A node is killed by the health check (unresponsive)</td></tr>
+<tr><td><code>input_timeouts</code></td><td><code>AtomicU64</code></td><td>An input timeout fires (circuit breaker trips)</td></tr>
+<tr><td><code>circuit_breaker_recoveries</code></td><td><code>AtomicU64</code></td><td>Data arrives on a broken input (auto-recovery)</td></tr>
+</tbody>
+</table>
+</div>
+<p>All counters use <code>Ordering::Relaxed</code> since they are informational and don’t need strict ordering guarantees.</p>
+<h3 id="log-output"><a class="header" href="fault-tolerance.html#log-output">Log Output</a></h3>
+<p>When any counter is non-zero, the daemon emits a structured log line:</p>
+<pre><code>INFO fault tolerance stats restarts=3 health_kills=0 input_timeouts=1 cb_recoveries=1
+</code></pre>
+<p>These counters are cumulative for the lifetime of the daemon process. They are not reset between dataflows.</p>
+<hr/>
+<h2 id="distributed-health"><a class="header" href="fault-tolerance.html#distributed-health">Distributed Health</a></h2>
+<p>In multi-daemon deployments, the coordinator monitors daemon heartbeats.</p>
+<h3 id="protocol"><a class="header" href="fault-tolerance.html#protocol">Protocol</a></h3>
+<ul>
+<li><strong>Heartbeat interval</strong>: 3 seconds (coordinator sends heartbeat to each daemon)</li>
+<li><strong>Disconnect threshold</strong>: 30 seconds without a response</li>
+<li><strong>Detection</strong>: On each heartbeat sweep, the coordinator removes daemons that haven’t responded within the threshold</li>
+<li><strong>Notification</strong>: The coordinator broadcasts <code>PeerDaemonDisconnected { daemon_id }</code> to all remaining daemons</li>
+</ul>
+<h3 id="daemoninfo"><a class="header" href="fault-tolerance.html#daemoninfo">DaemonInfo</a></h3>
+<p>The <code>ConnectedMachines</code> CLI query returns <code>Vec&lt;DaemonInfo&gt;</code>:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct DaemonInfo {
+    pub daemon_id: DaemonId,
+    pub last_heartbeat_ago_ms: u64,  // milliseconds since last heartbeat
+}
+<span class="boring">}</span></code></pre>
+<p>This allows monitoring tools to detect daemons that are alive but slow to respond.</p>
+<h3 id="daemon-side-handling"><a class="header" href="fault-tolerance.html#daemon-side-handling">Daemon-Side Handling</a></h3>
+<p>When a daemon receives <code>PeerDaemonDisconnected</code>, it logs a structured warning:</p>
+<pre><code>WARN peer daemon disconnected daemon_id=machine-B
+</code></pre>
+<p>Currently this is informational. Future work may include automatic migration of nodes from the disconnected daemon.</p>
+<hr/>
+<h2 id="coordinator-state-persistence"><a class="header" href="fault-tolerance.html#coordinator-state-persistence">Coordinator State Persistence</a></h2>
+<p>By default the coordinator holds all state in memory. If the coordinator process crashes or is restarted, all knowledge of running dataflows is lost – daemons continue running but become orphaned, and users must manually re-run dataflows.</p>
+<p>The <strong>redb store backend</strong> solves this by persisting coordinator state to a single file on disk using <a href="https://docs.rs/redb">redb</a>, a pure-Rust embedded key-value store with copy-on-write B-trees that are crash-safe by design.</p>
+<h3 id="design-stateless-coordinator-with-stateful-backend"><a class="header" href="fault-tolerance.html#design-stateless-coordinator-with-stateful-backend">Design: Stateless Coordinator with Stateful Backend</a></h3>
+<p>The coordinator itself remains stateless in the K8s sense – it can be stopped and restarted at any time. All durable state lives in the store backend behind the <code>CoordinatorStore</code> trait:</p>
+<pre><code>Coordinator (stateless process)
+    |
+    v
+CoordinatorStore trait
+    |
+    +-- InMemoryStore (default, no persistence)
+    +-- RedbStore     (persists to ~/.dora/coordinator.redb)
+</code></pre>
+<p>This separation means:</p>
+<ul>
+<li>The coordinator event loop never reads from the filesystem during normal operation (only at startup recovery)</li>
+<li>All state mutations are written to the store at well-defined persistence points</li>
+<li>The store can be swapped without changing coordinator logic</li>
+</ul>
+<h3 id="enabling-persistence"><a class="header" href="fault-tolerance.html#enabling-persistence">Enabling Persistence</a></h3>
+<pre><code class="language-bash"># Use default path (~/.dora/coordinator.redb)
+dora coordinator --store redb
+
+# Use custom path
+dora coordinator --store redb:/path/to/coordinator.redb
+
+# Default: in-memory only (no persistence)
+dora coordinator --store memory
+</code></pre>
+<p>The <code>redb</code> backend requires the <code>redb-backend</code> Cargo feature, which is enabled in the default CLI build.</p>
+<h3 id="what-is-persisted"><a class="header" href="fault-tolerance.html#what-is-persisted">What Is Persisted</a></h3>
+<p>The store tracks three record types:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Record</th><th>Key</th><th>Persisted Fields</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DataflowRecord</code></td><td>UUID (16 bytes)</td><td>uuid, name, descriptor (JSON), status, daemon IDs, generation counter, created/updated timestamps</td></tr>
+<tr><td><code>BuildRecord</code></td><td>UUID (16 bytes)</td><td>build ID, status, errors, created/updated timestamps</td></tr>
+<tr><td><code>DaemonInfo</code></td><td>DaemonId (postcard)</td><td>daemon ID, machine ID</td></tr>
+</tbody>
+</table>
+</div>
+<p>Records are serialized with <a href="https://docs.rs/postcard">postcard</a> for compact, fast encoding.</p>
+<h3 id="dataflow-status-lifecycle"><a class="header" href="fault-tolerance.html#dataflow-status-lifecycle">Dataflow Status Lifecycle</a></h3>
+<p>The coordinator persists dataflow status at every state transition:</p>
+<pre><code>Start command     --&gt;  Pending
+All daemons ready --&gt;  Running
+Stop command      --&gt;  Stopping
+All nodes finish  --&gt;  Succeeded  or  Failed { error }
+Spawn failure     --&gt;  Failed { error: "spawn failed: ..." }
+</code></pre>
+<p>Each persist call increments the record’s <code>generation</code> counter, providing a monotonic version for conflict detection.</p>
+<h3 id="persistence-points"><a class="header" href="fault-tolerance.html#persistence-points">Persistence Points</a></h3>
+<p>The coordinator writes to the store at these moments in the event loop:</p>
+<ol>
+<li><strong>Dataflow started</strong> (<code>ControlRequest::Start</code>) – record created with status <code>Pending</code></li>
+<li><strong>Dataflow spawned</strong> (<code>DataflowSpawnResult</code> success from all daemons) – updated to <code>Running</code></li>
+<li><strong>Spawn failed</strong> (<code>DataflowSpawnResult</code> error) – updated to <code>Failed</code> with the actual error message</li>
+<li><strong>Stop requested</strong> (<code>ControlRequest::Stop</code> or <code>StopByName</code>) – updated to <code>Stopping</code></li>
+<li><strong>All nodes finished</strong> (<code>DataflowFinishedOnDaemon</code>) – updated to <code>Succeeded</code> or <code>Failed</code> with per-node error details</li>
+<li><strong>Graceful shutdown</strong> (Ctrl-C or <code>Destroy</code> command) – all running dataflows marked <code>Stopping</code> before stop messages are sent</li>
+</ol>
+<p>If a store write fails, the coordinator logs a warning and continues operating with in-memory state. This prevents a store failure from blocking the dataflow lifecycle.</p>
+<h3 id="startup-recovery"><a class="header" href="fault-tolerance.html#startup-recovery">Startup Recovery</a></h3>
+<p>When the coordinator starts with a redb store that contains data from a previous run, it performs recovery:</p>
+<ol>
+<li>Read all persisted dataflow records via <code>store.list_dataflows()</code></li>
+<li>For any record with a non-terminal status (<code>Pending</code>, <code>Running</code>, <code>Stopping</code>):
+<ul>
+<li>Mark it as <code>Failed { error: "coordinator restarted" }</code></li>
+<li>Increment the generation counter</li>
+<li>Write the updated record back to the store</li>
+</ul>
+</li>
+<li>Terminal records (<code>Succeeded</code>, <code>Failed</code>) are left unchanged</li>
+</ol>
+<p>This ensures that stale dataflows from a crashed coordinator are not confused with actively running ones. The daemons that were running those dataflows will detect the coordinator disconnect independently.</p>
+<h3 id="error-detail-preservation"><a class="header" href="fault-tolerance.html#error-detail-preservation">Error Detail Preservation</a></h3>
+<p>When a dataflow fails, the <code>Failed</code> status includes the actual per-node error messages rather than a generic string:</p>
+<pre><code>Failed { error: "node-1: exited with code 137; node-2: failed to spawn node: binary not found" }
+</code></pre>
+<p>Errors are collected from <code>DataflowDaemonResult.node_results</code> across all daemons, formatted as <code>node_id: error_message</code>, and joined with <code>; </code>.</p>
+<h3 id="schema-versioning"><a class="header" href="fault-tolerance.html#schema-versioning">Schema Versioning</a></h3>
+<p>The redb database includes a <code>meta</code> table with a <code>schema_version</code> key. On open:</p>
+<ul>
+<li>If no version exists (fresh database), the current version is written</li>
+<li>If the stored version matches the binary’s version, the database opens normally</li>
+<li>If there is a mismatch, the database is rejected with an error</li>
+</ul>
+<p>This prevents silent data corruption when the serialization format of stored records changes between Dora versions. The current schema version is <code>1</code>.</p>
+<h3 id="file-security"><a class="header" href="fault-tolerance.html#file-security">File Security</a></h3>
+<p>On Unix systems:</p>
+<ul>
+<li>The database file is set to <code>0600</code> (owner read/write only) after creation</li>
+<li>The default directory (<code>~/.dora/</code>) is set to <code>0700</code> (owner only)</li>
+<li>Custom paths provided via <code>redb:/path</code> are validated to reject <code>..</code> components</li>
+</ul>
+<h3 id="internal-architecture"><a class="header" href="fault-tolerance.html#internal-architecture">Internal Architecture</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Store trait (libraries/coordinator-store/src/lib.rs)
+pub trait CoordinatorStore: Send + Sync {
+    fn put_dataflow(&amp;self, record: &amp;DataflowRecord) -&gt; Result&lt;()&gt;;
+    fn get_dataflow(&amp;self, uuid: &amp;Uuid) -&gt; Result&lt;Option&lt;DataflowRecord&gt;&gt;;
+    fn list_dataflows(&amp;self) -&gt; Result&lt;Vec&lt;DataflowRecord&gt;&gt;;
+    fn delete_dataflow(&amp;self, uuid: &amp;Uuid) -&gt; Result&lt;()&gt;;
+    // ... daemon and build methods
+}
+<span class="boring">}</span></code></pre>
+<p>The <code>RedbStore</code> implementation uses three redb tables (<code>daemons</code>, <code>dataflows</code>, <code>builds</code>) with UUID-based binary keys and postcard-serialized values. All operations are synchronous (redb is a synchronous library); the coordinator calls them directly from the async event loop since they are fast in-process operations.</p>
+<p>A 64 MiB record-size limit is enforced symmetrically on both encode and decode, so a record can never be written that the reader would later refuse. postcard reads only from the slice it is handed and does not pre-allocate from a length prefix, so a corrupt row cannot drive a large allocation.</p>
+<hr/>
+<h2 id="complete-yaml-reference"><a class="header" href="fault-tolerance.html#complete-yaml-reference">Complete YAML Reference</a></h2>
+<pre><code class="language-yaml"># Dataflow-level settings
+health_check_interval: 2.0    # health check sweep interval (default: 5.0s)
+
+nodes:
+  - id: sensor-node
+    path: ./target/debug/sensor
+    inputs:
+      tick: dora/timer/millis/100
+    outputs:
+      - frames
+
+  - id: processor
+    path: ./target/debug/processor
+
+    # Restart policy
+    restart_policy: on-failure    # never | on-failure | always
+    max_restarts: 5               # 0 = unlimited
+    restart_delay: 1.0            # initial backoff delay (seconds)
+    max_restart_delay: 30.0       # max backoff cap (seconds)
+    restart_window: 300.0         # reset counter after N seconds
+
+    # Health monitoring
+    health_check_timeout: 30.0    # kill if no activity for N seconds
+
+    inputs:
+      frames:
+        source: sensor-node/frames
+        input_timeout: 5.0        # circuit breaker timeout (seconds)
+        queue_size: 10            # input buffer size (default: 10)
+    outputs:
+      - result
+</code></pre>
+<hr/>
+<h2 id="use-case-scenarios"><a class="header" href="fault-tolerance.html#use-case-scenarios">Use Case Scenarios</a></h2>
+<h3 id="1-camera-pipeline-with-intermittent-hardware-failures"><a class="header" href="fault-tolerance.html#1-camera-pipeline-with-intermittent-hardware-failures">1. Camera Pipeline with Intermittent Hardware Failures</a></h3>
+<p>A camera driver node occasionally crashes due to USB disconnects. The processing pipeline should survive these outages and resume when the camera reconnects.</p>
+<pre><code class="language-yaml">nodes:
+  - id: camera-driver
+    path: ./target/debug/camera-driver
+    restart_policy: on-failure
+    max_restarts: 0               # unlimited -- hardware failures are expected
+    restart_delay: 2.0            # wait for USB to re-enumerate
+    max_restart_delay: 30.0
+    inputs:
+      tick: dora/timer/millis/33  # ~30 FPS
+    outputs:
+      - frames
+
+  - id: object-detector
+    path: ./target/debug/detector
+    inputs:
+      frames:
+        source: camera-driver/frames
+        input_timeout: 5.0        # tolerate 5s camera outage
+    outputs:
+      - detections
+
+  - id: planner
+    path: ./target/debug/planner
+    inputs:
+      detections:
+        source: object-detector/detections
+        input_timeout: 10.0       # longer tolerance -- can plan with stale data
+      lidar:
+        source: lidar-driver/points
+        input_timeout: 3.0
+</code></pre>
+<p><strong>What happens when the camera crashes:</strong></p>
+<ol>
+<li><code>camera-driver</code> exits with non-zero code</li>
+<li>Daemon evaluates <code>on-failure</code> policy -&gt; restart after 2s backoff</li>
+<li>During the outage, <code>object-detector</code> receives <code>InputClosed { id: "frames" }</code> after 5s</li>
+<li><code>planner</code> receives <code>InputClosed { id: "detections" }</code> after 10s</li>
+<li>Camera restarts, begins producing frames</li>
+<li><code>object-detector</code> receives new frame data + <code>InputRecovered { id: "frames" }</code> (circuit breaker recovers)</li>
+<li><code>planner</code> receives detections + <code>InputRecovered { id: "detections" }</code></li>
+</ol>
+<p><strong>Node-side handling in the planner:</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event, InputTracker};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+let mut tracker = InputTracker::new();
+
+while let Some(event) = events.recv() {
+    tracker.process_event(&amp;event);
+
+    match event {
+        Event::Input { id, data, .. } =&gt; match id.as_ref() {
+            "detections" =&gt; plan_with_detections(&amp;data),
+            "lidar" =&gt; update_lidar_map(&amp;data),
+            _ =&gt; {}
+        },
+        Event::InputClosed { id } =&gt; match id.as_ref() {
+            "detections" =&gt; {
+                // Camera pipeline down -- plan with lidar only
+                plan_lidar_only();
+            }
+            "lidar" =&gt; {
+                // LiDAR down -- use last known detection data
+                if let Some(stale) = tracker.last_value(&amp;"detections".into()) {
+                    plan_with_stale_detections(stale);
+                }
+            }
+            _ =&gt; {}
+        },
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+}
+<span class="boring">}</span></code></pre>
+<h3 id="2-ml-inference-node-with-oom-crashes"><a class="header" href="fault-tolerance.html#2-ml-inference-node-with-oom-crashes">2. ML Inference Node with OOM Crashes</a></h3>
+<p>An ML inference node occasionally runs out of memory on large inputs. It should restart quickly but give up after repeated failures (indicating a systemic issue).</p>
+<pre><code class="language-yaml">nodes:
+  - id: ml-inference
+    path: ./target/debug/ml-inference
+    restart_policy: on-failure
+    max_restarts: 3
+    restart_delay: 0.5
+    restart_window: 60.0          # 3 restarts per minute
+    health_check_timeout: 60.0    # ML inference can be slow
+    inputs:
+      images:
+        source: preprocessor/images
+    outputs:
+      - predictions
+</code></pre>
+<p><strong>Behavior:</strong></p>
+<ul>
+<li>Node crashes from OOM -&gt; restarts after 0.5s</li>
+<li>Crashes again on another large input -&gt; restarts after 1.0s</li>
+<li>Crashes a third time -&gt; restarts after 2.0s</li>
+<li>Crashes a fourth time within 60s -&gt; <code>max_restarts</code> exceeded, node fails permanently</li>
+<li>If the node runs stably for 60s after the first crash, the restart window resets and it gets 3 more chances</li>
+</ul>
+<h3 id="3-multi-sensor-fusion-with-graceful-degradation"><a class="header" href="fault-tolerance.html#3-multi-sensor-fusion-with-graceful-degradation">3. Multi-Sensor Fusion with Graceful Degradation</a></h3>
+<p>A robot fuses data from multiple sensors. Individual sensors may fail, but the system should continue operating with reduced capability.</p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor-fusion
+    path: ./target/debug/sensor-fusion
+    inputs:
+      camera:
+        source: camera-node/frames
+        input_timeout: 3.0
+      lidar:
+        source: lidar-node/points
+        input_timeout: 3.0
+      imu:
+        source: imu-node/readings
+        input_timeout: 1.0        # IMU is critical, short timeout
+      gps:
+        source: gps-node/fix
+        input_timeout: 10.0       # GPS can be intermittent
+    outputs:
+      - fused-state
+</code></pre>
+<p><strong>Node-side with InputTracker:</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event, InputTracker};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+let mut tracker = InputTracker::new();
+
+while let Some(event) = events.recv() {
+    tracker.process_event(&amp;event);
+
+    match event {
+        Event::Input { id, data, .. } =&gt; {
+            // Process fresh data from any sensor
+            update_sensor(&amp;id, &amp;data);
+            compute_and_send_fusion(&amp;mut node, &amp;tracker);
+        }
+        Event::InputClosed { id } =&gt; {
+            // Sensor went offline -- adjust fusion weights
+            eprintln!("sensor {id} offline, degrading");
+            compute_and_send_fusion(&amp;mut node, &amp;tracker);
+        }
+        Event::InputRecovered { id } =&gt; {
+            // Sensor back online
+            eprintln!("sensor {id} recovered");
+        }
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+}
+
+fn compute_and_send_fusion(node: &amp;mut DoraNode, tracker: &amp;InputTracker) {
+    // Use fresh data where available, stale cache for degraded sensors
+    let camera = tracker.last_value(&amp;"camera".into());
+    let lidar = tracker.last_value(&amp;"lidar".into());
+    let imu = tracker.last_value(&amp;"imu".into());
+
+    if tracker.is_closed(&amp;"imu".into()) {
+        // IMU is critical -- switch to emergency mode
+        emergency_stop(node);
+        return;
+    }
+
+    // Fuse available sensors, weighting active ones higher
+    let closed = tracker.closed_inputs();
+    let active_count = 4 - closed.len();
+    // ... fusion logic using active_count for confidence weighting
+}
+<span class="boring">}</span></code></pre>
+<h3 id="4-long-running-data-processing-pipeline"><a class="header" href="fault-tolerance.html#4-long-running-data-processing-pipeline">4. Long-Running Data Processing Pipeline</a></h3>
+<p>A batch processing pipeline runs continuously. The processing node occasionally hangs due to a third-party library bug. Health monitoring detects and recovers from these hangs.</p>
+<pre><code class="language-yaml">nodes:
+  - id: data-ingest
+    path: ./target/debug/ingest
+    restart_policy: always        # always restart -- this is a long-running service
+    max_restarts: 0               # unlimited
+    restart_delay: 1.0
+    inputs:
+      tick: dora/timer/millis/1000
+    outputs:
+      - records
+
+  - id: processor
+    path: ./target/debug/processor
+    restart_policy: on-failure
+    max_restarts: 10
+    restart_delay: 0.5
+    restart_window: 600.0         # 10 restarts per 10 minutes
+    health_check_timeout: 30.0    # kill if hung for 30s
+    inputs:
+      records: data-ingest/records
+    outputs:
+      - results
+
+  - id: writer
+    path: ./target/debug/writer
+    restart_policy: on-failure
+    max_restarts: 5
+    restart_delay: 2.0            # give DB time to recover
+    max_restart_delay: 60.0
+    inputs:
+      results:
+        source: processor/results
+        input_timeout: 60.0       # processor may be slow
+</code></pre>
+<p><strong>What happens when the processor hangs:</strong></p>
+<ol>
+<li>Processor stops communicating with daemon</li>
+<li>After 30s, health check detects the hang and kills the process</li>
+<li><code>health_check_kills</code> counter increments</li>
+<li>Daemon evaluates <code>on-failure</code> -&gt; restart after 0.5s</li>
+<li>New processor instance starts, resumes consuming from <code>data-ingest</code></li>
+<li><code>writer</code> may have received <code>InputClosed</code> during the 60s timeout – or may not if the restart was fast enough</li>
+<li>If <code>writer</code> did receive <code>InputClosed</code>, it gets <code>InputRecovered</code> when new results arrive</li>
+</ol>
+<h3 id="5-distributed-deployment-with-daemon-failure-detection"><a class="header" href="fault-tolerance.html#5-distributed-deployment-with-daemon-failure-detection">5. Distributed Deployment with Daemon Failure Detection</a></h3>
+<p>A multi-machine deployment where the coordinator monitors daemon health.</p>
+<pre><code>Machine A (coordinator + daemon):  camera-driver, preprocessor
+Machine B (daemon):                ml-inference, postprocessor
+Machine C (daemon):                planner, actuator-driver
+</code></pre>
+<p><strong>What happens when Machine B loses network:</strong></p>
+<ol>
+<li>Coordinator’s heartbeat to Machine B fails</li>
+<li>After 30s without response, coordinator removes Machine B from active daemons</li>
+<li>Coordinator broadcasts <code>PeerDaemonDisconnected { daemon_id: "machine-B" }</code> to Machine A and Machine C</li>
+<li>Daemons on A and C log: <code>WARN peer daemon disconnected daemon_id=machine-B</code></li>
+<li>Nodes on A and C with inputs from Machine B’s nodes receive <code>InputClosed</code> events (via their input timeouts)</li>
+<li>CLI queries to <code>ConnectedMachines</code> show only A and C with their <code>last_heartbeat_ago_ms</code></li>
+</ol>
+<h3 id="6-coordinator-crash-recovery-with-redb-persistence"><a class="header" href="fault-tolerance.html#6-coordinator-crash-recovery-with-redb-persistence">6. Coordinator Crash Recovery with redb Persistence</a></h3>
+<p>A long-running multi-daemon deployment where the coordinator must survive restarts without losing track of dataflow history.</p>
+<pre><code class="language-bash"># Start coordinator with persistent store
+dora coordinator --store redb
+
+# In another terminal, start a dataflow
+dora start examples/rust-dataflow/dataflow.yml --name my-pipeline --detach
+
+# Coordinator crashes or is killed (e.g., OOM, hardware failure)
+# ... time passes ...
+
+# Restart coordinator with the same store
+dora coordinator --store redb
+</code></pre>
+<p><strong>What happens on restart:</strong></p>
+<ol>
+<li>Coordinator opens <code>~/.dora/coordinator.redb</code> and reads persisted dataflow records</li>
+<li>Finds <code>my-pipeline</code> with status <code>Running</code></li>
+<li>Marks it as <code>Failed { error: "coordinator restarted" }</code>, increments generation</li>
+<li>Logs: <code>INFO recovering stale dataflow &lt;uuid&gt; ("my-pipeline") -&gt; marking as Failed</code></li>
+<li><code>dora list</code> now shows <code>my-pipeline</code> with its final status and timestamps</li>
+<li>Daemons detect the coordinator disconnect independently and stop their nodes</li>
+<li>User can start a fresh dataflow – the coordinator is fully operational</li>
+</ol>
+<p>The key benefit: the coordinator retains a complete history of dataflow lifecycle events across restarts. Without <code>--store redb</code>, all state would be lost and the operator would have no record of what was running before the crash.</p>
+<h3 id="7-periodic-batch-job-with-always-restart"><a class="header" href="fault-tolerance.html#7-periodic-batch-job-with-always-restart">7. Periodic Batch Job with Always-Restart</a></h3>
+<p>A node that processes batches and exits when done. It should restart to process the next batch.</p>
+<pre><code class="language-yaml">nodes:
+  - id: batch-processor
+    path: ./target/debug/batch-proc
+    restart_policy: always        # restart even on clean exit
+    max_restarts: 0               # unlimited
+    restart_delay: 10.0           # wait 10s between batches
+    max_restart_delay: 10.0       # no exponential growth
+    inputs:
+      trigger: dora/timer/millis/1  # immediate first trigger
+    outputs:
+      - batch-result
+</code></pre>
+<p>The node processes one batch, exits with code 0, waits 10s, then restarts to process the next. The <code>always</code> policy ensures restarts even on success. Setting <code>restart_delay == max_restart_delay</code> gives a constant delay.</p>
+<hr/>
+<h2 id="best-practices"><a class="header" href="fault-tolerance.html#best-practices">Best Practices</a></h2>
+<p><strong>Start with <code>on-failure</code></strong>. Use <code>always</code> only for nodes that are expected to exit and restart (e.g., periodic batch jobs).</p>
+<p><strong>Set <code>max_restarts</code></strong>. Unlimited restarts can mask bugs. Start with 3-5 and increase if needed. Use <code>max_restarts: 0</code> only for nodes where crashes are expected and unavoidable (hardware drivers, external API clients).</p>
+<p><strong>Use <code>restart_window</code></strong>. Prevents permanent restart loops. A window of 60-300 seconds is typical. Without a window, a node that crashes at startup will exhaust its restart budget immediately.</p>
+<p><strong>Tune <code>restart_delay</code></strong>. Start with 0.5-1.0 seconds. Too short causes thrashing; too long delays recovery. Match the delay to your node’s typical startup time and the root cause of failures:</p>
+<ul>
+<li>USB/hardware reconnection: 2-5s</li>
+<li>Network service reconnection: 1-3s</li>
+<li>OOM/transient bugs: 0.5-1.0s</li>
+</ul>
+<p><strong>Set <code>health_check_timeout</code> generously</strong>. Should be at least 2-3x your node’s longest expected processing time. ML inference nodes may need 60s+. If too short, healthy nodes get killed during normal processing.</p>
+<p><strong>Set <code>input_timeout</code> per input</strong>. Not all inputs need the same timeout. Use shorter timeouts for high-frequency inputs (IMU, camera) and longer timeouts for slow/bursty sources (GPS, batch results). A good starting point is 3-5x the expected publish interval.</p>
+<p><strong>Use <code>InputTracker</code> for critical paths</strong>. When a node must keep running even with degraded inputs, use <code>InputTracker</code> to fall back to cached data. This is essential for sensor fusion, planning, and control nodes.</p>
+<p><strong>Use <code>--store redb</code> for production deployments</strong>. The redb backend ensures the coordinator retains dataflow history across crashes and restarts. The in-memory default is fine for development but loses all state on exit. The redb file is small (proportional to the number of dataflow records) and adds negligible overhead.</p>
+<p><strong>Known limitation:</strong> when the coordinator disconnects, the daemon currently kills running node processes before reconnecting (<a href="https://github.com/dora-rs/dora/issues/1799">#1799</a>). Dataflow <em>records</em> survive coordinator restart (via redb), but running <em>processes</em> are restarted from scratch. Seamless process reclaim across reconnect is planned (see <a href="https://dora-rs.ai/docs/plan-coordinator-ha.html"><code>docs/plan-coordinator-ha.md</code></a> Phase 1.4).</p>
+<p><strong>Combine features for defense in depth</strong>:</p>
+<ul>
+<li><code>restart_policy</code> + <code>restart_delay</code> -&gt; recover from node crashes</li>
+<li><code>health_check_timeout</code> -&gt; recover from hung nodes</li>
+<li><code>input_timeout</code> -&gt; detect stale upstream data</li>
+<li><code>InputTracker</code> -&gt; graceful degradation in node code</li>
+<li><code>--store redb</code> -&gt; survive coordinator crashes</li>
+</ul>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">Unofficial copy of the dora documentation. See the <a href="https://dora-rs.ai/dora/operations/fault-tolerance.html" rel="noopener" target="_blank">official page</a>. Original © dora-rs contributors, licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a>.</p></main>
+<nav aria-label="Page navigation" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="mobile-nav-chapters previous" href="debugging.html" rel="prev" title="Previous chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="mobile-nav-chapters next" href="distributed.html" rel="next prefetch" title="Next chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="Page navigation" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="nav-chapters previous" href="debugging.html" rel="prev" title="Previous chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="nav-chapters next" href="distributed.html" rel="next prefetch" title="Next chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../searcher-09f2665d.js"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到中文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/operations/fault-tolerance.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">View official page</a></div>
+<button id="i18n-fab-btn" type="button" title="Language / official page (drag to move)" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">EN</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/en/","/zh/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/en/","/zh/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

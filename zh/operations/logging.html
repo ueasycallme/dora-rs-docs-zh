@@ -1,0 +1,1341 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>日志 - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/operations/logging.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="logging"><a class="header" href="logging.html#logging">日志记录</a></h1>
+<p>dora 为实时机器人与 AI 数据流提供了一套结构化日志系统。日志按节点捕获为结构化 JSONL 文件，转发给协调器以进行实时流传输，并可选地作为数据消息通过数据流图路由。</p>
+<h2 id="which-logging-approach-should-i-use"><a class="header" href="logging.html#which-logging-approach-should-i-use">应该使用哪种日志记录方式？</a></h2>
+<p>如果你不确定哪种方式适合你的用例，可以从这里开始。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>我想……</th><th>方式</th><th>配置</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>从 Python 记录日志</strong></td><td>使用 Python 的 <code>logging</code> 模块（自动桥接）</td><td>无需任何操作——只需 <code>import logging</code></td></tr>
+<tr><td><strong>从 Rust 记录日志</strong></td><td>使用 <code>node.log_info()</code> / <code>node.log_error()</code> 等</td><td>无——开箱即用</td></tr>
+<tr><td><strong>从 C/C++ 记录日志</strong></td><td>使用 <code>dora_log()</code> / <code>log_message()</code></td><td>无——开箱即用</td></tr>
+<tr><td><strong>过滤噪声节点</strong></td><td>在 YAML 中设置 <code>min_log_level</code></td><td>逐节点 YAML 字段</td></tr>
+<tr><td><strong>在一处查看所有日志</strong></td><td>订阅 <code>dora/logs</code> 虚拟输入</td><td><code>inputs: logs: dora/logs</code></td></tr>
+<tr><td><strong>将某个节点的日志作为数据处理</strong></td><td>在该节点上使用 <code>send_logs_as</code></td><td>逐节点配置 YAML 并接入输出</td></tr>
+<tr><td><strong>轮转日志文件</strong></td><td>在 YAML 中设置 <code>max_log_size</code></td><td>逐节点 YAML 字段</td></tr>
+<tr><td><strong>构建自定义日志接收器</strong></td><td>使用 <code>dora-log-utils</code> crate</td><td>Rust 依赖项</td></tr>
+<tr><td><strong>过滤 CLI 显示</strong></td><td>使用 <code>--log-level</code> / <code>--log-filter</code> 标志</td><td>CLI 标志或环境变量</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="language-specific-quick-start"><a class="header" href="logging.html#language-specific-quick-start">各语言的快速开始</a></h3>
+<p><strong>Python</strong>——最简单的方式是使用 Python 内置的 <code>logging</code> 模块：</p>
+<pre><code class="language-python">import logging
+from dora import Node
+
+node = Node()  # Automatically bridges Python logging -&gt; dora
+
+logging.info("Sensor started")       # Captured as structured "info" log
+logging.warning("High temp: 42C")    # Captured as structured "warn" log
+print("raw debug output")            # Captured as "stdout" level
+</code></pre>
+<p>当创建 <code>Node()</code> 时，它会安装一个处理器，将所有 Python <code>logging</code> 调用都路由到 Rust 的 <code>tracing</code> 系统中。守护进程会将这些调用解析为带有级别、消息、文件和行号的结构化日志条目。无需额外配置。</p>
+<p>你也可以使用显式 API 来设置结构化字段：</p>
+<pre><code class="language-python">node.log_info("Reading acquired")
+node.log("info", "Reading acquired", fields={"sensor_id": "temp-01"})
+</code></pre>
+<p><strong>Rust</strong>——使用节点 API 提供的便捷方法：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let (node, mut events) = DoraNode::init_from_env()?;
+
+// Convenience methods (recommended for most cases)
+node.log_info("Sensor started");
+node.log_warn("High temperature");
+
+// With structured fields
+let mut fields = BTreeMap::new();
+fields.insert("sensor_id".into(), "temp-01".into());
+node.log_with_fields("info", "Reading acquired", None, Some(&amp;fields));
+<span class="boring">}</span></code></pre>
+<p>此外，Rust 节点也可以使用 <code>tracing</code> crate。当初始化了 dora 的 tracing 订阅者（通过 <code>init_tracing()</code>）之后，<code>tracing::info!()</code> 等调用会将结构化 JSON 输出到 stdout，守护进程会自动解析：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Also works -- parsed as structured logs by the daemon
+tracing::info!("Sensor started");
+tracing::warn!(sensor_id = "temp-01", "High temperature");
+<span class="boring">}</span></code></pre>
+<p>当你希望对日志格式进行显式控制时，使用 <code>node.log_*()</code>。当你希望与生态系统集成（span、instrumentation、OpenTelemetry）时，使用 <code>tracing::*!()</code>。两者在守护进程中产生的结构化日志条目是相同的。</p>
+<p><strong>C</strong>——使用 <code>dora_log()</code> 函数：</p>
+<pre><code class="language-c">dora_log(ctx, "info", 4, "Sensor started", 14);
+</code></pre>
+<p><strong>C++</strong>——使用 <code>log_message()</code> 函数：</p>
+<pre><code class="language-cpp">log_message(node.send_output, "info", "Sensor started");
+</code></pre>
+<hr/>
+<h2 id="features-at-a-glance"><a class="header" href="logging.html#features-at-a-glance">功能概览</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>功能</th><th>作用域</th><th>配置</th></tr>
+</thead>
+<tbody>
+<tr><td>日志级别过滤</td><td>CLI 显示</td><td><code>--log-level</code>, <code>DORA_LOG_LEVEL</code></td></tr>
+<tr><td>输出格式</td><td>CLI 显示</td><td><code>--log-format</code>, <code>DORA_LOG_FORMAT</code></td></tr>
+<tr><td>按节点覆盖级别</td><td>CLI 显示</td><td><code>--log-filter</code>, <code>DORA_LOG_FILTER</code></td></tr>
+<tr><td>源码级过滤</td><td>逐节点 YAML</td><td><code>min_log_level</code></td></tr>
+<tr><td>Stdout 转数据路由</td><td>逐节点 YAML</td><td><code>send_stdout_as</code></td></tr>
+<tr><td>结构化日志路由</td><td>逐节点 YAML</td><td><code>send_logs_as</code></td></tr>
+<tr><td>日志文件轮转</td><td>逐节点 YAML</td><td><code>max_log_size</code></td></tr>
+<tr><td>轮转文件数限制</td><td>逐节点 YAML</td><td><code>max_rotated_files</code></td></tr>
+<tr><td>节点日志 API</td><td>Rust/Python/C/C++ 节点</td><td><code>node.log()</code>、<code>dora_log()</code> 等</td></tr>
+<tr><td>日志工具库</td><td>Rust crate</td><td><code>dora-log-utils</code></td></tr>
+<tr><td><strong>日志聚合</strong></td><td><strong>数据流输入</strong></td><td><strong><code>dora/logs</code> 虚拟输入</strong></td></tr>
+<tr><td>按时间范围过滤</td><td><code>dora logs</code></td><td><code>--since</code>, <code>--until</code></td></tr>
+<tr><td>实时日志流</td><td><code>dora logs</code></td><td><code>--follow</code></td></tr>
+<tr><td>文本搜索</td><td><code>dora logs</code></td><td><code>--grep</code></td></tr>
+<tr><td>本地日志读取</td><td><code>dora logs</code></td><td><code>--local</code>, <code>--all-nodes</code></td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="log-file-format"><a class="header" href="logging.html#log-file-format">日志文件格式</a></h2>
+<p>每个节点都会在以下位置生成一个 JSONL 文件（每行一个 JSON 对象）：</p>
+<pre><code>&lt;working_dir&gt;/out/&lt;dataflow_uuid&gt;/log_&lt;node_id&gt;.jsonl
+</code></pre>
+<p>每一行的结构如下：</p>
+<pre><code class="language-json">{
+  "timestamp": "2024-01-15T10:30:00.123Z",
+  "level": "info",
+  "node_id": "sensor",
+  "message": "Starting sensor...",
+  "target": "sensor::module",
+  "fields": { "key": "value" }
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>timestamp</code></td><td>string</td><td>精确到毫秒的 RFC3339 时间戳</td></tr>
+<tr><td><code>level</code></td><td>string</td><td><code>"error"</code>、<code>"warn"</code>、<code>"info"</code>、<code>"debug"</code>、<code>"trace"</code> 或 <code>"stdout"</code></td></tr>
+<tr><td><code>node_id</code></td><td>string</td><td>节点 ID</td></tr>
+<tr><td><code>message</code></td><td>string</td><td>日志消息文本</td></tr>
+<tr><td><code>target</code></td><td>string?</td><td>Rust 模块目标（例如 <code>"sensor::module"</code>），缺失时为 null</td></tr>
+<tr><td><code>fields</code></td><td>object?</td><td>来自日志框架的结构化键值字段。<strong>信任模型：</strong> 字段来自节点的 stdout，未经消毒即直接传递。在混合信任环境中，日志消费者在据此采取行动前应先校验字段内容</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="how-node-output-becomes-log-entries"><a class="header" href="logging.html#how-node-output-becomes-log-entries">节点输出如何变为日志条目</a></h3>
+<p>守护进程会捕获节点进程 stdout/stderr 的每一行，并尝试将其解析为结构化日志消息（带有 <code>level</code>、<code>message</code>、<code>timestamp</code> 以及可选 <code>fields</code> 的 JSON）。如果解析成功，结构化字段会被保留；如果解析失败，原始行会成为一条 <code>"stdout"</code> 级别的条目。</p>
+<p>这意味着使用 Rust 的 <code>tracing</code> 或 <code>log</code> crate 并以 JSON 格式输出的节点会自动获得完整的结构化日志。而只是简单 <code>println!</code> 的节点会产生 <code>"stdout"</code> 级别的条目。</p>
+<hr/>
+<h2 id="viewing-logs-dora-run"><a class="header" href="logging.html#viewing-logs-dora-run">查看日志：<code>dora run</code></a></h2>
+<p>使用 <code>dora run</code> 运行数据流时，所有节点的日志都会在终端中实时显示。</p>
+<h3 id="flags"><a class="header" href="logging.html#flags">标志</a></h3>
+<pre><code>dora run dataflow.yml [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>环境变量</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--log-level LEVEL</code></td><td><code>stdout</code></td><td><code>DORA_LOG_LEVEL</code></td><td>显示的最低级别</td></tr>
+<tr><td><code>--log-format FORMAT</code></td><td><code>pretty</code></td><td><code>DORA_LOG_FORMAT</code></td><td>输出格式：<code>pretty</code>、<code>json</code>、<code>compact</code></td></tr>
+<tr><td><code>--log-filter FILTER</code></td><td>无</td><td><code>DORA_LOG_FILTER</code></td><td>按节点覆盖级别</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="log-levels"><a class="header" href="logging.html#log-levels">日志级别</a></h3>
+<p>从最详细到最简略依次为：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>级别</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>stdout</code></td><td>包含节点的原始 stdout 的所有内容（默认）</td></tr>
+<tr><td><code>trace</code></td><td>细粒度的诊断消息</td></tr>
+<tr><td><code>debug</code></td><td>开发者级别的诊断消息</td></tr>
+<tr><td><code>info</code></td><td>一般性信息消息</td></tr>
+<tr><td><code>warn</code></td><td>警告情况</td></tr>
+<tr><td><code>error</code></td><td>仅错误情况</td></tr>
+</tbody>
+</table>
+</div>
+<p>设置 <code>--log-level info</code> 会隐藏 <code>stdout</code>、<code>trace</code> 和 <code>debug</code> 消息。<code>stdout</code> 级别是一个特殊的全收集级别，会放行所有内容。</p>
+<h3 id="level-filtering-logic"><a class="header" href="logging.html#level-filtering-logic">级别过滤逻辑</a></h3>
+<p>级别过滤器使用 <code>LogLevelOrStdout::passes()</code>：</p>
+<pre><code>Message level    Filter level    Displayed?
+─────────────    ────────────    ──────────
+stdout           stdout          yes
+stdout           info            no       (stdout only passes stdout filter)
+info             stdout          yes      (any log level passes stdout filter)
+debug            info            no       (debug is more verbose than info)
+error            info            yes      (error is less verbose than info)
+</code></pre>
+<h3 id="per-node-overrides"><a class="header" href="logging.html#per-node-overrides">按节点覆盖</a></h3>
+<p><code>--log-filter</code> 标志可以为不同节点设置不同的级别：</p>
+<pre><code class="language-bash">dora run dataflow.yml --log-level info --log-filter "sensor=debug,planner=warn"
+</code></pre>
+<p>这会对所有节点显示 <code>info</code> 及以上级别，除了 <code>sensor</code>（显示 <code>debug</code> 及以上）和 <code>planner</code>（显示 <code>warn</code> 及以上）。</p>
+<p>格式：<code>"node1=level,node2=level"</code>（以逗号分隔的 <code>name=level</code> 对）。</p>
+<h3 id="output-formats"><a class="header" href="logging.html#output-formats">输出格式</a></h3>
+<p><strong>Pretty</strong>（默认）——彩色、人类可读：</p>
+<pre><code>10:30:00 INFO   sensor: Starting sensor...
+
+10:30:01 INFO   [dora]: spawning node processor
+
+10:30:01 stdout sensor: raw output line
+</code></pre>
+<ul>
+<li>本地时区的时间戳（<code>HH:MM:SS</code>）</li>
+<li>带颜色的级别：ERROR（红色）、WARN（黄色）、INFO（绿色）、DEBUG（蓝色）、TRACE（暗淡）、stdout（斜体暗淡蓝色）</li>
+<li>节点名以粗体显示，颜色根据名称唯一生成</li>
+<li>系统消息前缀为 <code>[dora]</code></li>
+<li>生命周期消息（<code>spawning</code>、<code>node finished</code>、<code>stopping</code>）会通过空行进行视觉分隔</li>
+</ul>
+<p><strong>Json</strong>——完整的 <code>LogMessage</code> 结构体以 JSON 形式输出，每行一条：</p>
+<pre><code class="language-json">{"build_id":null,"dataflow_id":"abc-123","node_id":"sensor","level":"INFO","message":"Starting...","timestamp":"2024-01-15T10:30:00Z",...}
+</code></pre>
+<p>适用于传给 <code>jq</code> 处理或导入日志聚合系统。</p>
+<p><strong>Compact</strong>——极简，无颜色：</p>
+<pre><code>10:30:00 INFO sensor: Starting sensor...
+</code></pre>
+<p>适用于 CI/CD 环境和日志文件。</p>
+<hr/>
+<h2 id="viewing-logs-dora-logs"><a class="header" href="logging.html#viewing-logs-dora-logs">查看日志：<code>dora logs</code></a></h2>
+<p>读取历史日志或从正在运行的数据流中流式查看实时日志。</p>
+<h3 id="basic-usage"><a class="header" href="logging.html#basic-usage">基本用法</a></h3>
+<pre><code class="language-bash"># Read logs for a specific node (via coordinator)
+dora logs &lt;dataflow_uuid&gt; &lt;node_name&gt;
+
+# Read local log files directly
+dora logs --local &lt;node_name&gt;
+dora logs --local --all-nodes
+
+# Stream live logs
+dora logs &lt;dataflow_uuid&gt; &lt;node_name&gt; --follow
+dora logs --local &lt;node_name&gt; --follow
+</code></pre>
+<h3 id="flags-1"><a class="header" href="logging.html#flags-1">标志</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>简写</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--local</code></td><td></td><td>false</td><td>从本地 <code>out/</code> 目录读取，而不是从协调器读取</td></tr>
+<tr><td><code>--all-nodes</code></td><td></td><td>false</td><td>合并所有节点的日志，按时间戳排序</td></tr>
+<tr><td><code>--tail N</code></td><td><code>-n</code></td><td>all</td><td>仅显示最后 N 行</td></tr>
+<tr><td><code>--follow</code></td><td><code>-f</code></td><td>false</td><td>在新日志条目到达时进行流式显示</td></tr>
+<tr><td><code>--since DURATION</code></td><td></td><td>无</td><td>仅显示比该时长更新的日志</td></tr>
+<tr><td><code>--until DURATION</code></td><td></td><td>无</td><td>仅显示比该时长更旧的日志</td></tr>
+<tr><td><code>--level LEVEL</code></td><td></td><td><code>stdout</code></td><td>最低日志级别（环境变量：<code>DORA_LOG_LEVEL</code>）</td></tr>
+<tr><td><code>--grep PATTERN</code></td><td></td><td>无</td><td>不区分大小写的文本搜索</td></tr>
+<tr><td><code>--coordinator-addr IP</code></td><td></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port PORT</code></td><td></td><td>默认值</td><td>协调器控制端口</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="time-filters"><a class="header" href="logging.html#time-filters">时间过滤器</a></h3>
+<p><code>--since</code> 和 <code>--until</code> 接受相对于当前时间的时长字符串：</p>
+<pre><code class="language-bash"># Logs from the last 5 minutes
+dora logs --local sensor --since 5m
+
+# Logs from 1 hour ago to 30 minutes ago
+dora logs --local sensor --since 1h --until 30m
+
+# Last 10 errors from the past hour
+dora logs --local sensor --since 1h --level error --tail 10
+</code></pre>
+<p>支持的时长格式：<code>30</code>（秒）、<code>30s</code>、<code>5m</code>、<code>1h</code>、<code>2d</code>。</p>
+<h3 id="text-search"><a class="header" href="logging.html#text-search">文本搜索</a></h3>
+<p><code>--grep</code> 对以下内容执行不区分大小写的子串匹配：</p>
+<ul>
+<li>日志消息文本</li>
+<li>节点 ID</li>
+<li>模块目标</li>
+</ul>
+<pre><code class="language-bash"># Find all timeout-related messages
+dora logs --local --all-nodes --grep "timeout"
+
+# Find errors from a specific module
+dora logs --local sensor --grep "camera::driver" --level error
+</code></pre>
+<h3 id="filter-pipeline"><a class="header" href="logging.html#filter-pipeline">过滤流水线</a></h3>
+<p>所有过滤器按以下顺序应用：</p>
+<pre><code>Read/Parse -&gt; Time Filters -&gt; Grep -&gt; Tail -&gt; Display
+</code></pre>
+<p>在协调器模式下使用 <code>--since</code>、<code>--until</code> 或 <code>--grep</code> 时，CLI 会从服务器获取所有日志（忽略服务器端的 <code>--tail</code>），并在客户端应用所有过滤器。这确保了组合使用多个过滤器时能得到正确的结果。</p>
+<h3 id="local-vs-coordinator-mode"><a class="header" href="logging.html#local-vs-coordinator-mode">本地模式与协调器模式</a></h3>
+<p><strong>本地模式</strong>（<code>--local</code>）直接从当前工作目录下的 <code>out/</code> 目录读取 JSONL 文件，无需运行协调器或守护进程。如果使用了 <code>--all-nodes</code> 或未指定节点名，则所有日志文件都会被合并并按时间戳排序。</p>
+<p><strong>协调器模式</strong>（默认）通过 WebSocket 连接到正在运行的协调器。协调器从守护进程的工作目录读取日志文件并流式回传。该模式同时适用于本地部署和分布式部署。</p>
+<h3 id="follow-mode"><a class="header" href="logging.html#follow-mode">跟随模式</a></h3>
+<p><strong>本地跟随（Local follow）</strong>（<code>--local --follow</code>）：每 200 毫秒轮询日志文件以获取新内容。新行会被解析、按 <code>--grep</code> 过滤并打印。时间/尾部过滤器仅应用于初始的历史输出。</p>
+<p><strong>协调器跟随（Coordinator follow）</strong>（<code>--follow</code>）：向协调器打开一个 WebSocket 订阅。协调器会实时转发来自守护进程的日志消息。为提高效率，级别过滤在服务器端进行。<code>--grep</code> 和 <code>--since</code> 则在客户端对数据流进行过滤。</p>
+<hr/>
+<h2 id="environment-variables"><a class="header" href="logging.html#environment-variables">环境变量</a></h2>
+<p>所有环境变量都仅作为后备——CLI 标志始终优先。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>变量</th><th>使用方</th><th>取值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DORA_LOG_LEVEL</code></td><td><code>dora run</code>, <code>dora logs</code></td><td><code>error</code>, <code>warn</code>, <code>info</code>, <code>debug</code>, <code>trace</code>, <code>stdout</code></td><td>默认的最低日志级别</td></tr>
+<tr><td><code>DORA_LOG_FORMAT</code></td><td><code>dora run</code></td><td><code>pretty</code>, <code>json</code>, <code>compact</code></td><td>默认输出格式</td></tr>
+<tr><td><code>DORA_LOG_FILTER</code></td><td><code>dora run</code></td><td><code>"node1=level,node2=level"</code></td><td>默认值 / 按节点覆盖</td></tr>
+<tr><td><code>DORA_QUIET</code></td><td>守护进程</td><td>任意值</td><td>禁止将日志转发到显示端（文件写入仍继续）</td></tr>
+</tbody>
+</table>
+</div>
+<p>示例：</p>
+<pre><code class="language-bash"># Set defaults for a development session
+export DORA_LOG_LEVEL=info
+export DORA_LOG_FORMAT=pretty
+export DORA_LOG_FILTER="sensor=debug"
+
+# These are equivalent:
+dora run dataflow.yml
+dora run dataflow.yml --log-level info --log-format pretty --log-filter "sensor=debug"
+
+# CLI flag overrides env var:
+dora run dataflow.yml --log-level debug   # overrides DORA_LOG_LEVEL=info
+</code></pre>
+<hr/>
+<h2 id="yaml-configuration"><a class="header" href="logging.html#yaml-configuration">YAML 配置</a></h2>
+<h3 id="min_log_level"><a class="header" href="logging.html#min_log_level"><code>min_log_level</code></a></h3>
+<p>在日志到达日志文件、协调器或 <code>send_logs_as</code> 路由之前，在源头（守护进程端）对其进行过滤。</p>
+<pre><code class="language-yaml">nodes:
+  - id: noisy-sensor
+    path: ./target/debug/sensor
+    min_log_level: info    # suppress debug/trace/stdout from this node
+</code></pre>
+<p>有效取值：<code>error</code>、<code>warn</code>、<code>info</code>、<code>debug</code>、<code>trace</code>、<code>stdout</code>。</p>
+<p>设置后，守护进程会在解析完成后立即丢弃低于该级别的日志消息。这可以减少磁盘 I/O、网络流量和日志文件大小。该过滤使用与 CLI 显示过滤器相同的 <code>passes()</code> 逻辑。</p>
+<h3 id="send_stdout_as"><a class="header" href="logging.html#send_stdout_as"><code>send_stdout_as</code></a></h3>
+<p>将原始的 stdout/stderr 行作为数据流输出消息进行路由。</p>
+<pre><code class="language-yaml">nodes:
+  - id: legacy-node
+    path: ./legacy-script.py
+    send_stdout_as: raw_output
+    outputs:
+      - raw_output
+      - data
+
+  - id: log-consumer
+    inputs:
+      logs: legacy-node/raw_output
+</code></pre>
+<p>每一行 stdout/stderr 都会以 Arrow 编码字符串的形式发送。这对于集成那些将数据输出到 stdout 的旧节点（例如使用 <code>print()</code> 的 Python 脚本）很有用。</p>
+<p><code>send_stdout_as</code> 与正常的日志文件写入会同时发生——stdout 路由不会抑制日志文件的写入。</p>
+<h3 id="send_logs_as"><a class="header" href="logging.html#send_logs_as"><code>send_logs_as</code></a></h3>
+<p>将已解析的结构化日志条目作为数据流输出消息进行路由。</p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor
+    path: ./target/debug/sensor
+    send_logs_as: log_entries
+    outputs:
+      - data
+      - log_entries
+
+  - id: log-aggregator
+    inputs:
+      sensor_logs: sensor/log_entries
+</code></pre>
+<p>与 <code>send_stdout_as</code> 不同，这里只发送成功解析为结构化日志的行（而非原始 stdout）。每个条目都会序列化为完整的 JSON <code>LogMessage</code> 字符串。<code>min_log_level</code> 过滤器会在路由之前生效——被抑制的消息不会被发送。</p>
+<p>可以利用这一点在数据流内部构建日志聚合、告警或监控节点。</p>
+<h3 id="doralogs--automatic-log-aggregation"><a class="header" href="logging.html#doralogs--automatic-log-aggregation"><code>dora/logs</code>——自动日志聚合</a></h3>
+<p>只需一行输入即可订阅<strong>所有节点</strong>的日志——无需手动连线：</p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor
+    path: sensor.py
+    inputs:
+      tick: dora/timer/millis/200
+    outputs:
+      - reading
+
+  - id: processor
+    path: processor.py
+    inputs:
+      reading: sensor/reading
+    outputs:
+      - result
+
+  - id: log-viewer
+    path: log_viewer.py
+    inputs:
+      logs: dora/logs              # all nodes, all levels
+      errors: dora/logs/error      # only error+ from all nodes
+      sensor: dora/logs/info/sensor  # info+ from one node
+</code></pre>
+<p><code>dora/logs</code> 虚拟输入的工作方式与 <code>dora/timer</code> 类似——订阅由守护进程在内部处理。每条日志消息都会以 Arrow 数组中经 JSON 编码的 <code>LogMessage</code> 字符串形式到达。为防止无限循环，节点永远不会收到自己的日志消息。</p>
+<p><strong>语法：</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>输入</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>dora/logs</code></td><td>所有节点的所有日志</td></tr>
+<tr><td><code>dora/logs/&lt;level&gt;</code></td><td>所有节点中级别为 <code>&lt;level&gt;</code> 及以上的日志</td></tr>
+<tr><td><code>dora/logs/&lt;level&gt;/&lt;node-id&gt;</code></td><td>指定节点中级别为 <code>&lt;level&gt;</code> 及以上的日志</td></tr>
+</tbody>
+</table>
+</div>
+<p>级别：<code>stdout</code>、<code>error</code>、<code>warn</code>、<code>info</code>、<code>debug</code>、<code>trace</code>。</p>
+<p><strong>何时使用 <code>dora/logs</code>，何时使用 <code>send_logs_as</code>：</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th><code>dora/logs</code></th><th><code>send_logs_as</code></th></tr>
+</thead>
+<tbody>
+<tr><td>作用域</td><td>一次性覆盖所有节点</td><td>每次一个节点</td></tr>
+<tr><td>需要修改 YAML</td><td>只有消费者</td><td>每个源节点</td></tr>
+<tr><td>新增节点</td><td>无需修改连线</td><td>必须更新消费者</td></tr>
+<tr><td>使用场景</td><td>仪表盘、监控</td><td>按节点处理日志</td></tr>
+</tbody>
+</table>
+</div>
+<p>完整可运行示例见 <code>examples/log-aggregator/</code>。</p>
+<h3 id="max_log_size"><a class="header" href="logging.html#max_log_size"><code>max_log_size</code></a></h3>
+<p>启用基于大小的日志文件轮转。</p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor
+    path: ./target/debug/sensor
+    max_log_size: "50MB"
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>值</th><th>字节</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"1KB"</code> 或 <code>"1K"</code></td><td>1,024</td></tr>
+<tr><td><code>"50MB"</code> 或 <code>"50M"</code></td><td>52,428,800</td></tr>
+<tr><td><code>"1GB"</code> 或 <code>"1G"</code></td><td>1,073,741,824</td></tr>
+<tr><td><code>"1000"</code></td><td>1,000（纯数字表示字节）</td></tr>
+</tbody>
+</table>
+</div>
+<p>当活动日志文件超过配置的大小时，守护进程会：</p>
+<ol>
+<li>刷新并关闭当前文件</li>
+<li>重命名已有的轮转文件：<code>.4.jsonl</code> -&gt; <code>.5.jsonl</code>、<code>.3.jsonl</code> -&gt; <code>.4.jsonl</code>，依此类推。</li>
+<li>重命名当前文件：<code>log_sensor.jsonl</code> -&gt; <code>log_sensor.1.jsonl</code></li>
+<li>创建一个新的 <code>log_sensor.jsonl</code></li>
+<li>删除超出轮转限制的文件（默认 5 个，可通过 <code>max_rotated_files</code> 配置）</li>
+</ol>
+<p><strong>命名规则：</strong></p>
+<pre><code>log_sensor.jsonl       # current (active)
+log_sensor.1.jsonl     # previous
+log_sensor.2.jsonl     # older
+log_sensor.3.jsonl
+log_sensor.4.jsonl
+log_sensor.5.jsonl     # oldest (deleted on next rotation)
+</code></pre>
+<p>每个节点的最大磁盘占用：<code>max_log_size * (1 + max_rotated_files)</code>（1 个活动文件 + N 个轮转文件）。</p>
+<p>如果不设置 <code>max_log_size</code>，日志文件会无限增长。对于长期运行的数据流，务必设置该项。</p>
+<p><code>dora logs --local</code> 命令会自动读取某个节点的所有轮转文件，并按时间顺序将它们合并（最早的轮转文件在前，当前文件在最后）。</p>
+<h3 id="max_rotated_files"><a class="header" href="logging.html#max_rotated_files"><code>max_rotated_files</code></a></h3>
+<p>控制保留多少个轮转日志文件（默认：5，范围：0-100）。</p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor
+    path: ./target/debug/sensor
+    max_log_size: "50MB"
+    max_rotated_files: 10    # keep 10 rotated files instead of 5
+</code></pre>
+<p>设置 <code>max_rotated_files: 10</code> 和 <code>max_log_size: "50MB"</code> 时，每个节点的最大磁盘占用为 <code>50MB * 11</code> = 550MB。较低的值可以节省磁盘空间；较高的值可以保留更多历史记录。</p>
+<p>将 <code>max_rotated_files: 0</code> 设置为完全不保留历史记录：活动日志会被直接轮转清除而不是重命名，因此每个节点的磁盘占用始终保持为一个 <code>max_log_size</code> 大小的文件。</p>
+<h3 id="runtime-node-restrictions"><a class="header" href="logging.html#runtime-node-restrictions">运行时节点限制</a></h3>
+<p>一个运行时节点（<code>operator:</code> / <code>operators:</code>）恰好持有一个算子，因此其日志字段来自该算子：</p>
+<pre><code class="language-yaml">nodes:
+  - id: runtime-node
+    operator:
+      python: process.py
+      send_logs_as: logs
+      min_log_level: info
+      max_log_size: "100MB"
+</code></pre>
+<p>当算子设置了 <code>send_logs_as</code> 时，输出名称会以算子 ID 作为前缀（例如，对于 <code>id: op1</code> 的算子，输出名为 <code>op1/logs</code>）。</p>
+<hr/>
+<h2 id="node-log-api"><a class="header" href="logging.html#node-log-api">节点日志 API</a></h2>
+<p>节点可以使用节点 API 以编程方式发出结构化日志消息。这与向 stdout 写入 JSON 格式的日志行等效——守护进程会以相同的方式解析它们。</p>
+<h3 id="rust"><a class="header" href="logging.html#rust">Rust</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::DoraNode;
+use std::collections::BTreeMap;
+
+let (node, mut events) = DoraNode::init_from_env()?;
+
+// General log with level string and optional target
+node.log("info", "sensor initialized", Some("sensor::init"));
+
+// Convenience methods (no target parameter)
+node.log_error("connection failed");
+node.log_warn("temperature elevated");
+node.log_info("reading acquired");
+node.log_debug("raw bytes received");
+node.log_trace("entering loop iteration");
+
+// Structured fields (key-value context preserved through send_logs_as)
+let mut fields = BTreeMap::new();
+fields.insert("sensor_id".to_string(), "temp-01".to_string());
+fields.insert("reading".to_string(), "42.5".to_string());
+node.log_with_fields("info", "reading acquired", None, Some(&amp;fields));
+<span class="boring">}</span></code></pre>
+<p><code>level</code> 参数接受 <code>"error"</code>、<code>"warn"</code>（或 <code>"warning"</code>）、<code>"info"</code>、<code>"debug"</code>、<code>"trace"</code>。未知级别默认视为 <code>"info"</code>。字段（序列化后）总大小上限为 60 KB，这能确保单条日志远低于守护进程每行 1 MiB 的限制。</p>
+<h3 id="python"><a class="header" href="logging.html#python">Python</a></h3>
+<p>Python 节点有三种记录日志的方式，全部都会生成结构化日志条目：</p>
+<pre><code class="language-python">from dora import Node
+import logging
+
+node = Node()
+
+# Option 1: Python's logging module (recommended -- auto-bridged by Node())
+logging.info("sensor initialized")
+logging.warning("temperature elevated")
+logging.debug("raw bytes: %s", data)
+
+# Option 2: Explicit dora API with level string
+node.log("info", "sensor initialized", target="sensor.init")
+node.log("info", "reading acquired", fields={"sensor_id": "temp-01", "reading": "42.5"})
+
+# Option 3: Convenience methods
+node.log_error("connection failed")
+node.log_warn("temperature elevated")
+node.log_info("reading acquired")
+node.log_debug("raw bytes received")
+node.log_trace("entering loop iteration")
+
+# This also works but produces "stdout"-level entries (no structure):
+print("raw output")
+</code></pre>
+<p><strong>Python 日志桥接的工作原理：</strong>创建 <code>Node()</code> 时，会安装一个自定义的 <code>logging.Handler</code>，把所有 Python <code>logging</code> 调用都通过 Rust 的 <code>tracing</code> 系统路由出去。守护进程会把这些调用解析为带级别、消息、文件路径和行号的结构化日志条目。这一过程自动完成——无需任何配置。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方法</th><th>是否结构化？</th><th>是否支持字段？</th><th>适用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><code>logging.info()</code></td><td>是</td><td>不支持（可用 <code>extra=</code> 实现自定义格式化）</td><td>通用日志记录</td></tr>
+<tr><td><code>node.log("info", msg, fields={...})</code></td><td>是</td><td>是</td><td>需要结构化的键值对上下文时</td></tr>
+<tr><td><code>node.log_info(msg)</code></td><td>是</td><td>否</td><td>快捷的一行写法，等同于 <code>node.log("info", msg)</code></td></tr>
+<tr><td><code>print()</code></td><td>不支持（<code>stdout</code> 级别）</td><td>否</td><td>旧代码、快速调试</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>常见陷阱：</strong>不要在创建 <code>Node()</code> 之前调用 <code>logging.basicConfig()</code>。节点构造函数会设置日志桥接；如果先调用 <code>basicConfig()</code>，可能会安装一个互相冲突的 handler。如果需要自定义格式化器，请在 <code>Node()</code> 创建之后再配置。</p>
+<h3 id="c"><a class="header" href="logging.html#c">C</a></h3>
+<pre><code class="language-c">#include "node_api.h"
+
+void *ctx = init_dora_context_from_env();
+const char *level = "info";
+const char *msg = "sensor initialized";
+dora_log(ctx, level, strlen(level), msg, strlen(msg));
+</code></pre>
+<h3 id="c-1"><a class="header" href="logging.html#c-1">C++</a></h3>
+<pre><code class="language-cpp">// Via the cxx bridge
+auto node = init_dora_node();
+log_message(node.send_output, "info", "sensor initialized");
+</code></pre>
+<hr/>
+<h2 id="log-utilities-library-dora-log-utils"><a class="header" href="logging.html#log-utilities-library-dora-log-utils">日志工具库（<code>dora-log-utils</code>）</a></h2>
+<p><code>dora-log-utils</code> crate 提供了用于在自定义 sink 节点中处理 <code>LogMessage</code> 条目的解析、合并、过滤与格式化工具。当你要构建通过 <code>send_logs_as</code> 消费日志数据的节点时可以使用它。</p>
+<h3 id="api"><a class="header" href="logging.html#api">API</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_log_utils;
+
+// Parse a LogMessage from JSON (as received from send_logs_as)
+let log = dora_log_utils::parse_log(json_str)?;
+
+// Parse directly from Arrow input data (convenience for event handlers)
+let log = dora_log_utils::parse_log_from_arrow(&amp;data)?;
+
+// Merge multiple log streams into a single timeline
+let merged = dora_log_utils::merge_by_timestamp(vec![stream_a, stream_b]);
+
+// Filter by minimum level
+let errors = dora_log_utils::filter_by_level(&amp;logs, &amp;min_level);
+
+// Format as JSON (one line, no trailing newline)
+let json = dora_log_utils::format_json(&amp;log);
+
+// Format as compact single-line: "&lt;timestamp&gt; &lt;node&gt; &lt;LEVEL&gt;: &lt;message&gt;"
+let compact = dora_log_utils::format_compact(&amp;log);
+
+// Format as pretty: "[&lt;timestamp&gt;][&lt;LEVEL&gt;][&lt;node&gt;] &lt;message&gt;"
+let pretty = dora_log_utils::format_pretty(&amp;log);
+<span class="boring">}</span></code></pre>
+<h3 id="dependency"><a class="header" href="logging.html#dependency">依赖</a></h3>
+<p>在你的 sink 节点的 <code>Cargo.toml</code> 中添加：</p>
+<pre><code class="language-toml">[dependencies]
+dora-log-utils = { workspace = true }
+</code></pre>
+<hr/>
+<h2 id="log-sink-examples"><a class="header" href="logging.html#log-sink-examples">日志 Sink 示例</a></h2>
+<p>以下三个示例 sink 节点展示了如何消费通过 <code>send_logs_as</code> 路由来的日志，并把它们转发到外部目的地。</p>
+<h3 id="file-sink-exampleslog-sink-file"><a class="header" href="logging.html#file-sink-exampleslog-sink-file">文件 Sink（<code>examples/log-sink-file/</code>）</a></h3>
+<p>把来自多个节点的日志流合并写入单个 JSONL 文件。适用于统一的日志收集。</p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor
+    path: sensor.py
+    send_logs_as: log_entries
+    inputs:
+      tick: dora/timer/millis/200
+    outputs:
+      - reading
+      - log_entries
+
+  - id: processor
+    path: processor.py
+    send_logs_as: log_entries
+    inputs:
+      reading: sensor/reading
+    outputs:
+      - result
+      - log_entries
+
+  - id: file_sink
+    path: log-sink-file
+    inputs:
+      sensor_logs: sensor/log_entries
+      processor_logs: processor/log_entries
+    env:
+      LOG_FILE: "./combined.jsonl"
+</code></pre>
+<p>文件 sink 从环境变量读取 <code>LOG_FILE</code>（默认为 <code>./combined.jsonl</code>），用 <code>dora_log_utils::parse_log_from_arrow()</code> 解析每条收到的 Arrow 消息，将其格式化为 JSON，并追加写入文件。</p>
+<h3 id="tcp-sink-exampleslog-sink-tcp"><a class="header" href="logging.html#tcp-sink-exampleslog-sink-tcp">TCP Sink（<code>examples/log-sink-tcp/</code>）</a></h3>
+<p>把日志条目通过 TCP 套接字转发给远程日志收集器。适用于没有本地文件系统、需要把日志流式传输到设备外部的嵌入式系统。</p>
+<pre><code class="language-yaml">nodes:
+  - id: source
+    path: source.py
+    send_logs_as: log_entries
+    inputs:
+      tick: dora/timer/millis/500
+    outputs:
+      - data
+      - log_entries
+
+  - id: tcp_sink
+    path: log-sink-tcp
+    inputs:
+      logs: source/log_entries
+    env:
+      SINK_ADDR: "127.0.0.1:9876"
+</code></pre>
+<p>TCP sink 从环境变量读取 <code>SINK_ADDR</code>（默认为 <code>127.0.0.1:9876</code>），启动时连接到服务器，并把每条日志作为一行 JSON 发送。写入失败时会自动重连。</p>
+<h3 id="alert-router-exampleslog-sink-alert"><a class="header" href="logging.html#alert-router-exampleslog-sink-alert">告警路由器（<code>examples/log-sink-alert/</code>）</a></h3>
+<p>按严重级别拆分收到的日志条目。所有日志都会转发到 <code>all_logs</code> 输出；只有 error 和 warn 级别的日志才会转发到 <code>alerts</code> 输出。这样下游节点就能对告警进行不同处理（例如触发通知、写入专用文件）。</p>
+<pre><code class="language-yaml">nodes:
+  - id: source
+    path: my_node.py
+    send_stdout_as: log_entries
+    inputs:
+      tick: dora/timer/millis/200
+    outputs:
+      - log_entries
+
+  - id: alert_router
+    path: log-sink-alert
+    inputs:
+      logs: source/log_entries
+    outputs:
+      - all_logs
+      - alerts
+</code></pre>
+<p>源节点使用 <code>send_stdout_as</code> 把自己的 stdout 行作为 Arrow 字符串数据路由出去。路由器用 <code>dora_log_utils::parse_log_from_arrow()</code> 解析每条日志，检查其级别，并用 <code>node.send_output()</code> 把数据转发到相应的输出。使用 node API 的节点也可以用 <code>send_logs_as</code> 来路由来自 <code>node.log()</code> 的结构化日志。</p>
+<h3 id="building-a-custom-sink"><a class="header" href="logging.html#building-a-custom-sink">构建自定义 Sink</a></h3>
+<p>要构建自己的 sink 节点，请遵循以下模式：</p>
+<pre class="playground"><code class="language-rust">use dora_node_api::{DoraNode, Event};
+
+fn main() -&gt; eyre::Result&lt;()&gt; {
+    let (_node, mut events) = DoraNode::init_from_env()?;
+
+    while let Some(event) = events.recv() {
+        match event {
+            Event::Input { data, .. } =&gt; {
+                let log = dora_log_utils::parse_log_from_arrow(&amp;data)?;
+                // Process the log entry: write to file, send over network, etc.
+                let json = dora_log_utils::format_json(&amp;log);
+                println!("{json}");
+            }
+            Event::Stop(_) =&gt; break,
+            _ =&gt; {}
+        }
+    }
+    Ok(())
+}</code></pre>
+<hr/>
+<h2 id="how-the-daemon-processes-logs"><a class="header" href="logging.html#how-the-daemon-processes-logs">守护进程处理日志的方式</a></h2>
+<p>了解其内部流水线有助于调试和调优。针对每个节点，守护进程都会运行一个专用的异步任务，按顺序处理各行日志：</p>
+<pre><code>Node Process (stdout/stderr)
+    |
+    v
+[1] Capture: lines buffered in mpsc channel (capacity 100)
+    |
+    v
+[2] send_stdout_as: raw line -&gt; Arrow data -&gt; dataflow output
+    |
+    v
+[3] Parse: try JSON structured log, fall back to Stdout-level
+    |
+    v
+[4] min_log_level filter: drop messages below threshold
+    |
+    v
+[5] send_logs_as: LogMessage -&gt; JSON -&gt; Arrow data -&gt; dataflow output
+    |
+    v
+[6] Write JSONL: compact format to log file, track bytes written
+    |
+    v
+[7] Rotation check: if bytes_written &gt;= max_log_size, rotate files
+    |
+    v
+[8] Forward: send LogMessage to display channel (unless DORA_QUIET)
+    |
+    v
+[9] Sync: fsync log file to disk
+</code></pre>
+<p>关键细节：</p>
+<ul>
+<li><strong>步骤 2</strong> 发生在解析之前，因此 <code>send_stdout_as</code> 会捕获每一行，包括非结构化输出</li>
+<li><strong>步骤 4</strong> 发生在步骤 5——8 之前，因此 <code>min_log_level</code> 会抑制所有后续处理流程中的消息</li>
+<li><strong>步骤 5</strong> 只在结构化日志成功解析时触发（即步骤 3 的成功路径）</li>
+<li><strong>步骤 8</strong> 会发送到 flume 通道（<code>dora run</code> 直接模式）或协调器（分布式模式）</li>
+<li><strong>步骤 9</strong> 在每次写入后都会调用 <code>sync_all()</code>，以一定的 I/O 开销为代价保证持久性</li>
+</ul>
+<h3 id="structured-log-parsing"><a class="header" href="logging.html#structured-log-parsing">结构化日志解析</a></h3>
+<p>当节点输出 JSON 格式的日志（例如来自带 JSON 格式化的 <code>tracing-subscriber</code>）时，守护进程会提取：</p>
+<ul>
+<li><code>level</code>：日志严重级别</li>
+<li><code>message</code>：日志文本</li>
+<li><code>target</code>：模块路径</li>
+<li><code>timestamp</code>：日志发出的时间</li>
+<li><code>fields</code>：任意键值对</li>
+<li><code>build_id</code>、<code>dataflow_id</code>、<code>node_id</code>、<code>daemon_id</code>：作为回退，从字段中提取</li>
+</ul>
+<p>守护进程还会在所有消息上设置 <code>dataflow_id</code>、<code>node_id</code> 和 <code>daemon_id</code>，以确保它们始终存在于日志文件中。</p>
+<hr/>
+<h2 id="coordinator-log-streaming-protocol"><a class="header" href="logging.html#coordinator-log-streaming-protocol">协调器日志流式传输协议</a></h2>
+<p>当守护进程在协调器之下运行（分布式模式）时，日志转发通过 WebSocket 进行：</p>
+<ol>
+<li><strong>守护进程 -&gt; 协调器</strong>：每条 <code>LogMessage</code> 都会被包装进 <code>DaemonEvent::Log(message)</code>，并通过该守护进程的 WebSocket 连接发送</li>
+<li><strong>协调器存储</strong>：协调器存储/转发日志</li>
+<li><strong>CLI 订阅</strong>：CLI 通过其 WebSocket 连接发送 <code>ControlRequest::LogSubscribe { dataflow_id, level }</code></li>
+<li><strong>服务端过滤</strong>：协调器只转发满足 <code>msg_level &lt;= subscription_level</code> 的消息。这可以减少被过滤订阅的网络流量</li>
+<li><strong>CLI 接收</strong>：消息以序列化的 <code>LogMessage</code> 结构体形式到达</li>
+</ol>
+<p><code>--level</code> 标志映射到 <code>log::LevelFilter</code>：</p>
+<ul>
+<li><code>stdout</code> -&gt; <code>LevelFilter::Trace</code>（最宽松，接收所有消息）</li>
+<li><code>info</code> -&gt; <code>LevelFilter::Info</code>（接收 Error、Warn、Info）</li>
+<li>等等。</li>
+</ul>
+<hr/>
+<h2 id="complete-yaml-reference"><a class="header" href="logging.html#complete-yaml-reference">完整 YAML 参考</a></h2>
+<pre><code class="language-yaml">nodes:
+  - id: sensor
+    path: ./target/debug/sensor
+    outputs:
+      - data
+      - raw_output       # for send_stdout_as
+      - log_entries       # for send_logs_as
+
+    # Source-level log filtering (daemon-side)
+    min_log_level: info          # suppress debug/trace/stdout
+
+    # Route stdout to dataflow
+    send_stdout_as: raw_output   # every stdout line becomes a data message
+
+    # Route structured logs to dataflow
+    send_logs_as: log_entries    # parsed log entries become data messages
+
+    # Log file rotation
+    max_log_size: "50MB"         # rotate when file exceeds 50MB
+    max_rotated_files: 5         # keep 5 rotated files (default, range 0-100)
+
+    inputs:
+      tick: dora/timer/millis/100
+</code></pre>
+<hr/>
+<h2 id="complete-example"><a class="header" href="logging.html#complete-example">完整示例</a></h2>
+<p><code>examples/python-logging/</code> 目录包含一个可运行的三节点流水线，演练了每一项日志功能：</p>
+<pre><code>sensor (noisy, high-volume) --&gt; processor (structured logs) --&gt; monitor (log aggregator)
+</code></pre>
+<p><strong>数据流配置要点：</strong></p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor
+    path: sensor.py
+    min_log_level: info       # suppress debug noise at source
+    max_log_size: "1KB"       # small for demo (triggers rotation quickly)
+    inputs:
+      tick: dora/timer/millis/50
+    outputs:
+      - reading
+
+  - id: processor
+    path: processor.py
+    send_logs_as: log_entries  # route structured logs as data
+    inputs:
+      reading: sensor/reading
+    outputs:
+      - result
+      - log_entries
+
+  - id: monitor
+    path: monitor.py
+    inputs:
+      logs: processor/log_entries
+      reading: sensor/reading
+</code></pre>
+<p><strong>每个节点演示的内容：</strong></p>
+<ul>
+<li><strong>sensor</strong>——混合使用了 <code>print()</code>（原始 stdout）、<code>logging.info()</code>、<code>logging.debug()</code> 和 <code>logging.warning()</code>。设置 <code>min_log_level: info</code> 后，debug 消息会在到达日志文件前被守护进程丢弃。设置 <code>max_log_size: "1KB"</code> 后，几秒钟内就会触发日志轮转。</li>
+<li><strong>processor</strong>——使用 <code>send_logs_as: log_entries</code> 将其结构化日志条目作为数据流数据路由。原始的 <code>print()</code> 输出<em>不会</em>被路由（只有被解析的结构化条目才会）。</li>
+<li><strong>monitor</strong>——订阅 <code>processor/log_entries</code> 并统计警告/错误数量，演示数据流内的日志聚合。</li>
+</ul>
+<p><strong>直接模式</strong>（<code>dora run</code>——单进程，适合快速测试）：</p>
+<pre><code class="language-bash"># Basic run
+dora run examples/python-logging/dataflow.yml --stop-after 5s
+
+# Only warnings and above
+dora run examples/python-logging/dataflow.yml --log-level warn --stop-after 5s
+
+# Per-node overrides
+dora run examples/python-logging/dataflow.yml --log-filter "monitor=debug,sensor=warn" --stop-after 5s
+
+# JSON output for machine parsing
+dora run examples/python-logging/dataflow.yml --log-format json --stop-after 3s
+
+# Environment variable control
+DORA_LOG_LEVEL=warn dora run examples/python-logging/dataflow.yml --stop-after 5s
+</code></pre>
+<p><strong>分布式模式</strong>（<code>dora up</code> + <code>dora start</code>——协调器/守护进程架构，多机部署时需要）：</p>
+<pre><code class="language-bash"># Start infrastructure
+dora up
+
+# Start attached (live log stream)
+dora start examples/python-logging/dataflow.yml --attach
+
+# Or start detached and query logs separately
+dora start examples/python-logging/dataflow.yml
+dora logs &lt;dataflow-id&gt; sensor --follow                    # stream one node
+dora logs &lt;dataflow-id&gt; sensor --follow --level warn       # only warnings
+dora logs &lt;dataflow-id&gt; --all-nodes --tail 20              # last 20 lines
+dora logs &lt;dataflow-id&gt; processor --grep "error" --since 5m  # targeted search
+</code></pre>
+<p>在分布式模式下，日志通过 WebSocket 按 节点 -&gt; 守护进程 -&gt; 协调器 -&gt; CLI 的路径流动。协调器会在有订阅者连接之前缓冲日志消息，因此即使你较晚接入也不会错过日志。YAML 层级的设置（<code>min_log_level</code>、<code>send_logs_as</code>、<code>max_log_size</code>）效果相同，因为它们是在守护进程上应用的。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th><code>dora run</code></th><th><code>dora start</code></th></tr>
+</thead>
+<tbody>
+<tr><td>显示过滤</td><td><code>--log-level</code>, <code>--log-format</code>, <code>--log-filter</code></td><td><code>dora logs</code> 上的 <code>--level</code></td></tr>
+<tr><td>按节点覆盖</td><td><code>--log-filter "sensor=debug"</code></td><td>对每个节点分别执行 <code>dora logs</code></td></tr>
+<tr><td>远程节点</td><td>否</td><td>是</td></tr>
+<tr><td>实时流式传输</td><td>始终保持连接</td><td><code>--attach</code> 或 <code>dora logs --follow</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>运行后的日志分析</strong>（两种模式下行为相同）：</p>
+<pre><code class="language-bash"># Read all local logs
+dora logs --local --all-nodes --tail 20
+
+# Search for warnings in sensor logs
+dora logs --local sensor --grep "high temp"
+
+# Check that rotation created multiple files
+ls -la out/*/log_sensor*.jsonl
+</code></pre>
+<hr/>
+<h2 id="use-case-scenarios"><a class="header" href="logging.html#use-case-scenarios">使用场景</a></h2>
+<h3 id="1-debugging-a-noisy-sensor-pipeline"><a class="header" href="logging.html#1-debugging-a-noisy-sensor-pipeline">1. 调试一个日志噪音过多的传感器流水线</a></h3>
+<p>一个摄像头传感器节点让日志被大量 debug 消息淹没，导致很难看到其他节点的错误信息。</p>
+<pre><code class="language-yaml">nodes:
+  - id: camera
+    path: ./target/debug/camera
+    min_log_level: warn          # suppress info/debug/trace at the source
+    max_log_size: "10MB"         # limit disk usage
+
+  - id: detector
+    path: ./target/debug/detector
+
+  - id: planner
+    path: ./target/debug/planner
+</code></pre>
+<pre><code class="language-bash"># During development: see everything from detector, only warnings from camera
+dora run dataflow.yml --log-level debug --log-filter "camera=warn,detector=debug"
+
+# In production: only errors
+export DORA_LOG_LEVEL=error
+dora run dataflow.yml
+</code></pre>
+<p><strong>会发生什么：</strong></p>
+<ul>
+<li>摄像头节点的 debug/info 消息会在到达日志文件之前被守护进程丢弃（<code>min_log_level: warn</code>）</li>
+<li>CLI 会基于 <code>--log-filter</code> 进一步过滤显示内容</li>
+<li>日志文件会在达到 10MB 时轮转，摄像头节点的日志在磁盘上最多保留 60MB</li>
+</ul>
+<h3 id="2-log-aggregation-within-the-dataflow"><a class="header" href="logging.html#2-log-aggregation-within-the-dataflow">2. 数据流内的日志聚合</a></h3>
+<p>构建一个数据流内的日志监控节点，监视多个节点的错误并发送告警。</p>
+<pre><code class="language-yaml">nodes:
+  - id: camera
+    path: ./target/debug/camera
+    send_logs_as: logs
+    outputs:
+      - frames
+      - logs
+
+  - id: detector
+    path: ./target/debug/detector
+    send_logs_as: logs
+    outputs:
+      - detections
+      - logs
+
+  - id: log-monitor
+    path: ./target/debug/log-monitor
+    inputs:
+      camera_logs: camera/logs
+      detector_logs: detector/logs
+    outputs:
+      - alerts
+</code></pre>
+<p><strong>日志监控节点一侧的处理方式（使用 <code>dora-log-utils</code>）：</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event};
+use dora_message::common::{LogLevel, LogLevelOrStdout};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+while let Some(event) = events.recv() {
+    match event {
+        Event::Input { data, .. } =&gt; {
+            let log = dora_log_utils::parse_log_from_arrow(&amp;data)?;
+
+            let is_error = matches!(log.level,
+                LogLevelOrStdout::LogLevel(LogLevel::Error));
+
+            if is_error || log.message.contains("timeout") {
+                // Send alert downstream
+                node.send_output("alerts", /* ... */)?;
+            }
+        }
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+}
+<span class="boring">}</span></code></pre>
+<p>另请参阅<a href="logging.html#log-sink-examples">日志接收示例</a>一节，查看完整可运行的示例。</p>
+<h3 id="3-post-mortem-debugging-of-a-crash"><a class="header" href="logging.html#3-post-mortem-debugging-of-a-crash">3. 崩溃后的事后调试</a></h3>
+<p>数据流崩溃后，调查最后几分钟内发生的情况。</p>
+<pre><code class="language-bash"># Find available dataflows
+ls out/
+
+# Read the last 50 lines from all nodes around the crash
+dora logs --local --all-nodes --tail 50
+
+# Focus on errors in the last 5 minutes
+dora logs --local --all-nodes --since 5m --level error
+
+# Search for a specific error pattern
+dora logs --local --all-nodes --grep "out of memory"
+
+# Drill into a specific node
+dora logs --local detector --since 2m
+
+# Export as JSON for external analysis
+dora run dataflow.yml --log-format json 2&gt;logs.json
+</code></pre>
+<h3 id="4-long-running-production-dataflow"><a class="header" href="logging.html#4-long-running-production-dataflow">4. 长时间运行的生产数据流</a></h3>
+<p>一个数据流会连续运行数天或数周。如果没有日志轮转，磁盘空间会被占满。</p>
+<pre><code class="language-yaml">nodes:
+  - id: ingest
+    path: ./target/debug/ingest
+    min_log_level: info        # no debug noise in production
+    max_log_size: "100MB"      # ~600MB max per node (100MB * 6)
+    restart_policy: always
+    inputs:
+      tick: dora/timer/millis/1000
+    outputs:
+      - data
+
+  - id: processor
+    path: ./target/debug/processor
+    min_log_level: warn        # only warnings and errors
+    max_log_size: "50MB"
+    restart_policy: on-failure
+    inputs:
+      data: ingest/data
+    outputs:
+      - results
+
+  - id: writer
+    path: ./target/debug/writer
+    min_log_level: error       # minimal logging
+    max_log_size: "20MB"
+    inputs:
+      results: processor/results
+</code></pre>
+<p><strong>磁盘预算：</strong></p>
+<ul>
+<li><code>ingest</code>：最多 600MB（100MB × 6 个文件）</li>
+<li><code>processor</code>：最多 300MB（50MB × 6 个文件）</li>
+<li><code>writer</code>：最多 120MB（20MB × 6 个文件）</li>
+<li><strong>总计</strong>：所有日志的磁盘占用最多约 1GB</li>
+</ul>
+<h3 id="5-live-monitoring-of-a-distributed-deployment"><a class="header" href="logging.html#5-live-monitoring-of-a-distributed-deployment">5. 分布式部署的实时监控</a></h3>
+<p>多个守护进程运行在不同机器上，从中央工作站进行监控。</p>
+<pre><code class="language-bash"># Start infrastructure (coordinator + local daemon)
+dora up
+
+# On remote machines, start a daemon pointing to the coordinator:
+#   dora daemon --coordinator-addr 192.168.1.10
+
+# Start the dataflow (detached)
+dora start dataflow.yml
+
+# Open targeted log streams in separate terminals:
+
+# Terminal 1: all sensor warnings
+dora logs &lt;dataflow-id&gt; sensor --follow --level warn
+
+# Terminal 2: processor errors with text search
+dora logs &lt;dataflow-id&gt; processor --follow --level error --grep "timeout"
+
+# Terminal 3: all nodes merged
+dora logs &lt;dataflow-id&gt; --all-nodes --follow
+
+# Terminal 4: historical + live (errors from the last hour, then stream)
+dora logs &lt;dataflow-id&gt; processor --since 1h --level error --follow
+
+# Monitor a remote coordinator from another machine:
+dora logs &lt;dataflow-id&gt; sensor --follow --coordinator-addr 192.168.1.10
+</code></pre>
+<p><strong>内部工作原理：</strong></p>
+<ol>
+<li>CLI 连接到协调器（默认 <code>localhost:6013</code>，或使用 <code>--coordinator-addr</code>）</li>
+<li>对于历史日志：采用请求—响应方式，过滤在客户端进行（<code>--since</code>、<code>--grep</code>、<code>--tail</code>）</li>
+<li>对于 <code>--follow</code>：会打开一个到协调器的 WebSocket 订阅</li>
+<li>协调器在转发之前按 <code>--level</code> 在服务端过滤（减少网络流量）</li>
+<li>CLI 在实时流上于客户端应用 <code>--grep</code> 和 <code>--since</code></li>
+<li>协调器会缓冲日志消息直到有订阅者连接，因此后加入的订阅者也能看到最近的历史记录</li>
+</ol>
+<h3 id="6-cicd-pipeline-with-structured-logging"><a class="header" href="logging.html#6-cicd-pipeline-with-structured-logging">6. 带结构化日志的 CI/CD 流水线</a></h3>
+<p>在 CI 中，使用 JSON 格式以获得可供机器解析的输出，使用紧凑格式以获得易读的日志。</p>
+<pre><code class="language-bash"># Machine-parseable logs for CI tooling
+dora run dataflow.yml --log-format json --stop-after 30s 2&gt;test-logs.json
+
+# Compact logs for CI console output
+dora run dataflow.yml --log-format compact --log-level info --stop-after 30s
+
+# Post-run analysis: count errors per node
+dora logs --local --all-nodes --level error | wc -l
+</code></pre>
+<p>使用 JSON 格式时，每一行都是一条完整的 <code>LogMessage</code>，可以被 <code>jq</code>、日志聚合工具或自定义脚本处理：</p>
+<pre><code class="language-bash"># Extract error messages with jq
+cat test-logs.json | jq -r 'select(.level == "ERROR") | "\(.node_id): \(.message)"'
+</code></pre>
+<hr/>
+<h2 id="performance-considerations"><a class="header" href="logging.html#performance-considerations">性能考量</a></h2>
+<p>日志记录会带来与日志量成正比的 I/O 开销。以下是调优方法：</p>
+<p><strong><code>min_log_level</code> 是影响最大的设置。</strong>它会在守护进程处进行过滤，发生在任何 I/O 之前：不写日志文件、不转发给协调器、也不经过 <code>send_logs_as</code> 路由。一个以每秒 1000 条 debug 日志速率发出消息的节点，在 <code>min_log_level: info</code> 设置下，这些消息产生的开销为零。</p>
+<p><strong><code>send_logs_as</code> 会为每行日志添加一条数据流消息。</strong>每条解析后的日志条目都会被序列化为 JSON、转换为 Arrow，并通过数据流发送。对于高频日志节点，这会消耗大量带宽。使用 <code>min_log_level</code> 来限制被路由的内容。</p>
+<p><strong><code>dora/logs</code> 的多个订阅者共享同一份序列化结果。</strong>守护进程只会把每行日志转换为 Arrow 一次，然后为每个订阅者克隆该结果。开销随订阅者数量线性增长，而非“日志量 × 订阅者数量”。对于大多数数据流（1~3 个日志订阅者）而言，这一开销可忽略不计。</p>
+<p><strong>单行日志大小上限为 1 MB。</strong>来自节点 stdout/stderr 的超过 1 MB 的行会被截断，以防止堆内存耗尽。这可以防止存在缺陷的节点向 stdout 输出大量二进制数据。</p>
+<p><strong>建议为长期运行的数据流启用日志文件轮转。</strong>如果不设置 <code>max_log_size</code>，日志文件会无限增长。一个以每秒 100 行、每行约 200 字节输出的节点，大约 14 小时就能填满 1 GB。</p>
+<p><strong>生产环境推荐配置：</strong></p>
+<pre><code class="language-yaml">nodes:
+  - id: my-node
+    path: ./my-node
+    min_log_level: info        # drop debug/trace at source
+    max_log_size: "50MB"       # rotate at 50MB
+    max_rotated_files: 5       # keep 5 rotated files (300MB max)
+</code></pre>
+<hr/>
+<h2 id="best-practices"><a class="header" href="logging.html#best-practices">最佳实践</a></h2>
+<p><strong>在生产环境中设置 <code>min_log_level</code>。</strong>在守护进程层面做源头过滤，可以防止调试噪音进入日志文件和网络。由于过滤发生在任何 I/O 之前，这是减少日志量最有效的方式。</p>
+<p><strong>为长期运行的数据流始终设置 <code>max_log_size</code>。</strong>如果没有轮转，单个噪音较多的节点就可能填满磁盘。建议从 <code>"50MB"</code> 开始（启用轮转后每个节点总计 300MB），并根据你的存储预算进行调整。使用 <code>max_rotated_files</code> 来调整保留多少历史文件（默认 5，范围 0~100）。</p>
+<p><strong>使用环境变量设置团队默认值。</strong>在 Shell 配置文件或 CI 配置中设置 <code>DORA_LOG_LEVEL</code> 和 <code>DORA_LOG_FORMAT</code>。个别开发者可以用 CLI 参数覆盖这些设置。</p>
+<p><strong>在开发过程中使用 <code>--log-filter</code>。</strong>无需修改 YAML 配置，可以使用按节点的显示覆盖项来聚焦正在调试的节点：<code>--log-filter "my-node=debug"</code>。</p>
+<p><strong>将 <code>send_logs_as</code> 用于运维监控。</strong>可以构建监控节点来检测错误模式、计算错误率或转发告警。这样可以把监控逻辑保留在数据流图内。可以使用 <code>dora-log-utils</code> 在自定义 sink 节点中解析和格式化日志条目（参见 <code>examples/log-sink-file/</code> 和 <code>examples/log-sink-tcp/</code>）。</p>
+<p><strong>对于结构化数据，优先使用 <code>send_logs_as</code> 而非 <code>send_stdout_as</code>。</strong><code>send_stdout_as</code> 会捕获每一行 stdout 输出（包括原始打印内容），而 <code>send_logs_as</code> 只捕获带有完整元数据的、已解析的结构化日志条目。</p>
+<p><strong>在事后调试时使用 <code>--local</code>。</strong>发生崩溃后，<code>dora logs --local --all-nodes</code> 无需运行中的协调器即可工作，并会将所有节点的日志按时间顺序合并。</p>
+<p><strong>结合 <code>--since</code> 和 <code>--grep</code> 进行有针对性的调试。</strong>不必在成千上万行中翻找，可以缩小范围：<code>dora logs --local sensor --since 5m --grep "error"</code>。</p>
+<p><strong>日志管道使用 JSON 格式。</strong>将日志提供给外部系统（ELK、Grafana Loki、Datadog）时，使用 <code>--log-format json</code> 以便进行结构化接入。</p>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/operations/logging.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="cli.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="debugging.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="cli.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="debugging.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/operations/logging.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

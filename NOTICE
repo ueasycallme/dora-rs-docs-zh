@@ -1,0 +1,15 @@
+dora 文档非官方中文翻译
+
+本仓库内容译自 dora 官方文档（https://dora-rs.ai/dora/），
+文档源码位于 https://github.com/dora-rs/dora 的 guide/ 目录。
+
+原文 Copyright dora-rs contributors，依 Apache License 2.0 发布（见 LICENSE）。
+
+修改说明：本仓库对原文做了以下修改——
+- 将正文翻译为简体中文（zh/），由机器翻译生成并经规则校验；
+- 加入语言切换按钮、页末声明，并将搜索替换为支持中文的实现；
+- 去除了与文档阅读无关的脚本；
+- 翻译日期：2026-10-13。
+英文对照版（en/）为官方页面的副本，仅做上述页面级修改。
+
+本项目与 dora-rs 项目无关，不代表官方立场；内容以官方原文为准。

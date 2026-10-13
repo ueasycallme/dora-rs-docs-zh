@@ -1,0 +1,1022 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>容错 - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/operations/fault-tolerance.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="fault-tolerance"><a class="header" href="fault-tolerance.html#fault-tolerance">容错</a></h1>
+<p>Dora 为机器人和 AI 数据流提供了内置的容错能力。节点可以在失败时自动重启、检测过期的上游连接、在输入不可用时优雅降级，协调器还可以将状态持久化到磁盘，使其在崩溃和重启后依然存活。</p>
+<h2 id="features-at-a-glance"><a class="header" href="fault-tolerance.html#features-at-a-glance">功能概览</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>功能</th><th>作用域</th><th>配置</th></tr>
+</thead>
+<tbody>
+<tr><td>重启策略</td><td>逐节点</td><td><code>restart_policy</code>, <code>max_restarts</code>, <code>restart_delay</code>, …</td></tr>
+<tr><td>健康监控</td><td>逐节点</td><td><code>health_check_timeout</code>、<code>health_check_interval</code>（数据流级别）</td></tr>
+<tr><td>输入超时</td><td>按输入</td><td><code>input_timeout</code></td></tr>
+<tr><td>断路器</td><td>自动</td><td>由 <code>input_timeout</code> 触发，自动恢复</td></tr>
+<tr><td>NodeRestarted 事件</td><td>下游节点</td><td>上游重启时自动触发</td></tr>
+<tr><td>InputTracker API</td><td>Rust 节点</td><td><code>dora_node_api::InputTracker</code></td></tr>
+<tr><td>可观测性</td><td>整个守护进程范围</td><td>定期记录的原子计数器</td></tr>
+<tr><td>分布式健康检查</td><td>多守护进程</td><td>协调器心跳监控</td></tr>
+<tr><td>协调器状态持久化</td><td>协调器</td><td><code>--store redb</code>（需要 <code>redb-backend</code> 功能特性）</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="restart-policies"><a class="header" href="fault-tolerance.html#restart-policies">重启策略</a></h2>
+<p>控制节点退出或崩溃时的行为。</p>
+<h3 id="configuration"><a class="header" href="fault-tolerance.html#configuration">配置</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: my-node
+    path: ./target/debug/my-node
+    restart_policy: on-failure  # never | on-failure | always
+    max_restarts: 5             # 0 = unlimited (default: 0)
+    restart_delay: 1.0          # initial delay in seconds
+    max_restart_delay: 30.0     # cap for exponential backoff
+    restart_window: 300.0       # reset counter after this many seconds
+</code></pre>
+<h3 id="policy-types"><a class="header" href="fault-tolerance.html#policy-types">策略类型</a></h3>
+<p><strong><code>never</code></strong>（默认）——节点不会被重启。失败将正常传播。</p>
+<p><strong><code>on-failure</code></strong>——仅当节点以非零退出码退出时才重启。正常退出（退出码为 0）不会被重启。</p>
+<p><strong><code>always</code></strong>——任何退出都会重启，除非：</p>
+<ul>
+<li>数据流是被用户停止的（<code>dora stop</code> 或 Ctrl-C）</li>
+<li>所有输入都已关闭，且节点以非零退出码退出</li>
+</ul>
+<h3 id="how-restarts-work-internally"><a class="header" href="fault-tolerance.html#how-restarts-work-internally">重启在内部的工作方式</a></h3>
+<p>当一个节点进程退出时，守护进程按以下顺序评估重启决策：</p>
+<ol>
+<li><span><strong>策略检查</strong>：重启策略是否允许重启？</span><ul>
+<li><code>Never</code> -&gt; 不重启</li>
+<li><code>OnFailure</code> -&gt; 仅当退出码 != 0 时重启</li>
+<li><code>Always</code> -&gt; 重启</li>
+</ul>
+</li>
+<li><strong>禁用检查</strong>：是否已设置 <code>disable_restart</code>？（在所有输入关闭或通过 <code>stop_all</code> 手动停止时会被设置）</li>
+<li><strong>窗口检查</strong>：如果设置了 <code>restart_window</code>，且自首次重启以来该窗口已过去，则将计数器重置为 0</li>
+<li><strong>限制检查</strong>：如果 <code>max_restarts &gt; 0</code> 且窗口内计数器超过该值，则永久放弃</li>
+<li><strong>退避</strong>：如果设置了 <code>restart_delay</code>，则休眠计算出的延迟时间（唤醒后会重新检查 <code>disable_restart</code>）</li>
+<li><strong>重新启动</strong>：以相同的配置重新启动节点进程</li>
+</ol>
+<p>守护进程在 <code>spawn/prepared.rs</code> 生命周期循环中按节点实例跟踪重启状态。每个节点运行在自己的 tokio 任务中，因此重启不会阻塞其他节点。</p>
+<h3 id="backoff"><a class="header" href="fault-tolerance.html#backoff">退避</a></h3>
+<p>当设置了 <code>restart_delay</code> 时，守护进程会在重启前等待。延迟时间在每次尝试时翻倍（指数退避），并受 <code>max_restart_delay</code> 限制。</p>
+<p>退避指数在内部被限制为最多 16，以防止溢出（<code>2^16 = 65536x multiplier</code>）。</p>
+<p>示例：<code>restart_delay: 1.0</code> 且 <code>max_restart_delay: 10.0</code>：</p>
+<pre><code>Attempt 1: wait 1s    (1.0 * 2^0)
+Attempt 2: wait 2s    (1.0 * 2^1)
+Attempt 3: wait 4s    (1.0 * 2^2)
+Attempt 4: wait 8s    (1.0 * 2^3)
+Attempt 5: wait 10s   (capped at max_restart_delay)
+Attempt 6: wait 10s   (capped)
+</code></pre>
+<p>在退避休眠期间，守护进程会持续监控 <code>disable_restart</code> 标志。如果在节点等待重启期间所有输入都关闭了，重启将被取消，并记录日志信息：“restart cancelled: inputs closed during backoff wait”。</p>
+<h3 id="restart-window"><a class="header" href="fault-tolerance.html#restart-window">重启窗口</a></h3>
+<p>当设置了 <code>restart_window</code> 时，重启计数器会在窗口（从当前窗口的首次重启开始计算）过去后重置。这实现了“每 M 秒最多 N 次重启”的语义。</p>
+<p>示例：<code>max_restarts: 5</code>、<code>restart_window: 300.0</code> 表示“每 5 分钟最多重启 5 次”。如果窗口期过去而未达到限制，计数器会重置，节点会获得另外 5 次尝试机会。</p>
+<h3 id="restart-disable-during-shutdown"><a class="header" href="fault-tolerance.html#restart-disable-during-shutdown">关闭期间禁用重启</a></h3>
+<p>当守护进程通过 <code>stop_all</code> 停止数据流时，会在发送 Stop 事件<strong>之前</strong>对每个节点调用 <code>disable_restart()</code>。这可以防止重启机制与关闭过程相互冲突。<code>disable_restart</code> 标志是一个在守护进程事件循环和节点的启动生命周期任务之间共享的 <code>Arc&lt;AtomicBool&gt;</code>。</p>
+<h3 id="noderestarted-event"><a class="header" href="fault-tolerance.html#noderestarted-event">NodeRestarted 事件</a></h3>
+<p>当一个节点重启时，守护进程会向所有消费其输出的下游节点发送 <code>NodeRestarted</code> 事件。这使下游节点可以：</p>
+<ul>
+<li>重置内部状态或缓存</li>
+<li>记录上游恢复的日志</li>
+<li>重新初始化连接或会话</li>
+</ul>
+<p>该事件携带重启节点的 <code>NodeId</code>。下游节点会通过事件流自动收到该事件：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>match event {
+    Event::NodeRestarted { id } =&gt; {
+        println!("upstream node {id} restarted, resetting state");
+        // Clear any cached state from the old node instance
+    }
+    _ =&gt; {}
+}
+<span class="boring">}</span></code></pre>
+<p>守护进程通过 <code>dataflow.mappings</code> 查找下游节点，该映射将每个节点的输出关联到所有订阅的 (receiver_node, input_id) 对。每次重启，每个唯一的接收方都会收到一次 <code>NodeRestarted</code> 事件。</p>
+<hr/>
+<h2 id="health-monitoring"><a class="header" href="fault-tolerance.html#health-monitoring">健康监控</a></h2>
+<p>被动监控可以检测到停止与守护进程通信的挂起节点。</p>
+<pre><code class="language-yaml">health_check_interval: 2.0  # seconds (default: 5.0, dataflow-level)
+nodes:
+  - id: my-node
+    path: ./target/debug/my-node
+    health_check_timeout: 30.0  # seconds (per-node)
+    restart_policy: on-failure
+</code></pre>
+<h3 id="configurable-health-check-interval"><a class="header" href="fault-tolerance.html#configurable-health-check-interval">可配置的健康检查间隔</a></h3>
+<p><code>health_check_interval</code> 是一个<strong>数据流级别</strong>的设置，用于控制守护进程检查节点健康状态的频率。默认值为 5.0 秒。较小的值可以更快地检测到挂起的节点，但会增加更多开销。请在 dataflow YAML 的顶层设置此项，而非在单个节点下设置。</p>
+<h3 id="how-it-works-internally"><a class="header" href="fault-tolerance.html#how-it-works-internally">内部工作原理</a></h3>
+<p>守护进程会按配置的 <code>health_check_interval</code> 运行健康检查扫描（通过发出 <code>Event::NodeHealthCheckInterval</code> 的 tokio 定时流实现）。</p>
+<p>每个 <code>RunningNode</code> 都有一个 <code>last_activity: Arc&lt;AtomicU64&gt;</code> 字段，用于存储最后一次通信的时间戳（自 epoch 起的毫秒数）。每当节点向守护进程发送任何请求（事件订阅、输出发送等）时，节点的通信处理器（<code>node_communication/mod.rs</code>）都会原子化地更新该字段。</p>
+<p>健康检查函数（<code>check_node_health</code>）会遍历所有正在运行的节点：</p>
+<ol>
+<li>跳过未设置 <code>health_check_timeout</code> 的节点</li>
+<li>跳过尚未连接的节点（不在 <code>connected_nodes</code> 中）</li>
+<li>计算 <code>elapsed_ms = now - last_activity</code></li>
+<li>若 <code>elapsed_ms &gt; timeout_ms</code>，记录一条警告并<strong>杀死</strong>该节点进程</li>
+</ol>
+<p>杀死后会执行正常的退出处理流程，从而评估重启策略。这意味着 <code>health_check_timeout</code> 配合 <code>restart_policy: on-failure</code> 可以自动恢复挂起的节点。</p>
+<h3 id="post-connection-liveness-only"><a class="header" href="fault-tolerance.html#post-connection-liveness-only">仅限连接建立后的存活检测</a></h3>
+<p>上面的第 2 步意味着 <code>health_check_timeout</code> 限定的是<strong>连接建立后</strong>的存活时间，而非总启动时间。节点首次订阅事件时（在 <code>Node::init</code> / <code>DoraNode::init_from_env</code> 内部）才会加入 <code>connected_nodes</code>，超时计时也只从那时起才开始生效。</p>
+<p>这是有意为之：<code>last_activity</code> 的初始值为启动时间戳，若没有连接门控，节点正常的冷启动（如 Python 导入、模型权重加载）一旦超过 <code>health_check_timeout</code>，就会在启动过程中被 SIGKILLed——而在 <code>restart_policy: always</code>/<code>on-failure</code> 下，这会变成无法摆脱的重启循环。</p>
+<p>代价是：若节点在<strong>订阅事件之前</strong>就已挂起——例如导入或初始化代码中的死锁，从未到达 <code>Node::init</code>——该看门狗不会回收它，数据流会一直处于待处理状态，等待这个节点。节点连接之前，正常的慢启动与挂起的启动是无法区分的，因此需要一个独立的启动截止时间来限定它们，而不是依赖这个超时。</p>
+<h3 id="what-counts-as-activity"><a class="header" href="fault-tolerance.html#what-counts-as-activity">何为“活动”</a></h3>
+<p>节点向守护进程发送的任何消息都算作活动：</p>
+<ul>
+<li>事件订阅请求</li>
+<li>输出数据发送（通过共享内存或 TCP）</li>
+<li>定时器滴答确认</li>
+</ul>
+<p>从其他节点接收到的正常输入数据<strong>不会</strong>重置计时器——节点必须主动与守护进程通信。</p>
+<hr/>
+<h2 id="input-timeouts-and-circuit-breaker"><a class="header" href="fault-tolerance.html#input-timeouts-and-circuit-breaker">输入超时与断路器</a></h2>
+<p>按输入设置的超时用于检测上游节点何时停止生成数据。</p>
+<h3 id="configuration-1"><a class="header" href="fault-tolerance.html#configuration-1">配置</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: downstream-node
+    path: ./target/debug/downstream
+    inputs:
+      sensor_data:
+        source: camera-node/frames
+        input_timeout: 5.0  # seconds
+</code></pre>
+<p><code>input_timeout</code> 是按输入设置的，而非按节点设置。不同输入可以有不同的超时时间。</p>
+<h3 id="how-it-works-internally-1"><a class="header" href="fault-tolerance.html#how-it-works-internally-1">内部工作原理</a></h3>
+<p>守护进程为每个设有超时的输入维护一个 <code>InputDeadline</code>：</p>
+<pre><code>struct InputDeadline {
+    timeout: Duration,        // configured timeout
+    last_received: Instant,   // last time data arrived
+}
+</code></pre>
+<p>这些信息存储在 <code>RunningDataflow.input_deadlines</code> 中，以 <code>(NodeId, DataId)</code> 为键。</p>
+<p><strong>超时检测</strong>在同一个 5 秒的健康检查周期内运行。<code>check_input_timeouts</code> 函数会：</p>
+<ol>
+<li>扫描所有 <code>input_deadlines</code> 条目</li>
+<li>若 <code>last_received.elapsed() &gt; timeout</code>，则该输入被判定为“已损坏（broken）”</li>
+<li><code>(node_id, input_id)</code> 这一对会从 <code>input_deadlines</code> 移动到 <code>broken_inputs</code></li>
+<li>守护进程调用 <code>break_input()</code>，向下游节点发送 <code>InputClosed { id }</code></li>
+<li>如果某节点的所有输入现在都已关闭（且没有已损坏/可恢复的），则会发送 <code>AllInputsClosed</code>，并禁用该节点的重启</li>
+</ol>
+<p><strong>截止时间重置</strong>：每当某个输入收到数据时，其 <code>last_received</code> 会被重置为 <code>Instant::now()</code>。</p>
+<h3 id="circuit-breaker-auto-recovery"><a class="header" href="fault-tolerance.html#circuit-breaker-auto-recovery">断路器：自动恢复</a></h3>
+<p>断路器通过 <code>RunningDataflow.broken_inputs</code> 跟踪已损坏的输入。当已损坏的输入上出现新数据时：</p>
+<ol>
+<li>该数据正常传递给节点</li>
+<li><code>broken_inputs</code> 中对应的条目会被移除</li>
+<li>该输入会被重新加入 <code>open_inputs</code></li>
+<li>会创建一个新的 <code>InputDeadline</code>（重新开始计时）</li>
+<li>会向该节点发送一个 <code>InputRecovered { id }</code> 事件</li>
+<li><code>circuit_breaker_recoveries</code> 计数器会递增</li>
+</ol>
+<p>这意味着恢复是完全自动的。如果上游节点（通过重启策略）重新启动并再次开始生成数据，下游节点会无缝地恢复接收。</p>
+<h3 id="node-side-handling"><a class="header" href="fault-tolerance.html#node-side-handling">节点侧的处理</a></h3>
+<p>在 Rust 节点中，应在事件循环里处理这些事件：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+while let Some(event) = events.recv() {
+    match event {
+        Event::Input { id, data, .. } =&gt; {
+            // Normal processing
+        }
+        Event::InputClosed { id } =&gt; {
+            // Upstream stopped producing on this input.
+            // You can: use cached data, skip processing, alert operator, etc.
+        }
+        Event::InputRecovered { id } =&gt; {
+            // Upstream is back online for this input.
+            // Resume normal processing.
+        }
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+}
+<span class="boring">}</span></code></pre>
+<hr/>
+<h2 id="inputtracker-api-rust"><a class="header" href="fault-tolerance.html#inputtracker-api-rust">InputTracker API（Rust）</a></h2>
+<p><code>InputTracker</code> 辅助工具用于跟踪输入的健康状态，并为每个输入缓存最近一次收到的值，从而方便实现优雅降级。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event, InputTracker, InputState};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+let mut tracker = InputTracker::new();
+
+while let Some(event) = events.recv() {
+    tracker.process_event(&amp;event);
+
+    match event {
+        Event::Input { id, data, .. } =&gt; {
+            // Fresh data available
+        }
+        Event::InputClosed { id } =&gt; {
+            // Input timed out -- fall back to cached data
+            if let Some(stale_data) = tracker.last_value(&amp;id) {
+                // Use stale_data as fallback
+            }
+        }
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+
+    // Check overall health
+    if tracker.any_closed() {
+        let closed: Vec&lt;_&gt; = tracker.closed_inputs();
+        // Log or adjust behavior
+    }
+}
+<span class="boring">}</span></code></pre>
+<h3 id="internal-design"><a class="header" href="fault-tolerance.html#internal-design">内部设计</a></h3>
+<p><code>InputTracker</code> 维护两个 <code>HashMap</code>：</p>
+<ul>
+<li><code>states: HashMap&lt;DataId, InputState&gt;</code>——每个输入的当前状态（Healthy 或 Closed）</li>
+<li><code>cache: HashMap&lt;DataId, ArrowData&gt;</code>——每个输入最近一次收到的值</li>
+</ul>
+<p>在 <code>Event::Input</code> 时，两个映射都会更新（state 设为 Healthy，cache 克隆数据）。在 <code>Event::InputClosed</code> 时，只有 state 会改变（cache 保持不变）。在 <code>Event::InputRecovered</code> 时，state 会被重新设为 Healthy。cache 永远不会被清空，因此即使输入关闭后，<code>last_value()</code> 仍始终返回最近一次的数据。</p>
+<p>注意：<code>ArrowData</code> 包装了 <code>Arc&lt;dyn arrow::array::Array&gt;</code>，因此缓存克隆是引用计数的（开销很小）。</p>
+<h3 id="api-reference"><a class="header" href="fault-tolerance.html#api-reference">API 参考</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方法</th><th>返回</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>new()</code></td><td><code>InputTracker</code></td><td>创建一个空的 tracker</td></tr>
+<tr><td><code>process_event(&amp;Event)</code></td><td><code>bool</code></td><td>更新状态。如果事件相关则返回 true</td></tr>
+<tr><td><code>state(&amp;DataId)</code></td><td><code>Option&lt;InputState&gt;</code></td><td>当前状态（Healthy 或 Closed）</td></tr>
+<tr><td><code>is_closed(&amp;DataId)</code></td><td><code>bool</code></td><td>检查输入是否已关闭</td></tr>
+<tr><td><code>last_value(&amp;DataId)</code></td><td><code>Option&lt;&amp;ArrowData&gt;</code></td><td>最近一次收到的值（即使已关闭也可用）</td></tr>
+<tr><td><code>closed_inputs()</code></td><td><code>Vec&lt;&amp;DataId&gt;</code></td><td>所有当前已关闭的输入</td></tr>
+<tr><td><code>any_closed()</code></td><td><code>bool</code></td><td>若有任何被跟踪的输入处于关闭状态，则为 true</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="observability"><a class="header" href="fault-tolerance.html#observability">可观测性</a></h2>
+<p>守护进程通过原子计数器（<code>FaultToleranceStats</code>）跟踪容错相关事件，并在每个 5 秒的健康检查周期中记录一次汇总日志。</p>
+<h3 id="counters"><a class="header" href="fault-tolerance.html#counters">计数器</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>计数器</th><th>类型</th><th>递增时机</th></tr>
+</thead>
+<tbody>
+<tr><td><code>restarts</code></td><td><code>AtomicU64</code></td><td>发起节点重启时（在启动生命周期中）</td></tr>
+<tr><td><code>health_check_kills</code></td><td><code>AtomicU64</code></td><td>节点因无响应被健康检查杀死时</td></tr>
+<tr><td><code>input_timeouts</code></td><td><code>AtomicU64</code></td><td>输入超时触发（断路器跳闸）时</td></tr>
+<tr><td><code>circuit_breaker_recoveries</code></td><td><code>AtomicU64</code></td><td>已损坏的输入上到达数据（自动恢复）时</td></tr>
+</tbody>
+</table>
+</div>
+<p>所有计数器都使用 <code>Ordering::Relaxed</code>，因为它们只是信息性的，不需要严格的顺序保证。</p>
+<h3 id="log-output"><a class="header" href="fault-tolerance.html#log-output">日志输出</a></h3>
+<p>当任意计数器非零时，守护进程会输出一条结构化日志：</p>
+<pre><code>INFO fault tolerance stats restarts=3 health_kills=0 input_timeouts=1 cb_recoveries=1
+</code></pre>
+<p>这些计数器在守护进程的整个生命周期内是累加的，不会在不同数据流之间重置。</p>
+<hr/>
+<h2 id="distributed-health"><a class="header" href="fault-tolerance.html#distributed-health">分布式健康状态</a></h2>
+<p>在多守护进程部署中，协调器会监控各守护进程的心跳。</p>
+<h3 id="protocol"><a class="header" href="fault-tolerance.html#protocol">协议</a></h3>
+<ul>
+<li><strong>心跳间隔</strong>：3 秒（协调器向每个守护进程发送心跳）</li>
+<li><strong>断线阈值</strong>：30 秒无响应</li>
+<li><strong>检测</strong>：在每次心跳巡检时，协调器会移除在阈值时间内未响应的守护进程</li>
+<li><strong>通知</strong>：协调器向所有剩余守护进程广播 <code>PeerDaemonDisconnected { daemon_id }</code></li>
+</ul>
+<h3 id="daemoninfo"><a class="header" href="fault-tolerance.html#daemoninfo">DaemonInfo</a></h3>
+<p><code>ConnectedMachines</code> CLI 查询返回 <code>Vec&lt;DaemonInfo&gt;</code>：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct DaemonInfo {
+    pub daemon_id: DaemonId,
+    pub last_heartbeat_ago_ms: u64,  // milliseconds since last heartbeat
+}
+<span class="boring">}</span></code></pre>
+<p>这使得监控工具能够检测到那些仍存活但响应缓慢的守护进程。</p>
+<h3 id="daemon-side-handling"><a class="header" href="fault-tolerance.html#daemon-side-handling">守护进程侧的处理</a></h3>
+<p>当守护进程收到 <code>PeerDaemonDisconnected</code> 时，会记录一条结构化警告：</p>
+<pre><code>WARN peer daemon disconnected daemon_id=machine-B
+</code></pre>
+<p>目前这仅是信息性的。未来的工作可能包括将节点自动迁移出已断开的守护进程。</p>
+<hr/>
+<h2 id="coordinator-state-persistence"><a class="header" href="fault-tolerance.html#coordinator-state-persistence">协调器状态持久化</a></h2>
+<p>默认情况下，协调器将所有状态保存在内存中。如果协调器进程崩溃或被重启，所有正在运行的数据流信息都会丢失——守护进程会继续运行，但会变成孤立状态，用户必须手动重新运行数据流。</p>
+<p><strong>redb 存储后端</strong>通过使用 <a href="https://docs.rs/redb">redb</a>（一个纯 Rust 实现的嵌入式键值存储，采用天生具备崩溃安全性的写时复制 B 树）将协调器状态持久化到磁盘上的单个文件来解决这个问题。</p>
+<h3 id="design-stateless-coordinator-with-stateful-backend"><a class="header" href="fault-tolerance.html#design-stateless-coordinator-with-stateful-backend">设计：无状态协调器 + 有状态后端</a></h3>
+<p>协调器本身在 K8s 意义上仍然是无状态的——可以随时停止和重启。所有持久状态都保存在 <code>CoordinatorStore</code> trait 背后的存储后端中：</p>
+<pre><code>Coordinator (stateless process)
+    |
+    v
+CoordinatorStore trait
+    |
+    +-- InMemoryStore (default, no persistence)
+    +-- RedbStore     (persists to ~/.dora/coordinator.redb)
+</code></pre>
+<p>这种分离意味着：</p>
+<ul>
+<li>协调器事件循环在正常运行期间从不读取文件系统（仅在启动恢复时读取）</li>
+<li>所有状态变更都会在明确定义的持久化点写入存储</li>
+<li>存储可以在不更改协调器逻辑的情况下替换</li>
+</ul>
+<h3 id="enabling-persistence"><a class="header" href="fault-tolerance.html#enabling-persistence">启用持久化</a></h3>
+<pre><code class="language-bash"># Use default path (~/.dora/coordinator.redb)
+dora coordinator --store redb
+
+# Use custom path
+dora coordinator --store redb:/path/to/coordinator.redb
+
+# Default: in-memory only (no persistence)
+dora coordinator --store memory
+</code></pre>
+<p><code>redb</code> 后端需要 <code>redb-backend</code> Cargo 特性，该特性在默认的 CLI 构建中已启用。</p>
+<h3 id="what-is-persisted"><a class="header" href="fault-tolerance.html#what-is-persisted">持久化内容</a></h3>
+<p>存储会跟踪三种记录类型：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>记录类型</th><th>键</th><th>持久化字段</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DataflowRecord</code></td><td>UUID（16 字节）</td><td>uuid、name、descriptor（JSON）、status、守护进程 ID、生成计数器、创建/更新时间戳</td></tr>
+<tr><td><code>BuildRecord</code></td><td>UUID（16 字节）</td><td>构建 ID、status、错误信息、创建/更新时间戳</td></tr>
+<tr><td><code>DaemonInfo</code></td><td>DaemonId（postcard）</td><td>守护进程 ID、机器 ID</td></tr>
+</tbody>
+</table>
+</div>
+<p>记录使用 <a href="https://docs.rs/postcard">postcard</a> 进行序列化，以实现紧凑且快速的编码。</p>
+<h3 id="dataflow-status-lifecycle"><a class="header" href="fault-tolerance.html#dataflow-status-lifecycle">数据流状态生命周期</a></h3>
+<p>协调器在每次状态转换时都会持久化数据流状态：</p>
+<pre><code>Start command     --&gt;  Pending
+All daemons ready --&gt;  Running
+Stop command      --&gt;  Stopping
+All nodes finish  --&gt;  Succeeded  or  Failed { error }
+Spawn failure     --&gt;  Failed { error: "spawn failed: ..." }
+</code></pre>
+<p>每次持久化调用都会使记录的 <code>generation</code> 计数器递增，从而提供用于冲突检测的单调版本号。</p>
+<h3 id="persistence-points"><a class="header" href="fault-tolerance.html#persistence-points">持久化时机</a></h3>
+<p>协调器会在事件循环中的以下时刻写入存储：</p>
+<ol>
+<li><strong>数据流启动</strong>（<code>ControlRequest::Start</code>）——创建状态为 <code>Pending</code> 的记录</li>
+<li><strong>数据流已启动</strong>（所有守护进程返回成功的 <code>DataflowSpawnResult</code>）——更新为 <code>Running</code></li>
+<li><strong>启动失败</strong>（<code>DataflowSpawnResult</code> 返回错误）——更新为 <code>Failed</code>，并附带实际错误信息</li>
+<li><strong>请求停止</strong>（<code>ControlRequest::Stop</code> 或 <code>StopByName</code>）——更新为 <code>Stopping</code></li>
+<li><strong>所有节点已结束</strong>（<code>DataflowFinishedOnDaemon</code>）——更新为 <code>Succeeded</code> 或 <code>Failed</code>，并附带各节点的错误详情</li>
+<li><strong>优雅关闭</strong>（Ctrl-C 或 <code>Destroy</code> 命令）——在发送停止消息之前，所有正在运行的数据流都标记为 <code>Stopping</code></li>
+</ol>
+<p>如果存储写入失败，协调器会记录一条警告并继续以内存状态运行。这可以防止存储故障阻塞数据流生命周期。</p>
+<h3 id="startup-recovery"><a class="header" href="fault-tolerance.html#startup-recovery">启动恢复</a></h3>
+<p>当协调器以包含上一次运行数据的 redb 存储启动时，会执行恢复操作：</p>
+<ol>
+<li>通过 <code>store.list_dataflows()</code> 读取所有已持久化的数据流记录</li>
+<li><span>对于任何处于非终止状态（<code>Pending</code>、<code>Running</code>、<code>Stopping</code>）的记录：</span><ul>
+<li>将其标记为 <code>Failed { error: "coordinator restarted" }</code></li>
+<li>递增生成计数器</li>
+<li>将更新后的记录写回存储</li>
+</ul>
+</li>
+<li>终止状态的记录（<code>Succeeded</code>、<code>Failed</code>）保持不变</li>
+</ol>
+<p>这确保了来自已崩溃协调器的过期数据流不会与正在实际运行的数据流混淆。那些正在运行这些数据流的守护进程会独立检测到与协调器的连接断开。</p>
+<h3 id="error-detail-preservation"><a class="header" href="fault-tolerance.html#error-detail-preservation">错误详情保留</a></h3>
+<p>当数据流失败时，<code>Failed</code> 状态会包含实际的各节点错误信息，而不是一个通用的字符串：</p>
+<pre><code>Failed { error: "node-1: exited with code 137; node-2: failed to spawn node: binary not found" }
+</code></pre>
+<p>错误信息从所有守护进程的 <code>DataflowDaemonResult.node_results</code> 中收集，格式化为 <code>node_id: error_message</code>，并用 <code>; </code> 连接。</p>
+<h3 id="schema-versioning"><a class="header" href="fault-tolerance.html#schema-versioning">模式版本管理</a></h3>
+<p>redb 数据库包含一个带有 <code>schema_version</code> 键的 <code>meta</code> 表。打开时：</p>
+<ul>
+<li>如果不存在版本号（全新的数据库），则写入当前版本号</li>
+<li>如果存储的版本号与二进制文件的版本号一致，数据库正常打开</li>
+<li>如果存在不一致，数据库会被拒绝打开并报错</li>
+</ul>
+<p>这可以防止存储记录的序列化格式在 Dora 版本之间发生变化时出现静默数据损坏。当前的 schema 版本是 <code>1</code>。</p>
+<h3 id="file-security"><a class="header" href="fault-tolerance.html#file-security">文件安全</a></h3>
+<p>在 Unix 系统上：</p>
+<ul>
+<li>数据库文件在创建后会被设置为 <code>0600</code>（仅所有者可读写）</li>
+<li>默认目录（<code>~/.dora/</code>）被设置为 <code>0700</code>（仅所有者）</li>
+<li>通过 <code>redb:/path</code> 提供的自定义路径会经过校验，拒绝包含 <code>..</code> 的路径片段</li>
+</ul>
+<h3 id="internal-architecture"><a class="header" href="fault-tolerance.html#internal-architecture">内部架构</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Store trait (libraries/coordinator-store/src/lib.rs)
+pub trait CoordinatorStore: Send + Sync {
+    fn put_dataflow(&amp;self, record: &amp;DataflowRecord) -&gt; Result&lt;()&gt;;
+    fn get_dataflow(&amp;self, uuid: &amp;Uuid) -&gt; Result&lt;Option&lt;DataflowRecord&gt;&gt;;
+    fn list_dataflows(&amp;self) -&gt; Result&lt;Vec&lt;DataflowRecord&gt;&gt;;
+    fn delete_dataflow(&amp;self, uuid: &amp;Uuid) -&gt; Result&lt;()&gt;;
+    // ... daemon and build methods
+}
+<span class="boring">}</span></code></pre>
+<p><code>RedbStore</code> 实现使用三个 redb 表（<code>daemons</code>、<code>dataflows</code>、<code>builds</code>），采用基于 UUID 的二进制键和 postcard 序列化的值。所有操作都是同步的（redb 是一个同步库）；协调器直接从异步事件循环中调用它们，因为这些是快速的进程内操作。</p>
+<p>编码和解码两端都对称地强制执行 64 MiB 的记录大小限制，因此永远不会写入一条读取方随后会拒绝的记录。postcard 只从传入的切片中读取，不会根据长度前缀预先分配内存，因此损坏的行不会导致大规模内存分配。</p>
+<hr/>
+<h2 id="complete-yaml-reference"><a class="header" href="fault-tolerance.html#complete-yaml-reference">完整 YAML 参考</a></h2>
+<pre><code class="language-yaml"># Dataflow-level settings
+health_check_interval: 2.0    # health check sweep interval (default: 5.0s)
+
+nodes:
+  - id: sensor-node
+    path: ./target/debug/sensor
+    inputs:
+      tick: dora/timer/millis/100
+    outputs:
+      - frames
+
+  - id: processor
+    path: ./target/debug/processor
+
+    # Restart policy
+    restart_policy: on-failure    # never | on-failure | always
+    max_restarts: 5               # 0 = unlimited
+    restart_delay: 1.0            # initial backoff delay (seconds)
+    max_restart_delay: 30.0       # max backoff cap (seconds)
+    restart_window: 300.0         # reset counter after N seconds
+
+    # Health monitoring
+    health_check_timeout: 30.0    # kill if no activity for N seconds
+
+    inputs:
+      frames:
+        source: sensor-node/frames
+        input_timeout: 5.0        # circuit breaker timeout (seconds)
+        queue_size: 10            # input buffer size (default: 10)
+    outputs:
+      - result
+</code></pre>
+<hr/>
+<h2 id="use-case-scenarios"><a class="header" href="fault-tolerance.html#use-case-scenarios">使用场景</a></h2>
+<h3 id="1-camera-pipeline-with-intermittent-hardware-failures"><a class="header" href="fault-tolerance.html#1-camera-pipeline-with-intermittent-hardware-failures">1. 存在间歇性硬件故障的相机流水线</a></h3>
+<p>相机驱动节点偶尔会因为 USB 断连而崩溃。处理流水线应当能挺过这些中断，并在相机重新连接后恢复。</p>
+<pre><code class="language-yaml">nodes:
+  - id: camera-driver
+    path: ./target/debug/camera-driver
+    restart_policy: on-failure
+    max_restarts: 0               # unlimited -- hardware failures are expected
+    restart_delay: 2.0            # wait for USB to re-enumerate
+    max_restart_delay: 30.0
+    inputs:
+      tick: dora/timer/millis/33  # ~30 FPS
+    outputs:
+      - frames
+
+  - id: object-detector
+    path: ./target/debug/detector
+    inputs:
+      frames:
+        source: camera-driver/frames
+        input_timeout: 5.0        # tolerate 5s camera outage
+    outputs:
+      - detections
+
+  - id: planner
+    path: ./target/debug/planner
+    inputs:
+      detections:
+        source: object-detector/detections
+        input_timeout: 10.0       # longer tolerance -- can plan with stale data
+      lidar:
+        source: lidar-driver/points
+        input_timeout: 3.0
+</code></pre>
+<p><strong>相机崩溃时发生的情况：</strong></p>
+<ol>
+<li><code>camera-driver</code> 以非零退出码退出</li>
+<li>守护进程评估 <code>on-failure</code> 策略 -&gt; 退避 2 秒后重启</li>
+<li>在中断期间，<code>object-detector</code> 在 5 秒后收到 <code>InputClosed { id: "frames" }</code></li>
+<li><code>planner</code> 在 10 秒后收到 <code>InputClosed { id: "detections" }</code></li>
+<li>相机重启，开始产生帧</li>
+<li><code>object-detector</code> 收到新的帧数据以及 <code>InputRecovered { id: "frames" }</code>（断路器恢复）</li>
+<li><code>planner</code> 收到检测结果以及 <code>InputRecovered { id: "detections" }</code></li>
+</ol>
+<p><strong>planner 中的节点端处理：</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event, InputTracker};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+let mut tracker = InputTracker::new();
+
+while let Some(event) = events.recv() {
+    tracker.process_event(&amp;event);
+
+    match event {
+        Event::Input { id, data, .. } =&gt; match id.as_ref() {
+            "detections" =&gt; plan_with_detections(&amp;data),
+            "lidar" =&gt; update_lidar_map(&amp;data),
+            _ =&gt; {}
+        },
+        Event::InputClosed { id } =&gt; match id.as_ref() {
+            "detections" =&gt; {
+                // Camera pipeline down -- plan with lidar only
+                plan_lidar_only();
+            }
+            "lidar" =&gt; {
+                // LiDAR down -- use last known detection data
+                if let Some(stale) = tracker.last_value(&amp;"detections".into()) {
+                    plan_with_stale_detections(stale);
+                }
+            }
+            _ =&gt; {}
+        },
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+}
+<span class="boring">}</span></code></pre>
+<h3 id="2-ml-inference-node-with-oom-crashes"><a class="header" href="fault-tolerance.html#2-ml-inference-node-with-oom-crashes">2. 存在 OOM 崩溃的 ML 推理节点</a></h3>
+<p>ML 推理节点在处理大输入时偶尔会耗尽内存。它应该快速重启，但在反复失败后放弃（这表明存在系统性问题）。</p>
+<pre><code class="language-yaml">nodes:
+  - id: ml-inference
+    path: ./target/debug/ml-inference
+    restart_policy: on-failure
+    max_restarts: 3
+    restart_delay: 0.5
+    restart_window: 60.0          # 3 restarts per minute
+    health_check_timeout: 60.0    # ML inference can be slow
+    inputs:
+      images:
+        source: preprocessor/images
+    outputs:
+      - predictions
+</code></pre>
+<p><strong>行为：</strong></p>
+<ul>
+<li>节点因 OOM 崩溃 -&gt; 0.5 秒后重启</li>
+<li>在另一个大输入上再次崩溃 -&gt; 1.0 秒后重启</li>
+<li>第三次崩溃 -&gt; 2.0 秒后重启</li>
+<li>60 秒内第四次崩溃 -&gt; 超过 <code>max_restarts</code>，节点永久失败</li>
+<li>如果节点在第一次崩溃后稳定运行 60 秒，重启窗口会重置，它会再获得 3 次机会</li>
+</ul>
+<h3 id="3-multi-sensor-fusion-with-graceful-degradation"><a class="header" href="fault-tolerance.html#3-multi-sensor-fusion-with-graceful-degradation">3. 具有优雅降级能力的多传感器融合</a></h3>
+<p>一台机器人融合了来自多个传感器的数据。单个传感器可能会失效，但系统应当以降低的能力继续运行。</p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor-fusion
+    path: ./target/debug/sensor-fusion
+    inputs:
+      camera:
+        source: camera-node/frames
+        input_timeout: 3.0
+      lidar:
+        source: lidar-node/points
+        input_timeout: 3.0
+      imu:
+        source: imu-node/readings
+        input_timeout: 1.0        # IMU is critical, short timeout
+      gps:
+        source: gps-node/fix
+        input_timeout: 10.0       # GPS can be intermittent
+    outputs:
+      - fused-state
+</code></pre>
+<p><strong>使用 InputTracker 的节点端：</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{DoraNode, Event, InputTracker};
+
+let (mut node, mut events) = DoraNode::init_from_env()?;
+let mut tracker = InputTracker::new();
+
+while let Some(event) = events.recv() {
+    tracker.process_event(&amp;event);
+
+    match event {
+        Event::Input { id, data, .. } =&gt; {
+            // Process fresh data from any sensor
+            update_sensor(&amp;id, &amp;data);
+            compute_and_send_fusion(&amp;mut node, &amp;tracker);
+        }
+        Event::InputClosed { id } =&gt; {
+            // Sensor went offline -- adjust fusion weights
+            eprintln!("sensor {id} offline, degrading");
+            compute_and_send_fusion(&amp;mut node, &amp;tracker);
+        }
+        Event::InputRecovered { id } =&gt; {
+            // Sensor back online
+            eprintln!("sensor {id} recovered");
+        }
+        Event::Stop(_) =&gt; break,
+        _ =&gt; {}
+    }
+}
+
+fn compute_and_send_fusion(node: &amp;mut DoraNode, tracker: &amp;InputTracker) {
+    // Use fresh data where available, stale cache for degraded sensors
+    let camera = tracker.last_value(&amp;"camera".into());
+    let lidar = tracker.last_value(&amp;"lidar".into());
+    let imu = tracker.last_value(&amp;"imu".into());
+
+    if tracker.is_closed(&amp;"imu".into()) {
+        // IMU is critical -- switch to emergency mode
+        emergency_stop(node);
+        return;
+    }
+
+    // Fuse available sensors, weighting active ones higher
+    let closed = tracker.closed_inputs();
+    let active_count = 4 - closed.len();
+    // ... fusion logic using active_count for confidence weighting
+}
+<span class="boring">}</span></code></pre>
+<h3 id="4-long-running-data-processing-pipeline"><a class="header" href="fault-tolerance.html#4-long-running-data-processing-pipeline">4. 长时间运行的数据处理流水线</a></h3>
+<p>批处理流水线持续运行。处理节点偶尔会由于第三方库的 bug 而挂起。健康监控会检测并从这些挂起中恢复。</p>
+<pre><code class="language-yaml">nodes:
+  - id: data-ingest
+    path: ./target/debug/ingest
+    restart_policy: always        # always restart -- this is a long-running service
+    max_restarts: 0               # unlimited
+    restart_delay: 1.0
+    inputs:
+      tick: dora/timer/millis/1000
+    outputs:
+      - records
+
+  - id: processor
+    path: ./target/debug/processor
+    restart_policy: on-failure
+    max_restarts: 10
+    restart_delay: 0.5
+    restart_window: 600.0         # 10 restarts per 10 minutes
+    health_check_timeout: 30.0    # kill if hung for 30s
+    inputs:
+      records: data-ingest/records
+    outputs:
+      - results
+
+  - id: writer
+    path: ./target/debug/writer
+    restart_policy: on-failure
+    max_restarts: 5
+    restart_delay: 2.0            # give DB time to recover
+    max_restart_delay: 60.0
+    inputs:
+      results:
+        source: processor/results
+        input_timeout: 60.0       # processor may be slow
+</code></pre>
+<p><strong>处理器挂起时发生的情况：</strong></p>
+<ol>
+<li>处理器停止与守护进程通信</li>
+<li>30 秒后，健康检查检测到挂起并终止该进程</li>
+<li><code>health_check_kills</code> 计数器递增</li>
+<li>守护进程评估 <code>on-failure</code> -&gt; 0.5 秒后重启</li>
+<li>新的处理器实例启动，从 <code>data-ingest</code> 恢复消费</li>
+<li><code>writer</code> 可能在 60 秒超时期间收到了 <code>InputClosed</code>——如果重启足够快，也可能没有收到</li>
+<li>如果 <code>writer</code> 确实收到了 <code>InputClosed</code>，当新结果到达时它会收到 <code>InputRecovered</code></li>
+</ol>
+<h3 id="5-distributed-deployment-with-daemon-failure-detection"><a class="header" href="fault-tolerance.html#5-distributed-deployment-with-daemon-failure-detection">5. 带有守护进程故障检测的分布式部署</a></h3>
+<p>一个多机器部署，协调器监控守护进程的健康状态。</p>
+<pre><code>Machine A (coordinator + daemon):  camera-driver, preprocessor
+Machine B (daemon):                ml-inference, postprocessor
+Machine C (daemon):                planner, actuator-driver
+</code></pre>
+<p><strong>机器 B 失去网络连接时发生的情况：</strong></p>
+<ol>
+<li>协调器对机器 B 的心跳失败</li>
+<li>30 秒没有响应后，协调器将机器 B 从活跃守护进程中移除</li>
+<li>协调器向机器 A 和机器 C 广播 <code>PeerDaemonDisconnected { daemon_id: "machine-B" }</code></li>
+<li>A 和 C 上的守护进程记录日志：<code>WARN peer daemon disconnected daemon_id=machine-B</code></li>
+<li>A 和 C 上接收来自机器 B 节点输入的节点会收到 <code>InputClosed</code> 事件（通过它们的输入超时）</li>
+<li>对 <code>ConnectedMachines</code> 的 CLI 查询只显示 A 和 C，以及它们的 <code>last_heartbeat_ago_ms</code></li>
+</ol>
+<h3 id="6-coordinator-crash-recovery-with-redb-persistence"><a class="header" href="fault-tolerance.html#6-coordinator-crash-recovery-with-redb-persistence">6. 使用 redb 持久化的协调器崩溃恢复</a></h3>
+<p>一个长时间运行的多守护进程部署，协调器必须在重启后不丢失数据流历史记录。</p>
+<pre><code class="language-bash"># Start coordinator with persistent store
+dora coordinator --store redb
+
+# In another terminal, start a dataflow
+dora start examples/rust-dataflow/dataflow.yml --name my-pipeline --detach
+
+# Coordinator crashes or is killed (e.g., OOM, hardware failure)
+# ... time passes ...
+
+# Restart coordinator with the same store
+dora coordinator --store redb
+</code></pre>
+<p><strong>重启时发生的情况：</strong></p>
+<ol>
+<li>协调器打开 <code>~/.dora/coordinator.redb</code> 并读取持久化的数据流记录</li>
+<li>发现 <code>my-pipeline</code> 状态为 <code>Running</code></li>
+<li>将其标记为 <code>Failed { error: "coordinator restarted" }</code>，并递增 generation</li>
+<li>记录日志：<code>INFO recovering stale dataflow &lt;uuid&gt; ("my-pipeline") -&gt; marking as Failed</code></li>
+<li><code>dora list</code> 现在会显示 <code>my-pipeline</code> 及其最终状态和时间戳</li>
+<li>各守护进程独立检测到协调器断开连接，并停止它们的节点</li>
+<li>用户可以启动新的数据流——协调器完全可以正常工作</li>
+</ol>
+<p>关键优势在于：协调器在重启之间保留了数据流生命周期事件的完整历史记录。如果没有 <code>--store redb</code>，所有状态都会丢失，操作员将无法得知崩溃前正在运行什么。</p>
+<h3 id="7-periodic-batch-job-with-always-restart"><a class="header" href="fault-tolerance.html#7-periodic-batch-job-with-always-restart">7. 始终重启的周期性批处理作业</a></h3>
+<p>一个处理批次并在完成后退出的节点。它应该重启以处理下一个批次。</p>
+<pre><code class="language-yaml">nodes:
+  - id: batch-processor
+    path: ./target/debug/batch-proc
+    restart_policy: always        # restart even on clean exit
+    max_restarts: 0               # unlimited
+    restart_delay: 10.0           # wait 10s between batches
+    max_restart_delay: 10.0       # no exponential growth
+    inputs:
+      trigger: dora/timer/millis/1  # immediate first trigger
+    outputs:
+      - batch-result
+</code></pre>
+<p>该节点处理一个批次后以状态码 0 退出，等待 10 秒，然后重启处理下一个批次。<code>always</code> 策略即使在成功退出时也会确保重启。设置 <code>restart_delay == max_restart_delay</code> 可实现固定延迟。</p>
+<hr/>
+<h2 id="best-practices"><a class="header" href="fault-tolerance.html#best-practices">最佳实践</a></h2>
+<p><strong>从 <code>on-failure</code> 开始</strong>。仅对预期会退出并重启的节点（例如周期性批处理任务）使用 <code>always</code>。</p>
+<p><strong>设置 <code>max_restarts</code></strong>。无限重启可能掩盖 bug。先从 3 到 5 开始，必要时再增加。仅对崩溃是预期且不可避免的节点（硬件驱动、外部 API 客户端）使用 <code>max_restarts: 0</code>。</p>
+<p><strong>使用 <code>restart_window</code></strong>。可防止永久性重启循环。常用窗口为 60 到 300 秒。如果没有设置窗口，一个在启动时崩溃的节点会立即耗尽其重启预算。</p>
+<p><strong>调整 <code>restart_delay</code></strong>。先从 0.5 到 1.0 秒开始。过短会导致抖动；过长会延迟恢复。应根据节点的典型启动时间以及故障的根本原因来匹配延迟：</p>
+<ul>
+<li>USB/硬件重新连接：2 到 5 秒</li>
+<li>网络服务重新连接：1 到 3 秒</li>
+<li>OOM/瞬时性 bug：0.5 到 1.0 秒</li>
+</ul>
+<p><strong>宽松设置 <code>health_check_timeout</code></strong>。应至少为节点最长预期处理时间的 2 到 3 倍。ML 推理节点可能需要 60 秒以上。如果设置过短，健康的节点会在正常处理过程中被杀死。</p>
+<p><strong>为每个输入设置 <code>input_timeout</code></strong>。并非所有输入都需要相同的超时时间。对高频输入（IMU、摄像头）使用较短的超时，对缓慢/突发性来源（GPS、批处理结果）使用较长的超时。一个好的起点是预期发布间隔的 3 到 5 倍。</p>
+<p><strong>在关键路径上使用 <code>InputTracker</code></strong>。当一个节点必须在输入数据降质的情况下仍继续运行时，使用 <code>InputTracker</code> 回退到缓存数据。这对传感器融合、规划和控制节点至关重要。</p>
+<p><strong>在生产部署中使用 <code>--store redb</code></strong>。redb 后端可确保协调器在崩溃和重启后仍保留数据流历史记录。默认的内存方式适合开发使用，但退出时会丢失所有状态。redb 文件很小（与数据流记录的数量成正比），开销可忽略不计。</p>
+<p><strong>已知限制：</strong>当协调器断开连接时，守护进程目前会在重新连接之前杀死正在运行的节点进程（<a href="https://github.com/dora-rs/dora/issues/1799">#1799</a>）。数据流<em>记录</em>在协调器重启后仍能保留（通过 redb），但正在运行的<em>进程</em>会从头重启。目前正在规划实现跨重连的无缝进程接管（参见 <a href="https://dora-rs.ai/docs/plan-coordinator-ha.html"><code>docs/plan-coordinator-ha.md</code></a> 第 1.4 阶段）。</p>
+<p><strong>组合使用多个特性以实现纵深防御</strong>：</p>
+<ul>
+<li><code>restart_policy</code> + <code>restart_delay</code> -&gt; 从节点崩溃中恢复</li>
+<li><code>health_check_timeout</code> -&gt; 从挂起的节点中恢复</li>
+<li><code>input_timeout</code> -&gt; 检测过期的上游数据</li>
+<li><code>InputTracker</code> -&gt; 在节点代码中实现优雅降级</li>
+<li><code>--store redb</code> -&gt; 在协调器崩溃后仍能存活</li>
+</ul>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/operations/fault-tolerance.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="debugging.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="distributed.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="debugging.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="distributed.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/operations/fault-tolerance.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

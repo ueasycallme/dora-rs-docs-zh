@@ -1,0 +1,960 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="en">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>Python - Dora User Guide</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../searchindex-59461594.js";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+<div>
+<p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+<p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+<p>Press <kbd>?</kbd> to show this help</p>
+<p>Press <kbd>Esc</kbd> to hide this help</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="Table of contents" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="Toggle Table of Contents" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="Toggle Table of Contents">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="Change theme" class="icon-button" id="mdbook-theme-toggle" title="Change theme" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="Themes" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">Auto</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">Light</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="Toggle Searchbar" class="icon-button" id="mdbook-search-toggle" title="Search (`/`)" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora User Guide</h1>
+<div class="right-buttons">
+<a aria-label="Print this book" href="../print.html" title="Print this book">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git repository" href="https://github.com/dora-rs/dora" title="Git repository">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="Suggest an edit" href="https://github.com/dora-rs/dora/edit/main/guide/src/languages/python.md" rel="edit" title="Suggest an edit">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="python-api-reference"><a class="header" href="python.html#python-api-reference">Python API Reference</a></h1>
+<p>This document covers the Python APIs for building dora nodes, operators, and dataflows. Install with:</p>
+<pre><code class="language-bash">pip install dora-rs
+</code></pre>
+<hr/>
+<h2 id="table-of-contents"><a class="header" href="python.html#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="python.html#node-api">Node API</a>
+<ul>
+<li><a href="python.html#node-class">Node class</a></li>
+<li><a href="python.html#event-dictionary">Event dictionary</a></li>
+<li><a href="python.html#dorastatus-enum">DoraStatus enum</a></li>
+</ul>
+</li>
+<li><a href="python.html#operator-api">Operator API</a>
+<ul>
+<li><a href="python.html#operator-class-user-defined">Operator class (user-defined)</a></li>
+<li><a href="python.html#send_output-callback">send_output callback</a></li>
+</ul>
+</li>
+<li><a href="python.html#dataflowbuilder">DataflowBuilder</a>
+<ul>
+<li><a href="python.html#dataflowbuilder-class">DataflowBuilder class</a></li>
+<li><a href="python.html#node-class-builder">Node class (builder)</a></li>
+<li><a href="python.html#output-class-builder">Output class (builder)</a></li>
+<li><a href="python.html#operator-class-builder">Operator class (builder)</a></li>
+</ul>
+</li>
+<li><a href="python.html#cuda-module">CUDA Module</a></li>
+<li><a href="python.html#quick-start-example">Quick Start Example</a></li>
+<li><a href="python.html#dataflowbuilder-example">DataflowBuilder Example</a></li>
+</ul>
+<hr/>
+<h2 id="node-api"><a class="header" href="python.html#node-api">Node API</a></h2>
+<pre><code class="language-python">from dora import Node
+</code></pre>
+<p>The <code>Node</code> class is the primary interface for custom nodes. It connects to a running dataflow, receives input events, and sends outputs.</p>
+<h3 id="node-class"><a class="header" href="python.html#node-class">Node class</a></h3>
+<h4 id="__init__node_idnone"><a class="header" href="python.html#__init__node_idnone"><code>__init__(node_id=None)</code></a></h4>
+<p>Create a new node and connect to the running dataflow.</p>
+<pre><code class="language-python"># Standard: node ID is read from environment variables set by the daemon
+node = Node()
+
+# Dynamic: connect to a running dataflow by explicit node ID
+node = Node(node_id="my-dynamic-node")
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>node_id</code> (str, optional) – Explicit node ID for dynamic nodes. When omitted, the node reads its identity from environment variables set by the dora daemon.</li>
+</ul>
+<p><strong>Raises:</strong> <code>RuntimeError</code> if the node cannot connect to the dataflow.</p>
+<hr/>
+<h4 id="nexttimeoutnone"><a class="header" href="python.html#nexttimeoutnone"><code>next(timeout=None)</code></a></h4>
+<p>Retrieve the next event from the event stream. Blocks until an event is available or the timeout expires.</p>
+<pre><code class="language-python">event = node.next()              # block indefinitely
+event = node.next(timeout=2.0)   # block up to 2 seconds
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>timeout</code> (float, optional) – Maximum wait time in seconds.</li>
+</ul>
+<p><strong>Returns:</strong> <code>dict</code> – An <a href="python.html#event-dictionary">event dictionary</a>, or <code>None</code> if all senders have been dropped or the timeout expired.</p>
+<hr/>
+<h4 id="drain"><a class="header" href="python.html#drain"><code>drain()</code></a></h4>
+<p>Retrieve all buffered events without blocking.</p>
+<pre><code class="language-python">events = node.drain()
+for event in events:
+    print(event["type"])
+</code></pre>
+<p><strong>Returns:</strong> <code>list[dict]</code> – A list of <a href="python.html#event-dictionary">event dictionaries</a>. Returns an empty list if no events are buffered.</p>
+<hr/>
+<h4 id="try_recv"><a class="header" href="python.html#try_recv"><code>try_recv()</code></a></h4>
+<p>Non-blocking receive. Returns the next buffered event if one is available.</p>
+<pre><code class="language-python">event = node.try_recv()
+if event is not None:
+    print(event["type"])
+</code></pre>
+<p><strong>Returns:</strong> <code>dict | None</code> – An <a href="python.html#event-dictionary">event dictionary</a>, or <code>None</code> if no event is buffered.</p>
+<hr/>
+<h4 id="recv_asynctimeoutnone"><a class="header" href="python.html#recv_asynctimeoutnone"><code>recv_async(timeout=None)</code></a></h4>
+<p>Asynchronous receive. For use with <code>asyncio</code>.</p>
+<pre><code class="language-python">event = await node.recv_async()
+event = await node.recv_async(timeout=5.0)
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>timeout</code> (float, optional) – Maximum wait time in seconds. Returns an error if the timeout is reached.</li>
+</ul>
+<p><strong>Returns:</strong> <code>dict | None</code> – An <a href="python.html#event-dictionary">event dictionary</a>, or <code>None</code> if all senders have been dropped.</p>
+<blockquote>
+<p><strong>Note:</strong> This method is experimental. The pyo3 async (Rust-Python FFI) integration is still in development.</p>
+</blockquote>
+<hr/>
+<h4 id="is_empty"><a class="header" href="python.html#is_empty"><code>is_empty()</code></a></h4>
+<p>Check whether there are any buffered events in the event stream.</p>
+<pre><code class="language-python">if not node.is_empty():
+    event = node.try_recv()
+</code></pre>
+<p><strong>Returns:</strong> <code>bool</code></p>
+<hr/>
+<h4 id="send_outputoutput_id-data-metadatanone"><a class="header" href="python.html#send_outputoutput_id-data-metadatanone"><code>send_output(output_id, data, metadata=None)</code></a></h4>
+<p>Send data on an output channel.</p>
+<pre><code class="language-python">import pyarrow as pa
+
+# Send raw bytes
+node.send_output("status", b"OK")
+
+# Send an Apache Arrow array (zero-copy capable)
+node.send_output("values", pa.array([1, 2, 3]))
+
+# Send with metadata
+node.send_output("image", pa.array(pixels), {"camera_id": "front"})
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>output_id</code> (str) – The output name as declared in the dataflow YAML.</li>
+<li><code>data</code> (bytes | pyarrow.Array) – The payload. Use <code>bytes</code> for simple data or <code>pyarrow.Array</code> for zero-copy shared-memory transport.</li>
+<li><code>metadata</code> (dict, optional) – Key-value pairs attached to the message. Supported value types: <code>bool</code>, <code>int</code>, <code>float</code>, <code>str</code>, <code>list[int]</code>, <code>list[float]</code>, <code>list[str]</code>, <code>datetime.datetime</code>.</li>
+</ul>
+<p><strong>Raises:</strong> <code>RuntimeError</code> if <code>data</code> is neither <code>bytes</code> nor a <code>pyarrow.Array</code>.</p>
+<h5 id="service-action-and-streaming-patterns"><a class="header" href="python.html#service-action-and-streaming-patterns">Service, action, and streaming patterns</a></h5>
+<p>Python nodes use the same metadata key conventions as Rust for <a href="https://dora-rs.ai/dora/languages/patterns.html">communication patterns</a>. Parameters are plain dicts with string keys.</p>
+<p><strong>Well-known metadata keys:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Key</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"request_id"</code></td><td>Service request/response correlation (UUID v7)</td></tr>
+<tr><td><code>"goal_id"</code></td><td>Action goal identification (UUID v7)</td></tr>
+<tr><td><code>"goal_status"</code></td><td>Action result status: <code>"succeeded"</code>, <code>"aborted"</code>, or <code>"canceled"</code></td></tr>
+<tr><td><code>"session_id"</code></td><td>Streaming session identifier</td></tr>
+<tr><td><code>"segment_id"</code></td><td>Streaming segment within a session (integer)</td></tr>
+<tr><td><code>"seq"</code></td><td>Streaming chunk sequence number (integer)</td></tr>
+<tr><td><code>"fin"</code></td><td>Last chunk of a streaming segment (bool)</td></tr>
+<tr><td><code>"flush"</code></td><td>Discard older queued messages on input (bool)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Service client example:</strong></p>
+<pre><code class="language-python">import uuid
+
+# Send a request with a unique request_id
+request_id = str(uuid.uuid7())  # Python 3.13+; use uuid_utils or uuid.uuid4() on older versions
+node.send_output("request", data, {"request_id": request_id})
+</code></pre>
+<p><strong>Service server example:</strong></p>
+<pre><code class="language-python"># Pass through the metadata (includes request_id) from the incoming request
+node.send_output("response", result, event["metadata"])
+</code></pre>
+<p><strong>Action client example:</strong></p>
+<pre><code class="language-python">goal_id = str(uuid.uuid7())
+node.send_output("goal", data, {"goal_id": goal_id})
+</code></pre>
+<p><strong>Streaming example</strong> (flush downstream queues on user interruption):</p>
+<pre><code class="language-python"># `metadata` is a flat dict of parameter name -&gt; value; there is no
+# enclosing "parameters" key.
+node.send_output(
+    "text",
+    data,
+    metadata={
+        "session_id": session_id,
+        "segment_id": 1,
+        "seq": 0,
+        "fin": False,
+        "flush": True,
+    },
+)
+</code></pre>
+<p>See <a href="https://dora-rs.ai/dora/languages/patterns.html">patterns.md</a> for the full guide.</p>
+<hr/>
+<h4 id="logging"><a class="header" href="python.html#logging">Logging</a></h4>
+<p>Python nodes can log using either Python’s built-in <code>logging</code> module (recommended) or the explicit node API.</p>
+<p><strong>Python <code>logging</code> module (auto-bridged):</strong></p>
+<p>When <code>Node()</code> is created, it automatically installs a handler that routes Python’s <code>logging</code> module through the dora daemon. No configuration needed:</p>
+<pre><code class="language-python">import logging
+from dora import Node
+
+node = Node()  # Installs the logging bridge
+
+logging.info("Sensor initialized")       # -&gt; structured "info" log entry
+logging.warning("High temperature")      # -&gt; structured "warn" log entry
+logging.debug("Raw bytes: %s", data)     # -&gt; structured "debug" log entry
+</code></pre>
+<p>These log entries are captured with full metadata (level, message, file path, line number) and work with <code>min_log_level</code> filtering, <code>send_logs_as</code> routing, and <code>dora/logs</code> subscribers.</p>
+<blockquote>
+<p><strong>Note:</strong> Do not call <code>logging.basicConfig()</code> before creating <code>Node()</code>. The constructor sets up the bridge; calling <code>basicConfig()</code> first may install a conflicting handler.</p>
+</blockquote>
+<p><strong>Explicit node API:</strong></p>
+<h4 id="loglevel-message-targetnone-fieldsnone"><a class="header" href="python.html#loglevel-message-targetnone-fieldsnone"><code>log(level, message, target=None, fields=None)</code></a></h4>
+<p>Emit a structured log message with optional target and key-value fields.</p>
+<pre><code class="language-python">node.log("info", "Processing frame", target="vision")
+node.log("error", "Sensor timeout", fields={"sensor": "lidar", "retry": "3"})
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>level</code> (str) – Log level: <code>"error"</code>, <code>"warn"</code>, <code>"info"</code>, <code>"debug"</code>, or <code>"trace"</code>.</li>
+<li><code>message</code> (str) – The log message.</li>
+<li><code>target</code> (str, optional) – Target module or subsystem name.</li>
+<li><code>fields</code> (dict[str, str], optional) – Structured key-value context fields.</li>
+</ul>
+<p>Works with the daemon’s <code>min_log_level</code> filtering, <code>send_logs_as</code> routing, and <code>dora/logs</code> subscribers.</p>
+<hr/>
+<h4 id="log_errormessage-log_warnmessage-log_infomessage-log_debugmessage-log_tracemessage"><a class="header" href="python.html#log_errormessage-log_warnmessage-log_infomessage-log_debugmessage-log_tracemessage"><code>log_error(message)</code>, <code>log_warn(message)</code>, <code>log_info(message)</code>, <code>log_debug(message)</code>, <code>log_trace(message)</code></a></h4>
+<p>Convenience methods for common log levels:</p>
+<pre><code class="language-python">node.log_error("Connection failed")
+node.log_warn("Temperature elevated")
+node.log_info("Sensor initialized")
+node.log_debug("Raw bytes received")
+node.log_trace("Entering loop iteration")
+</code></pre>
+<p>Each is equivalent to <code>node.log(level, message)</code>.</p>
+<p><strong>When to use which:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Method</th><th>Structured?</th><th>Fields?</th><th>Best for</th></tr>
+</thead>
+<tbody>
+<tr><td><code>logging.info()</code></td><td>Yes</td><td>No</td><td>General-purpose logging</td></tr>
+<tr><td><code>node.log("info", msg, fields={...})</code></td><td>Yes</td><td>Yes</td><td>Structured context (sensor_id, etc.)</td></tr>
+<tr><td><code>node.log_info(msg)</code></td><td>Yes</td><td>No</td><td>Quick one-liner</td></tr>
+<tr><td><code>print()</code></td><td>No</td><td>No</td><td>Legacy code, quick debugging</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h4 id="dataflow_descriptor"><a class="header" href="python.html#dataflow_descriptor"><code>dataflow_descriptor()</code></a></h4>
+<p>Return the full dataflow descriptor (the parsed dataflow YAML) as a Python dictionary.</p>
+<pre><code class="language-python">descriptor = node.dataflow_descriptor()
+print(descriptor["nodes"])
+</code></pre>
+<p><strong>Returns:</strong> <code>dict</code></p>
+<hr/>
+<h4 id="node_config"><a class="header" href="python.html#node_config"><code>node_config()</code></a></h4>
+<p>Return the configuration block for this node from the dataflow descriptor.</p>
+<pre><code class="language-python">config = node.node_config()
+model_path = config.get("model", "default.pt")
+</code></pre>
+<p><strong>Returns:</strong> <code>dict</code></p>
+<hr/>
+<h4 id="dataflow_id"><a class="header" href="python.html#dataflow_id"><code>dataflow_id()</code></a></h4>
+<p>Return the unique identifier of the running dataflow.</p>
+<pre><code class="language-python">print(node.dataflow_id())  # e.g. "a1b2c3d4-..."
+</code></pre>
+<p><strong>Returns:</strong> <code>str</code></p>
+<hr/>
+<h4 id="is_restart"><a class="header" href="python.html#is_restart"><code>is_restart()</code></a></h4>
+<p>Check whether this node was restarted after a previous exit or failure. Useful for deciding whether to restore saved state or start fresh.</p>
+<pre><code class="language-python">if node.is_restart():
+    restore_checkpoint()
+</code></pre>
+<p><strong>Returns:</strong> <code>bool</code></p>
+<hr/>
+<h4 id="restart_count"><a class="header" href="python.html#restart_count"><code>restart_count()</code></a></h4>
+<p>Return how many times this node has been restarted. Returns <code>0</code> on the first run, <code>1</code> after the first restart, and so on.</p>
+<pre><code class="language-python">print(f"Restart #{node.restart_count()}")
+</code></pre>
+<p><strong>Returns:</strong> <code>int</code></p>
+<hr/>
+<h4 id="merge_external_eventssubscription-idnone"><a class="header" href="python.html#merge_external_eventssubscription-idnone"><code>merge_external_events(subscription, id=None)</code></a></h4>
+<p>Merge a ROS2 subscription stream into the node’s main event loop. After calling this method, ROS2 messages arrive as events with <code>kind</code> set to <code>"external"</code> and <code>id</code> set to the subscription’s <code>id</code> (by default its ROS2 topic name). Call it once per subscription to handle several topics in one node.</p>
+<pre><code class="language-python">from dora import Node, Ros2Context, Ros2NodeOptions, Ros2QosPolicies
+
+node = Node()
+ros2_context = Ros2Context()
+ros2_node = ros2_context.new_node("listener", "/", Ros2NodeOptions())
+qos = Ros2QosPolicies()
+chatter = ros2_node.create_subscription(
+    ros2_node.create_topic("/chatter", "std_msgs/String", qos)
+)
+pose = ros2_node.create_subscription(
+    ros2_node.create_topic("/turtle1/pose", "turtlesim/Pose", qos)
+)
+
+node.merge_external_events(chatter)            # id defaults to "/chatter"
+node.merge_external_events(pose, id="pose")    # or choose your own label
+
+for event in node:
+    if event["kind"] == "external":
+        print("ROS2", event["id"], event["value"])
+    elif event["type"] == "INPUT":
+        print("Dora:", event["id"])
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>subscription</code> (<code>dora.Ros2Subscription</code>) – A ROS2 subscription created via the dora ROS2 bridge.</li>
+<li><code>id</code> (<code>str</code>, optional) – Label for events from this subscription, returned as <code>event["id"]</code>. Defaults to the subscription’s topic name exactly as passed to <code>create_topic</code> (not namespace-resolved). Must not be empty.</li>
+</ul>
+<hr/>
+<h4 id="iteration-support"><a class="header" href="python.html#iteration-support">Iteration support</a></h4>
+<p>The <code>Node</code> class implements <code>__iter__</code> and <code>__next__</code>, so you can iterate directly:</p>
+<pre><code class="language-python">for event in node:
+    match event["type"]:
+        case "INPUT":
+            process(event["value"])
+        case "STOP":
+            break
+</code></pre>
+<p>The iterator calls <code>next()</code> with no timeout on each iteration. It yields <code>None</code> when the event stream is closed, which terminates the loop.</p>
+<hr/>
+<h3 id="event-dictionary"><a class="header" href="python.html#event-dictionary">Event dictionary</a></h3>
+<p>Events are returned as plain Python dictionaries. The structure depends on the event type.</p>
+<h4 id="input"><a class="header" href="python.html#input">INPUT</a></h4>
+<p>An input message arrived from another node.</p>
+<pre><code class="language-python">{
+    "type": "INPUT",
+    "id": "camera_image",          # input ID as declared in the dataflow YAML
+    "kind": "dora",               # "dora" for dataflow events, "external" for ROS2
+    "value": &lt;pyarrow.Array&gt;,      # the payload as an Apache Arrow array
+    "metadata": {
+        "timestamp": datetime,     # UTC-aware datetime.datetime
+        "open_telemetry_context": "...",  # tracing context (if enabled)
+        ...                        # any user-supplied metadata
+    },
+}
+</code></pre>
+<p>Access the data:</p>
+<pre><code class="language-python">values = event["value"].to_pylist()     # convert to Python list
+array = event["value"].to_numpy()       # convert to NumPy array
+</code></pre>
+<h4 id="input_closed"><a class="header" href="python.html#input_closed">INPUT_CLOSED</a></h4>
+<p>An input channel was closed (the upstream node finished).</p>
+<pre><code class="language-python">{
+    "type": "INPUT_CLOSED",
+    "id": "camera_image",
+    "kind": "dora",
+}
+</code></pre>
+<h4 id="stop"><a class="header" href="python.html#stop">STOP</a></h4>
+<p>The dataflow is shutting down.</p>
+<pre><code class="language-python">{
+    "type": "STOP",
+    "id": "MANUAL" | "ALL_INPUTS_CLOSED",   # stop cause
+    "kind": "dora",
+}
+</code></pre>
+<h4 id="error"><a class="header" href="python.html#error">ERROR</a></h4>
+<p>An error occurred in the runtime.</p>
+<pre><code class="language-python">{
+    "type": "ERROR",
+    "error": "description of the error",
+    "kind": "dora",
+}
+</code></pre>
+<h4 id="external-ros2"><a class="header" href="python.html#external-ros2">External (ROS2)</a></h4>
+<p>When using <code>merge_external_events</code>, ROS2 messages arrive as:</p>
+<pre><code class="language-python">{
+    "kind": "external",
+    "id": "/turtle1/pose",      # the `id` given to merge_external_events, or the topic name
+    "value": &lt;pyarrow.Array&gt;,   # the ROS2 message as an Arrow array
+}
+</code></pre>
+<hr/>
+<h3 id="dorastatus-enum"><a class="header" href="python.html#dorastatus-enum">DoraStatus enum</a></h3>
+<p>Used as the return value from operator <code>on_event</code> methods to control the event loop.</p>
+<pre><code class="language-python">from dora import DoraStatus
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Value</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DoraStatus.CONTINUE</code></td><td>Continue processing events (value <code>0</code>)</td></tr>
+<tr><td><code>DoraStatus.STOP</code></td><td>Stop this operator (value <code>1</code>)</td></tr>
+<tr><td><code>DoraStatus.STOP_ALL</code></td><td>Stop the entire dataflow (value <code>2</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="operator-api"><a class="header" href="python.html#operator-api">Operator API</a></h2>
+<p>Operators run inside the dora runtime process (no separate OS process). They are defined as a Python class named <code>Operator</code> with an <code>on_event</code> method.</p>
+<h3 id="operator-class-user-defined"><a class="header" href="python.html#operator-class-user-defined">Operator class (user-defined)</a></h3>
+<p>Create a Python file with an <code>Operator</code> class:</p>
+<pre><code class="language-python">from dora import DoraStatus
+
+class Operator:
+    def __init__(self):
+        # Initialize state here
+        self.count = 0
+
+    def on_event(self, dora_event, send_output) -&gt; DoraStatus:
+        if dora_event["type"] == "INPUT":
+            self.count += 1
+            # Process the input and optionally send output
+            send_output("result", b"processed", dora_event["metadata"])
+        return DoraStatus.CONTINUE
+</code></pre>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><code>__init__(self)</code> – Called once when the operator is loaded. Initialize any state or models here.</li>
+<li><code>on_event(self, dora_event, send_output) -&gt; DoraStatus</code> – Called for every incoming event. Must return an <code>DoraStatus</code> value.</li>
+</ul>
+<p><strong>Parameters of <code>on_event</code>:</strong></p>
+<ul>
+<li><code>dora_event</code> (dict) – An <a href="python.html#event-dictionary">event dictionary</a>.</li>
+<li><code>send_output</code> (callable) – Callback to send output data (see below).</li>
+</ul>
+<p>The runtime also sets <code>self.dataflow_descriptor</code> on the operator instance with the parsed dataflow YAML as a dictionary.</p>
+<h3 id="send_output-callback"><a class="header" href="python.html#send_output-callback">send_output callback</a></h3>
+<p>The <code>send_output</code> callback is passed to <code>on_event</code> for sending data from an operator.</p>
+<pre><code class="language-python">send_output(output_id, data, metadata=None)
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>output_id</code> (str) – The output name as declared in the dataflow YAML.</li>
+<li><code>data</code> (bytes | pyarrow.Array) – The payload.</li>
+<li><code>metadata</code> (dict, optional) – Metadata to attach. Pass <code>dora_event["metadata"]</code> to propagate tracing context.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-python">import pyarrow as pa
+from dora import DoraStatus
+
+class Operator:
+    def on_event(self, dora_event, send_output) -&gt; DoraStatus:
+        if dora_event["type"] == "INPUT":
+            result = pa.array([42], type=pa.int64())
+            send_output("output", result, dora_event["metadata"])
+        return DoraStatus.CONTINUE
+</code></pre>
+<hr/>
+<h2 id="dataflowbuilder"><a class="header" href="python.html#dataflowbuilder">DataflowBuilder</a></h2>
+<pre><code class="language-python">from dora.builder import DataflowBuilder, Node, Operator, Output
+</code></pre>
+<p>Build dataflow YAML programmatically in Python.</p>
+<h3 id="dataflowbuilder-class"><a class="header" href="python.html#dataflowbuilder-class">DataflowBuilder class</a></h3>
+<h4 id="__init__namedora-dataflow"><a class="header" href="python.html#__init__namedora-dataflow"><code>__init__(name="dora-dataflow")</code></a></h4>
+<p>Create a new dataflow builder.</p>
+<pre><code class="language-python">flow = DataflowBuilder("my-robot")
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>name</code> (str, optional) – Name of the dataflow. Defaults to <code>"dora-dataflow"</code>.</li>
+</ul>
+<h4 id="add_nodeid-kwargs---node"><a class="header" href="python.html#add_nodeid-kwargs---node"><code>add_node(id, **kwargs) -&gt; Node</code></a></h4>
+<p>Add a node to the dataflow. Returns a <code>Node</code> object for further configuration.</p>
+<pre><code class="language-python">sender = flow.add_node("sender")
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>id</code> (str) – Unique node identifier.</li>
+<li><code>**kwargs</code> – Additional node configuration passed through to the YAML.</li>
+</ul>
+<p><strong>Returns:</strong> <code>Node</code> (builder)</p>
+<h4 id="to_yamlpathnone---str--none"><a class="header" href="python.html#to_yamlpathnone---str--none"><code>to_yaml(path=None) -&gt; str | None</code></a></h4>
+<p>Generate the YAML representation of the dataflow. If <code>path</code> is given, writes to file and returns <code>None</code>. Otherwise returns the YAML string.</p>
+<pre><code class="language-python"># Write to file
+flow.to_yaml("dataflow.yml")
+
+# Get as string
+yaml_str = flow.to_yaml()
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>path</code> (str, optional) – File path to write the YAML.</li>
+</ul>
+<p><strong>Returns:</strong> <code>str | None</code></p>
+<h4 id="context-manager"><a class="header" href="python.html#context-manager">Context manager</a></h4>
+<p><code>DataflowBuilder</code> supports the <code>with</code> statement:</p>
+<pre><code class="language-python">with DataflowBuilder("my-flow") as flow:
+    flow.add_node("sender").path("sender.py")
+    flow.to_yaml("dataflow.yml")
+</code></pre>
+<hr/>
+<h3 id="node-class-builder"><a class="header" href="python.html#node-class-builder">Node class (builder)</a></h3>
+<p>Returned by <code>DataflowBuilder.add_node()</code>. All setter methods return <code>self</code> for chaining.</p>
+<h4 id="pathpath---node"><a class="header" href="python.html#pathpath---node"><code>path(path) -&gt; Node</code></a></h4>
+<p>Set the path to the node’s executable or script.</p>
+<pre><code class="language-python">node.path("my_node.py")
+</code></pre>
+<h4 id="argsargs---node"><a class="header" href="python.html#argsargs---node"><code>args(args) -&gt; Node</code></a></h4>
+<p>Set command-line arguments for the node.</p>
+<pre><code class="language-python">node.args("--verbose --port 8080")
+</code></pre>
+<h4 id="envenv---node"><a class="header" href="python.html#envenv---node"><code>env(env) -&gt; Node</code></a></h4>
+<p>Set environment variables for the node.</p>
+<pre><code class="language-python">node.env({"MODEL_PATH": "/models/yolo.pt"})
+</code></pre>
+<h4 id="buildcommand---node"><a class="header" href="python.html#buildcommand---node"><code>build(command) -&gt; Node</code></a></h4>
+<p>Set the build command for the node (run before starting).</p>
+<pre><code class="language-python">node.build("pip install -r requirements.txt")
+</code></pre>
+<h4 id="giturl-branchnone-tagnone-revnone---node"><a class="header" href="python.html#giturl-branchnone-tagnone-revnone---node"><code>git(url, branch=None, tag=None, rev=None) -&gt; Node</code></a></h4>
+<p>Set a Git repository as the source for the node.</p>
+<pre><code class="language-python">node.git("https://github.com/org/repo.git", branch="main")
+</code></pre>
+<h4 id="add_operatoroperator---node"><a class="header" href="python.html#add_operatoroperator---node"><code>add_operator(operator) -&gt; Node</code></a></h4>
+<p>Attach an <code>Operator</code> to this node.</p>
+<pre><code class="language-python">op = Operator("detector", python="object_detection.py")
+node.add_operator(op)
+</code></pre>
+<h4 id="add_outputoutput_id---output"><a class="header" href="python.html#add_outputoutput_id---output"><code>add_output(output_id) -&gt; Output</code></a></h4>
+<p>Declare an output on this node and return an <code>Output</code> reference for use as an input source.</p>
+<pre><code class="language-python">output = sender.add_output("data")
+</code></pre>
+<h4 id="add_inputinput_id-source-queue_sizenone-queue_policynone---node"><a class="header" href="python.html#add_inputinput_id-source-queue_sizenone-queue_policynone---node"><code>add_input(input_id, source, queue_size=None, queue_policy=None) -&gt; Node</code></a></h4>
+<p>Subscribe this node to an output from another node.</p>
+<pre><code class="language-python"># Using an Output object
+output = sender.add_output("data")
+receiver.add_input("data", output)
+
+# Using a string reference
+receiver.add_input("tick", "dora/timer/millis/100")
+
+# With a custom queue size
+receiver.add_input("images", camera_output, queue_size=2)
+
+# Lossless input (blocks sender when full)
+receiver.add_input("commands", cmd_output, queue_size=100, queue_policy="backpressure")
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>input_id</code> (str) – Name of the input on this node.</li>
+<li><code>source</code> (str | Output) – Either a string (<code>"node_id/output_id"</code>) or an <code>Output</code> object.</li>
+<li><code>queue_size</code> (int, optional) – Maximum number of buffered messages for this input.</li>
+<li><code>queue_policy</code> (str, optional) – <code>"drop_oldest"</code> (default) or <code>"backpressure"</code> (buffers up to 10x <code>queue_size</code> before dropping).</li>
+</ul>
+<h4 id="to_dict---dict"><a class="header" href="python.html#to_dict---dict"><code>to_dict() -&gt; dict</code></a></h4>
+<p>Return the dictionary representation of the node for YAML serialization.</p>
+<hr/>
+<h3 id="output-class-builder"><a class="header" href="python.html#output-class-builder">Output class (builder)</a></h3>
+<p>Returned by <code>Node.add_output()</code>. Represents a reference to a node’s output, used as a source in <code>add_input()</code>.</p>
+<pre><code class="language-python">output = sender.add_output("data")
+receiver.add_input("sensor_data", output)
+str(output)  # "sender/data"
+</code></pre>
+<hr/>
+<h3 id="operator-class-builder"><a class="header" href="python.html#operator-class-builder">Operator class (builder)</a></h3>
+<p>Defines an operator for embedding in a node’s YAML configuration.</p>
+<h4 id="__init__id-namenone-descriptionnone-buildnone-pythonnone-shared_librarynone-send_stdout_asnone"><a class="header" href="python.html#__init__id-namenone-descriptionnone-buildnone-pythonnone-shared_librarynone-send_stdout_asnone"><code>__init__(id, name=None, description=None, build=None, python=None, shared_library=None, send_stdout_as=None)</code></a></h4>
+<pre><code class="language-python">op = Operator(
+    id="detector",
+    python="object_detection.py",
+    send_stdout_as="detection_text",
+)
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>id</code> (str) – Unique operator identifier.</li>
+<li><code>name</code> (str, optional) – Display name.</li>
+<li><code>description</code> (str, optional) – Human-readable description.</li>
+<li><code>build</code> (str, optional) – Build command to run before loading.</li>
+<li><code>python</code> (str, optional) – Path to the Python operator file.</li>
+<li><code>shared_library</code> (str, optional) – Path to a shared library operator.</li>
+<li><code>send_stdout_as</code> (str, optional) – Route the operator’s stdout as an output with this ID.</li>
+</ul>
+<h4 id="to_dict---dict-1"><a class="header" href="python.html#to_dict---dict-1"><code>to_dict() -&gt; dict</code></a></h4>
+<p>Return the dictionary representation for YAML serialization.</p>
+<hr/>
+<h2 id="cuda-module-opt-in-extension"><a class="header" href="python.html#cuda-module-opt-in-extension">CUDA Module (opt-in extension)</a></h2>
+<blockquote>
+<p><strong>Not part of the 1.0 API.</strong> These helpers moved out of the <code>dora</code> package into the <code>dora_tensor_pool</code> extension before 1.0 — they exist to serve the tensor-pool transport, which sits behind the extension seam, and are not covered by dora’s 1.0 compatibility guarantees. Install from <code>libraries/extensions/tensor-pool/python</code>.</p>
+</blockquote>
+<pre><code class="language-python">from dora_tensor_pool import torch_to_ipc_buffer, ipc_buffer_to_ipc_handle, open_ipc_handle
+</code></pre>
+<p>Utilities for zero-copy GPU tensor sharing between nodes via CUDA IPC. Requires PyTorch with CUDA and Numba with CUDA support.</p>
+<h3 id="torch_to_ipc_buffertensor---tuplepyarrowarray-dict"><a class="header" href="python.html#torch_to_ipc_buffertensor---tuplepyarrowarray-dict"><code>torch_to_ipc_buffer(tensor) -&gt; tuple[pyarrow.Array, dict]</code></a></h3>
+<p>Convert a PyTorch CUDA tensor into an Arrow array containing the CUDA IPC handle, plus a metadata dictionary. Send both through the dataflow to share GPU memory without copying.</p>
+<pre><code class="language-python">import torch
+import pyarrow as pa
+from dora import Node
+from dora_tensor_pool import torch_to_ipc_buffer
+
+node = Node()
+tensor = torch.randn(1024, 768, device="cuda")
+ipc_buffer, metadata = torch_to_ipc_buffer(tensor)
+node.send_output("gpu_data", ipc_buffer, metadata)
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tensor</code> (torch.Tensor) – A CUDA tensor.</li>
+</ul>
+<p><strong>Returns:</strong> <code>tuple[pyarrow.Array, dict]</code> – The IPC handle as an int8 Arrow array, and metadata with shape, strides, dtype, size, offset, and source info.</p>
+<hr/>
+<h3 id="ipc_buffer_to_ipc_handlehandle_buffer-metadata---ipchandle"><a class="header" href="python.html#ipc_buffer_to_ipc_handlehandle_buffer-metadata---ipchandle"><code>ipc_buffer_to_ipc_handle(handle_buffer, metadata) -&gt; IpcHandle</code></a></h3>
+<p>Reconstruct a CUDA IPC handle from a received Arrow buffer and metadata.</p>
+<pre><code class="language-python">from dora_tensor_pool import ipc_buffer_to_ipc_handle
+
+event = node.next()
+ipc_handle = ipc_buffer_to_ipc_handle(event["value"], event["metadata"])
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>handle_buffer</code> (pyarrow.Array) – The Arrow array from <code>event["value"]</code>.</li>
+<li><code>metadata</code> (dict) – The metadata from <code>event["metadata"]</code>.</li>
+</ul>
+<p><strong>Returns:</strong> <code>dora_tensor_pool.IpcHandle</code> (a lightweight wrapper around <code>cudaIpcMemHandle_t</code>; call <code>.open()</code> to map the handle into the current process and get a device pointer, <code>.close()</code> to release it).</p>
+<hr/>
+<h3 id="open_ipc_handleipc_handle-metadata---contextmanagertorchtensor"><a class="header" href="python.html#open_ipc_handleipc_handle-metadata---contextmanagertorchtensor"><code>open_ipc_handle(ipc_handle, metadata) -&gt; ContextManager[torch.Tensor]</code></a></h3>
+<p>Open a CUDA IPC handle and yield a PyTorch tensor. Use as a context manager to ensure proper cleanup.</p>
+<pre><code class="language-python">from dora_tensor_pool import ipc_buffer_to_ipc_handle, open_ipc_handle
+
+event = node.next()
+ipc_handle = ipc_buffer_to_ipc_handle(event["value"], event["metadata"])
+
+with open_ipc_handle(ipc_handle, event["metadata"]) as tensor:
+    result = tensor * 2  # use the GPU tensor directly
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>ipc_handle</code> (<code>IpcHandle</code>) – Handle from <code>ipc_buffer_to_ipc_handle</code>.</li>
+<li><code>metadata</code> (dict) – The metadata dictionary with shape, strides, and dtype info.</li>
+</ul>
+<p><strong>Returns:</strong> Context manager yielding a <code>torch.Tensor</code> on CUDA.</p>
+<hr/>
+<h2 id="quick-start-example"><a class="header" href="python.html#quick-start-example">Quick Start Example</a></h2>
+<p>A complete node that receives images, processes them, and sends results:</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+"""Example node: receives messages, transforms them, and sends output."""
+
+import logging
+
+import pyarrow as pa
+from dora import Node
+
+
+def main():
+    node = Node()
+
+    for event in node:
+        if event["type"] == "INPUT":
+            input_id = event["id"]
+
+            if input_id == "message":
+                values = event["value"].to_pylist()
+                number = values[0]
+
+                # Create a struct array with multiple fields
+                result = pa.StructArray.from_arrays(
+                    [
+                        pa.array([number * 2]),
+                        pa.array([f"Message #{number}"]),
+                    ],
+                    names=["doubled", "description"],
+                )
+                node.send_output("transformed", result)
+                logging.info("Transformed message %d", number)
+
+        elif event["type"] == "STOP":
+            logging.info("Node stopping")
+            break
+
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+<p>Run with:</p>
+<pre><code class="language-bash">dora run dataflow.yml
+</code></pre>
+<hr/>
+<h2 id="dataflowbuilder-example"><a class="header" href="python.html#dataflowbuilder-example">DataflowBuilder Example</a></h2>
+<p>Build a dataflow programmatically instead of writing YAML by hand:</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+"""Build a simple sender -&gt; receiver dataflow."""
+
+from dora.builder import DataflowBuilder, Operator
+
+flow = DataflowBuilder("example-flow")
+
+# Add a timer-driven sender node
+sender = flow.add_node("sender")
+sender.path("sender.py")
+tick_output = sender.add_output("message")
+
+# Add a receiver that subscribes to the sender
+receiver = flow.add_node("receiver")
+receiver.path("receiver.py")
+receiver.add_input("message", tick_output)
+
+# Add a node with a timer input
+timed_node = flow.add_node("periodic")
+timed_node.path("periodic.py")
+timed_node.add_input("tick", "dora/timer/millis/100")
+
+# Add a node with an operator
+runtime_node = flow.add_node("runtime-node")
+op = Operator("detector", python="object_detection.py")
+runtime_node.add_operator(op)
+runtime_node.add_input("image", "camera/image")
+
+# Write or print the YAML
+flow.to_yaml("dataflow.yml")
+print(flow.to_yaml())
+</code></pre>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">Unofficial copy of the dora documentation. See the <a href="https://dora-rs.ai/dora/languages/python.html" rel="noopener" target="_blank">official page</a>. Original © dora-rs contributors, licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a>.</p></main>
+<nav aria-label="Page navigation" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="mobile-nav-chapters previous" href="rust.html" rel="prev" title="Previous chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="mobile-nav-chapters next" href="c.html" rel="next prefetch" title="Next chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="Page navigation" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="nav-chapters previous" href="rust.html" rel="prev" title="Previous chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="nav-chapters next" href="c.html" rel="next prefetch" title="Next chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../searcher-09f2665d.js"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到中文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/languages/python.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">View official page</a></div>
+<button id="i18n-fab-btn" type="button" title="Language / official page (drag to move)" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">EN</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/en/","/zh/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/en/","/zh/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

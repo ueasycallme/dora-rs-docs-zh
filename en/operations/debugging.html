@@ -1,0 +1,863 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="en">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>Debugging - Dora User Guide</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../searchindex-59461594.js";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+<div>
+<p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+<p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+<p>Press <kbd>?</kbd> to show this help</p>
+<p>Press <kbd>Esc</kbd> to hide this help</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="Table of contents" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="Toggle Table of Contents" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="Toggle Table of Contents">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="Change theme" class="icon-button" id="mdbook-theme-toggle" title="Change theme" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="Themes" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">Auto</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">Light</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="Toggle Searchbar" class="icon-button" id="mdbook-search-toggle" title="Search (`/`)" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora User Guide</h1>
+<div class="right-buttons">
+<a aria-label="Print this book" href="../print.html" title="Print this book">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git repository" href="https://github.com/dora-rs/dora" title="Git repository">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="Suggest an edit" href="https://github.com/dora-rs/dora/edit/main/guide/src/operations/debugging.md" rel="edit" title="Suggest an edit">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="debugging-and-observability-guide"><a class="header" href="debugging.html#debugging-and-observability-guide">Debugging and Observability Guide</a></h1>
+<p>This guide covers how to debug, record, replay, and monitor dora dataflows. It is written for new users who want to understand what went wrong in a dataflow, measure performance, or reproduce issues offline.</p>
+<hr/>
+<h2 id="table-of-contents"><a class="header" href="debugging.html#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="debugging.html#prerequisites">Prerequisites</a></li>
+<li><a href="debugging.html#quick-debugging-checklist">Quick Debugging Checklist</a></li>
+<li><a href="debugging.html#record-and-replay">Record and Replay</a>
+<ul>
+<li><a href="debugging.html#recording-a-dataflow">Recording a Dataflow</a></li>
+<li><a href="debugging.html#recording-specific-topics">Recording Specific Topics</a></li>
+<li><a href="debugging.html#proxy-recording-remote--diskless">Proxy Recording (Remote / Diskless)</a></li>
+<li><a href="debugging.html#replaying-a-recording">Replaying a Recording</a></li>
+<li><a href="debugging.html#replay-options">Replay Options</a></li>
+<li><a href="debugging.html#selective-replay">Selective Replay</a></li>
+<li><a href="debugging.html#recording-file-format">Recording File Format</a></li>
+</ul>
+</li>
+<li><a href="debugging.html#node-management">Node Management</a>
+<ul>
+<li><a href="debugging.html#node-info">Node Info</a></li>
+<li><a href="debugging.html#node-restart">Node Restart</a></li>
+<li><a href="debugging.html#node-stop">Node Stop</a></li>
+</ul>
+</li>
+<li><a href="debugging.html#topic-inspection">Topic Inspection</a>
+<ul>
+<li><a href="debugging.html#listing-topics">Listing Topics</a></li>
+<li><a href="debugging.html#echoing-topic-data">Echoing Topic Data</a></li>
+<li><a href="debugging.html#publishing-test-data">Publishing Test Data</a></li>
+<li><a href="debugging.html#measuring-frequency">Measuring Frequency</a></li>
+<li><a href="debugging.html#topic-metadata-and-stats">Topic Metadata and Stats</a></li>
+</ul>
+</li>
+<li><a href="debugging.html#runtime-parameters">Runtime Parameters</a></li>
+<li><a href="debugging.html#environment-diagnosis">Environment Diagnosis</a></li>
+<li><a href="debugging.html#trace-inspection">Trace Inspection</a></li>
+<li><a href="debugging.html#resource-monitoring">Resource Monitoring</a></li>
+<li><a href="debugging.html#log-analysis">Log Analysis</a>
+<ul>
+<li><a href="debugging.html#live-log-streaming">Live Log Streaming</a></li>
+<li><a href="debugging.html#local-log-files">Local Log Files</a></li>
+<li><a href="debugging.html#filtering-and-searching">Filtering and Searching</a></li>
+</ul>
+</li>
+<li><a href="debugging.html#dataflow-visualization">Dataflow Visualization</a></li>
+<li><a href="debugging.html#monitoring-running-dataflows">Monitoring Running Dataflows</a></li>
+<li><a href="debugging.html#end-to-end-debugging-workflows">End-to-End Debugging Workflows</a></li>
+</ul>
+<hr/>
+<h2 id="prerequisites"><a class="header" href="debugging.html#prerequisites">Prerequisites</a></h2>
+<p>Before using topic inspection commands (<code>topic echo</code>, <code>topic hz</code>, <code>topic info</code>), enable debug message publishing using either approach:</p>
+<p><strong>Option 1: CLI flag (recommended)</strong></p>
+<pre><code class="language-bash">dora start dataflow.yml --debug
+dora run dataflow.yml --debug
+</code></pre>
+<p><strong>Option 2: YAML descriptor</strong></p>
+<pre><code class="language-yaml">debug:
+  enable_debug_inspection: true
+</code></pre>
+<p>This tells the daemon to publish all inter-node messages to Zenoh, where the coordinator can proxy them to CLI clients via WebSocket. Without this flag, topic inspection commands will return an error.</p>
+<p>The <code>record</code>, <code>replay</code>, <code>logs</code>, <code>list</code>, <code>top</code>, <code>graph</code>, <code>node info/restart/stop</code>, <code>param</code>, and <code>doctor</code> commands do <strong>not</strong> require this flag. The <code>topic pub</code> command does require it.</p>
+<hr/>
+<h2 id="quick-debugging-checklist"><a class="header" href="debugging.html#quick-debugging-checklist">Quick Debugging Checklist</a></h2>
+<p>When something goes wrong, follow this sequence:</p>
+<pre><code class="language-bash"># 1. Run full environment diagnosis
+dora doctor --dataflow dataflow.yml
+
+# 2. What dataflows are active?
+dora list
+
+# 3. Inspect the problem node
+dora node info -d my-dataflow problem-node
+
+# 4. Check node resource usage
+dora top
+
+# 5. Stream logs from the problem node
+dora logs my-dataflow problem-node --follow --level debug
+
+# 6. Is the node producing output?
+dora topic echo -d my-dataflow problem-node/output
+
+# 7. Inject test data
+dora topic pub -d my-dataflow problem-node/input '[1, 2, 3]'
+
+# 8. Is it publishing at the expected rate?
+dora topic hz -d my-dataflow --window 5
+
+# 9. Check/modify runtime parameters
+dora param list -d my-dataflow problem-node
+dora param set -d my-dataflow problem-node debug_level 2
+
+# 10. Restart a misbehaving node (without stopping the dataflow)
+dora node restart -d my-dataflow problem-node
+
+# 11. View coordinator traces (no external infra needed)
+dora trace list
+dora trace view &lt;trace-id-prefix&gt;
+
+# 12. Visualize the dataflow graph
+dora graph dataflow.yml --open
+
+# 13. Record for offline analysis
+dora record dataflow.yml -o debug-capture.drec
+</code></pre>
+<hr/>
+<h2 id="record-and-replay"><a class="header" href="debugging.html#record-and-replay">Record and Replay</a></h2>
+<p>Record captures live dataflow messages to a file. Replay substitutes source nodes with recorded data, letting you reproduce behavior without hardware.</p>
+<h3 id="recording-a-dataflow"><a class="header" href="debugging.html#recording-a-dataflow">Recording a Dataflow</a></h3>
+<pre><code class="language-bash"># Record all topics (default output: recording_{timestamp}.drec)
+dora record dataflow.yml
+
+# Specify output file
+dora record dataflow.yml -o my-capture.drec
+</code></pre>
+<p>This injects a hidden <code>__dora_record__</code> node into the dataflow that subscribes to all node outputs and writes them to a <code>.drec</code> file. The record node binary (<code>dora-record-node</code>) is auto-built on first use.</p>
+<p>The recording runs until you press Ctrl-C or the dataflow stops.</p>
+<h3 id="recording-specific-topics"><a class="header" href="debugging.html#recording-specific-topics">Recording Specific Topics</a></h3>
+<pre><code class="language-bash"># Only record camera and lidar
+dora record dataflow.yml --topics sensor/image,lidar/points
+</code></pre>
+<p>Topic names use the format <code>node_id/output_id</code>. Available topics can be discovered with <code>dora topic list -d &lt;dataflow&gt;</code>.</p>
+<h3 id="proxy-recording-remote--diskless"><a class="header" href="debugging.html#proxy-recording-remote--diskless">Proxy Recording (Remote / Diskless)</a></h3>
+<p>When the target machine has no local disk or you want to record on your local machine:</p>
+<pre><code class="language-bash"># Start the dataflow first (detached)
+dora start dataflow.yml --detach
+
+# Record via WebSocket proxy -- data streams through coordinator to CLI
+dora record dataflow.yml --proxy -o capture.drec
+
+# Record specific topics via proxy
+dora record dataflow.yml --proxy --topics sensor/image,lidar/points
+</code></pre>
+<p>How proxy mode works:</p>
+<ol>
+<li>The dataflow must already be running (<code>dora start --detach</code>)</li>
+<li>The CLI connects to the coordinator via WebSocket</li>
+<li>The coordinator subscribes to Zenoh on the CLI’s behalf</li>
+<li>Message data streams through WebSocket binary frames to the CLI</li>
+<li>The CLI writes the <code>.drec</code> file locally</li>
+</ol>
+<p>This requires <code>enable_debug_inspection: true</code> in the descriptor.</p>
+<p><strong>When to use <code>--proxy</code>:</strong></p>
+<ul>
+<li>Embedded targets with no local disk</li>
+<li>Remote machines where you want the recording on your workstation</li>
+<li>When you only have WebSocket connectivity (no direct Zenoh access)</li>
+</ul>
+<p><strong>When to use default mode (no <code>--proxy</code>):</strong></p>
+<ul>
+<li>Same machine or shared filesystem</li>
+<li>High-throughput scenarios (no WebSocket overhead)</li>
+<li>No need for <code>enable_debug_inspection</code></li>
+</ul>
+<h3 id="replaying-a-recording"><a class="header" href="debugging.html#replaying-a-recording">Replaying a Recording</a></h3>
+<pre><code class="language-bash"># Replay at original speed
+dora replay recording.drec
+
+# Replay at 2x speed
+dora replay recording.drec --speed 2.0
+
+# Replay as fast as possible (speed 0)
+dora replay recording.drec --speed 0
+</code></pre>
+<p>Replay works by:</p>
+<ol>
+<li>Reading the <code>.drec</code> file header to get the original dataflow descriptor</li>
+<li>Identifying which nodes produced the recorded data</li>
+<li>Replacing those source nodes with <code>dora-replay-node</code> instances</li>
+<li>Running the modified dataflow – downstream nodes receive replayed data identically to live data</li>
+</ol>
+<p>The replay node binary (<code>dora-replay-node</code>) is auto-built on first use.</p>
+<h3 id="replay-options"><a class="header" href="debugging.html#replay-options">Replay Options</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Default</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--speed &lt;FLOAT&gt;</code></td><td><code>1.0</code></td><td>Playback speed multiplier. <code>2.0</code> = 2x, <code>0.5</code> = half speed, <code>0</code> = as fast as possible</td></tr>
+<tr><td><code>--loop</code></td><td>off</td><td>Loop the recording continuously</td></tr>
+<tr><td><code>--replace &lt;NODES&gt;</code></td><td>all recorded</td><td>Comma-separated list of nodes to replace</td></tr>
+<tr><td><code>--output-yaml &lt;PATH&gt;</code></td><td>-</td><td>Write modified descriptor YAML without running</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="selective-replay"><a class="header" href="debugging.html#selective-replay">Selective Replay</a></h3>
+<p>Replace only specific source nodes while keeping others live:</p>
+<pre><code class="language-bash"># Only replace the sensor node, keep camera live
+dora replay recording.drec --replace sensor
+
+# Replace sensor and lidar, keep everything else live
+dora replay recording.drec --replace sensor,lidar
+</code></pre>
+<p>This is useful when you want to debug a specific processing pipeline with known input data while keeping other parts of the system live.</p>
+<h3 id="dry-run-output-yaml"><a class="header" href="debugging.html#dry-run-output-yaml">Dry Run (Output YAML)</a></h3>
+<p>Both record and replay support <code>--output-yaml</code> to see the modified descriptor without running:</p>
+<pre><code class="language-bash"># See what the record-injected descriptor looks like
+dora record dataflow.yml --output-yaml record-modified.yml
+
+# See what the replay-modified descriptor looks like
+dora replay recording.drec --output-yaml replay-modified.yml
+</code></pre>
+<h3 id="recording-file-format"><a class="header" href="debugging.html#recording-file-format">Recording File Format</a></h3>
+<p>The <code>.drec</code> format is a simple binary file:</p>
+<pre><code>┌──────────────────────────────────┐
+│ Header (binary)                  │
+│   version: u32                   │
+│   start_nanos: u64               │
+│   dataflow_id: Uuid              │
+│   descriptor_yaml: Vec&lt;u8&gt;       │
+├──────────────────────────────────┤
+│ Entry 1 (binary)                 │
+│   node_id: String                │
+│   output_id: String              │
+│   timestamp_offset_nanos: u64    │
+│   event_bytes: Vec&lt;u8&gt;           │
+├──────────────────────────────────┤
+│ Entry 2 ...                      │
+├──────────────────────────────────┤
+│ ...                              │
+├──────────────────────────────────┤
+│ Footer (binary)                  │
+│   total_messages: u64            │
+│   total_bytes: u64               │
+└──────────────────────────────────┘
+</code></pre>
+<p>The container framing (header, per-entry lengths, footer) is hand-written little-endian fields; the <code>event_bytes</code> field contains the raw <code>Timestamped&lt;InterDaemonEvent&gt;</code> postcard payload – the same format used on the wire between daemons. Recordings written before dora 1.0 used bincode for <code>event_bytes</code> and carry format version 1; this release refuses to open them. The <code>descriptor_yaml</code> in the header stores the original dataflow descriptor so replay can reconstruct the dataflow.</p>
+<hr/>
+<h2 id="node-management"><a class="header" href="debugging.html#node-management">Node Management</a></h2>
+<h3 id="node-info"><a class="header" href="debugging.html#node-info">Node Info</a></h3>
+<p>Get detailed information about a specific node including its status, inputs, outputs, metrics, and restart count:</p>
+<pre><code class="language-bash">dora node info -d my-dataflow camera
+
+# JSON output
+dora node info -d my-dataflow camera --format json
+</code></pre>
+<h3 id="node-restart"><a class="header" href="debugging.html#node-restart">Node Restart</a></h3>
+<p>Restart a single node without stopping the entire dataflow. Useful for recovering a misbehaving node or picking up configuration changes:</p>
+<pre><code class="language-bash"># Restart with default grace period
+dora node restart -d my-dataflow camera
+
+# Restart with custom grace period
+dora node restart -d my-dataflow camera --grace 10s
+</code></pre>
+<p>The daemon sends a stop event, waits for the grace period, then respawns the node process.</p>
+<h3 id="node-stop"><a class="header" href="debugging.html#node-stop">Node Stop</a></h3>
+<p>Stop a single node without stopping the entire dataflow:</p>
+<pre><code class="language-bash">dora node stop -d my-dataflow camera
+
+# With custom grace period
+dora node stop -d my-dataflow camera --grace 5s
+</code></pre>
+<hr/>
+<h2 id="topic-inspection"><a class="header" href="debugging.html#topic-inspection">Topic Inspection</a></h2>
+<p>Topic inspection commands subscribe to live dataflow messages via the coordinator’s WebSocket proxy. They require <code>--debug</code> flag or <code>enable_debug_inspection: true</code>.</p>
+<h3 id="listing-topics"><a class="header" href="debugging.html#listing-topics">Listing Topics</a></h3>
+<pre><code class="language-bash"># List all topics in a running dataflow
+dora topic list -d my-dataflow
+
+# JSON output
+dora topic list -d my-dataflow --format json
+</code></pre>
+<p>Shows each output, which node publishes it, and which nodes subscribe to it. This command reads from the descriptor and does <strong>not</strong> require <code>enable_debug_inspection</code>.</p>
+<h3 id="echoing-topic-data"><a class="header" href="debugging.html#echoing-topic-data">Echoing Topic Data</a></h3>
+<p>Stream live topic data to the terminal:</p>
+<pre><code class="language-bash"># Echo a single topic
+dora topic echo -d my-dataflow camera_node/image
+
+# Echo multiple topics
+dora topic echo -d my-dataflow robot1/pose robot2/vel
+
+# JSON output (useful for piping to jq or other tools)
+dora topic echo -d my-dataflow robot1/pose --format json
+
+# Echo all topics
+dora topic echo -d my-dataflow
+</code></pre>
+<p>Each line shows the topic name, Arrow data content, and metadata parameters. Use <code>--format json</code> for machine-readable output:</p>
+<pre><code class="language-json">{"timestamp":1709000000000,"name":"robot1/pose","data":[1.0,2.0,3.0],"metadata":null}
+</code></pre>
+<h3 id="measuring-frequency"><a class="header" href="debugging.html#measuring-frequency">Measuring Frequency</a></h3>
+<p>Interactive TUI showing per-topic publish frequency:</p>
+<pre><code class="language-bash"># All topics with 10-second sliding window
+dora topic hz -d my-dataflow --window 10
+
+# Specific topics with 5-second window
+dora topic hz -d my-dataflow robot1/pose robot2/vel --window 5
+</code></pre>
+<p>The TUI displays:</p>
+<ul>
+<li>Average frequency (Hz)</li>
+<li>Average, min, max interval</li>
+<li>Standard deviation</li>
+<li>Sparkline showing recent activity</li>
+</ul>
+<p>Press <code>q</code> or Ctrl-C to exit. Requires an interactive terminal.</p>
+<h3 id="publishing-test-data"><a class="header" href="debugging.html#publishing-test-data">Publishing Test Data</a></h3>
+<p>Inject data into a running dataflow for testing. Requires <code>enable_debug_inspection: true</code>.</p>
+<pre><code class="language-bash"># Publish a single Arrow array
+dora topic pub -d my-dataflow sensor/threshold '[42]'
+
+# Publish from a JSON file
+dora topic pub -d my-dataflow sensor/config --file test-config.json
+
+# Publish multiple messages
+dora topic pub -d my-dataflow sensor/trigger '[1]' --count 10
+</code></pre>
+<p>This is useful for:</p>
+<ul>
+<li>Testing node behavior with known input data</li>
+<li>Triggering specific code paths in downstream nodes</li>
+<li>Simulating sensor inputs without hardware</li>
+</ul>
+<h3 id="topic-metadata-and-stats"><a class="header" href="debugging.html#topic-metadata-and-stats">Topic Metadata and Stats</a></h3>
+<p>One-shot statistics collection:</p>
+<pre><code class="language-bash"># Collect stats for 5 seconds (default)
+dora topic info -d my-dataflow camera_node/image
+
+# Collect for 10 seconds
+dora topic info -d my-dataflow camera_node/image --duration 10
+</code></pre>
+<p>Reports:</p>
+<ul>
+<li>Arrow data type</li>
+<li>Publisher node</li>
+<li>Subscriber nodes (from descriptor)</li>
+<li>Message count and bandwidth</li>
+<li>Publishing frequency</li>
+</ul>
+<hr/>
+<h2 id="runtime-parameters"><a class="header" href="debugging.html#runtime-parameters">Runtime Parameters</a></h2>
+<p>Runtime parameters let you read and modify node configuration while a dataflow is running, without restarting. Parameters are stored in the coordinator and optionally forwarded to running nodes.</p>
+<pre><code class="language-bash"># List all parameters for a node
+dora param list -d my-dataflow detector
+
+# Get a single parameter
+dora param get -d my-dataflow detector confidence
+
+# Set a parameter (value is JSON)
+dora param set -d my-dataflow detector confidence 0.8
+dora param set -d my-dataflow detector config '{"nms": 0.5, "classes": ["car", "person"]}'
+
+# Delete a parameter
+dora param delete -d my-dataflow detector confidence
+</code></pre>
+<p>Parameters are persisted in the coordinator store (in-memory or redb). When a node is running, <code>param set</code> also forwards the new value to the node’s daemon. Nodes can read parameters through the node event stream.</p>
+<p><strong>Limits:</strong> Keys max 256 bytes, values max 64KB serialized.</p>
+<hr/>
+<h2 id="environment-diagnosis"><a class="header" href="debugging.html#environment-diagnosis">Environment Diagnosis</a></h2>
+<p><code>dora doctor</code> performs a comprehensive health check of your environment:</p>
+<pre><code class="language-bash"># Basic diagnosis
+dora doctor
+
+# Diagnosis + dataflow validation
+dora doctor --dataflow dataflow.yml
+</code></pre>
+<p>Checks performed:</p>
+<ol>
+<li>Coordinator reachability</li>
+<li>Connected daemon status</li>
+<li>Active dataflow health</li>
+<li>Dataflow YAML validation (if <code>--dataflow</code> provided)</li>
+</ol>
+<p>Use this as a first step when debugging any issue, or in CI to validate the environment before running tests.</p>
+<hr/>
+<h2 id="trace-inspection"><a class="header" href="debugging.html#trace-inspection">Trace Inspection</a></h2>
+<p>The coordinator captures tracing spans in-memory from <code>dora_coordinator</code> and <code>dora_core</code> crates (up to 4096 spans in a ring buffer). You can view these traces without any external tracing infrastructure (no Jaeger, Tempo, etc. required).</p>
+<h3 id="listing-traces"><a class="header" href="debugging.html#listing-traces">Listing Traces</a></h3>
+<pre><code class="language-bash">dora trace list
+</code></pre>
+<p>Shows all captured traces with their root span name, span count, start time, and total duration:</p>
+<pre><code>TRACE ID      ROOT SPAN          SPANS  STARTED              DURATION
+a1b2c3d4e5f6  spawn_dataflow     12     2026-03-01 10:30:05  1.234s
+f8e7d6c5b4a3  build_dataflow     5      2026-03-01 10:29:58  0.500s
+</code></pre>
+<h3 id="viewing-a-trace"><a class="header" href="debugging.html#viewing-a-trace">Viewing a Trace</a></h3>
+<pre><code class="language-bash"># Full trace ID
+dora trace view a1b2c3d4-e5f6-7890-abcd-1234567890ab
+
+# Or use a unique prefix
+dora trace view a1b2c3d4
+</code></pre>
+<p>Displays spans as an indented tree showing parent-child relationships, log levels, durations, and span fields:</p>
+<pre><code>spawn_dataflow [INFO 1.234s] {build_id="abc", session_id="def"}
+  build_dataflow [INFO 0.500s]
+    download_node [DEBUG 0.200s] {url="..."}
+  start_inner [INFO 0.734s]
+    spawn_node [INFO 0.100s] {node_id="camera"}
+    spawn_node [INFO 0.080s] {node_id="detector"}
+</code></pre>
+<h3 id="when-to-use-trace-inspection"><a class="header" href="debugging.html#when-to-use-trace-inspection">When to Use Trace Inspection</a></h3>
+<ul>
+<li><strong>Quick debugging</strong> – see what the coordinator did during a <code>start</code>, <code>stop</code>, or <code>build</code> without setting up Jaeger/Tempo</li>
+<li><strong>Performance analysis</strong> – identify slow spans in dataflow lifecycle operations</li>
+<li><strong>Deployment troubleshooting</strong> – understand the sequence and timing of coordinator operations</li>
+</ul>
+<p>For full distributed tracing across daemons and nodes, set <code>DORA_OTLP_ENDPOINT</code> and use an OTLP-compatible backend.</p>
+<hr/>
+<h2 id="resource-monitoring"><a class="header" href="debugging.html#resource-monitoring">Resource Monitoring</a></h2>
+<p><code>dora top</code> (also <code>dora inspect top</code>) provides a real-time TUI showing per-node resource usage:</p>
+<pre><code class="language-bash"># Default 2-second refresh
+dora top
+
+# Custom refresh interval
+dora top --refresh-interval 5
+
+# JSON snapshot for scripting/CI
+dora top --once | jq .
+</code></pre>
+<p>Displays for each node:</p>
+<ul>
+<li>CPU usage (% of a single core)</li>
+<li>Memory (RSS)</li>
+<li>Node status (Running, Restarting, Degraded, Failed)</li>
+<li>Restart count</li>
+<li>Queue depth (pending messages)</li>
+<li>Network TX/RX (cross-daemon bytes via Zenoh)</li>
+<li>Disk I/O read/write</li>
+</ul>
+<p>Metrics are collected by daemons and reported to the coordinator, so this works for distributed dataflows across multiple machines. Press <code>q</code> or Ctrl-C to exit.</p>
+<p>Use <code>--once</code> to print a single JSON snapshot and exit, useful for CI pipelines and monitoring integrations.</p>
+<p>Note: CPU percentages are per-core, so values can exceed 100% for multi-threaded nodes. Nodes on different machines may have different CPUs, so percentages are not directly comparable across machines.</p>
+<hr/>
+<h2 id="log-analysis"><a class="header" href="debugging.html#log-analysis">Log Analysis</a></h2>
+<h3 id="live-log-streaming"><a class="header" href="debugging.html#live-log-streaming">Live Log Streaming</a></h3>
+<pre><code class="language-bash"># Stream logs from a specific node
+dora logs my-dataflow sensor-node --follow
+
+# Stream logs from all nodes
+dora logs my-dataflow --all-nodes --follow
+
+# Filter by log level
+dora logs my-dataflow sensor-node --follow --level debug
+
+# Stream with grep filter
+dora logs my-dataflow --all-nodes --follow --grep "error"
+</code></pre>
+<p>Without <code>--follow</code>, reads from local log files. With <code>--follow</code>, streams live from the coordinator via WebSocket.</p>
+<h3 id="local-log-files"><a class="header" href="debugging.html#local-log-files">Local Log Files</a></h3>
+<p>Logs are stored in the <code>out/</code> directory:</p>
+<pre><code>out/
+  &lt;dataflow-uuid&gt;/
+    log_&lt;node-id&gt;.jsonl          # current log
+    log_&lt;node-id&gt;.1.jsonl        # rotated (previous)
+    log_&lt;node-id&gt;.2.jsonl        # rotated (older)
+</code></pre>
+<p>Read directly:</p>
+<pre><code class="language-bash"># All nodes, local files
+dora logs --local --all-nodes
+
+# Specific node, last 50 lines
+dora logs --local sensor-node --tail 50
+</code></pre>
+<h3 id="filtering-and-searching"><a class="header" href="debugging.html#filtering-and-searching">Filtering and Searching</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Example</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--level &lt;LEVEL&gt;</code></td><td><code>--level debug</code></td><td>Minimum level: error, warn, info, debug, trace, stdout</td></tr>
+<tr><td><code>--log-filter &lt;FILTER&gt;</code></td><td><code>--log-filter "sensor=debug,processor=warn"</code></td><td>Per-node level filter</td></tr>
+<tr><td><code>--grep &lt;PATTERN&gt;</code></td><td><code>--grep "timeout"</code></td><td>Case-insensitive substring match</td></tr>
+<tr><td><code>--since &lt;DURATION&gt;</code></td><td><code>--since 5m</code></td><td>Only logs newer than this</td></tr>
+<tr><td><code>--until &lt;DURATION&gt;</code></td><td><code>--until 1h</code></td><td>Only logs older than this</td></tr>
+<tr><td><code>--tail &lt;N&gt;</code></td><td><code>--tail 100</code></td><td>Show last N lines</td></tr>
+<tr><td><code>--log-format &lt;FMT&gt;</code></td><td><code>--log-format json</code></td><td>Output format: pretty (default) or json</td></tr>
+</tbody>
+</table>
+</div>
+<p>Environment variables:</p>
+<ul>
+<li><code>DORA_LOG_LEVEL</code> – default log level</li>
+<li><code>DORA_LOG_FORMAT</code> – default log format</li>
+<li><code>DORA_LOG_FILTER</code> – default per-node filter</li>
+</ul>
+<hr/>
+<h2 id="dataflow-visualization"><a class="header" href="debugging.html#dataflow-visualization">Dataflow Visualization</a></h2>
+<p>Generate a visual graph of your dataflow:</p>
+<pre><code class="language-bash"># Generate HTML and open in browser
+dora graph dataflow.yml --open
+
+# Generate Mermaid diagram text
+dora graph dataflow.yml --mermaid
+</code></pre>
+<p>The Mermaid output can be pasted into <a href="https://mermaid.live/">mermaid.live</a> or used in GitHub markdown:</p>
+<pre><code class="language-markdown">```mermaid
+graph TD
+    sensor --&gt; processor
+    processor --&gt; controller
+```
+</code></pre>
+<p>The HTML mode generates a self-contained file with an interactive mermaid.js diagram.</p>
+<hr/>
+<h2 id="monitoring-running-dataflows"><a class="header" href="debugging.html#monitoring-running-dataflows">Monitoring Running Dataflows</a></h2>
+<pre><code class="language-bash"># Full environment diagnosis
+dora doctor
+
+# List all dataflows (active and completed)
+dora list
+
+# Drop finished/failed entries from the list (keeps coordinator running)
+dora clean
+
+# List nodes in a specific dataflow
+dora node list -d my-dataflow
+
+# Get detailed info on a specific node
+dora node info -d my-dataflow camera
+
+# Check coordinator/daemon status
+dora status
+
+# View/modify runtime parameters
+dora param list -d my-dataflow detector
+dora param set -d my-dataflow detector threshold 0.5
+</code></pre>
+<p><code>dora list</code> shows each dataflow’s UUID, name, status, and node count. Use <code>-d &lt;name&gt;</code> with other commands to target a specific dataflow. When the list grows cluttered with finished/failed entries from past runs, <code>dora clean</code> drops them without restarting the coordinator — <code>dora logs &lt;uuid&gt;</code> won’t work for cleaned dataflows afterward.</p>
+<hr/>
+<h2 id="end-to-end-debugging-workflows"><a class="header" href="debugging.html#end-to-end-debugging-workflows">End-to-End Debugging Workflows</a></h2>
+<h3 id="workflow-1-node-not-producing-output"><a class="header" href="debugging.html#workflow-1-node-not-producing-output">Workflow 1: Node Not Producing Output</a></h3>
+<pre><code class="language-bash"># 1. Verify the node is running
+dora list
+dora top
+
+# 2. Check its logs
+dora logs my-dataflow problem-node --follow --level trace
+
+# 3. Check if upstream nodes are publishing
+dora topic echo -d my-dataflow upstream-node/output
+
+# 4. Verify topic wiring
+dora topic list -d my-dataflow
+dora graph dataflow.yml --open
+</code></pre>
+<h3 id="workflow-2-unexpected-data-or-wrong-values"><a class="header" href="debugging.html#workflow-2-unexpected-data-or-wrong-values">Workflow 2: Unexpected Data or Wrong Values</a></h3>
+<pre><code class="language-bash"># 1. Echo the topic to see raw data
+dora topic echo -d my-dataflow node/output --format json
+
+# 2. Record for offline analysis
+dora record dataflow.yml -o debug.drec
+
+# 3. Replay with known input to isolate the issue
+dora replay debug.drec --replace sensor --speed 0
+</code></pre>
+<h3 id="workflow-3-performance-issues"><a class="header" href="debugging.html#workflow-3-performance-issues">Workflow 3: Performance Issues</a></h3>
+<pre><code class="language-bash"># 1. Check CPU/memory per node
+dora top
+
+# 2. Measure publish frequencies
+dora topic hz -d my-dataflow --window 10
+
+# 3. Get bandwidth stats for suspected bottleneck
+dora topic info -d my-dataflow heavy-node/output --duration 10
+
+# 4. Record and replay at max speed to find throughput limits
+dora record dataflow.yml -o perf.drec
+dora replay perf.drec --speed 0
+</code></pre>
+<h3 id="workflow-4-reproducing-a-field-issue"><a class="header" href="debugging.html#workflow-4-reproducing-a-field-issue">Workflow 4: Reproducing a Field Issue</a></h3>
+<pre><code class="language-bash"># On the robot / target machine:
+dora start dataflow.yml --detach
+dora record dataflow.yml --proxy -o field-capture.drec
+
+# Transfer the .drec file to your workstation, then:
+dora replay field-capture.drec
+dora replay field-capture.drec --speed 0.5  # slow motion
+dora replay field-capture.drec --loop        # continuous replay
+</code></pre>
+<h3 id="workflow-5-remote-debugging-no-direct-access"><a class="header" href="debugging.html#workflow-5-remote-debugging-no-direct-access">Workflow 5: Remote Debugging (No Direct Access)</a></h3>
+<p>When you only have WebSocket connectivity to the coordinator:</p>
+<pre><code class="language-bash"># All these commands work over WebSocket -- no Zenoh needed
+dora list
+dora top
+dora logs my-dataflow --all-nodes --follow
+dora topic echo -d my-dataflow node/output
+dora topic hz -d my-dataflow
+dora record dataflow.yml --proxy -o remote-capture.drec
+</code></pre>
+<hr/>
+<h2 id="see-also"><a class="header" href="debugging.html#see-also">See Also</a></h2>
+<ul>
+<li><a href="cli.html">CLI Reference</a> – complete command reference</li>
+<li><a href="https://dora-rs.ai/dora/operations/websocket-control-plane.html">WebSocket Control Plane</a> – how CLI communicates with coordinator</li>
+<li><a href="https://dora-rs.ai/dora/operations/websocket-topic-data-channel.html">WebSocket Topic Data Channel</a> – how topic data is proxied</li>
+<li><a href="https://dora-rs.ai/dora/operations/testing-guide.html">Testing Guide</a> – running smoke tests</li>
+</ul>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">Unofficial copy of the dora documentation. See the <a href="https://dora-rs.ai/dora/operations/debugging.html" rel="noopener" target="_blank">official page</a>. Original © dora-rs contributors, licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a>.</p></main>
+<nav aria-label="Page navigation" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="mobile-nav-chapters previous" href="logging.html" rel="prev" title="Previous chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="mobile-nav-chapters next" href="fault-tolerance.html" rel="next prefetch" title="Next chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="Page navigation" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="Previous chapter" class="nav-chapters previous" href="logging.html" rel="prev" title="Previous chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="Next chapter" class="nav-chapters next" href="fault-tolerance.html" rel="next prefetch" title="Next chapter">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../searcher-09f2665d.js"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到中文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/operations/debugging.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">View official page</a></div>
+<button id="i18n-fab-btn" type="button" title="Language / official page (drag to move)" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">EN</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/en/","/zh/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/en/","/zh/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

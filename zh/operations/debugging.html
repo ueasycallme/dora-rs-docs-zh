@@ -1,0 +1,863 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>调试 - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/operations/debugging.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="debugging-and-observability-guide"><a class="header" href="debugging.html#debugging-and-observability-guide">调试与可观测性指南</a></h1>
+<p>本指南介绍如何调试、录制、回放和监控 dora 数据流，适合希望了解数据流出错原因、衡量性能，或离线重现问题的新用户。</p>
+<hr/>
+<h2 id="table-of-contents"><a class="header" href="debugging.html#table-of-contents">目录</a></h2>
+<ul>
+<li><a href="debugging.html#prerequisites">前置条件</a></li>
+<li><a href="debugging.html#quick-debugging-checklist">快速调试清单</a></li>
+<li><a href="debugging.html#record-and-replay">录制与回放</a>
+<ul>
+<li><a href="debugging.html#recording-a-dataflow">录制数据流</a></li>
+<li><a href="debugging.html#recording-specific-topics">录制指定话题</a></li>
+<li><a href="debugging.html#proxy-recording-remote--diskless">代理录制（远程 / 无磁盘）</a></li>
+<li><a href="debugging.html#replaying-a-recording">回放录制</a></li>
+<li><a href="debugging.html#replay-options">回放选项</a></li>
+<li><a href="debugging.html#selective-replay">选择性回放</a></li>
+<li><a href="debugging.html#recording-file-format">录制文件格式</a></li>
+</ul>
+</li>
+<li><a href="debugging.html#node-management">节点管理</a>
+<ul>
+<li><a href="debugging.html#node-info">节点信息</a></li>
+<li><a href="debugging.html#node-restart">节点重启</a></li>
+<li><a href="debugging.html#node-stop">节点停止</a></li>
+</ul>
+</li>
+<li><a href="debugging.html#topic-inspection">话题检查</a>
+<ul>
+<li><a href="debugging.html#listing-topics">列出话题</a></li>
+<li><a href="debugging.html#echoing-topic-data">回显话题数据</a></li>
+<li><a href="debugging.html#publishing-test-data">发布测试数据</a></li>
+<li><a href="debugging.html#measuring-frequency">测量频率</a></li>
+<li><a href="debugging.html#topic-metadata-and-stats">话题元数据与统计</a></li>
+</ul>
+</li>
+<li><a href="debugging.html#runtime-parameters">运行时参数</a></li>
+<li><a href="debugging.html#environment-diagnosis">环境诊断</a></li>
+<li><a href="debugging.html#trace-inspection">追踪检查</a></li>
+<li><a href="debugging.html#resource-monitoring">资源监控</a></li>
+<li><a href="debugging.html#log-analysis">日志分析</a>
+<ul>
+<li><a href="debugging.html#live-log-streaming">实时日志流</a></li>
+<li><a href="debugging.html#local-log-files">本地日志文件</a></li>
+<li><a href="debugging.html#filtering-and-searching">过滤与搜索</a></li>
+</ul>
+</li>
+<li><a href="debugging.html#dataflow-visualization">数据流可视化</a></li>
+<li><a href="debugging.html#monitoring-running-dataflows">监控运行中的数据流</a></li>
+<li><a href="debugging.html#end-to-end-debugging-workflows">端到端调试流程</a></li>
+</ul>
+<hr/>
+<h2 id="prerequisites"><a class="header" href="debugging.html#prerequisites">前置条件</a></h2>
+<p>在使用话题检查命令（<code>topic echo</code>、<code>topic hz</code>、<code>topic info</code>）之前，请用以下任一方式启用调试消息发布：</p>
+<p><strong>方式一：CLI 标志（推荐）</strong></p>
+<pre><code class="language-bash">dora start dataflow.yml --debug
+dora run dataflow.yml --debug
+</code></pre>
+<p><strong>方式二：YAML 描述文件</strong></p>
+<pre><code class="language-yaml">debug:
+  enable_debug_inspection: true
+</code></pre>
+<p>这会让守护进程将所有节点间消息发布到 Zenoh，协调器可以通过 WebSocket 将这些消息代理给 CLI 客户端。如果不设置此标志，话题检查命令将返回错误。</p>
+<p><code>record</code>、<code>replay</code>、<code>logs</code>、<code>list</code>、<code>top</code>、<code>graph</code>、<code>node info/restart/stop</code>、<code>param</code> 和 <code>doctor</code> 命令<strong>不</strong>需要此标志。<code>topic pub</code> 命令则需要。</p>
+<hr/>
+<h2 id="quick-debugging-checklist"><a class="header" href="debugging.html#quick-debugging-checklist">快速调试清单</a></h2>
+<p>当出现问题时，请按以下顺序排查：</p>
+<pre><code class="language-bash"># 1. Run full environment diagnosis
+dora doctor --dataflow dataflow.yml
+
+# 2. What dataflows are active?
+dora list
+
+# 3. Inspect the problem node
+dora node info -d my-dataflow problem-node
+
+# 4. Check node resource usage
+dora top
+
+# 5. Stream logs from the problem node
+dora logs my-dataflow problem-node --follow --level debug
+
+# 6. Is the node producing output?
+dora topic echo -d my-dataflow problem-node/output
+
+# 7. Inject test data
+dora topic pub -d my-dataflow problem-node/input '[1, 2, 3]'
+
+# 8. Is it publishing at the expected rate?
+dora topic hz -d my-dataflow --window 5
+
+# 9. Check/modify runtime parameters
+dora param list -d my-dataflow problem-node
+dora param set -d my-dataflow problem-node debug_level 2
+
+# 10. Restart a misbehaving node (without stopping the dataflow)
+dora node restart -d my-dataflow problem-node
+
+# 11. View coordinator traces (no external infra needed)
+dora trace list
+dora trace view &lt;trace-id-prefix&gt;
+
+# 12. Visualize the dataflow graph
+dora graph dataflow.yml --open
+
+# 13. Record for offline analysis
+dora record dataflow.yml -o debug-capture.drec
+</code></pre>
+<hr/>
+<h2 id="record-and-replay"><a class="header" href="debugging.html#record-and-replay">录制与回放</a></h2>
+<p>录制会将实时数据流消息捕获到文件中。回放会用录制的数据替换源节点，让你无需硬件即可重现行为。</p>
+<h3 id="recording-a-dataflow"><a class="header" href="debugging.html#recording-a-dataflow">录制数据流</a></h3>
+<pre><code class="language-bash"># Record all topics (default output: recording_{timestamp}.drec)
+dora record dataflow.yml
+
+# Specify output file
+dora record dataflow.yml -o my-capture.drec
+</code></pre>
+<p>这会在数据流中注入一个隐藏的 <code>__dora_record__</code> 节点，该节点会订阅所有节点的输出并将其写入 <code>.drec</code> 文件。录制节点二进制文件（<code>dora-record-node</code>）会在首次使用时自动构建。</p>
+<p>录制会持续进行，直到你按下 Ctrl-C 或数据流停止。</p>
+<h3 id="recording-specific-topics"><a class="header" href="debugging.html#recording-specific-topics">录制指定话题</a></h3>
+<pre><code class="language-bash"># Only record camera and lidar
+dora record dataflow.yml --topics sensor/image,lidar/points
+</code></pre>
+<p>话题名称采用 <code>node_id/output_id</code> 格式。可用话题可以通过 <code>dora topic list -d &lt;dataflow&gt;</code> 查看。</p>
+<h3 id="proxy-recording-remote--diskless"><a class="header" href="debugging.html#proxy-recording-remote--diskless">代理录制（远程 / 无磁盘）</a></h3>
+<p>当目标机器没有本地磁盘，或你想在本地机器上进行录制时：</p>
+<pre><code class="language-bash"># Start the dataflow first (detached)
+dora start dataflow.yml --detach
+
+# Record via WebSocket proxy -- data streams through coordinator to CLI
+dora record dataflow.yml --proxy -o capture.drec
+
+# Record specific topics via proxy
+dora record dataflow.yml --proxy --topics sensor/image,lidar/points
+</code></pre>
+<p>代理模式的工作原理：</p>
+<ol>
+<li>数据流必须已经在运行（<code>dora start --detach</code>）</li>
+<li>CLI 通过 WebSocket 连接到协调器</li>
+<li>协调器代表 CLI 订阅 Zenoh</li>
+<li>消息数据通过 WebSocket 二进制帧流式传输给 CLI</li>
+<li>CLI 在本地写入 <code>.drec</code> 文件</li>
+</ol>
+<p>这需要在描述文件中设置 <code>enable_debug_inspection: true</code>。</p>
+<p><strong>何时使用 <code>--proxy</code>：</strong></p>
+<ul>
+<li>没有本地磁盘的嵌入式目标设备</li>
+<li>希望将录制结果保存在工作站上的远程机器</li>
+<li>当你只有 WebSocket 连接（无法直接访问 Zenoh）时</li>
+</ul>
+<p><strong>何时使用默认模式（不使用 <code>--proxy</code>）：</strong></p>
+<ul>
+<li>同一台机器或共享文件系统</li>
+<li>高吞吐场景（无 WebSocket 开销）</li>
+<li>无需 <code>enable_debug_inspection</code></li>
+</ul>
+<h3 id="replaying-a-recording"><a class="header" href="debugging.html#replaying-a-recording">回放录制</a></h3>
+<pre><code class="language-bash"># Replay at original speed
+dora replay recording.drec
+
+# Replay at 2x speed
+dora replay recording.drec --speed 2.0
+
+# Replay as fast as possible (speed 0)
+dora replay recording.drec --speed 0
+</code></pre>
+<p>回放的工作方式：</p>
+<ol>
+<li>读取 <code>.drec</code> 文件头以获取原始数据流描述文件</li>
+<li>识别出哪些节点产生了被录制的数据</li>
+<li>用 <code>dora-replay-node</code> 实例替换这些源节点</li>
+<li>运行修改后的数据流——下游节点接收到的回放数据与实时数据完全一致</li>
+</ol>
+<p>回放节点二进制文件（<code>dora-replay-node</code>）会在首次使用时自动构建。</p>
+<h3 id="replay-options"><a class="header" href="debugging.html#replay-options">回放选项</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--speed &lt;FLOAT&gt;</code></td><td><code>1.0</code></td><td>回放速度倍率。<code>2.0</code> = 2 倍速，<code>0.5</code> = 半速，<code>0</code> = 尽可能快</td></tr>
+<tr><td><code>--loop</code></td><td>off</td><td>连续循环播放录制内容</td></tr>
+<tr><td><code>--replace &lt;NODES&gt;</code></td><td>全部录制内容</td><td>要替换的节点列表，以逗号分隔</td></tr>
+<tr><td><code>--output-yaml &lt;PATH&gt;</code></td><td>-</td><td>只写出修改后的描述文件 YAML，不运行</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="selective-replay"><a class="header" href="debugging.html#selective-replay">选择性回放</a></h3>
+<p>只替换特定的源节点，其余节点保持实时运行：</p>
+<pre><code class="language-bash"># Only replace the sensor node, keep camera live
+dora replay recording.drec --replace sensor
+
+# Replace sensor and lidar, keep everything else live
+dora replay recording.drec --replace sensor,lidar
+</code></pre>
+<p>当你想用已知的输入数据调试特定的处理流水线，同时让系统其他部分保持实时运行时，这种方式很有用。</p>
+<h3 id="dry-run-output-yaml"><a class="header" href="debugging.html#dry-run-output-yaml">空跑（输出 YAML）</a></h3>
+<p>录制和回放都支持 <code>--output-yaml</code>，可以在不运行的情况下查看修改后的描述文件：</p>
+<pre><code class="language-bash"># See what the record-injected descriptor looks like
+dora record dataflow.yml --output-yaml record-modified.yml
+
+# See what the replay-modified descriptor looks like
+dora replay recording.drec --output-yaml replay-modified.yml
+</code></pre>
+<h3 id="recording-file-format"><a class="header" href="debugging.html#recording-file-format">录制文件格式</a></h3>
+<p><code>.drec</code> 格式是一种简单的二进制文件：</p>
+<pre><code>┌──────────────────────────────────┐
+│ Header (binary)                  │
+│   version: u32                   │
+│   start_nanos: u64               │
+│   dataflow_id: Uuid              │
+│   descriptor_yaml: Vec&lt;u8&gt;       │
+├──────────────────────────────────┤
+│ Entry 1 (binary)                 │
+│   node_id: String                │
+│   output_id: String              │
+│   timestamp_offset_nanos: u64    │
+│   event_bytes: Vec&lt;u8&gt;           │
+├──────────────────────────────────┤
+│ Entry 2 ...                      │
+├──────────────────────────────────┤
+│ ...                              │
+├──────────────────────────────────┤
+│ Footer (binary)                  │
+│   total_messages: u64            │
+│   total_bytes: u64               │
+└──────────────────────────────────┘
+</code></pre>
+<p>容器帧结构（文件头、每条记录的长度、文件尾）由手写的小端字段组成；<code>event_bytes</code> 字段包含原始的 <code>Timestamped&lt;InterDaemonEvent&gt;</code> postcard 负载——与守护进程之间网络传输所用的格式相同。dora 1.0 之前写入的录制文件对 <code>event_bytes</code> 使用 bincode 编码，并标记为格式版本 1；本版本拒绝打开这些文件。文件头中的 <code>descriptor_yaml</code> 保存了原始数据流描述文件，以便回放时重建数据流。</p>
+<hr/>
+<h2 id="node-management"><a class="header" href="debugging.html#node-management">节点管理</a></h2>
+<h3 id="node-info"><a class="header" href="debugging.html#node-info">节点信息</a></h3>
+<p>获取某个节点的详细信息，包括其状态、输入、输出、指标和重启次数：</p>
+<pre><code class="language-bash">dora node info -d my-dataflow camera
+
+# JSON output
+dora node info -d my-dataflow camera --format json
+</code></pre>
+<h3 id="node-restart"><a class="header" href="debugging.html#node-restart">节点重启</a></h3>
+<p>重启单个节点，而不停止整个数据流。适用于恢复行为异常的节点或应用新的配置变更：</p>
+<pre><code class="language-bash"># Restart with default grace period
+dora node restart -d my-dataflow camera
+
+# Restart with custom grace period
+dora node restart -d my-dataflow camera --grace 10s
+</code></pre>
+<p>守护进程发送停止事件，等待宽限期后，重新启动该节点进程。</p>
+<h3 id="node-stop"><a class="header" href="debugging.html#node-stop">节点停止</a></h3>
+<p>停止单个节点，而不停止整个数据流：</p>
+<pre><code class="language-bash">dora node stop -d my-dataflow camera
+
+# With custom grace period
+dora node stop -d my-dataflow camera --grace 5s
+</code></pre>
+<hr/>
+<h2 id="topic-inspection"><a class="header" href="debugging.html#topic-inspection">话题检查</a></h2>
+<p>话题检查命令通过协调器的 WebSocket 代理订阅实时数据流消息。它们需要 <code>--debug</code> 标志或 <code>enable_debug_inspection: true</code>。</p>
+<h3 id="listing-topics"><a class="header" href="debugging.html#listing-topics">列出话题</a></h3>
+<pre><code class="language-bash"># List all topics in a running dataflow
+dora topic list -d my-dataflow
+
+# JSON output
+dora topic list -d my-dataflow --format json
+</code></pre>
+<p>显示每个输出，是由哪个节点发布的，以及哪些节点订阅了它。该命令从描述文件中读取，<strong>不</strong>需要 <code>enable_debug_inspection</code>。</p>
+<h3 id="echoing-topic-data"><a class="header" href="debugging.html#echoing-topic-data">回显话题数据</a></h3>
+<p>将实时话题数据流式输出到终端：</p>
+<pre><code class="language-bash"># Echo a single topic
+dora topic echo -d my-dataflow camera_node/image
+
+# Echo multiple topics
+dora topic echo -d my-dataflow robot1/pose robot2/vel
+
+# JSON output (useful for piping to jq or other tools)
+dora topic echo -d my-dataflow robot1/pose --format json
+
+# Echo all topics
+dora topic echo -d my-dataflow
+</code></pre>
+<p>每一行显示话题名称、Arrow 数据内容和元数据参数。使用 <code>--format json</code> 可获得机器可读的输出：</p>
+<pre><code class="language-json">{"timestamp":1709000000000,"name":"robot1/pose","data":[1.0,2.0,3.0],"metadata":null}
+</code></pre>
+<h3 id="measuring-frequency"><a class="header" href="debugging.html#measuring-frequency">测量频率</a></h3>
+<p>交互式 TUI，显示每个话题的发布频率：</p>
+<pre><code class="language-bash"># All topics with 10-second sliding window
+dora topic hz -d my-dataflow --window 10
+
+# Specific topics with 5-second window
+dora topic hz -d my-dataflow robot1/pose robot2/vel --window 5
+</code></pre>
+<p>该 TUI 显示：</p>
+<ul>
+<li>平均频率（Hz）</li>
+<li>平均、最小、最大间隔</li>
+<li>标准差</li>
+<li>显示最近活动的迷你折线图（sparkline）</li>
+</ul>
+<p>按 <code>q</code> 或 Ctrl-C 退出。需要交互式终端。</p>
+<h3 id="publishing-test-data"><a class="header" href="debugging.html#publishing-test-data">发布测试数据</a></h3>
+<p>向正在运行的数据流中注入数据以进行测试。需要 <code>enable_debug_inspection: true</code>。</p>
+<pre><code class="language-bash"># Publish a single Arrow array
+dora topic pub -d my-dataflow sensor/threshold '[42]'
+
+# Publish from a JSON file
+dora topic pub -d my-dataflow sensor/config --file test-config.json
+
+# Publish multiple messages
+dora topic pub -d my-dataflow sensor/trigger '[1]' --count 10
+</code></pre>
+<p>这适用于：</p>
+<ul>
+<li>使用已知输入数据测试节点行为</li>
+<li>触发下游节点中的特定代码路径</li>
+<li>在没有硬件的情况下模拟传感器输入</li>
+</ul>
+<h3 id="topic-metadata-and-stats"><a class="header" href="debugging.html#topic-metadata-and-stats">话题元数据与统计</a></h3>
+<p>一次性统计信息收集：</p>
+<pre><code class="language-bash"># Collect stats for 5 seconds (default)
+dora topic info -d my-dataflow camera_node/image
+
+# Collect for 10 seconds
+dora topic info -d my-dataflow camera_node/image --duration 10
+</code></pre>
+<p>报告内容：</p>
+<ul>
+<li>Arrow 数据类型</li>
+<li>发布者节点</li>
+<li>订阅者节点（来自描述文件）</li>
+<li>消息数量和带宽</li>
+<li>发布频率</li>
+</ul>
+<hr/>
+<h2 id="runtime-parameters"><a class="header" href="debugging.html#runtime-parameters">运行时参数</a></h2>
+<p>运行时参数允许你在数据流运行期间读取和修改节点配置，而无需重启。参数存储在协调器中，并可选择转发给正在运行的节点。</p>
+<pre><code class="language-bash"># List all parameters for a node
+dora param list -d my-dataflow detector
+
+# Get a single parameter
+dora param get -d my-dataflow detector confidence
+
+# Set a parameter (value is JSON)
+dora param set -d my-dataflow detector confidence 0.8
+dora param set -d my-dataflow detector config '{"nms": 0.5, "classes": ["car", "person"]}'
+
+# Delete a parameter
+dora param delete -d my-dataflow detector confidence
+</code></pre>
+<p>参数会持久化保存在协调器存储（内存或 redb）中。当节点正在运行时，<code>param set</code> 还会将新值转发给该节点的守护进程。节点可以通过节点事件流读取参数。</p>
+<p><strong>限制：</strong>键最大 256 字节，值序列化后最大 64KB。</p>
+<hr/>
+<h2 id="environment-diagnosis"><a class="header" href="debugging.html#environment-diagnosis">环境诊断</a></h2>
+<p><code>dora doctor</code> 对你的环境执行全面的健康检查：</p>
+<pre><code class="language-bash"># Basic diagnosis
+dora doctor
+
+# Diagnosis + dataflow validation
+dora doctor --dataflow dataflow.yml
+</code></pre>
+<p>执行的检查项：</p>
+<ol>
+<li>协调器可达性</li>
+<li>已连接的守护进程状态</li>
+<li>活动数据流的健康状况</li>
+<li>dataflow YAML 校验（若提供了 <code>--dataflow</code>）</li>
+</ol>
+<p>在调试任何问题时，可将其作为第一步；也可在 CI 中用于在运行测试前验证环境。</p>
+<hr/>
+<h2 id="trace-inspection"><a class="header" href="debugging.html#trace-inspection">追踪检查</a></h2>
+<p>协调器会在内存中捕获来自 <code>dora_coordinator</code> 和 <code>dora_core</code> crate 的追踪 span（环形缓冲区最多存储 4096 个 span）。你可以在不搭建任何外部追踪基础设施（无需 Jaeger、Tempo 等）的情况下查看这些追踪记录。</p>
+<h3 id="listing-traces"><a class="header" href="debugging.html#listing-traces">列出追踪记录</a></h3>
+<pre><code class="language-bash">dora trace list
+</code></pre>
+<p>显示所有已捕获的追踪记录，包括其根 span 名称、span 数量、开始时间和总耗时：</p>
+<pre><code>TRACE ID      ROOT SPAN          SPANS  STARTED              DURATION
+a1b2c3d4e5f6  spawn_dataflow     12     2026-03-01 10:30:05  1.234s
+f8e7d6c5b4a3  build_dataflow     5      2026-03-01 10:29:58  0.500s
+</code></pre>
+<h3 id="viewing-a-trace"><a class="header" href="debugging.html#viewing-a-trace">查看单条追踪记录</a></h3>
+<pre><code class="language-bash"># Full trace ID
+dora trace view a1b2c3d4-e5f6-7890-abcd-1234567890ab
+
+# Or use a unique prefix
+dora trace view a1b2c3d4
+</code></pre>
+<p>以缩进树的形式显示各个 span，展示父子关系、日志级别、耗时和 span 字段：</p>
+<pre><code>spawn_dataflow [INFO 1.234s] {build_id="abc", session_id="def"}
+  build_dataflow [INFO 0.500s]
+    download_node [DEBUG 0.200s] {url="..."}
+  start_inner [INFO 0.734s]
+    spawn_node [INFO 0.100s] {node_id="camera"}
+    spawn_node [INFO 0.080s] {node_id="detector"}
+</code></pre>
+<h3 id="when-to-use-trace-inspection"><a class="header" href="debugging.html#when-to-use-trace-inspection">何时使用追踪检查</a></h3>
+<ul>
+<li><strong>快速调试</strong>——在不搭建 Jaeger/Tempo 的情况下，查看协调器在 <code>start</code>、<code>stop</code> 或 <code>build</code> 期间做了什么</li>
+<li><strong>性能分析</strong>——识别数据流生命周期操作中耗时较长的 span</li>
+<li><strong>部署问题排查</strong>——了解协调器操作的顺序和时序</li>
+</ul>
+<p>若要对守护进程和节点进行完整的分布式追踪，请设置 <code>DORA_OTLP_ENDPOINT</code> 并使用兼容 OTLP 的后端。</p>
+<hr/>
+<h2 id="resource-monitoring"><a class="header" href="debugging.html#resource-monitoring">资源监控</a></h2>
+<p><code>dora top</code>（也可用 <code>dora inspect top</code>）提供一个实时 TUI，显示每个节点的资源使用情况：</p>
+<pre><code class="language-bash"># Default 2-second refresh
+dora top
+
+# Custom refresh interval
+dora top --refresh-interval 5
+
+# JSON snapshot for scripting/CI
+dora top --once | jq .
+</code></pre>
+<p>为每个节点显示：</p>
+<ul>
+<li>CPU 使用率（占单核的百分比）</li>
+<li>内存（RSS）</li>
+<li>节点状态（Running、Restarting、Degraded、Failed）</li>
+<li>重启次数</li>
+<li>队列深度（待处理消息数）</li>
+<li>网络 TX/RX（通过 Zenoh 跨守护进程传输的字节数）</li>
+<li>磁盘 I/O 读写</li>
+</ul>
+<p>指标由守护进程收集并上报给协调器，因此这适用于跨多台机器的分布式数据流。按 <code>q</code> 或 Ctrl-C 退出。</p>
+<p>使用 <code>--once</code> 打印一次 JSON 快照后退出，适用于 CI 流水线和监控集成。</p>
+<p>注意：CPU 百分比是按核计算的，因此对于多线程节点，数值可能超过 100%。不同机器上的节点可能使用不同的 CPU，因此跨机器的百分比不能直接比较。</p>
+<hr/>
+<h2 id="log-analysis"><a class="header" href="debugging.html#log-analysis">日志分析</a></h2>
+<h3 id="live-log-streaming"><a class="header" href="debugging.html#live-log-streaming">实时日志流</a></h3>
+<pre><code class="language-bash"># Stream logs from a specific node
+dora logs my-dataflow sensor-node --follow
+
+# Stream logs from all nodes
+dora logs my-dataflow --all-nodes --follow
+
+# Filter by log level
+dora logs my-dataflow sensor-node --follow --level debug
+
+# Stream with grep filter
+dora logs my-dataflow --all-nodes --follow --grep "error"
+</code></pre>
+<p>不带 <code>--follow</code> 时，从本地日志文件读取。带 <code>--follow</code> 时，通过 WebSocket 从协调器实时流式读取。</p>
+<h3 id="local-log-files"><a class="header" href="debugging.html#local-log-files">本地日志文件</a></h3>
+<p>日志存储在 <code>out/</code> 目录中：</p>
+<pre><code>out/
+  &lt;dataflow-uuid&gt;/
+    log_&lt;node-id&gt;.jsonl          # current log
+    log_&lt;node-id&gt;.1.jsonl        # rotated (previous)
+    log_&lt;node-id&gt;.2.jsonl        # rotated (older)
+</code></pre>
+<p>直接读取：</p>
+<pre><code class="language-bash"># All nodes, local files
+dora logs --local --all-nodes
+
+# Specific node, last 50 lines
+dora logs --local sensor-node --tail 50
+</code></pre>
+<h3 id="filtering-and-searching"><a class="header" href="debugging.html#filtering-and-searching">过滤与搜索</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>示例</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--level &lt;LEVEL&gt;</code></td><td><code>--level debug</code></td><td>最低级别：error、warn、info、debug、trace、stdout</td></tr>
+<tr><td><code>--log-filter &lt;FILTER&gt;</code></td><td><code>--log-filter "sensor=debug,processor=warn"</code></td><td>按节点过滤级别</td></tr>
+<tr><td><code>--grep &lt;PATTERN&gt;</code></td><td><code>--grep "timeout"</code></td><td>不区分大小写的子串匹配</td></tr>
+<tr><td><code>--since &lt;DURATION&gt;</code></td><td><code>--since 5m</code></td><td>仅显示比该时间更新的日志</td></tr>
+<tr><td><code>--until &lt;DURATION&gt;</code></td><td><code>--until 1h</code></td><td>仅显示比该时间更早的日志</td></tr>
+<tr><td><code>--tail &lt;N&gt;</code></td><td><code>--tail 100</code></td><td>显示最后 N 行</td></tr>
+<tr><td><code>--log-format &lt;FMT&gt;</code></td><td><code>--log-format json</code></td><td>输出格式：pretty（默认）或 json</td></tr>
+</tbody>
+</table>
+</div>
+<p>环境变量：</p>
+<ul>
+<li><code>DORA_LOG_LEVEL</code>——默认日志级别</li>
+<li><code>DORA_LOG_FORMAT</code>——默认日志格式</li>
+<li><code>DORA_LOG_FILTER</code>——默认的按节点过滤规则</li>
+</ul>
+<hr/>
+<h2 id="dataflow-visualization"><a class="header" href="debugging.html#dataflow-visualization">数据流可视化</a></h2>
+<p>生成数据流的可视化图：</p>
+<pre><code class="language-bash"># Generate HTML and open in browser
+dora graph dataflow.yml --open
+
+# Generate Mermaid diagram text
+dora graph dataflow.yml --mermaid
+</code></pre>
+<p>生成的 Mermaid 输出可以粘贴到 <a href="https://mermaid.live/">mermaid.live</a>，也可用于 GitHub markdown 中：</p>
+<pre><code class="language-markdown">```mermaid
+graph TD
+    sensor --&gt; processor
+    processor --&gt; controller
+```
+</code></pre>
+<p>HTML 模式会生成一个包含交互式 mermaid.js 图表的独立文件。</p>
+<hr/>
+<h2 id="monitoring-running-dataflows"><a class="header" href="debugging.html#monitoring-running-dataflows">监控运行中的数据流</a></h2>
+<pre><code class="language-bash"># Full environment diagnosis
+dora doctor
+
+# List all dataflows (active and completed)
+dora list
+
+# Drop finished/failed entries from the list (keeps coordinator running)
+dora clean
+
+# List nodes in a specific dataflow
+dora node list -d my-dataflow
+
+# Get detailed info on a specific node
+dora node info -d my-dataflow camera
+
+# Check coordinator/daemon status
+dora status
+
+# View/modify runtime parameters
+dora param list -d my-dataflow detector
+dora param set -d my-dataflow detector threshold 0.5
+</code></pre>
+<p><code>dora list</code> 显示每个数据流的 UUID、名称、状态和节点数量。可配合其他命令使用 <code>-d &lt;name&gt;</code> 来指定某个数据流。当列表中积累了过多以往运行产生的已完成/失败条目而显得杂乱时，<code>dora clean</code> 可以在不重启协调器的情况下清除它们——但清除之后，<code>dora logs &lt;uuid&gt;</code> 将无法再用于这些已清除的数据流。</p>
+<hr/>
+<h2 id="end-to-end-debugging-workflows"><a class="header" href="debugging.html#end-to-end-debugging-workflows">端到端调试流程</a></h2>
+<h3 id="workflow-1-node-not-producing-output"><a class="header" href="debugging.html#workflow-1-node-not-producing-output">工作流一：节点没有产生输出</a></h3>
+<pre><code class="language-bash"># 1. Verify the node is running
+dora list
+dora top
+
+# 2. Check its logs
+dora logs my-dataflow problem-node --follow --level trace
+
+# 3. Check if upstream nodes are publishing
+dora topic echo -d my-dataflow upstream-node/output
+
+# 4. Verify topic wiring
+dora topic list -d my-dataflow
+dora graph dataflow.yml --open
+</code></pre>
+<h3 id="workflow-2-unexpected-data-or-wrong-values"><a class="header" href="debugging.html#workflow-2-unexpected-data-or-wrong-values">工作流二：数据异常或数值错误</a></h3>
+<pre><code class="language-bash"># 1. Echo the topic to see raw data
+dora topic echo -d my-dataflow node/output --format json
+
+# 2. Record for offline analysis
+dora record dataflow.yml -o debug.drec
+
+# 3. Replay with known input to isolate the issue
+dora replay debug.drec --replace sensor --speed 0
+</code></pre>
+<h3 id="workflow-3-performance-issues"><a class="header" href="debugging.html#workflow-3-performance-issues">工作流三：性能问题</a></h3>
+<pre><code class="language-bash"># 1. Check CPU/memory per node
+dora top
+
+# 2. Measure publish frequencies
+dora topic hz -d my-dataflow --window 10
+
+# 3. Get bandwidth stats for suspected bottleneck
+dora topic info -d my-dataflow heavy-node/output --duration 10
+
+# 4. Record and replay at max speed to find throughput limits
+dora record dataflow.yml -o perf.drec
+dora replay perf.drec --speed 0
+</code></pre>
+<h3 id="workflow-4-reproducing-a-field-issue"><a class="header" href="debugging.html#workflow-4-reproducing-a-field-issue">工作流四：复现现场问题</a></h3>
+<pre><code class="language-bash"># On the robot / target machine:
+dora start dataflow.yml --detach
+dora record dataflow.yml --proxy -o field-capture.drec
+
+# Transfer the .drec file to your workstation, then:
+dora replay field-capture.drec
+dora replay field-capture.drec --speed 0.5  # slow motion
+dora replay field-capture.drec --loop        # continuous replay
+</code></pre>
+<h3 id="workflow-5-remote-debugging-no-direct-access"><a class="header" href="debugging.html#workflow-5-remote-debugging-no-direct-access">工作流五：远程调试（无法直接访问）</a></h3>
+<p>当你只能通过 WebSocket 连接到协调器时：</p>
+<pre><code class="language-bash"># All these commands work over WebSocket -- no Zenoh needed
+dora list
+dora top
+dora logs my-dataflow --all-nodes --follow
+dora topic echo -d my-dataflow node/output
+dora topic hz -d my-dataflow
+dora record dataflow.yml --proxy -o remote-capture.drec
+</code></pre>
+<hr/>
+<h2 id="see-also"><a class="header" href="debugging.html#see-also">另请参阅</a></h2>
+<ul>
+<li><a href="cli.html">CLI 参考</a>——完整的命令参考</li>
+<li><a href="https://dora-rs.ai/dora/operations/websocket-control-plane.html">WebSocket Control Plane</a>——CLI 如何与协调器通信</li>
+<li><a href="https://dora-rs.ai/dora/operations/websocket-topic-data-channel.html">WebSocket Topic Data Channel</a>——话题数据如何被代理转发</li>
+<li><a href="https://dora-rs.ai/dora/operations/testing-guide.html">Testing Guide</a>——运行冒烟测试</li>
+</ul>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/operations/debugging.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="logging.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="fault-tolerance.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="logging.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="fault-tolerance.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/operations/debugging.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

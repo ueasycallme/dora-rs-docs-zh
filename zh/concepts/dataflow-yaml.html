@@ -1,0 +1,797 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>Dataflow YAML - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/concepts/dataflow-yaml.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="dataflow-yaml-specification"><a class="header" href="dataflow-yaml.html#dataflow-yaml-specification">Dataflow YAML 规范</a></h1>
+<p>数据流在 YAML 文件中定义。每个文件描述一个节点图，以及节点的输入/输出和执行参数。</p>
+<p>仓库根目录提供了一个 JSON Schema（<code>dora-schema.json</code>），可用于编辑器自动补全和校验。</p>
+<h2 id="quick-start"><a class="header" href="dataflow-yaml.html#quick-start">快速开始</a></h2>
+<pre><code class="language-yaml">nodes:
+  - id: sender
+    path: sender.py
+    outputs:
+      - message
+
+  - id: receiver
+    path: receiver.py
+    inputs:
+      message: sender/message
+</code></pre>
+<p>使用 <code>dora run dataflow.yml</code>（本地模式）或 <code>dora up &amp;&amp; dora start dataflow.yml</code>（网络模式）运行。</p>
+<h2 id="editor-setup"><a class="header" href="dataflow-yaml.html#editor-setup">编辑器设置</a></h2>
+<p>在 YAML 文件顶部添加 schema 注释以启用 VS Code 自动补全（需要安装 <a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml">YAML 扩展</a>）：</p>
+<pre><code class="language-yaml"># yaml-language-server: $schema=https://raw.githubusercontent.com/dora-rs/dora/main/dora-schema.json
+nodes:
+  - id: my-node
+    # ... autocompletion works here
+</code></pre>
+<h2 id="root-level-fields"><a class="header" href="dataflow-yaml.html#root-level-fields">根级字段</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>nodes</code></td><td>list</td><td><strong>必需</strong></td><td>节点配置列表</td></tr>
+<tr><td><code>strict_types</code></td><td>bool</td><td><code>false</code></td><td>在 <code>validate</code> 和 <code>build</code> 中将类型警告视为错误</td></tr>
+<tr><td><code>type_rules</code></td><td>list</td><td><code>[]</code></td><td>用户定义的类型兼容性规则（参见 <a href="types.html#user-defined-compatibility-rules">类型注解</a>）</td></tr>
+<tr><td><code>health_check_interval</code></td><td>float</td><td><code>5.0</code></td><td>守护进程健康检查扫描之间的间隔秒数。对于设置了 <code>health_check_timeout</code> 的每个节点，守护进程会检查该节点是否在其超时时间内进行过通信；如果没有，该节点将被终止，并评估其 <code>restart_policy</code></td></tr>
+<tr><td><code>deploy</code></td><td>object</td><td>–</td><td>根级部署配置（参见 <a href="dataflow-yaml.html#deployment">Deployment</a>）</td></tr>
+<tr><td><code>debug</code></td><td>object</td><td>–</td><td>调试选项（参见 <a href="dataflow-yaml.html#debug">Debug</a>）</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="node-configuration"><a class="header" href="dataflow-yaml.html#node-configuration">节点配置</a></h2>
+<p>每个节点都需要一个 <code>id</code>。其他字段均为可选（不过大多数节点至少需要 <code>path</code> 或 <code>operator</code>/<code>operators</code>）。</p>
+<h3 id="identity"><a class="header" href="dataflow-yaml.html#identity">标识</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>string</td><td><strong>必需。</strong>唯一标识符。不能包含 <code>/</code>。不建议使用空白字符</td></tr>
+<tr><td><code>name</code></td><td>string</td><td>人类可读的显示名称（仅作为元数据，用于工具和日志）</td></tr>
+<tr><td><code>description</code></td><td>string</td><td>文档字符串（仅作为元数据，运行时不使用）</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="source"><a class="header" href="dataflow-yaml.html#source">Source</a></h3>
+<p>节点的可执行文件可以来自本地路径、Git 仓库、模块引用，或者是隐式的（算子/ROS2 节点）。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>path</code></td><td>string</td><td>可执行文件或脚本的路径。也可以是 URL（遗留用法）</td></tr>
+<tr><td><code>module</code></td><td>string</td><td>模块定义文件的路径（与 <code>path</code> 互斥）。参见 <a href="modules.html">模块指南</a></td></tr>
+<tr><td><code>git</code></td><td>string</td><td>Git 仓库 URL。<code>dora build</code> 会克隆该仓库，并将克隆目录用作工作目录</td></tr>
+<tr><td><code>branch</code></td><td>string</td><td>要检出的分支（需要 <code>git</code>，与 <code>tag</code>/<code>rev</code> 互斥）</td></tr>
+<tr><td><code>tag</code></td><td>string</td><td>要检出的标签（需要 <code>git</code>，与 <code>branch</code>/<code>rev</code> 互斥）</td></tr>
+<tr><td><code>rev</code></td><td>string</td><td>要检出的 commit hash（需要 <code>git</code>，与 <code>branch</code>/<code>tag</code> 互斥）</td></tr>
+<tr><td><code>build</code></td><td>string</td><td>在 <code>dora build</code> 期间运行的构建命令。每一行单独运行。使用 <code>--uv</code> 时，<code>pip</code>/<code>pip3</code> 行会使用 <code>uv pip</code>，并且 Python 节点会在 <code>&lt;working-dir&gt;/.dora/python-envs/&lt;node-id&gt;/</code> 获得一个专用的受管 venv，运行时会在启动时重用该 venv。详情参见 <a href="../operations/cli.html#dora-build">CLI 参考</a>。</td></tr>
+<tr><td><code>args</code></td><td>string</td><td>命令行参数（以空格分隔）</td></tr>
+</tbody>
+</table>
+</div>
+<p>使用 Git 源的示例：</p>
+<pre><code class="language-yaml">- id: rust-node
+  git: https://github.com/dora-rs/dora.git
+  branch: main
+  build: cargo build -p example-node --release
+  path: target/release/example-node
+</code></pre>
+<h3 id="data-io"><a class="header" href="dataflow-yaml.html#data-io">数据 I/O</a></h3>
+<h4 id="inputs"><a class="header" href="dataflow-yaml.html#inputs">输入</a></h4>
+<p>输入使用 <code>&lt;node-id&gt;/&lt;output-id&gt;</code> 格式订阅另一个节点的输出：</p>
+<pre><code class="language-yaml">inputs:
+  # Short form
+  image: camera/frames
+  tick: dora/timer/millis/100
+
+  # Long form with options
+  sensor_data:
+    source: sensor/frames
+    queue_size: 10
+    queue_policy: drop_oldest
+    input_timeout: 5.0
+
+  # Lossless input (blocks sender when full)
+  commands:
+    source: controller/cmd
+    queue_size: 100
+    queue_policy: backpressure
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>输入选项</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>source</code></td><td>string</td><td><strong>必需</strong></td><td><code>&lt;node-id&gt;/&lt;output-id&gt;</code> 或定时器路径</td></tr>
+<tr><td><code>queue_size</code></td><td>integer</td><td><code>10</code></td><td>输入缓冲区大小</td></tr>
+<tr><td><code>queue_policy</code></td><td>string</td><td><code>drop_oldest</code></td><td><code>drop_oldest</code>：缓冲区满时丢弃最旧的消息。<code>backpressure</code>：最多缓冲 <code>queue_size</code> 的 10 倍而不丢弃（达到硬上限时会丢弃并记录 ERROR 日志）</td></tr>
+<tr><td><code>input_timeout</code></td><td>float</td><td>–</td><td>断路器超时时间（秒）。如果在此时间段内没有消息到达，守护进程会关闭该输入，节点会收到一个 <code>InputClosed</code> 事件以实现优雅降级</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="built-in-timers"><a class="header" href="dataflow-yaml.html#built-in-timers">内置定时器</a></h4>
+<p>定时器是以固定间隔发出 tick 的虚拟节点：</p>
+<pre><code class="language-yaml">inputs:
+  tick: dora/timer/millis/100   # every 100ms
+  slow: dora/timer/millis/1000  # every 1s
+  fast: dora/timer/hz/30        # 30 Hz (~33ms)
+</code></pre>
+<h4 id="built-in-log-aggregation"><a class="header" href="dataflow-yaml.html#built-in-log-aggregation">内置日志聚合</a></h4>
+<p>订阅来自所有（或经过筛选的）节点的结构化日志消息：</p>
+<pre><code class="language-yaml">inputs:
+  all_logs: dora/logs               # all nodes, all levels
+  errors:   dora/logs/error         # error+ from all nodes
+  sensor:   dora/logs/info/sensor   # info+ from specific node
+</code></pre>
+<p>每条消息以 JSON 编码的 <code>LogMessage</code> 字符串形式到达。详情参见 <a href="https://dora-rs.ai/dora/concepts/logging.html#doralogs----automatic-log-aggregation">日志记录</a>。</p>
+<h4 id="outputs"><a class="header" href="dataflow-yaml.html#outputs">输出</a></h4>
+<p>节点产生的输出标识符列表：</p>
+<pre><code class="language-yaml">outputs:
+  - processed_image
+  - metadata
+</code></pre>
+<h3 id="type-annotations"><a class="header" href="dataflow-yaml.html#type-annotations">类型注解</a></h3>
+<p>输入和输出的可选类型注解。类型从不是必需的——未注解的端口将保持完全动态。</p>
+<pre><code class="language-yaml">- id: camera
+  path: camera.py
+  outputs:
+    - image
+    - depth
+  output_types:
+    image: std/media/v1/Image
+    depth: std/media/v1/Image
+
+- id: detector
+  path: detect.py
+  inputs:
+    image: camera/image
+  input_types:
+    image: std/media/v1/Image
+  outputs:
+    - bbox
+  output_types:
+    bbox: std/vision/v1/BoundingBox
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>output_types</code></td><td>object</td><td><code>{}</code></td><td>将输出 ID 映射到类型 URN。键必须与 <code>outputs</code> 中的条目匹配</td></tr>
+<tr><td><code>input_types</code></td><td>object</td><td><code>{}</code></td><td>将输入 ID 映射到期望的类型 URN。键必须与 <code>inputs</code> 中的条目匹配</td></tr>
+<tr><td><code>output_metadata</code></td><td>object</td><td><code>{}</code></td><td>将输出 ID 映射到所需元数据键的列表</td></tr>
+<tr><td><code>pattern</code></td><td>string</td><td>–</td><td>通信模式简写：<code>service-server</code>、<code>service-client</code>、<code>action-server</code>、<code>action-client</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>类型 URN 使用 <code>std/&lt;category&gt;/v&lt;version&gt;/&lt;TypeName&gt;</code> 格式，并支持参数（例如 <code>std/media/v1/AudioFrame[sample_type=f32]</code>）。完整的标准类型库、参数化类型、兼容性规则和用户自定义类型请参见<a href="types.html">类型注解指南</a>。</p>
+<p>运行 <code>dora validate &lt;file&gt;</code> 可静态检查类型注解。如需运行时检查，设置 <code>DORA_RUNTIME_TYPE_CHECK=warn</code> 或 <code>error</code>：</p>
+<pre><code class="language-bash">dora validate dataflow.yml
+DORA_RUNTIME_TYPE_CHECK=warn dora run dataflow.yml
+</code></pre>
+<p>若有注解，类型也会显示在 <code>dora graph</code> 的边标签上。</p>
+<h3 id="arrow-ipc-framing"><a class="header" href="dataflow-yaml.html#arrow-ipc-framing">Arrow IPC 分帧</a></h3>
+<p>按输出覆盖的传输分帧方式。默认为 <code>raw</code>（Arrow 缓冲区布局）。设为 <code>arrow-ipc</code> 可使用自描述的 Arrow IPC 流格式。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>output_framing</code></td><td>映射</td><td><code>{}</code></td><td>按输出的分帧方式：<code>raw</code>（默认）或 <code>arrow-ipc</code></td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml">- id: sensor
+  path: ./sensor
+  outputs:
+    - image
+  output_framing:
+    image: arrow-ipc
+</code></pre>
+<h3 id="module-parameters"><a class="header" href="dataflow-yaml.html#module-parameters">模块参数</a></h3>
+<p>使用 <code>module:</code> 时，通过 <code>params:</code> 传递配置值：</p>
+<pre><code class="language-yaml">- id: fast_pipeline
+  module: modules/transform.module.yml
+  inputs:
+    data: sender/value
+  params:
+    speed: "2.0"
+    mode: turbo
+</code></pre>
+<p>在模块内部，参数可在 <code>args:</code> 中以 <code>$PARAM_&lt;UPPERCASE_KEY&gt;</code> 的形式访问，也可作为环境变量使用。完整文档请参见<a href="modules.html">模块指南</a>。</p>
+<h3 id="environment"><a class="header" href="dataflow-yaml.html#environment">环境</a></h3>
+<pre><code class="language-yaml">env:
+  MY_VAR: "value"          # string
+  DEBUG: true               # boolean
+  PORT: 8080                # integer
+  RATE: 1.5                 # float
+  FROM_HOST:
+    __dora_env: HOST_VAR   # read from host environment at runtime
+</code></pre>
+<p>环境变量同时适用于 <code>build</code> 命令和节点执行。取值支持 <code>$VAR</code> 展开语法。</p>
+<h3 id="logging"><a class="header" href="dataflow-yaml.html#logging">日志记录</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>send_stdout_as</code></td><td>string</td><td>–</td><td>将原始 stdout/stderr 行作为数据输出路由。每一行作为一条独立的 Arrow 消息发送</td></tr>
+<tr><td><code>send_logs_as</code></td><td>string</td><td>–</td><td>将结构化日志条目作为数据输出路由。每条记录是一个 JSON 字符串，包含字段：<code>timestamp</code>、<code>level</code>、<code>node_id</code>、<code>message</code>、<code>target</code>、<code>fields</code></td></tr>
+<tr><td><code>min_log_level</code></td><td>string</td><td>–</td><td>抑制低于此级别的日志，不写入文件输出、不转发给协调器，也不通过 <code>send_logs_as</code> 发送。级别从最详细到最简略依次为：<code>stdout</code>（包括原始 stdout 的全部输出）、<code>trace</code>、<code>debug</code>、<code>info</code>、<code>warn</code>、<code>error</code></td></tr>
+<tr><td><code>max_log_size</code></td><td>string</td><td>–</td><td>日志文件达到此大小后进行轮转（例如 <code>"50MB"</code>、<code>"1GB"</code>）</td></tr>
+<tr><td><code>max_rotated_files</code></td><td>integer</td><td><code>5</code></td><td>保留的轮转日志文件数量</td></tr>
+</tbody>
+</table>
+</div>
+<p>示例：</p>
+<pre><code class="language-yaml">- id: sensor
+  path: ./sensor
+  min_log_level: info
+  send_stdout_as: raw_output
+  send_logs_as: log_entries
+  max_log_size: "100MB"
+  max_rotated_files: 3
+  outputs:
+    - data
+    - raw_output
+    - log_entries
+</code></pre>
+<p>使用 <code>send_stdout_as</code> 或 <code>send_logs_as</code> 时，请将该输出名称加入 <code>outputs</code> 列表，以便下游节点可以订阅它。</p>
+<p>有关所有日志功能的完整指南，请参见<a href="https://dora-rs.ai/dora/concepts/logging.html">日志</a>。</p>
+<h3 id="fault-tolerance"><a class="header" href="dataflow-yaml.html#fault-tolerance">容错</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>restart_policy</code></td><td>string</td><td><code>never</code></td><td><code>never</code>、<code>on-failure</code> 或 <code>always</code></td></tr>
+<tr><td><code>max_restarts</code></td><td>integer</td><td><code>0</code></td><td>最大重启尝试次数。0 表示无限制</td></tr>
+<tr><td><code>restart_delay</code></td><td>float</td><td>–</td><td>初始退避时间（秒）。每次尝试翻倍</td></tr>
+<tr><td><code>max_restart_delay</code></td><td>float</td><td>–</td><td>指数退避的上限</td></tr>
+<tr><td><code>restart_window</code></td><td>float</td><td>–</td><td>统计重启次数的时间窗口。自当前窗口内首次重启起经过这么多秒后，计数器会重置。可与 <code>max_restarts</code> 配合实现“每 M 秒最多 N 次重启”的语义</td></tr>
+<tr><td><code>health_check_timeout</code></td><td>float</td><td>–</td><td>一旦节点已连接（已订阅事件），若之后在这么多秒内未与守护进程通信（发送输出、确认 tick 等），守护进程会终止该进程并评估 <code>restart_policy</code>。仅覆盖<strong>连接后</strong>的存活检测</td></tr>
+<tr><td><code>startup_timeout</code></td><td>float</td><td>–</td><td>若节点进程在启动后这么多秒内未能连接（订阅事件），守护进程会终止该进程并评估 <code>restart_policy</code>。用于限定启动/初始化时间。在每次 <code>health_check_interval</code>（默认 5 秒）触发时进行评估</td></tr>
+</tbody>
+</table>
+</div>
+<p>重启策略：</p>
+<ul>
+<li><strong><code>never</code></strong>（默认）：不自动重启</li>
+<li><strong><code>on-failure</code></strong>：仅在退出码非零时重启</li>
+<li><strong><code>always</code></strong>：任何退出都重启，除非是用户停止或所有输入成功关闭的情况</li>
+</ul>
+<p>带指数退避的示例：</p>
+<pre><code class="language-yaml">- id: sensor
+  path: ./sensor
+  restart_policy: on-failure
+  max_restarts: 5
+  restart_delay: 1.0         # 1s, 2s, 4s, 8s, 16s
+  max_restart_delay: 30.0    # capped at 30s
+  restart_window: 300.0      # 5 restarts per 5 minutes
+  health_check_timeout: 30.0
+</code></pre>
+<h3 id="deployment"><a class="header" href="dataflow-yaml.html#deployment">部署</a></h3>
+<p>使用 <code>deploy</code> 将节点分配到特定机器：</p>
+<pre><code class="language-yaml">- id: camera-driver
+  deploy:
+    machine: robot-arm
+  path: ./target/debug/camera
+  outputs:
+    - frames
+
+- id: ml-inference
+  deploy:
+    machine: gpu-server
+    labels:
+      gpu: "true"
+    distribute: scp
+  path: ./target/debug/inference
+  inputs:
+    frames: camera-driver/frames
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Deploy 字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>machine</code></td><td>string</td><td>–</td><td>目标机器/守护进程 ID。协调器会将节点路由到以此 ID 注册的守护进程</td></tr>
+<tr><td><code>working_dir</code></td><td>string</td><td>–</td><td>目标机器上的工作目录</td></tr>
+<tr><td><code>labels</code></td><td>object</td><td>–</td><td>用于调度的键值标签。协调器会将这些标签与每个守护进程在注册时上报的标签进行匹配</td></tr>
+<tr><td><code>distribute</code></td><td>string</td><td><code>local</code></td><td>已构建的二进制文件如何送达目标守护进程：<strong><code>local</code></strong>——每个守护进程独立从源码构建；<strong><code>scp</code></strong>——CLI 在启动前通过 SSH/SCP 推送已构建的二进制文件；<strong><code>http</code></strong>——守护进程从协调器的 HTTP 工件存储中拉取二进制文件</td></tr>
+</tbody>
+</table>
+</div>
+<p>当节点位于不同机器上时，通信会自动从共享内存切换到 Zenoh pub/sub。</p>
+<h3 id="cpu-affinity"><a class="header" href="dataflow-yaml.html#cpu-affinity">CPU 亲和性</a></h3>
+<p>将节点的进程固定到特定的 CPU 核心（仅限 Linux）。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>cpu_affinity</code></td><td>int 列表</td><td>–</td><td>要将节点进程固定到的 CPU 核心索引</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-yaml">- id: controller
+  path: ./controller
+  cpu_affinity: [0, 1]
+</code></pre>
+<h2 id="operator-nodes"><a class="header" href="dataflow-yaml.html#operator-nodes">算子节点</a></h2>
+<p>算子在共享运行时内进程内运行（没有独立进程）。单个算子使用 <code>operator</code>，多个算子使用 <code>operators</code>。</p>
+<h3 id="single-operator"><a class="header" href="dataflow-yaml.html#single-operator">单个算子</a></h3>
+<p>对于单个算子，<code>id</code> 字段是可选的（默认为节点的 <code>id</code>）：</p>
+<pre><code class="language-yaml">- id: detector
+  operator:
+    python: detect.py
+    build: pip install -r requirements.txt
+    inputs:
+      image: camera/frames
+    outputs:
+      - bbox
+</code></pre>
+<h3 id="the-operators-list"><a class="header" href="dataflow-yaml.html#the-operators-list"><code>operators</code> 列表</a></h3>
+<p><code>operators</code> 是 <code>operator</code> 的列表形式。其每个条目<strong>必须</strong>有一个 <code>id</code>，该 ID 会成为对其输出的每次引用的一部分（<code>&lt;node&gt;/&lt;operator&gt;/&lt;output&gt;</code>）。</p>
+<p>一个运行时节点只能持有一个算子：算子运行时在零个或多个算子的情况下都会拒绝启动，因此校验会拒绝这样的节点。要运行多个算子，请为每个算子分配各自的节点：</p>
+<pre><code class="language-yaml">- id: preprocess
+  operators:
+    - id: preprocessor
+      shared-library: ../../target/debug/libpreprocess
+      inputs:
+        raw: sensor/data
+      outputs:
+        - processed
+- id: analyze
+  operators:
+    - id: analyzer
+      shared-library: ../../target/debug/libanalyze
+      inputs:
+        data: preprocess/preprocessor/processed
+      outputs:
+        - result
+</code></pre>
+<h3 id="operator-source-types"><a class="header" href="dataflow-yaml.html#operator-source-types">算子源类型</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>python</code></td><td>Python 脚本路径，或 <code>{source: "script.py", conda_env: "myenv"}</code></td></tr>
+<tr><td><code>shared-library</code></td><td>共享库路径（<code>.so</code>/<code>.dylib</code>/<code>.dll</code>）</td></tr>
+</tbody>
+</table>
+</div>
+<p>算子同样支持 <code>inputs</code>、<code>outputs</code>、<code>build</code>、<code>send_stdout_as</code>、<code>send_logs_as</code>、<code>min_log_level</code>、<code>max_log_size</code> 和 <code>max_rotated_files</code>，语义与节点级字段相同。</p>
+<h2 id="ros2-bridge"><a class="header" href="dataflow-yaml.html#ros2-bridge">ROS2 桥接</a></h2>
+<p>将节点声明为 ROS2 桥接，可自动在 ROS2 消息与 Dora 的 Arrow 格式之间转换。默认使用 DDS；原生 <code>rmw_zenoh_cpp</code> 兼容性需显式选择。</p>
+<pre><code class="language-yaml">ros2:
+  transport:
+    kind: zenoh
+    compatibility: humble # or rep2016
+    config_uri: /etc/zenoh/session.json5 # optional
+  topic: /chatter
+  message_type: std_msgs/String
+  direction: subscribe
+</code></pre>
+<p><code>config_uri</code> 会覆盖 <code>ZENOH_SESSION_CONFIG_URI</code>；否则使用内置的 Zenoh 默认配置。所选 profile 和 <code>ROS_DOMAIN_ID</code> 必须与 ROS 对端一致。</p>
+<h3 id="single-topic"><a class="header" href="dataflow-yaml.html#single-topic">单个话题</a></h3>
+<pre><code class="language-yaml">- id: camera_bridge
+  ros2:
+    topic: /camera/image_raw
+    message_type: sensor_msgs/Image
+    direction: subscribe
+  outputs:
+    - image
+</code></pre>
+<h3 id="multiple-topics"><a class="header" href="dataflow-yaml.html#multiple-topics">多个话题</a></h3>
+<pre><code class="language-yaml">- id: robot_bridge
+  ros2:
+    topics:
+      - topic: /camera/image_raw
+        message_type: sensor_msgs/Image
+        direction: subscribe
+        output: image
+      - topic: /cmd_vel
+        message_type: geometry_msgs/Twist
+        direction: publish
+        input: velocity
+    qos:
+      reliable: true
+  inputs:
+    velocity: planner/cmd_vel
+  outputs:
+    - image
+</code></pre>
+<h3 id="service-bridge"><a class="header" href="dataflow-yaml.html#service-bridge">服务（Service）桥接</a></h3>
+<pre><code class="language-yaml">- id: add_service
+  ros2:
+    service: /add_two_ints
+    service_type: example_interfaces/AddTwoInts
+    role: server
+  inputs:
+    request: client_node/request
+  outputs:
+    - response
+</code></pre>
+<h3 id="action-bridge"><a class="header" href="dataflow-yaml.html#action-bridge">动作（Action）桥接</a></h3>
+<pre><code class="language-yaml">- id: nav_action
+  ros2:
+    action: /navigate
+    action_type: nav2_msgs/NavigateToPose
+    role: client
+  inputs:
+    goal: planner/goal
+  outputs:
+    - feedback
+    - result
+</code></pre>
+<h3 id="qos-configuration"><a class="header" href="dataflow-yaml.html#qos-configuration">QoS 配置</a></h3>
+<p>QoS 可以在桥接级别设置（适用于所有话题），也可以按话题设置：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>QoS 字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>reliable</code></td><td>bool</td><td><code>false</code></td><td>可靠传输还是尽力传输</td></tr>
+<tr><td><code>durability</code></td><td>string</td><td><code>volatile</code></td><td><code>volatile</code> 或 <code>transient_local</code></td></tr>
+<tr><td><code>liveliness</code></td><td>string</td><td><code>automatic</code></td><td><code>automatic</code>, <code>manual_by_participant</code>, <code>manual_by_topic</code></td></tr>
+<tr><td><code>lease_duration</code></td><td>float</td><td>无限</td><td>租约时长（秒）</td></tr>
+<tr><td><code>max_blocking_time</code></td><td>float</td><td>–</td><td>可靠传输的最大阻塞时间</td></tr>
+<tr><td><code>keep_last</code></td><td>integer</td><td><code>1</code></td><td>历史深度（KeepLast 策略）</td></tr>
+<tr><td><code>keep_all</code></td><td>bool</td><td><code>false</code></td><td>使用 KeepAll 历史策略而非 KeepLast</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="other-ros2-fields"><a class="header" href="dataflow-yaml.html#other-ros2-fields">其他 ROS2 字段</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>namespace</code></td><td>string</td><td><code>/</code></td><td>ROS2 命名空间</td></tr>
+<tr><td><code>node_name</code></td><td>string</td><td>节点 <code>id</code></td><td>ROS2 节点名称</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="debug"><a class="header" href="dataflow-yaml.html#debug">调试</a></h2>
+<pre><code class="language-yaml">debug:
+  enable_debug_inspection: true
+</code></pre>
+<p><code>dora topic echo</code>、<code>dora topic hz</code> 和 <code>dora topic info</code> 命令所必需。</p>
+<h2 id="communication-patterns"><a class="header" href="dataflow-yaml.html#communication-patterns">通信模式</a></h2>
+<p>Dora 支持在数据流之上构建的四种通信模式：</p>
+<ul>
+<li><strong>Topic</strong>（默认）：发布/订阅式数据流</li>
+<li><strong>服务（Service）</strong>：通过 <code>request_id</code> 元数据实现请求 / 回复</li>
+<li><strong>动作（Action）</strong>：通过 <code>goal_id</code> / <code>goal_status</code> 元数据实现目标 / 反馈 / 结果，并支持取消</li>
+<li><strong>Streaming</strong>：通过 <code>session_id</code>/<code>segment_id</code>/<code>seq</code>/<code>fin</code>/<code>flush</code> 元数据实现会话/分段/分块，并支持通过队列刷新实现中断</li>
+</ul>
+<p>详情和示例见<a href="https://dora-rs.ai/docs/patterns.html">通信模式</a>。</p>
+<h2 id="full-example"><a class="header" href="dataflow-yaml.html#full-example">完整示例</a></h2>
+<pre><code class="language-yaml">health_check_interval: 10.0
+
+debug:
+  enable_debug_inspection: true
+
+nodes:
+  - id: webcam
+    operator:
+      python: webcam.py
+      inputs:
+        tick: dora/timer/millis/100
+      outputs:
+        - image
+
+  - id: detector
+    operator:
+      python: detect.py
+      build: pip install ultralytics
+      inputs:
+        image: webcam/image
+      outputs:
+        - bbox
+
+  - id: plotter
+    operator:
+      python: plot.py
+      inputs:
+        image: webcam/image
+        bbox: detector/bbox
+
+  - id: logger
+    path: ./logger
+    inputs:
+      bbox: detector/bbox
+    send_stdout_as: logs
+    min_log_level: info
+    restart_policy: on-failure
+    max_restarts: 3
+    outputs:
+      - logs
+</code></pre>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/concepts/dataflow-yaml.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="architecture.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="types.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="architecture.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="types.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/concepts/dataflow-yaml.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

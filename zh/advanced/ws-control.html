@@ -1,0 +1,705 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>WebSocket 控制平面 - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/advanced/ws-control.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="websocket-control-plane"><a class="header" href="ws-control.html#websocket-control-plane">WebSocket 控制平面</a></h1>
+<p>Dora 的控制平面使用 WebSocket 连接来承载 CLI、协调器和守护进程之间的所有通信。单个 Axum 服务器在同一端口上暴露三个路由，取代了此前的多端口 TCP 设计。JSON 文本帧承载一套以 UUID 关联请求与响应的协议，同时支持用于日志流式传输的即发即弃（fire-and-forget）事件。</p>
+<h2 id="features-at-a-glance"><a class="header" href="ws-control.html#features-at-a-glance">功能概览</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>功能</th><th>详情</th></tr>
+</thead>
+<tbody>
+<tr><td>路由</td><td><code>/api/control</code>（CLI）、<code>/api/daemon</code>（守护进程）、<code>/health</code></td></tr>
+<tr><td>传输格式</td><td>JSON 文本帧 + 用于话题数据的二进制帧</td></tr>
+<tr><td>协议</td><td>以 UUID 关联的请求—响应模式 + 即发即弃事件</td></tr>
+<tr><td>消息大小限制</td><td>1 MiB（<code>MAX_CONTROL_MESSAGE_BYTES</code>）</td></tr>
+<tr><td>并发连接限制</td><td>每个端点最多 256 个打开的连接（<code>MAX_WS_CONNECTIONS</code>）</td></tr>
+<tr><td>服务端框架</td><td>Axum + Tower 中间件</td></tr>
+<tr><td>客户端库</td><td><code>tokio-tungstenite</code>（集成测试、守护进程）、自定义的 <code>WsSession</code>（CLI）</td></tr>
+<tr><td>安全性</td><td>重复注册防护、守护进程 ID 校验、机器 ID 长度限制</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="architecture"><a class="header" href="ws-control.html#architecture">架构</a></h2>
+<pre><code>                        Single Axum server (one port)
+                       ┌────────────────────────────┐
+                       │  /api/control   (CLI)       │
+  CLI ──── WS ────────&gt;│  /api/daemon    (Daemons)   │
+                       │  /health        (HTTP GET)  │
+  Daemon ── WS ───────&gt;│                             │
+                       └──────────┬─────────────────┘
+                                  │ mpsc::Sender&lt;Event&gt;
+                                  v
+                            Coordinator
+                          (event loop)
+</code></pre>
+<p>协调器绑定一个 <code>TcpListener</code>，并提供一个 Axum 路由器。每次 WebSocket 升级都会启动一个处理任务，该任务通过 <code>mpsc::Sender&lt;Event&gt;</code> 通道与协调器的主事件循环通信。</p>
+<h3 id="key-source-files"><a class="header" href="ws-control.html#key-source-files">关键源文件</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>文件</th><th>角色</th></tr>
+</thead>
+<tbody>
+<tr><td><code>binaries/coordinator/src/ws_server.rs</code></td><td>路由器、<code>serve()</code>、常量、<code>ShutdownTrigger</code></td></tr>
+<tr><td><code>binaries/coordinator/src/ws_control.rs</code></td><td><code>/api/control</code> 处理器</td></tr>
+<tr><td><code>binaries/coordinator/src/ws_daemon.rs</code></td><td><code>/api/daemon</code> 处理器、安全性、事件转换</td></tr>
+<tr><td><code>binaries/cli/src/ws_client.rs</code></td><td><code>WsSession</code> 同步客户端封装</td></tr>
+<tr><td><code>libraries/message/src/ws_protocol.rs</code></td><td><code>WsRequest</code>、<code>WsResponse</code>、<code>WsEvent</code>、<code>WsMessage</code> 类型</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="wire-protocol"><a class="header" href="ws-control.html#wire-protocol">线路协议</a></h2>
+<p>所有消息均为 JSON 文本帧。共有三种消息形态：</p>
+<h3 id="wsrequest-client---server"><a class="header" href="ws-control.html#wsrequest-client---server">WsRequest（客户端 -&gt; 服务端）</a></h3>
+<pre><code class="language-json">{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "method": "control",
+  "params": { "List": null }
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>UUID</td><td>用于响应关联的唯一请求标识符</td></tr>
+<tr><td><code>method</code></td><td>string</td><td>CLI 请求为 <code>"control"</code>，守护进程为 <code>"daemon_event"</code> / <code>"daemon_command"</code></td></tr>
+<tr><td><code>params</code></td><td>object</td><td>序列化后的 <code>ControlRequest</code> 或 <code>Timestamped&lt;CoordinatorRequest&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="wsresponse-server---client"><a class="header" href="ws-control.html#wsresponse-server---client">WsResponse（服务端 -&gt; 客户端）</a></h3>
+<p>成功：</p>
+<pre><code class="language-json">{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "result": { "DataflowList": [] }
+}
+</code></pre>
+<p>失败：</p>
+<pre><code class="language-json">{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "error": "no running dataflow with id ..."
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>id</code></td><td>UUID</td><td>与原始请求的 <code>id</code> 匹配</td></tr>
+<tr><td><code>result</code></td><td>object?</td><td>成功时存在（序列化后的 <code>ControlRequestReply</code>）</td></tr>
+<tr><td><code>error</code></td><td>string?</td><td>失败时存在</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="wsevent-either-direction"><a class="header" href="ws-control.html#wsevent-either-direction">WsEvent（任一方向）</a></h3>
+<pre><code class="language-json">{
+  "event": "log",
+  "payload": { "message": "sensor started", "level": "info" }
+}
+</code></pre>
+<p>用于在 <code>LogSubscribe</code> / <code>BuildLogSubscribe</code> 被确认后进行日志流式传输。</p>
+<h3 id="dispatch"><a class="header" href="ws-control.html#dispatch">分发</a></h3>
+<p>每个处理器都使用各自的策略解析接收到的帧，以保持 u128 精度（参见 <a href="ws-control.html#u128-serialization-workaround">u128 序列化</a>）：</p>
+<ul>
+<li><strong>CLI（<code>ws_client.rs</code>）</strong>：使用一个扁平的 <code>IncomingFrame</code> 结构体，<code>result</code> / <code>payload</code> 字段使用 <code>serde_json::value::RawValue</code>，完全避免使用 <code>serde_json::Value</code>。通过是否存在 <code>event</code>（日志推送）或 <code>id</code>（响应）来区分类型。</li>
+<li><strong>协调器控制处理器（<code>ws_control.rs</code>）</strong>：解析为 <code>WsRequest</code>（始终来自 CLI 的请求）。</li>
+<li><strong>协调器守护进程处理器（<code>ws_daemon.rs</code>）</strong>：通过检查是否存在 <code>"method"</code> 键来区分请求与响应。请求使用 <code>DaemonWsRequestRaw</code> 辅助类型。</li>
+<li><strong>守护进程（<code>coordinator.rs</code>）</strong>：使用 <code>CoordinatorCommandRaw</code> / <code>RegisterReplyRaw</code> 辅助结构体直接从原始 JSON 文本解析。</li>
+</ul>
+<p><code>ws_protocol.rs</code> 中定义了一个用于通用分发的 <code>WsMessage</code> untagged 枚举，但生产环境的处理器并未使用它：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[serde(untagged)]
+pub enum WsMessage {
+    Request(WsRequest),
+    Response(WsResponse),
+    Event(WsEvent),
+}
+<span class="boring">}</span></code></pre>
+<hr/>
+<h2 id="cli-control-plane-apicontrol"><a class="header" href="ws-control.html#cli-control-plane-apicontrol">CLI 控制平面（<code>/api/control</code>）</a></h2>
+<p>CLI 连接到 <code>/api/control</code> 以发送 <code>ControlRequest</code> 命令并接收 <code>ControlRequestReply</code> 响应。</p>
+<h3 id="connection-lifecycle"><a class="header" href="ws-control.html#connection-lifecycle">连接生命周期</a></h3>
+<ol>
+<li><strong>Connect</strong>——HTTP 升级为 WebSocket</li>
+<li><strong>Request-reply</strong>——CLI 发送 <code>WsRequest</code>，协调器处理 <code>ControlRequest</code>，发送 <code>WsResponse</code></li>
+<li><strong>Log subscribe</strong>（可选）——CLI 发送 <code>LogSubscribe</code>/<code>BuildLogSubscribe</code>，协调器用 <code>WsResponse</code> 确认，随后推送 <code>WsEvent{event:"log"}</code> 帧</li>
+<li><strong>Close</strong>——CLI 发送 <code>Close</code> 帧或断开连接</li>
+</ol>
+<h3 id="supported-controlrequest-variants"><a class="header" href="ws-control.html#supported-controlrequest-variants">支持的 ControlRequest 变体</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>变体</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>List</code></td><td>列出所有正在运行的数据流</td></tr>
+<tr><td><code>Build</code></td><td>触发数据流构建</td></tr>
+<tr><td><code>WaitForBuild</code></td><td>阻塞直到构建完成</td></tr>
+<tr><td><code>Start</code></td><td>启动数据流</td></tr>
+<tr><td><code>WaitForSpawn</code></td><td>阻塞直到节点启动完成</td></tr>
+<tr><td><code>Stop</code> / <code>StopByName</code></td><td>停止正在运行的数据流</td></tr>
+<tr><td><code>Reload</code></td><td>对节点 / 算子进行热重载</td></tr>
+<tr><td><code>Check</code></td><td>检查数据流状态</td></tr>
+<tr><td><code>Destroy</code></td><td>关闭所有守护进程</td></tr>
+<tr><td><code>Logs</code></td><td>获取历史日志</td></tr>
+<tr><td><code>Info</code></td><td>获取数据流详情</td></tr>
+<tr><td><code>DaemonConnected</code></td><td>检查是否有守护进程已连接</td></tr>
+<tr><td><code>ConnectedMachines</code></td><td>列出已连接的守护进程</td></tr>
+<tr><td><code>LogSubscribe</code></td><td>订阅实时数据流日志</td></tr>
+<tr><td><code>BuildLogSubscribe</code></td><td>订阅实时构建日志</td></tr>
+<tr><td><code>CliAndDefaultDaemonOnSameMachine</code></td><td>检查协同定位</td></tr>
+<tr><td><code>GetNodeInfo</code></td><td>获取节点元数据</td></tr>
+<tr><td><code>TopicSubscribe</code></td><td>通过二进制 WS 帧订阅实时话题数据（<a href="https://dora-rs.ai/dora/advanced/websocket-topic-data-channel.html">详情</a>）</td></tr>
+<tr><td><code>TopicUnsubscribe</code></td><td>取消话题订阅</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="log-subscription-flow"><a class="header" href="ws-control.html#log-subscription-flow">日志订阅流程</a></h3>
+<pre><code>CLI                         Coordinator
+ │                              │
+ │─── WsRequest{LogSubscribe} ─&gt;│
+ │                              │  (check dataflow exists)
+ │&lt;── WsResponse{subscribed} ───│
+ │                              │
+ │&lt;── WsEvent{event:"log"} ────│  (repeated)
+ │&lt;── WsEvent{event:"log"} ────│
+ │                              │
+ │─── Close ───────────────────&gt;│  (log_subscribers dropped)
+</code></pre>
+<p>如果未找到数据流，协调器会返回带错误信息的 <code>WsResponse</code>，并不发送任何事件。</p>
+<h3 id="wssession-cli-client"><a class="header" href="ws-control.html#wssession-cli-client">WsSession（CLI 客户端）</a></h3>
+<p><code>WsSession</code> 是一个同步封装，用于把阻塞式的 CLI 代码与异步 WebSocket 连接连接起来。它内部创建了一个 <code>tokio::runtime::Runtime</code>（单线程），并启动一个异步的 <code>session_loop</code> 任务。</p>
+<pre><code>CLI thread (sync)                       session_loop (async)
+     │                                        │
+     │── SessionCommand::Request ────────────&gt;│── WsRequest ──&gt; server
+     │                                        │&lt;── WsResponse ──
+     │&lt;── oneshot reply ─────────────────────│
+     │                                        │
+     │── SessionCommand::SubscribeLogs ──────&gt;│── WsRequest ──&gt; server
+     │                                        │&lt;── WsResponse (ack)
+     │&lt;── oneshot ack ───────────────────────│
+     │&lt;── std_mpsc log events ───────────────│&lt;── WsEvent ──
+</code></pre>
+<p>会话循环维护以下内容：</p>
+<ul>
+<li><code>pending_requests: HashMap&lt;Uuid, oneshot::Sender&gt;</code>——用于请求——响应的关联匹配</li>
+<li><code>pending_subscribes: HashMap&lt;Uuid, (ack_tx, log_tx)&gt;</code>——用于订阅确认的路由</li>
+<li><code>log_subscribers: Vec&lt;std_mpsc::Sender&gt;</code>——用于广播日志事件</li>
+<li><code>pending_topic_subscribes: HashMap&lt;Uuid, (ack_tx, data_tx)&gt;</code>——用于话题订阅确认的路由</li>
+<li><code>topic_subscribers: HashMap&lt;Uuid, std_mpsc::Sender&gt;</code>——用于按订阅 UUID 分派二进制帧</li>
+</ul>
+<p>二进制 WS 帧（话题数据）与文本帧分开分派。详情参见 <a href="https://dora-rs.ai/dora/advanced/websocket-topic-data-channel.html">WebSocket 话题数据通道</a>。</p>
+<p>连接断开时，所有待处理的请求都会通过各自的 oneshot 通道收到一个错误。</p>
+<hr/>
+<h2 id="daemon-plane-apidaemon"><a class="header" href="ws-control.html#daemon-plane-apidaemon">守护进程平面（<code>/api/daemon</code>）</a></h2>
+<p>守护进程连接到 <code>/api/daemon</code>，用于注册、事件上报以及接收协调器命令。</p>
+<h3 id="registration-flow"><a class="header" href="ws-control.html#registration-flow">注册流程</a></h3>
+<pre><code>Daemon                       Coordinator
+  │                              │
+  │── WsRequest{Register} ─────&gt;│
+  │                              │  (validate, assign daemon_id)
+  │                              │  (track connection + cmd channel)
+  │                              │
+  │── WsRequest{Event{...}} ───&gt;│  (subsequent events)
+</code></pre>
+<ol>
+<li>守护进程发送一个包含 <code>DaemonRegisterRequest</code>（版本号 + 机器 ID）的 <code>Register</code> 请求</li>
+<li>协调器校验版本兼容性及机器 ID 长度</li>
+<li>协调器分配一个 <code>DaemonId</code> 并存储 <code>DaemonConnection</code>（包含用于向守护进程回传命令的 <code>cmd_tx</code> 通道）</li>
+<li>该连接通过 <code>tracked_daemon_id</code> 进行跟踪，以便断开时清理</li>
+</ol>
+<h3 id="event-translation"><a class="header" href="ws-control.html#event-translation">事件转换</a></h3>
+<p>守护进程事件会被转换为协调器内部的 <code>Event</code> 变体：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>DaemonEvent</th><th>协调器 Event</th></tr>
+</thead>
+<tbody>
+<tr><td><code>AllNodesReady</code></td><td><code>Event::Dataflow { ReadyOnDaemon }</code></td></tr>
+<tr><td><code>AllNodesFinished</code></td><td><code>Event::Dataflow { DataflowFinishedOnDaemon }</code></td></tr>
+<tr><td><code>Heartbeat</code></td><td><code>Event::DaemonHeartbeat</code></td></tr>
+<tr><td><code>Log(message)</code></td><td><code>Event::Log(message)</code></td></tr>
+<tr><td><code>Exit</code></td><td><code>Event::DaemonExit</code></td></tr>
+<tr><td><code>NodeMetrics</code></td><td><code>Event::NodeMetrics</code></td></tr>
+<tr><td><code>BuildResult</code></td><td><code>Event::DataflowBuildResult</code></td></tr>
+<tr><td><code>SpawnResult</code></td><td><code>Event::DataflowSpawnResult</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="bidirectional-communication"><a class="header" href="ws-control.html#bidirectional-communication">双向通信</a></h3>
+<p>协调器可以通过存储在 <code>DaemonConnection</code> 中的 <code>cmd_tx</code> 通道向守护进程回传命令。守护进程的处理程序维护一个 <code>pending_replies: HashMap&lt;Uuid, oneshot::Sender&gt;</code>，用于将守护进程的响应与协调器发起的请求关联起来。</p>
+<p>守护进程处理程序上的消息路由：</p>
+<ul>
+<li>帧包含 <code>"method"</code> 键 -&gt; 守护进程请求（注册或事件）</li>
+<li>帧不包含 <code>"method"</code> 键 -&gt; 守护进程对协调器命令的响应</li>
+</ul>
+<h3 id="u128-serialization-workaround"><a class="header" href="ws-control.html#u128-serialization-workaround">u128 序列化变通方案</a></h3>
+<p><code>uhlc::ID</code> 包含一个 <code>NonZeroU128</code>，超出了 <code>serde_json::Value::Number</code> 的范围（仅支持 i64/u64/f64）。使用 <code>serde_json::to_value()</code> 会报“number out of range”错误，而 <code>serde_json::from_slice::&lt;Value&gt;()</code> 会以 f64 存储，从而悄悄丢失精度。</p>
+<p>所有生产代码在处理包含 <code>uhlc::Timestamp</code> 的数据时都绕开了 <code>serde_json::Value</code>：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>组件</th><th>序列化</th><th>反序列化</th></tr>
+</thead>
+<tbody>
+<tr><td>守护进程（<code>coordinator.rs</code>）</td><td><code>to_string</code> + <code>format!</code></td><td>辅助结构体（<code>RegisterReplyRaw</code>、<code>CoordinatorCommandRaw</code>）+ <code>from_str</code></td></tr>
+<tr><td>协调器控制（<code>ws_control.rs</code>）</td><td>回复使用 <code>to_string</code> + <code>format!</code></td><td>不适用（CLI 请求不包含 u128）</td></tr>
+<tr><td>协调器守护进程端（<code>ws_daemon.rs</code>）</td><td>N/A</td><td><code>DaemonWsRequestRaw</code> + <code>from_str</code></td></tr>
+<tr><td>协调器状态（<code>state.rs</code>）</td><td><code>str::from_utf8</code> + <code>format!</code>（原始字节嵌入）</td><td>N/A</td></tr>
+<tr><td>CLI（<code>ws_client.rs</code>）</td><td>不适用（请求不包含 u128）</td><td><code>IncomingFrame</code> 配合 <code>serde_json::value::RawValue</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>集成测试同样通过 <code>format!()</code> + <code>serde_json::to_string()</code>（而非 <code>to_value()</code>）手动构造 WsRequest JSON 字符串，以匹配真实的传输格式。</p>
+<hr/>
+<h2 id="security"><a class="header" href="ws-control.html#security">安全</a></h2>
+<h3 id="re-register-guard"><a class="header" href="ws-control.html#re-register-guard">重复注册保护</a></h3>
+<p>每个守护进程的 WebSocket 连接只允许一次 <code>Register</code> 请求。如果某个连接尝试第二次注册，协调器会记录一条警告并关闭该连接：</p>
+<pre><code>daemon attempted re-register on same connection, rejecting
+</code></pre>
+<h3 id="daemon-id-verification"><a class="header" href="ws-control.html#daemon-id-verification">守护进程 ID 校验</a></h3>
+<p>注册完成后，每条 <code>Event</code> 消息都必须包含与注册时分配的 ID 一致的 <code>daemon_id</code>。ID 不匹配会导致连接被终止：</p>
+<pre><code>daemon sent event with mismatched id: expected `X`, got `Y` -- closing connection
+</code></pre>
+<h3 id="machine-id-length-validation"><a class="header" href="ws-control.html#machine-id-length-validation">机器 ID 长度校验</a></h3>
+<p><code>DaemonRegisterRequest</code> 中的 <code>machine_id</code> 字段限制为 256 字节。超出该大小会导致连接被终止。</p>
+<h3 id="connection-and-message-limits"><a class="header" href="ws-control.html#connection-and-message-limits">连接与消息限制</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>限制</th><th>值</th><th>强制方</th></tr>
+</thead>
+<tbody>
+<tr><td>最大消息大小</td><td>1 MiB</td><td><code>WebSocketUpgrade::max_message_size</code></td></tr>
+<tr><td>最大并发连接数</td><td>每个端点 256 个（<code>/api/control</code>、<code>/api/daemon</code>）</td><td>在 socket 生命周期内持有的信号量许可</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="connection-lifecycle--keepalive"><a class="header" href="ws-control.html#connection-lifecycle--keepalive">连接生命周期与保活（Keepalive）</a></h2>
+<h3 id="establishment"><a class="header" href="ws-control.html#establishment">建立连接</a></h3>
+<p><code>/api/control</code> 和 <code>/api/daemon</code> 均使用标准的 HTTP/1.1 WebSocket 升级。握手由 Axum 的 <code>WebSocketUpgrade</code> 提取器处理。</p>
+<h3 id="pingpong"><a class="header" href="ws-control.html#pingpong">Ping/Pong</a></h3>
+<p>两个处理器都会对 <code>Ping</code> 帧返回携带相同负载的 <code>Pong</code> 帧：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Ok(Message::Ping(data)) =&gt; {
+    let _ = ws_tx.send(Message::Pong(data)).await;
+    continue;
+}
+<span class="boring">}</span></code></pre>
+<h3 id="graceful-close"><a class="header" href="ws-control.html#graceful-close">优雅关闭</a></h3>
+<p>当收到 <code>Close</code> 帧时：</p>
+<ul>
+<li><strong>Control 处理器</strong>：退出处理循环，释放日志订阅通道</li>
+<li><strong>Daemon 处理器</strong>：退出循环，然后发出 <code>Event::DaemonExit { daemon_id }</code> 以立即清理</li>
+</ul>
+<h3 id="cleanup-on-disconnect"><a class="header" href="ws-control.html#cleanup-on-disconnect">断开连接时的清理</a></h3>
+<p><strong>Control 连接</strong>：</p>
+<ul>
+<li><code>log_tx</code> 通道被释放，停止向该客户端转发日志</li>
+<li>无需清理协调器状态（control 连接是无状态的）</li>
+</ul>
+<p><strong>Daemon 连接</strong>：</p>
+<ul>
+<li>如果已跟踪某个 <code>daemon_id</code>，则发出 <code>DaemonExit</code> 事件</li>
+<li><code>cmd_tx</code> 和 <code>pending_replies</code> 被释放</li>
+<li>协调器将该 daemon 从其连接映射表中移除</li>
+</ul>
+<p><strong>WsSession（CLI 客户端）</strong>：</p>
+<ul>
+<li><code>pending_requests</code> 中的所有条目都会收到 <code>Err("WS connection closed")</code></li>
+<li><code>pending_subscribes</code> 中的所有条目都会收到 <code>Err("WS connection closed")</code></li>
+</ul>
+<hr/>
+<h2 id="message-flow-examples"><a class="header" href="ws-control.html#message-flow-examples">消息流示例</a></h2>
+<h3 id="cli-lists-dataflows"><a class="header" href="ws-control.html#cli-lists-dataflows">CLI 列出数据流</a></h3>
+<pre><code>CLI                          WsSession                    Coordinator
+ │                              │                              │
+ │── request(&amp;List) ───────────&gt;│                              │
+ │                              │── WsRequest ────────────────&gt;│
+ │                              │   id: "abc-123"              │
+ │                              │   method: "control"          │
+ │                              │   params: "List"             │
+ │                              │                              │
+ │                              │                    ControlEvent::IncomingRequest
+ │                              │                    reply via oneshot
+ │                              │                              │
+ │                              │&lt;── WsResponse ──────────────│
+ │                              │   id: "abc-123"              │
+ │                              │   result: {DataflowList:[]}  │
+ │                              │                              │
+ │&lt;── ControlRequestReply ─────│                              │
+</code></pre>
+<h3 id="daemon-registration"><a class="header" href="ws-control.html#daemon-registration">Daemon 注册</a></h3>
+<pre><code>Daemon                                    Coordinator
+  │                                           │
+  │── WsRequest ─────────────────────────────&gt;│
+  │   method: "daemon_event"                  │
+  │   params: {inner: Register{...},          │
+  │            timestamp: ...}                │
+  │                                           │  validate version
+  │                                           │  validate machine_id
+  │                                           │  assign daemon_id
+  │                                           │  store DaemonConnection
+  │                                           │
+  │── WsRequest{Event{Heartbeat}} ──────────&gt;│
+  │                                           │  Event::DaemonHeartbeat
+  │                                           │
+  │                        (on WS close) ────&gt;│  Event::DaemonExit
+</code></pre>
+<h3 id="log-subscription-lifecycle"><a class="header" href="ws-control.html#log-subscription-lifecycle">日志订阅生命周期</a></h3>
+<pre><code>CLI                    WsSession              Coordinator
+ │                        │                        │
+ │── subscribe_logs() ───&gt;│                        │
+ │                        │── WsRequest ──────────&gt;│
+ │                        │   params: LogSubscribe │
+ │                        │                        │  find dataflow
+ │                        │&lt;── WsResponse ────────│  {subscribed: true}
+ │&lt;── ack (Ok) ──────────│                        │
+ │                        │                        │
+ │                        │&lt;── WsEvent{log} ──────│  (node produces log)
+ │&lt;── log_rx.recv() ─────│                        │
+ │                        │&lt;── WsEvent{log} ──────│
+ │&lt;── log_rx.recv() ─────│                        │
+ │                        │                        │
+ │   (drop session) ─────&gt;│── Close ─────────────&gt;│  (log_subscribers dropped)
+</code></pre>
+<hr/>
+<h2 id="test-coverage"><a class="header" href="ws-control.html#test-coverage">测试覆盖</a></h2>
+<h3 id="test-tiers"><a class="header" href="ws-control.html#test-tiers">测试层级</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>层级</th><th>位置</th><th>测试</th><th>覆盖内容</th></tr>
+</thead>
+<tbody>
+<tr><td>单元测试（protocol）</td><td><code>libraries/message/src/ws_protocol.rs</code></td><td>10</td><td>往返序列化、无标签分发（untagged dispatch）、错误场景</td></tr>
+<tr><td>单元（客户端）</td><td><code>binaries/cli/src/ws_client.rs</code></td><td>6</td><td>响应路由、subscribe 确认、topic subscribe 确认、孤儿处理（orphan handling）、断开连接</td></tr>
+<tr><td>集成测试（control）</td><td><code>binaries/coordinator/tests/ws_control_tests.rs</code></td><td>11</td><td>健康检查、List、无效 JSON/参数、Destroy、DaemonConnected、ping/pong、并发请求、连接关闭、日志订阅</td></tr>
+<tr><td>集成测试（daemon）</td><td><code>binaries/coordinator/tests/ws_daemon_tests.rs</code></td><td>4</td><td>Register、register 后 status、断开清理、ping/pong</td></tr>
+<tr><td>端到端测试（WsSession）</td><td><code>tests/ws-cli-e2e.rs</code></td><td>4</td><td>WsSession + 协调器：list、status、stop、多重请求</td></tr>
+<tr><td><strong>总计</strong></td><td></td><td><strong>35</strong></td><td></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="key-test-patterns"><a class="header" href="ws-control.html#key-test-patterns">关键测试模式</a></h3>
+<p><strong>带超时的轮询（Poll-with-timeout）</strong>：集成测试以 2 秒的截止时间和 20ms 的休眠间隔轮询协调器状态（例如 <code>DaemonConnected</code>），避免不稳定的时序假设。</p>
+<p><strong>不嵌套运行时（No nested runtimes）</strong>：端到端测试在带有独立 tokio 运行时的后台 <code>std::thread</code> 上运行协调器，而 <code>WsSession</code>（它会创建自己的 current-thread 运行时）则运行在测试的主线程上。这样可以避免“cannot start a runtime from within a runtime”的 panic。</p>
+<p><strong>测试中的 u128 变通方案</strong>：Daemon 测试辅助函数通过 <code>format!()</code> + <code>serde_json::to_string()</code>（而非 <code>serde_json::to_value()</code>）手动构造 WsRequest JSON 字符串，以便在传输中保留 <code>uhlc::ID</code> 的 u128 值。</p>
+<p><strong>测试协调器搭建</strong>：集成测试和端到端测试都使用 <code>dora_coordinator::start_testing_with_store()</code>，它绑定到端口 0（由操作系统分配），接受一个空的外部事件流，并接收一个注入的 store（通常是 <code>Arc::new(InMemoryStore::new())</code>）。</p>
+<hr/>
+<h2 id="configuration-reference"><a class="header" href="ws-control.html#configuration-reference">配置参考</a></h2>
+<h3 id="constants"><a class="header" href="ws-control.html#constants">常量</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>常量</th><th>值</th><th>文件</th><th>用途</th></tr>
+</thead>
+<tbody>
+<tr><td><code>MAX_CONTROL_MESSAGE_BYTES</code></td><td>1 MiB（1,048,576）</td><td><code>ws_server.rs</code></td><td>最大 WebSocket 帧大小</td></tr>
+<tr><td><code>MAX_WS_CONNECTIONS</code></td><td>256</td><td><code>ws_server.rs</code></td><td>每个端点打开的 WebSocket 连接数</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="server-setup"><a class="header" href="ws-control.html#server-setup">服务器搭建</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Production: called by coordinator's main startup
+let (port, shutdown, future) = ws_server::serve(bind_addr, event_tx, clock).await?;
+tokio::spawn(future);
+// ...
+shutdown.shutdown(); // graceful stop
+<span class="boring">}</span></code></pre>
+<h3 id="test-setup"><a class="header" href="ws-control.html#test-setup">测试搭建</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Binds to port 0, returns (port, future)
+let (port, future) = dora_coordinator::start_testing_with_store(
+    "127.0.0.1:0".parse().unwrap(),
+    futures::stream::empty(),
+    Arc::new(dora_coordinator::InMemoryStore::new()),
+).await?;
+<span class="boring">}</span></code></pre>
+<h3 id="shutdown"><a class="header" href="ws-control.html#shutdown">关闭</a></h3>
+<p><code>ShutdownTrigger</code> 封装了一个 <code>oneshot::Sender&lt;()&gt;</code>。调用 <code>.shutdown()</code> 会发送该信号，Axum 服务器通过 <code>with_graceful_shutdown</code> 接收该信号。正在处理的请求会完成，新连接则会被拒绝。</p>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/advanced/ws-control.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="ros2-bridge.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="ws-topic.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="ros2-bridge.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="ws-topic.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/advanced/ws-control.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

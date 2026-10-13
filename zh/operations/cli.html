@@ -1,0 +1,1812 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>CLI 参考 - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/operations/cli.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="dora-cli-reference"><a class="header" href="cli.html#dora-cli-reference">Dora CLI 参考</a></h1>
+<p>Dora（AI-Dora，Dataflow-Oriented Robotic Architecture）是一个 100% 使用 Rust 构建的框架，用于构建实时机器人和 AI 应用。本文档从终端用户和开发者两个角度介绍 <code>dora</code> CLI。</p>
+<h2 id="table-of-contents"><a class="header" href="cli.html#table-of-contents">目录</a></h2>
+<ul>
+<li><a href="cli.html#quick-start">快速开始</a></li>
+<li><a href="cli.html#installation">安装</a></li>
+<li><a href="cli.html#core-concepts">核心概念</a></li>
+<li><a href="cli.html#dataflow-descriptor">数据流描述符</a></li>
+<li><a href="cli.html#command-reference">命令参考</a>
+<ul>
+<li><a href="cli.html#lifecycle-commands">生命周期</a></li>
+<li><a href="cli.html#monitoring-commands">监控</a></li>
+<li><a href="cli.html#debugging-commands">调试</a></li>
+<li><a href="cli.html#setup-commands">设置</a></li>
+<li><a href="cli.html#utility-commands">实用工具</a></li>
+<li><a href="cli.html#self-management-commands">自我管理</a></li>
+</ul>
+</li>
+<li><a href="cli.html#environment-variables">环境变量</a></li>
+<li><a href="cli.html#architecture-guide">架构指南</a></li>
+<li><a href="cli.html#writing-nodes">编写节点</a></li>
+<li><a href="cli.html#writing-operators">编写算子</a></li>
+<li><a href="cli.html#distributed-deployments">分布式部署</a>——另请参阅<a href="https://dora-rs.ai/dora/operations/distributed-deployment.html">分布式部署指南</a>，了解集群管理、调度和运维相关内容</li>
+<li><a href="cli.html#troubleshooting">故障排查</a></li>
+<li><a href="debugging.html">调试与可观测性</a>——独立指南，涵盖录制/回放、话题检查、日志分析和资源监控</li>
+<li><strong>API 参考：</strong><a href="https://dora-rs.ai/dora/operations/api-rust.html">Rust</a> | <a href="https://dora-rs.ai/dora/operations/api-python.html">Python</a> | <a href="https://dora-rs.ai/dora/operations/api-c.html">C</a> | <a href="https://dora-rs.ai/dora/operations/api-cxx.html">C++</a></li>
+</ul>
+<hr/>
+<h2 id="quick-start"><a class="header" href="cli.html#quick-start">快速开始</a></h2>
+<pre><code class="language-bash"># Create a new project
+dora new my-robot --kind dataflow --lang rust
+
+# Run locally (no coordinator/daemon needed)
+dora run dataflow.yml
+
+# Exit as soon as every node has finished. Without this, a dataflow in
+# which any node consumes a `dora/timer/...` input never ends on its
+# own: a timer input has no upstream node, so it never closes, and the
+# node consuming it is never told its inputs are done.
+dora run dataflow.yml --exit-when-nodes-finish
+
+# Or use coordinator/daemon for production
+dora up
+dora start dataflow.yml --attach
+# Ctrl-C to stop
+dora down
+</code></pre>
+<h2 id="installation"><a class="header" href="cli.html#installation">安装</a></h2>
+<h3 id="from-cratesio-recommended"><a class="header" href="cli.html#from-cratesio-recommended">从 crates.io 安装（推荐）</a></h3>
+<pre><code class="language-bash">cargo install dora-cli
+</code></pre>
+<h3 id="from-source"><a class="header" href="cli.html#from-source">从源码安装</a></h3>
+<pre><code class="language-bash">cargo install --path binaries/cli --locked
+</code></pre>
+<h3 id="verify"><a class="header" href="cli.html#verify">验证</a></h3>
+<pre><code class="language-bash">dora --version
+dora status
+</code></pre>
+<hr/>
+<h2 id="core-concepts"><a class="header" href="cli.html#core-concepts">核心概念</a></h2>
+<h3 id="dataflow"><a class="header" href="cli.html#dataflow">数据流</a></h3>
+<p><strong>数据流</strong>是由多个节点通过有类型的数据通道连接而成的有向图。节点产生<strong>输出</strong>，供其他节点作为<strong>输入</strong>消费。该框架负责数据路由、序列化（Apache Arrow）以及生命周期管理。</p>
+<h3 id="execution-modes"><a class="header" href="cli.html#execution-modes">执行模式</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>模式</th><th>命令</th><th>基础设施</th><th>使用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>本地</strong></td><td><code>dora run</code></td><td>无</td><td>开发、测试、单机场景</td></tr>
+<tr><td><strong>分布式</strong></td><td><code>dora up</code> + <code>dora start</code></td><td>协调器 + 守护进程</td><td>生产环境、多机场景</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="component-roles"><a class="header" href="cli.html#component-roles">组件角色</a></h3>
+<pre><code>CLI  --&gt;  Coordinator  --&gt;  Daemon(s)  --&gt;  Nodes / Operators
+              (control plane)  (per machine)    (user code)
+</code></pre>
+<ul>
+<li><strong>CLI</strong>：用户接口，发送命令、显示日志。</li>
+<li><strong>协调器</strong>：在多台机器间编排数据流的生命周期。</li>
+<li><strong>守护进程</strong>：启动节点进程、管理 IPC、收集指标。</li>
+<li><strong>节点</strong>：产生和消费 Arrow 数据的独立进程。</li>
+<li><strong>算子</strong>：在共享运行时内运行的进程内代码（相比节点延迟更低）。</li>
+</ul>
+<h3 id="data-format"><a class="header" href="cli.html#data-format">数据格式</a></h3>
+<p>系统内所有数据均以 <strong>Apache Arrow</strong> 列式数组的形式流动。这使得同机节点之间可以实现零拷贝共享内存传输，且没有序列化开销。</p>
+<hr/>
+<h2 id="dataflow-descriptor"><a class="header" href="cli.html#dataflow-descriptor">数据流描述符</a></h2>
+<p>数据流定义在 YAML 文件中。完整的模式如下：</p>
+<h3 id="minimal-example"><a class="header" href="cli.html#minimal-example">最小示例</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: sender
+    path: sender.py
+    outputs:
+      - message
+
+  - id: receiver
+    path: receiver.py
+    inputs:
+      message: sender/message
+</code></pre>
+<h3 id="full-schema"><a class="header" href="cli.html#full-schema">完整模式</a></h3>
+<pre><code class="language-yaml"># Dataflow-level settings
+health_check_interval: 5.0    # health check sweep interval in seconds (default: 5.0)
+
+nodes:
+  - id: my-node                 # unique identifier (required)
+    name: "My Node"             # human-readable name (optional)
+    description: "..."          # description (optional)
+
+    # --- Source (pick one) ---
+    path: ./target/debug/my-node          # local executable
+    # path: https://example.com/node.zip  # download from URL
+    # git: https://github.com/org/repo.git  # build from git
+    #   branch: main            # git branch (mutually exclusive with tag/rev)
+    #   tag: v1.0               # git tag
+    #   rev: abc123             # git commit hash
+
+    # --- Build ---
+    build: cargo build -p my-node   # shell command to build (optional)
+
+    # --- Inputs ---
+    inputs:
+      # Short form: source_node/output_id
+      tick: dora/timer/millis/100
+      data: other-node/output
+
+      # Long form with options
+      sensor_data:
+        source: sensor/frames
+        queue_size: 10            # input buffer size (default: 10)
+        queue_policy: drop_oldest # or "backpressure" (buffers up to 10x queue_size)
+        input_timeout: 5.0        # circuit breaker timeout in seconds
+
+    # --- Outputs ---
+    outputs:
+      - processed
+      - status
+
+    # --- Environment ---
+    env:
+      MY_VAR: "value"
+      FROM_ENV:
+        __dora_env: HOST_VAR     # read from host environment
+    args: "--verbose"             # command-line arguments
+
+    # --- Fault tolerance ---
+    restart_policy: on-failure    # never (default) | on-failure | always
+    max_restarts: 5               # 0 = unlimited
+    restart_delay: 1.0            # initial backoff in seconds
+    max_restart_delay: 30.0       # backoff cap in seconds
+    restart_window: 300.0         # reset counter after N seconds
+    health_check_timeout: 30.0    # kill if no activity for N seconds
+
+    # --- Logging ---
+    min_log_level: info           # source-level filter (daemon-side)
+    send_stdout_as: raw_output    # route raw stdout as data output
+    send_logs_as: log_entries     # route structured logs as data output
+    max_log_size: "50MB"          # rotate log files at this size
+    max_rotated_files: 5          # number of rotated files to keep (0-100)
+
+    # --- Deployment ---
+    deploy:
+      machine: A                  # target machine/daemon ID
+
+# Debug settings
+debug:
+  enable_debug_inspection: true   # required for topic echo/hz/info
+</code></pre>
+<h3 id="built-in-timer-nodes"><a class="header" href="cli.html#built-in-timer-nodes">内置定时器节点</a></h3>
+<p>定时器是以固定间隔发出 tick 的虚拟节点：</p>
+<pre><code class="language-yaml">inputs:
+  tick: dora/timer/millis/100   # every 100ms
+  slow: dora/timer/millis/1000  # every 1s
+  fast: dora/timer/hz/30        # 30 Hz (~33ms)
+</code></pre>
+<h3 id="operator-nodes"><a class="header" href="cli.html#operator-nodes">算子节点</a></h3>
+<p>算子在共享运行时内以进程内方式运行（无需独立进程）：</p>
+<pre><code class="language-yaml">nodes:
+  # Single operator (shorthand)
+  - id: detector
+    operator:
+      python: detect.py
+      build: pip install -r requirements.txt
+      inputs:
+        image: camera/frames
+      outputs:
+        - bbox
+
+  # List form with an explicit operator id (a runtime node holds exactly
+  # one operator; outputs are referenced as runtime-node/preprocessor/&lt;output&gt;)
+  - id: runtime-node
+    operators:
+      - id: preprocessor
+        shared-library: ../../target/debug/libpreprocess
+        inputs:
+          raw: sensor/data
+        outputs:
+          - processed
+</code></pre>
+<h3 id="distributed-deployment"><a class="header" href="cli.html#distributed-deployment">分布式部署</a></h3>
+<p>使用 <code>deploy</code> 将节点分配到特定机器：</p>
+<pre><code class="language-yaml">nodes:
+  - id: camera-driver
+    deploy:
+      machine: robot-arm
+    path: ./target/debug/camera
+    outputs:
+      - frames
+
+  - id: ml-inference
+    deploy:
+      machine: gpu-server
+    path: ./target/debug/inference
+    inputs:
+      frames: camera-driver/frames
+    outputs:
+      - predictions
+</code></pre>
+<p>当节点位于不同机器上时，通信会自动从共享内存切换到 Zenoh pub/sub。</p>
+<hr/>
+<h2 id="command-reference"><a class="header" href="cli.html#command-reference">命令参考</a></h2>
+<h3 id="lifecycle-commands"><a class="header" href="cli.html#lifecycle-commands">生命周期命令</a></h3>
+<h4 id="dora-run"><a class="header" href="cli.html#dora-run"><code>dora run</code></a></h4>
+<p><strong>独立</strong>地在本地运行数据流：通过守护进程库以进程内方式启动节点，不绑定任何协调器端口。最适合开发和测试使用。</p>
+<p>由于 <code>dora run</code> 不绑定协调器端口：</p>
+<ul>
+<li>即使 <code>dora up</code> 已在运行，也可以调用它（不存在端口争用）。</li>
+<li>可以并行执行多个 <code>dora run</code> 调用。</li>
+<li>CLI 监控命令（<code>dora list</code>、<code>dora stop</code>、<code>dora logs</code>、<code>dora top</code> 等）<strong>不会</strong>连接到 <code>dora run</code> 的执行实例。如果需要使用这些工具进行连接，请改用 <code>dora up</code> + <code>dora start</code>。</li>
+</ul>
+<pre><code>dora run &lt;PATH&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>参数/标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件 YAML 的路径</td></tr>
+<tr><td><code>--stop-after &lt;DURATION&gt;</code></td><td></td><td>经过指定时长后自动停止（例如 <code>30s</code>、<code>5m</code>）</td></tr>
+<tr><td><code>--uv</code></td><td>false</td><td>使用 <code>uv</code> 进行 Python 节点管理</td></tr>
+<tr><td><code>--debug</code></td><td>false</td><td>启用调试话题（等效于 <code>enable_debug_inspection: true</code>）</td></tr>
+<tr><td><code>--allow-shell-nodes</code></td><td>false</td><td>启用基于 shell 的节点执行</td></tr>
+<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述符</td><td>当所有节点都结束后退出，将 <code>dora/timer/...</code> 类输入视为时钟而非工作任务。会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略此项则由 YAML 决定</td></tr>
+<tr><td><code>--log-level &lt;LEVEL&gt;</code></td><td><code>stdout</code></td><td>最低显示级别：<code>error|warn|info|debug|trace|stdout</code></td></tr>
+<tr><td><code>--log-format &lt;FORMAT&gt;</code></td><td><code>pretty</code></td><td>输出格式：<code>pretty|json|compact</code>；<code>json</code> 会输出 JSON Lines 格式（每条日志消息一个对象）</td></tr>
+<tr><td><code>--log-filter &lt;FILTER&gt;</code></td><td></td><td>按节点覆盖级别：<code>"node1=debug,node2=warn"</code></td></tr>
+<tr><td><code>--locked</code></td><td>false</td><td>使用构建锁文件中固定的 git 源提交</td></tr>
+<tr><td><code>--write-lockfile</code></td><td>false</td><td>在运行前构建过程中将解析出的 git 源提交写入锁文件</td></tr>
+<tr><td><code>--lockfile &lt;PATH&gt;</code></td><td><code>&lt;dataflow-stem&gt;.dora-lock.yaml</code></td><td>覆盖锁文件路径</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash"># Basic run
+dora run dataflow.yml
+
+# Stop after 10 seconds, only show warnings
+dora run dataflow.yml --stop-after 10s --log-level warn
+
+# Python dataflow with uv
+dora run dataflow.yml --uv
+
+# Debug one node, silence others
+dora run dataflow.yml --log-level warn --log-filter "sensor=debug"
+
+# JSON output for CI pipelines
+dora run dataflow.yml --log-format json --stop-after 30s 2&gt;test.json
+</code></pre>
+<h4 id="dora-up"><a class="header" href="cli.html#dora-up"><code>dora up</code></a></h4>
+<p>以本地模式启动协调器和守护进程。</p>
+<pre><code>dora up
+dora up --recreate-store
+</code></pre>
+<p>将 <code>dora coordinator</code> 和 <code>dora daemon</code> 作为后台进程启动，等待两者都准备就绪后再返回。具有幂等性：若已在运行，则不做任何操作。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--auth</code></td><td>为协调器启用 token 认证</td></tr>
+<tr><td><code>--recreate-store</code></td><td>归档 <code>~/.dora/coordinator.redb</code> 并以全新的持久化存储启动</td></tr>
+</tbody>
+</table>
+</div>
+<p>如果协调器无法启动，<code>dora up</code> 会直接报告其启动错误。若升级后报告了不兼容的 redb 模式，请使用 <code>--recreate-store</code> 重新运行。旧的存储会被保留在新存储旁边，命名为 <code>coordinator.redb.backup</code>（或带编号的变体）。</p>
+<p>所启动协调器的 stderr 会被捕获到 <code>~/.dora/coordinator-stderr.log</code>（每次 <code>dora up</code> 都会截断该文件），以便启动后发生的错误仍可查阅。<code>--recreate-store</code> 仅作用于本地默认存储：当 <code>DORA_COORDINATOR_ADDR</code> 指向非回环地址时会被拒绝；当已有协调器在运行时会被跳过（并给出提示）；当有进程监听协调器端口但连接失败（例如认证 token 不匹配）时会中止——因此正在运行的协调器的存储永远不会被在其运行期间归档。</p>
+<h4 id="dora-down-alias-dora-destroy"><a class="header" href="cli.html#dora-down-alias-dora-destroy"><code>dora down</code>（别名：<code>dora destroy</code>）</a></h4>
+<p>关闭协调器和守护进程。会先停止所有正在运行的数据流。</p>
+<pre><code>dora down [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--force</code></td><td>false</td><td>即使协调器上有正在运行的数据流，也强制关闭，先立即终止这些数据流</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>这是机器级别的操作，而非项目级别的。</strong><code>dora down</code> 没有“你的”数据流或“你的”工作副本的概念：它会连接到占用该端口的任何协调器，并将其连同其守护进程以及其上运行的所有数据流一起销毁。同一台机器上的两个工作副本默认共享 <code>127.0.0.1:6013</code>，因此在其中一个副本上执行 <code>dora down</code> 会悄无声息地终止另一个副本的工作——在受害一方看来，这与协调器崩溃没有区别。</p>
+<p>自 <a href="https://github.com/dora-rs/dora/issues/2924">#2924</a> 起，当目标机器上有正在运行的数据流时，该命令会拒绝执行并列出这些数据流。<code>--force</code> 则会继续执行，先停止每个数据流。</p>
+<p>停机操作不会留下残留节点。每个守护进程都会等待停止宽限期结束，并在退出前杀掉仍在运行的进程，因此忽略协作式停止的节点会被终止而不是被遗弃（<a href="https://github.com/dora-rs/dora/issues/2980">#2980</a>）。因此，一个卡死的节点会使 <code>dora down</code> 耗时长达整个宽限期；行为良好的节点则会立即退出，不会产生任何耗时。</p>
+<p><strong>要并行运行多个实例，需为每个实例指定独立的端口</strong>——这就是隔离机制，所有生命周期命令（<code>up</code>、<code>down</code>、<code>start</code>、<code>stop</code>、<code>list</code>、<code>logs</code>）都遵循这一机制：</p>
+<pre><code class="language-bash">DORA_COORDINATOR_PORT=6113 dora up
+DORA_COORDINATOR_PORT=6113 dora start flow.yml
+DORA_COORDINATOR_PORT=6113 dora down     # touches only this instance
+</code></pre>
+</blockquote>
+<h4 id="dora-build"><a class="header" href="cli.html#dora-build"><code>dora build</code></a></h4>
+<p>运行数据流描述文件中定义的构建命令。</p>
+<pre><code>dora build &lt;PATH&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>--uv</code></td><td>false</td><td>Python 构建使用 <code>uv</code></td></tr>
+<tr><td><code>--local</code></td><td>false</td><td>强制本地构建（跳过协调器）</td></tr>
+<tr><td><code>--strict-types</code></td><td>false</td><td>将类型警告视为错误（返回非零退出码）</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>类型检查：</strong>展开模块后，<code>build</code> 会运行与 <code>validate</code> 相同的类型检查。默认只打印警告；使用 <code>--strict-types</code>（或在 YAML 中设置 <code>strict_types: true</code>）可在类型不匹配时让构建失败。数据流旁的 <code>types/</code> 目录中定义的用户自定义类型会自动加载。</p>
+<p><strong>构建策略：</strong>如果节点包含 <code>deploy</code> 部分且协调器可达，构建会被分发到目标机器；否则在本地运行构建。</p>
+<p><strong>Git 源：</strong>带有 <code>git:</code> 字段的节点会在构建前被克隆/更新。构建命令从 Git 仓库根目录运行。</p>
+<p><strong>托管的 Python 环境（<code>--uv</code>）：</strong>对于 Python 节点（带 <code>build:</code> 代码块的 <code>.py</code> 自定义节点，以及带有 Python 算子的运行时节点），<code>--uv</code> 现在会为每个节点在 <code>&lt;working-dir&gt;/.dora/python-envs/&lt;node-id&gt;/</code> 创建一个专属的 <code>uv</code> 虚拟环境。构建命令会在该虚拟环境中运行，并设置 <code>VIRTUAL_ENV</code>，同时将该环境的 <code>bin/</code>（Windows 上为 <code>Scripts/</code>）前置到 <code>PATH</code> 中。<code>dora start</code> 和 <code>dora run</code> 在启动时会自动复用相同的解释器，因此 Python 节点看到的正是构建时安装的依赖——不再存在构建与运行时之间的漂移，也不会在节点间产生污染。没有 <code>build:</code> 代码块的自定义 Python 节点仍沿用调用方环境中已有的 <code>uv</code> 环境。该环境在后续构建中会被复用（而不会重新创建）。</p>
+<h4 id="dora-start"><a class="header" href="cli.html#dora-start"><code>dora start</code></a></h4>
+<p>在运行中的协调器上启动一个数据流。</p>
+<p>如果一个带有 <code>deploy</code> 部分的数据流上次是在本地构建的（通过 <code>dora build --local</code>，或在没有可达协调器的情况下执行 <code>dora build</code>），它会被<strong>拒绝</strong>并给出可操作的错误提示：运行这些部署目标的远程守护进程无法访问本地构建产物。请在执行 <code>dora start</code> 之前，针对运行中的协调器重新运行 <code>dora build</code>（#1956）。</p>
+<pre><code>dora start &lt;PATH&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>--name &lt;NAME&gt;</code>, <code>-n</code></td><td></td><td>为数据流指定一个名称</td></tr>
+<tr><td><code>--attach</code></td><td>auto</td><td>附加到日志流并等待完成</td></tr>
+<tr><td><code>--detach</code></td><td>auto</td><td>启动后立即返回</td></tr>
+<tr><td><code>--debug</code></td><td>false</td><td>启用调试话题（等效于 <code>enable_debug_inspection: true</code>）</td></tr>
+<tr><td><code>--hot-reload</code></td><td>false</td><td>监视 Python 文件变化并自动重新加载</td></tr>
+<tr><td><code>--uv</code></td><td>false</td><td>Python 节点使用 <code>uv</code></td></tr>
+<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述符</td><td>等所有节点都完成后才结束，将 <code>dora/timer/...</code> 输入视为时钟而非工作任务。该选项会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略该选项则由 YAML 决定。</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p>如果 <code>--attach</code> 和 <code>--detach</code> 都未指定：在 TTY 中运行时会附加，否则会分离。</p>
+<p><strong>附加模式：</strong>流式输出日志，优雅处理 Ctrl-C（第一次 = 停止，第二次 = 强制终止）。</p>
+<p><strong>热重载：</strong>监视 Python 算子源文件。发生变化时，向协调器发送重新加载请求，并由协调器传播到守护进程。</p>
+<p><strong>已知限制——通过原子重命名方式保存的编辑器（vim、JetBrains、部分 IDE）：</strong>监视器只在 <code>notify-rs</code> 发出的 <code>Modify(Data)</code> 事件时触发，但 vim 默认的保存流程是写入一个临时文件再重命名覆盖原文件，这会表现为 <code>Remove(File)</code> 事件，从而导致重新加载错过此次更改。详见 <a href="https://github.com/dora-rs/dora/issues/530">#530</a> 以及上游 notify-rs 的讨论 <a href="https://github.com/notify-rs/notify/issues/247">notify-rs/notify#247</a>。</p>
+<p>在 <a href="https://github.com/dora-rs/dora/issues/530">#530</a> 的修复落地之前的临时解决方法：将编辑器配置为原地写入，而不是原子重命名。</p>
+<ul>
+<li><strong>vim / neovim：</strong>在 <code>.vimrc</code> 中添加 <code>:set backupcopy=yes</code>，或按会话临时设置。这会让 vim 复制文件并原地覆盖（而不是先写临时文件再重命名）。</li>
+<li><strong>JetBrains IDE（PyCharm、IntelliJ）：</strong>Settings → Appearance &amp; Behavior → System Settings，取消勾选“Use 'safe write'（save changes to a temporary file first）”。</li>
+<li><strong>VS Code：</strong>默认即为原地写入，无需任何变通方案。</li>
+</ul>
+<h4 id="dora-stop"><a class="header" href="cli.html#dora-stop"><code>dora stop</code></a></h4>
+<p>停止一个正在运行的数据流。</p>
+<pre><code>dora stop [UUID_OR_NAME] [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>[UUID_OR_NAME]</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>--name &lt;NAME&gt;</code>, <code>-n</code></td><td></td><td>可选的名称指定方式</td></tr>
+<tr><td><code>--grace-duration &lt;DURATION&gt;</code></td><td></td><td>优雅关闭超时时间</td></tr>
+<tr><td><code>--force</code>, <code>-f</code></td><td>false</td><td>立即终止</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p>如果未提供标识符且在 TTY 中运行，会呈现一个交互式选择器。</p>
+<p><strong>停止流程：</strong>发送 Event::Stop -&gt; 等待宽限期 -&gt; SIGTERM -&gt; 强制终止。</p>
+<h4 id="dora-restart"><a class="header" href="cli.html#dora-restart"><code>dora restart</code></a></h4>
+<p>重启一个正在运行的数据流（先停止，再用已保存的描述文件重新启动）。无需提供 YAML 路径——协调器保留了原始的描述文件。</p>
+<pre><code>dora restart [UUID] [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>[UUID]</code></td><td></td><td>数据流 UUID</td></tr>
+<tr><td><code>--name &lt;NAME&gt;</code>, <code>-n</code></td><td></td><td>按名称而非 UUID 重启</td></tr>
+<tr><td><code>--grace-duration &lt;DURATION&gt;</code></td><td></td><td>停止阶段的优雅关闭超时时间</td></tr>
+<tr><td><code>--force</code>, <code>-f</code></td><td>false</td><td>重启前强制终止</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash"># Restart by name
+dora restart --name my-app
+
+# Restart by UUID with forced stop
+dora restart a1b2c3d4-... --force
+</code></pre>
+<h4 id="dora-record"><a class="header" href="cli.html#dora-record"><code>dora record</code></a></h4>
+<p>将数据流消息记录到 <code>.drec</code> 文件中以便离线回放。完整流程参见<a href="debugging.html#record-and-replay">调试指南</a>。</p>
+<pre><code>dora record &lt;DATAFLOW_YAML&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;DATAFLOW_YAML&gt;</code></td><td>必需</td><td>数据流描述文件的路径</td></tr>
+<tr><td><code>-o, --output &lt;PATH&gt;</code></td><td><code>recording_{timestamp}.drec</code></td><td>输出文件路径</td></tr>
+<tr><td><code>--topics &lt;TOPICS&gt;</code></td><td>all</td><td>以逗号分隔的 <code>node/output</code> 话题，用于录制</td></tr>
+<tr><td><code>--proxy</code></td><td>false</td><td>通过 WebSocket 流式传输，而不是在目标上录制</td></tr>
+<tr><td><code>--output-yaml &lt;PATH&gt;</code></td><td></td><td>写入修改后的 YAML 而不运行（dry run）</td></tr>
+<tr><td><code>--queue-size &lt;N&gt;</code></td><td><code>100</code></td><td>注入的录制节点每个话题的队列深度</td></tr>
+</tbody>
+</table>
+</div>
+<p>默认模式会向数据流中注入一个录制节点。<code>--proxy</code> 模式需要一个正在运行的数据流，并设置 <code>enable_debug_inspection: true</code>。</p>
+<p><strong>录制完整性。</strong>注入的录制节点会写入磁盘，因此生产者的突发流量或写入停滞都可能使其跟不上节奏，它来不及接收的消息会在写入器看到之前就被丢弃。<code>--queue-size</code> 决定每个被录制话题能获得多少缓冲余量；这个深度还决定了该节点 zenoh 入口通道的大小，而这正是零拷贝负载（&gt;=4 KB）真正会溢出的地方。调大它可以撑过更长时间的停滞，代价是缓冲负载占用的内存——每个话题的峰值常驻内存大约是 <code>2 x queue_size x payload size</code>（每个输入的调度器队列和共享入口通道各自都可能占满整个深度），对视频帧来说这是一笔不小的开销。对于达到或超过零拷贝阈值的负载，一条被缓冲的消息还会固定（pin）住其共享内存区域：一旦停滞的录制器占用的区域超过生产者内存池（<code>DORA_NODE_SHM_POOL_SIZE</code>，默认 8 MiB）所能腾出的空间，该生产者就会为其所有消费者回退到堆内存拷贝。</p>
+<p>运行结束时会按话题报告被丢弃的消息，摘要会标注 <code>INCOMPLETE</code>，这样一段较短的 <code>.drec</code> 就不会被误认为是完整录制。长时间录制在第一次丢弃消息时也会在 stderr 上发出警告。一次干净的运行会报告“未检测到消息丢失”而不是“complete（完整）”：生产者以 <code>CongestionControl::Drop</code> 方式发布，因此在 zenoh 出口被丢弃的消息永远不会到达录制器的计数器，而零丢弃意味着在录制器可观察到的所有路径上都没有发生丢失。</p>
+<p>录制节点特意<em>不</em>在其输入上设置 <code>queue_policy: backpressure</code>。该策略会把生产者的全部输出都固定在守护进程路径上，对<strong>每个</strong>消费者都是如此，这样录制一个数据流就会把其流量移出零拷贝路径，从而改变被测量的对象——况且这个策略本身也不是无损的（它会在 <code>10x queue_size</code> 时丢弃消息）。录制器绝不能扰动它所观测的系统。</p>
+<h4 id="dora-replay"><a class="header" href="cli.html#dora-replay"><code>dora replay</code></a></h4>
+<p>通过用回放节点替换源节点，来回放一段已录制的 <code>.drec</code> 文件。完整工作流程参见<a href="debugging.html#replaying-a-recording">调试指南</a>。</p>
+<pre><code>dora replay &lt;FILE&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;FILE&gt;</code></td><td>必需</td><td><code>.drec</code> 录制文件的路径</td></tr>
+<tr><td><code>--speed &lt;FLOAT&gt;</code></td><td><code>1.0</code></td><td>回放速度（0 表示最大速度）</td></tr>
+<tr><td><code>--loop</code></td><td>false</td><td>循环播放录制内容</td></tr>
+<tr><td><code>--replace &lt;NODE_IDS&gt;</code></td><td>全部录制内容</td><td>以逗号分隔的待替换节点</td></tr>
+<tr><td><code>--output-yaml &lt;PATH&gt;</code></td><td></td><td>写入修改后的 YAML 而不运行（dry run）</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h3 id="monitoring-commands"><a class="header" href="cli.html#monitoring-commands">监控命令</a></h3>
+<h4 id="dora-list-alias-dora-ps"><a class="header" href="cli.html#dora-list-alias-dora-ps"><code>dora list</code>（别名：<code>dora ps</code>）</a></h4>
+<p>列出正在运行的数据流及其指标。</p>
+<pre><code>dora list [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--format &lt;FMT&gt;</code>, <code>-f</code></td><td><code>table</code></td><td>输出格式：<code>table|json</code>。JSON 输出采用 JSON Lines 格式（每行一个对象）</td></tr>
+<tr><td><code>--status &lt;STATUS&gt;</code></td><td></td><td>过滤条件：<code>running|finished|failed</code></td></tr>
+<tr><td><code>--name &lt;PATTERN&gt;</code></td><td></td><td>按名称过滤（不区分大小写的子串匹配）</td></tr>
+<tr><td><code>--sort-by &lt;FIELD&gt;</code></td><td></td><td>排序方式：<code>cpu|memory</code></td></tr>
+<tr><td><code>--quiet</code>, <code>-q</code></td><td>false</td><td>仅输出 UUID</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>输出列：</strong>UUID、Name、Status、Nodes、CPU、Memory</p>
+<h4 id="dora-clean"><a class="header" href="cli.html#dora-clean"><code>dora clean</code></a></h4>
+<p>从协调器的状态中移除已完全结束的数据流。正在运行的数据流不受影响。对于多守护进程的数据流，如果部分守护进程已结束而另一些尚未结束，也会被跳过——清理操作只处理没有任何守护进程仍在运行的数据流。</p>
+<pre><code>dora clean [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--format &lt;FMT&gt;</code>, <code>-f</code></td><td><code>table</code></td><td>输出格式：<code>table|json</code>。JSON 输出使用 JSON Lines（每行一个对象）；每个失败项也会在 stderr 上以一行 JSON 对象的形式输出，随后附带一段纯文本错误摘要（退出码为非零）</td></tr>
+<tr><td><code>--quiet</code>, <code>-q</code></td><td>false</td><td>仅输出已清理的 UUID</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>被移除的内容：</strong><code>dataflow_results</code> 中已完全结束的数据流记录及其归档的描述符，以及任何仅存在于磁盘（redb 中）持久化存储、但不在内存中的已持久化 Succeeded/Failed 记录——这些通常是协调器重启之前遗留的历史记录，因为恢复流程特意不会把已完成的数据流重新加载进内存。协调器会<em>先</em>从持久化存储中删除每一条被清理的记录，然后才将其从内存状态中移除——因此只有当两边都确实被清理后，该数据流才会出现在命令的输出中。持久化存储的删除操作会级联清除属于该已清理数据流的每一行 <code>dora param</code> 记录，以避免状态文件无限增长。缓存的构建结果（<code>finished_builds</code>）会被特意保留——清除它们会破坏并发的 <code>dora build</code> 调用。</p>
+<p><strong>部分失败时的行为：</strong>如果持久化存储删除对一个或多个数据流失败，这些数据流会保留其内存中的记录，以便之后的 <code>dora clean</code> 可以重试。CLI 会针对每个失败在 stderr 上打印一行 <code>warning:</code>，并以非零状态退出，以区分“部分故障”和“没有符合清理条件的对象”这两种情况。如果持久化存储<em>枚举</em>本身失败（例如 redb 文件不可读），协调器会以错误回复直接使该请求彻底失败，并保持所有状态不变——待存储恢复正常后，下一次清理会重试。</p>
+<p><strong>会丢失的内容：</strong>清理之后，<code>dora logs &lt;uuid&gt;</code> 对已清理的数据流将不再有效，持久化记录也已消失（因此针对该已清理 UUID 的 <code>dora param</code> 也会失败）。在运行 <code>dora clean</code> 之前，请先保存任何以后可能需要参考的内容。</p>
+<p><strong>何时使用：</strong>当 <code>dora list</code> 中堆积了大量来自以往运行的已完成/失败数据流，或长期运行的协调器的 redb 状态文件已变得过大时。比 <code>dora down + dora up</code> 破坏性更小——协调器保持运行，守护进程也保持连接。</p>
+<h4 id="dora-logs"><a class="header" href="cli.html#dora-logs"><code>dora logs</code></a></h4>
+<p>显示并跟踪某个数据流和节点的日志。</p>
+<pre><code>dora logs [OPTIONS] [UUID_OR_NAME]
+</code></pre>
+<p>节点选择通过 <code>--node &lt;NAME&gt;</code> 标志进行（自 #1883 起不再是位置参数）。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>[UUID_OR_NAME]</code></td><td></td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>--node &lt;NAME&gt;</code></td><td></td><td>要显示日志的单个节点（使用 <code>--all-nodes</code> 时省略）</td></tr>
+<tr><td><code>--all-nodes</code></td><td>false</td><td>按时间戳合并所有节点的日志</td></tr>
+<tr><td><code>--tail &lt;N&gt;</code></td><td>all</td><td>显示最后 N 行</td></tr>
+<tr><td><code>--follow</code>, <code>-f</code></td><td>false</td><td>持续输出新的日志条目</td></tr>
+<tr><td><code>--local</code></td><td>false</td><td>从本地 <code>out/</code> 目录读取</td></tr>
+<tr><td><code>--since &lt;DURATION&gt;</code></td><td></td><td>只显示比指定时长更新的日志</td></tr>
+<tr><td><code>--until &lt;DURATION&gt;</code></td><td></td><td>只显示比指定时长更旧的日志</td></tr>
+<tr><td><code>--level &lt;LEVEL&gt;</code></td><td><code>stdout</code></td><td>最低日志级别</td></tr>
+<tr><td><code>--log-format &lt;FORMAT&gt;</code></td><td><code>pretty</code></td><td>输出格式：<code>pretty|json|compact</code>；<code>json</code> 会输出 JSON Lines 格式（每条日志消息一个对象）</td></tr>
+<tr><td><code>--log-filter &lt;FILTER&gt;</code></td><td></td><td>按节点覆盖级别</td></tr>
+<tr><td><code>--grep &lt;PATTERN&gt;</code></td><td></td><td>不区分大小写的文本搜索</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>过滤流水线：</strong>读取/解析 -&gt; 时间过滤 -&gt; Grep -&gt; Tail -&gt; 显示</p>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash"># Follow all nodes live
+dora logs my-dataflow --all-nodes --follow
+
+# Last 50 errors from a specific node
+dora logs my-dataflow --node sensor --level error --tail 50
+
+# Search logs from last 5 minutes
+dora logs my-dataflow --all-nodes --since 5m --grep "timeout"
+
+# Read local files (no coordinator needed)
+dora logs --local --all-nodes --tail 100
+
+# Post-mortem analysis: errors in time window
+dora logs --local --node sensor --since 1h --until 30m --level error
+</code></pre>
+<p><strong>时长格式：</strong><code>30</code>（秒）、<code>30s</code>、<code>5m</code>、<code>1h</code>、<code>2d</code></p>
+<h4 id="dora-inspect-top-alias-dora-top"><a class="header" href="cli.html#dora-inspect-top-alias-dora-top"><code>dora inspect top</code>（别名：<code>dora top</code>）</a></h4>
+<p>用于节点资源占用的实时 TUI 监视器（类似 <code>top</code>）。</p>
+<pre><code>dora inspect top [OPTIONS]
+dora top [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--refresh-interval &lt;SECONDS&gt;</code></td><td><code>2</code></td><td>更新间隔（最小值：1）</td></tr>
+<tr><td><code>--once</code></td><td>false</td><td>打印一次 JSON 快照后退出（用于脚本编写/CI）</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>需要交互式终端</strong>（除非使用了 <code>--once</code>）。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>键</th><th>操作</th></tr>
+</thead>
+<tbody>
+<tr><td><code>q</code> / <code>Esc</code></td><td>退出</td></tr>
+<tr><td><code>Up</code> / <code>k</code></td><td>选择上一个节点</td></tr>
+<tr><td><code>Down</code> / <code>j</code></td><td>选择下一个节点</td></tr>
+<tr><td><code>n</code></td><td>按节点名称排序</td></tr>
+<tr><td><code>c</code></td><td>按 CPU 排序</td></tr>
+<tr><td><code>m</code></td><td>按内存排序</td></tr>
+<tr><td><code>r</code></td><td>强制刷新</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>列：</strong>NODE、STATUS、DATAFLOW、PID、CPU%、MEMORY (MB)、RESTARTS、QUEUE、NET TX、NET RX、I/O READ (MB/s)、I/O WRITE (MB/s)</p>
+<ul>
+<li><strong>STATUS</strong>：Running、Restarting、Degraded（输入损坏）或 Failed</li>
+<li><strong>RESTARTS</strong>：每个节点当前的重启次数</li>
+<li><strong>QUEUE</strong>：节点输入队列中的待处理消息数</li>
+<li><strong>NET TX/RX</strong>：通过 Zenoh 跨守护进程发送/接收的累计网络字节数</li>
+</ul>
+<p>CPU 数值按单核计算（多核情况下可超过 100%）。指标来自各守护进程，因此对分布式部署同样适用。</p>
+<p><strong>脚本示例：</strong></p>
+<pre><code class="language-bash"># JSON snapshot for CI/monitoring pipelines
+dora top --once | jq '.[].cpu_usage'
+</code></pre>
+<h4 id="dora-topic-list"><a class="header" href="cli.html#dora-topic-list"><code>dora topic list</code></a></h4>
+<p>列出正在运行的数据流中所有话题（输出）。</p>
+<pre><code>dora topic list [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>--format &lt;FMT&gt;</code></td><td><code>table</code></td><td>输出格式：<code>table|json</code>。JSON 输出采用 JSON Lines 格式（每行一个对象）</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="dora-topic-echo"><a class="header" href="cli.html#dora-topic-echo"><code>dora topic echo</code></a></h4>
+<p>订阅话题并实时显示消息。</p>
+<pre><code>dora topic echo [OPTIONS] [DATA...]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>必需</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>[DATA...]</code></td><td>所有输出</td><td>要 echo 的话题（例如 <code>node1/output</code>）</td></tr>
+<tr><td><code>--format &lt;FMT&gt;</code></td><td><code>table</code></td><td>输出格式：<code>table|json</code>。JSON 输出采用 JSON Lines 格式（每条解码后的消息对应一个对象）；诊断信息输出到 stderr</td></tr>
+</tbody>
+</table>
+</div>
+<p>需要在描述文件中设置 <code>debug.enable_debug_inspection: true</code>。</p>
+<h4 id="dora-topic-hz"><a class="header" href="cli.html#dora-topic-hz"><code>dora topic hz</code></a></h4>
+<p>通过 TUI 仪表盘测量话题发布频率。</p>
+<pre><code>dora topic hz [OPTIONS] [DATA...]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>必需</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>[DATA...]</code></td><td>所有输出</td><td>要测量的话题</td></tr>
+<tr><td><code>--window &lt;SECONDS&gt;</code></td><td><code>10</code></td><td>滑动窗口（最小值：1）</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>需要交互式终端。</strong>显示内容：Avg (ms)、Avg (Hz)、Min (ms)、Max (ms)、Std (ms)，以及所选话题的速率走势图和直方图。</p>
+<h4 id="dora-topic-info"><a class="header" href="cli.html#dora-topic-info"><code>dora topic info</code></a></h4>
+<p>显示单个话题的详细元数据。</p>
+<pre><code>dora topic info [OPTIONS] DATA
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>必需</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>DATA</code></td><td>必需</td><td>单个话题（例如 <code>camera/image</code>）</td></tr>
+<tr><td><code>--duration &lt;SECONDS&gt;</code></td><td><code>5</code></td><td>采集时长（最小值：1）</td></tr>
+</tbody>
+</table>
+</div>
+<p>在指定时长内订阅该话题，并报告：类型（Arrow schema）、发布者、订阅者、消息数量、带宽。</p>
+<h4 id="dora-node"><a class="header" href="cli.html#dora-node"><code>dora node</code></a></h4>
+<p>管理和检查数据流节点。</p>
+<h5 id="dora-node-list"><a class="header" href="cli.html#dora-node-list"><code>dora node list</code></a></h5>
+<pre><code>dora node list [OPTIONS]
+</code></pre>
+<p>列出正在运行的数据流中的节点及其状态、CPU、内存和重启次数。</p>
+<p><strong>列：</strong>NODE、STATUS、PID、CPU%、MEMORY (MB)、RESTARTS、DATAFLOW</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>所有数据流</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>-f &lt;FORMAT&gt;</code>, <code>--format</code></td><td><code>table</code></td><td>输出格式：<code>table|json</code>。JSON 输出采用 JSON Lines 格式（每行一个对象）；所有字段均为格式化字符串，且在给出 <code>-d</code> 时省略 <code>dataflow</code> 字段</td></tr>
+<tr><td><code>-q</code>, <code>--quiet</code></td><td></td><td>仅打印节点 ID，每行一个（与 <code>--format</code> 冲突）</td></tr>
+</tbody>
+</table>
+</div>
+<h5 id="dora-node-info"><a class="header" href="cli.html#dora-node-info"><code>dora node info</code></a></h5>
+<p>显示特定节点的详细信息，包括状态、输入、输出和指标。</p>
+<pre><code>dora node info &lt;NODE&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;NODE&gt;</code></td><td>必需</td><td>要检查的节点 ID</td></tr>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>-f &lt;FORMAT&gt;</code>, <code>--format</code></td><td><code>table</code></td><td>输出格式：<code>table|json</code>。JSON 输出为单个格式化的文档</td></tr>
+</tbody>
+</table>
+</div>
+<h5 id="dora-node-restart"><a class="header" href="cli.html#dora-node-restart"><code>dora node restart</code></a></h5>
+<p>重启正在运行的数据流中的单个节点。守护进程会停止该节点进程并重新启动它。</p>
+<pre><code>dora node restart &lt;NODE&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;NODE&gt;</code></td><td>必需</td><td>要重启的节点 ID</td></tr>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>--grace &lt;DURATION&gt;</code></td><td></td><td>强制终止节点前的宽限期</td></tr>
+</tbody>
+</table>
+</div>
+<h5 id="dora-node-stop"><a class="header" href="cli.html#dora-node-stop"><code>dora node stop</code></a></h5>
+<p>停止正在运行的数据流中的单个节点，而不停止整个数据流。</p>
+<pre><code>dora node stop &lt;NODE&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;NODE&gt;</code></td><td>必需</td><td>要停止的节点 ID</td></tr>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>--grace &lt;DURATION&gt;</code></td><td></td><td>强制终止节点前的宽限期</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="dora-topic-pub"><a class="header" href="cli.html#dora-topic-pub"><code>dora topic pub</code></a></h4>
+<p>向正在运行的数据流中的某个话题发布 JSON 数据。需要 <code>enable_debug_inspection: true</code>。</p>
+<pre><code>dora topic pub &lt;TOPIC&gt; [DATA] [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;TOPIC&gt;</code></td><td>必需</td><td>要发布到的话题（格式：<code>node_id/output_id</code>）</td></tr>
+<tr><td><code>[DATA]</code></td><td></td><td>要发布的 JSON 数据（除非使用 <code>--file</code>，否则必填）</td></tr>
+<tr><td><code>--file &lt;PATH&gt;</code></td><td></td><td>从 JSON 文件读取数据，而不是从命令行</td></tr>
+<tr><td><code>--count &lt;N&gt;</code></td><td><code>1</code></td><td>要发布的消息数量</td></tr>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>必需</td><td>数据流 UUID 或名称</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash"># Publish a single value
+dora topic pub -d my-app sensor/threshold '[42]'
+
+# Publish from file, 10 times
+dora topic pub -d my-app sensor/config --file config.json --count 10
+</code></pre>
+<h4 id="dora-param"><a class="header" href="cli.html#dora-param"><code>dora param</code></a></h4>
+<p>管理节点的运行时参数。参数会持久化保存在协调器存储中，并可选地转发给正在运行的节点。</p>
+<h5 id="dora-param-list"><a class="header" href="cli.html#dora-param-list"><code>dora param list</code></a></h5>
+<p>列出某个节点的所有运行时参数。</p>
+<pre><code>dora param list &lt;NODE&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;NODE&gt;</code></td><td>必需</td><td>节点 ID</td></tr>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+<tr><td><code>--format &lt;FMT&gt;</code></td><td><code>table</code></td><td>输出格式：<code>table|json</code>。JSON 输出为单个格式化的文档</td></tr>
+</tbody>
+</table>
+</div>
+<h5 id="dora-param-get"><a class="header" href="cli.html#dora-param-get"><code>dora param get</code></a></h5>
+<p>获取单个运行时参数的值。</p>
+<pre><code>dora param get &lt;NODE&gt; &lt;KEY&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;NODE&gt;</code></td><td>必需</td><td>节点 ID</td></tr>
+<tr><td><code>&lt;KEY&gt;</code></td><td>必需</td><td>参数键</td></tr>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+</tbody>
+</table>
+</div>
+<h5 id="dora-param-set"><a class="header" href="cli.html#dora-param-set"><code>dora param set</code></a></h5>
+<p>设置一个运行时参数。该值为 JSON 格式。参数会存储在协调器中，并在节点运行时转发给该节点。</p>
+<pre><code>dora param set &lt;NODE&gt; &lt;KEY&gt; &lt;VALUE&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;NODE&gt;</code></td><td>必需</td><td>节点 ID</td></tr>
+<tr><td><code>&lt;KEY&gt;</code></td><td>必需</td><td>参数键（最大 256 字节）</td></tr>
+<tr><td><code>&lt;VALUE&gt;</code></td><td>必需</td><td>作为 JSON 的参数值（序列化后最大 64KB）</td></tr>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash"># Set a numeric parameter
+dora param set -d my-app sensor threshold 42
+
+# Set a string parameter
+dora param set -d my-app camera resolution '"1080p"'
+
+# Set a complex parameter
+dora param set -d my-app detector config '{"confidence": 0.8, "nms": 0.5}'
+</code></pre>
+<h5 id="dora-param-delete"><a class="header" href="cli.html#dora-param-delete"><code>dora param delete</code></a></h5>
+<p>删除一个运行时参数。</p>
+<pre><code>dora param delete &lt;NODE&gt; &lt;KEY&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;NODE&gt;</code></td><td>必需</td><td>节点 ID</td></tr>
+<tr><td><code>&lt;KEY&gt;</code></td><td>必需</td><td>参数键</td></tr>
+<tr><td><code>-d &lt;DATAFLOW&gt;</code>, <code>--dataflow</code></td><td>interactive</td><td>数据流 UUID 或名称</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="dora-doctor"><a class="header" href="cli.html#dora-doctor"><code>dora doctor</code></a></h4>
+<p>诊断环境、协调器/守护进程的连接性，并可选地校验 dataflow YAML。</p>
+<pre><code>dora doctor [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--dataflow &lt;PATH&gt;</code></td><td></td><td>要校验的 dataflow YAML 的路径</td></tr>
+</tbody>
+</table>
+</div>
+<p>执行的检查项：</p>
+<ol>
+<li>协调器可达性</li>
+<li>守护进程连接性</li>
+<li>活动中的数据流状态</li>
+<li>dataflow YAML 校验（若提供了 <code>--dataflow</code>）</li>
+</ol>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash"># Basic health check
+dora doctor
+
+# Check environment + validate a dataflow
+dora doctor --dataflow dataflow.yml
+</code></pre>
+<h4 id="dora-trace-list"><a class="header" href="cli.html#dora-trace-list"><code>dora trace list</code></a></h4>
+<p>列出协调器捕获的最近 trace。协调器会在内存中捕获来自 <code>dora_coordinator</code> 和 <code>dora_core</code> crate 的 span（最多 4096 个）。无需外部追踪基础设施。</p>
+<pre><code>dora trace list [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>输出列：</strong>TRACE ID（前 12 个字符）、ROOT SPAN、SPANS、STARTED、DURATION</p>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash">dora trace list
+</code></pre>
+<pre><code>TRACE ID      ROOT SPAN          SPANS  STARTED              DURATION
+a1b2c3d4e5f6  spawn_dataflow     12     2026-03-01 10:30:05  1.234s
+f8e7d6c5b4a3  build_dataflow     5      2026-03-01 10:29:58  0.500s
+</code></pre>
+<h4 id="dora-trace-view"><a class="header" href="cli.html#dora-trace-view"><code>dora trace view</code></a></h4>
+<p>以带缩进的树形结构查看特定 trace 的 span。支持 trace ID 的前缀匹配。</p>
+<pre><code>dora trace view &lt;TRACE_ID&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>参数/标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;TRACE_ID&gt;</code></td><td>必需</td><td>完整的 trace ID 或唯一前缀</td></tr>
+<tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
+<tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash">dora trace view a1b2c3d4
+</code></pre>
+<pre><code>spawn_dataflow [INFO 1.234s] {build_id="abc", session_id="def"}
+  build_dataflow [INFO 0.500s]
+    download_node [DEBUG 0.200s] {url="..."}
+  start_inner [INFO 0.734s]
+    spawn_node [INFO 0.100s] {node_id="camera"}
+    spawn_node [INFO 0.080s] {node_id="detector"}
+</code></pre>
+<p>trace ID 支持前缀匹配：如果前缀能唯一确定一个 trace，则会自动解析。如果存在歧义，系统会提示你使用更长的前缀。</p>
+<hr/>
+<h3 id="setup-commands"><a class="header" href="cli.html#setup-commands">设置命令</a></h3>
+<h4 id="dora-status-alias-dora-check"><a class="header" href="cli.html#dora-status-alias-dora-check"><code>dora status</code>（别名：<code>dora check</code>）</a></h4>
+<p>检查系统健康状况和连接性。</p>
+<pre><code>dora status [OPTIONS]
+</code></pre>
+<p>报告协调器连接性、守护进程状态以及活动数据流数量。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>-f &lt;FORMAT&gt;</code>, <code>--format</code></td><td><code>table</code></td><td>输出格式：<code>table|json</code>。JSON 输出是单个带格式化的文档，即使检查失败也会打印（失败详情输出到 stderr；退出码为非零）</td></tr>
+<tr><td><code>--dataflow &lt;PATH&gt;</code></td><td></td><td>用于启用额外检查的描述文件</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="dora-new"><a class="header" href="cli.html#dora-new"><code>dora new</code></a></h4>
+<p>根据模板生成新的项目或节点。</p>
+<pre><code>dora new &lt;NAME&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;NAME&gt;</code></td><td>必需</td><td>项目或节点名称</td></tr>
+<tr><td><code>--kind &lt;KIND&gt;</code></td><td><code>dataflow</code></td><td><code>dataflow|node</code></td></tr>
+<tr><td><code>--lang &lt;LANG&gt;</code></td><td><code>rust</code></td><td><code>rust|python|c|cxx</code></td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="dora-expand"><a class="header" href="cli.html#dora-expand"><code>dora expand</code></a></h4>
+<p>展开数据流中的模块引用，并打印展开后的扁平 YAML。适用于调试模块组合。</p>
+<pre><code>dora expand &lt;PATH&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件（或配合 <code>--module</code> 使用的模块文件）</td></tr>
+<tr><td><code>--module</code></td><td>false</td><td>校验独立的模块文件，而不是完整的数据流</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>示例：</strong></p>
+<pre><code class="language-bash"># Expand a dataflow with modules
+dora expand dataflow.yml
+
+# Validate a module file
+dora expand --module modules/navigation.module.yml
+</code></pre>
+<p>有关模块组合的完整文档，请参阅<a href="https://dora-rs.ai/dora/operations/modules.html">模块指南</a>。</p>
+<h4 id="dora-graph"><a class="header" href="cli.html#dora-graph"><code>dora graph</code></a></h4>
+<p>将数据流可视化为图形。</p>
+<pre><code>dora graph &lt;PATH&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>--mermaid</code></td><td>false</td><td>输出 Mermaid 图表文本</td></tr>
+<tr><td><code>--open</code></td><td>false</td><td>在浏览器中打开 HTML</td></tr>
+</tbody>
+</table>
+</div>
+<p>不加 <code>--mermaid</code> 时，会使用 mermaid.js 生成一个交互式 HTML 文件。当输出带有类型注解时，边标签会包含类型名（例如 <code>image [Image]</code>）。</p>
+<pre><code class="language-bash"># Generate HTML
+dora graph dataflow.yml --open
+
+# Generate Mermaid for GitHub markdown
+dora graph dataflow.yml --mermaid
+</code></pre>
+<h4 id="dora-validate"><a class="header" href="cli.html#dora-validate"><code>dora validate</code></a></h4>
+<p>校验一个 dataflow YAML 文件并检查类型注解。</p>
+<pre><code>dora validate &lt;PATH&gt; [OPTIONS]
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>标志</th><th>默认值</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>--strict-types</code></td><td>false</td><td>将警告视为错误（用于 CI 的非零退出码）</td></tr>
+</tbody>
+</table>
+</div>
+<p>检查项：</p>
+<ol>
+<li><strong>键是否存在</strong>：对应的 <code>outputs</code>/<code>inputs</code> 列表中存在 <code>output_types</code>/<code>input_types</code> 键</li>
+<li><strong>URN 解析</strong>：所有类型 URN 均能在标准或用户自定义类型库中解析</li>
+<li><strong>边兼容性</strong>：相连的边具有兼容的类型（完全匹配、类型拓宽或用户自定义规则）</li>
+<li><strong>参数化类型</strong>：参数不匹配（例如 <code>AudioFrame[sample_type=f32]</code> 与 <code>AudioFrame[sample_type=i16]</code>）</li>
+<li><strong>定时器自动类型化</strong>：定时器输入会被自动标注为 <code>std/core/v1/UInt64</code> 类型</li>
+<li><strong>类型推断</strong>：当只有上游标注了类型时，会自动推断到下游输入上</li>
+<li><strong>元数据模式</strong>：会校验 <code>output_metadata</code> 键和 <code>pattern</code> 简写形式</li>
+<li><strong>模式（Schema）兼容性</strong>：结构体类型会在字段级别进行检查（缺失/错误的字段）</li>
+</ol>
+<p>位于数据流旁的 <code>types/</code> 目录中的用户自定义类型会被自动加载。</p>
+<pre><code class="language-bash"># Validate with warnings
+dora validate dataflow.yml
+
+# Strict mode for CI (exit 1 on warnings)
+dora validate --strict-types dataflow.yml
+</code></pre>
+<p>完整的类型库和用法细节请参阅<a href="https://dora-rs.ai/dora/operations/types.html">类型注解指南</a>。</p>
+<hr/>
+<h3 id="utility-commands"><a class="header" href="cli.html#utility-commands">实用命令</a></h3>
+<h4 id="dora-completion"><a class="header" href="cli.html#dora-completion"><code>dora completion</code></a></h4>
+<p>生成 shell 补全脚本。</p>
+<pre><code>dora completion [SHELL]
+</code></pre>
+<p>如果省略，会自动检测 shell 类型。支持：bash、zsh、fish、elvish、powershell。</p>
+<pre><code class="language-bash"># Bash
+eval "$(dora completion bash)"
+echo 'eval "$(dora completion bash)"' &gt;&gt; ~/.bashrc
+
+# Zsh
+eval "$(dora completion zsh)"
+echo 'eval "$(dora completion zsh)"' &gt;&gt; ~/.zshrc
+
+# Fish
+dora completion fish &gt; ~/.config/fish/completions/dora.fish
+</code></pre>
+<h4 id="dora-system"><a class="header" href="cli.html#dora-system"><code>dora system</code></a></h4>
+<p>系统管理命令。</p>
+<pre><code>dora system status [OPTIONS]
+</code></pre>
+<p>目前提供 <code>status</code> 子命令（等价于 <code>dora status</code>）。</p>
+<hr/>
+<h3 id="self-management-commands"><a class="header" href="cli.html#self-management-commands">自我管理命令</a></h3>
+<h4 id="dora-self-update"><a class="header" href="cli.html#dora-self-update"><code>dora self update</code></a></h4>
+<p>检查并安装 CLI 更新。</p>
+<pre><code>dora self update [--check-only]
+</code></pre>
+<p>从 GitHub releases（<code>dora-rs/dora</code>）下载。</p>
+<h4 id="dora-self-uninstall"><a class="header" href="cli.html#dora-self-uninstall"><code>dora self uninstall</code></a></h4>
+<p>从系统中移除该 CLI。</p>
+<pre><code>dora self uninstall [--force]
+</code></pre>
+<p>不加 <code>--force</code> 时会提示确认（需要 TTY）。会先尝试 <code>uv pip uninstall</code>，然后 <code>pip uninstall</code>，最后再尝试二进制文件自删除。</p>
+<hr/>
+<h2 id="environment-variables"><a class="header" href="cli.html#environment-variables">环境变量</a></h2>
+<p>所有环境变量都只是后备值，CLI 参数始终优先。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>变量</th><th>默认值</th><th>命令</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DORA_COORDINATOR_ADDR</code></td><td><code>127.0.0.1</code></td><td>所有协调器命令</td><td>协调器 IP 地址</td></tr>
+<tr><td><code>DORA_COORDINATOR_PORT</code></td><td><code>6013</code></td><td>所有协调器命令</td><td>协调器 WebSocket 端口。<strong>这是在同一台机器上隔离并发 dora 实例的方式</strong>——命令会作用于端口所属的那个协调器，因此共享默认端口的两个检出会互相 <code>down</code>/<code>stop</code> 对方的数据流</td></tr>
+<tr><td><code>DORA_LOG_LEVEL</code></td><td><code>stdout</code></td><td><code>run</code>, <code>logs</code></td><td>默认的最低日志级别</td></tr>
+<tr><td><code>DORA_LOG_FORMAT</code></td><td><code>pretty</code></td><td><code>run</code>, <code>logs</code></td><td>默认输出格式</td></tr>
+<tr><td><code>DORA_LOG_FILTER</code></td><td></td><td><code>run</code>, <code>logs</code></td><td>默认的按节点级别覆盖设置</td></tr>
+<tr><td><code>DORA_ALLOW_SHELL_NODES</code></td><td></td><td><code>run</code></td><td>启用 shell 节点执行</td></tr>
+<tr><td><code>DORA_RUNTIME_TYPE_CHECK</code></td><td></td><td><code>run</code>, <code>start</code></td><td>运行时类型检查：<code>warn</code>（记录不匹配日志）或 <code>error</code>（不匹配时失败）。参见<a href="https://dora-rs.ai/dora/operations/types.html#runtime-type-checking">类型注解</a></td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-bash"># Set defaults for a development session
+export DORA_COORDINATOR_ADDR=192.168.1.10
+export DORA_LOG_LEVEL=info
+export DORA_LOG_FORMAT=compact
+</code></pre>
+<hr/>
+<h2 id="architecture-guide"><a class="header" href="cli.html#architecture-guide">架构指南</a></h2>
+<p>本节适合想要了解框架内部原理、进行扩展或调试问题的开发者。</p>
+<h3 id="communication-stack"><a class="header" href="cli.html#communication-stack">通信栈</a></h3>
+<pre><code>                    ┌─────────────────────────────────────┐
+                    │           CLI (dora)                │
+                    │   WebSocket (JSON request/reply)     │
+                    └─────────────┬───────────────────────┘
+                                  │
+                    ┌─────────────▼───────────────────────┐
+                    │        Coordinator                   │
+                    │   WebSocket control + daemon mgmt    │
+                    │   State: InMemoryStore | RedbStore   │
+                    └──┬──────────────────────────────┬───┘
+                       │                              │
+          ┌────────────▼──────────┐     ┌─────────────▼──────────┐
+          │     Daemon A          │     │     Daemon B           │
+          │  (machine: robot)     │     │  (machine: gpu-server) │
+          │                       │     │                        │
+          │  ┌─────┐  ┌─────┐    │     │  ┌──────┐  ┌───────┐  │
+          │  │Node1│  │Node2│    │     │  │Node3 │  │Node4  │  │
+          │  └──┬──┘  └──┬──┘    │     │  └──┬───┘  └───┬───┘  │
+          │     │shmem    │shmem  │     │     │shmem      │shmem │
+          │     └────┬────┘       │     │     └─────┬─────┘      │
+          └──────────┼────────────┘     └───────────┼────────────┘
+                     │                              │
+                     └──────── Zenoh pub/sub ────────┘
+                              (cross-machine)
+</code></pre>
+<h3 id="protocol-layers"><a class="header" href="cli.html#protocol-layers">协议分层</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>层</th><th>传输方式</th><th>格式</th><th>用途</th></tr>
+</thead>
+<tbody>
+<tr><td>CLI &lt;-&gt; 协调器</td><td>WebSocket</td><td>JSON（ControlRequest/Reply）</td><td>命令、日志流式传输</td></tr>
+<tr><td>协调器 &lt;-&gt; 守护进程</td><td>WebSocket</td><td>JSON（DaemonCoordinatorEvent）</td><td>节点生命周期、指标</td></tr>
+<tr><td>守护进程 &lt;-&gt; 节点（小数据）</td><td>TCP / Unix socket</td><td>自定义二进制格式</td><td>控制消息、小数据</td></tr>
+<tr><td>守护进程 &lt;-&gt; 节点（大数据）</td><td>共享内存</td><td>零拷贝 Arrow</td><td>大于 4KB 的数据消息</td></tr>
+<tr><td>守护进程 &lt;-&gt; 守护进程</td><td>Zenoh 发布/订阅</td><td>Arrow + 元数据</td><td>跨机器数据路由</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="coordinator-internals"><a class="header" href="cli.html#coordinator-internals">协调器内部原理</a></h3>
+<p>协调器是一个事件驱动的异步服务器：</p>
+<pre><code>Event Sources:
+  - CLI WebSocket connections (ControlRequest)
+  - Daemon WebSocket connections (DaemonEvent)
+  - Heartbeat timer (3s interval)
+  - External events (for embedding)
+
+Event Loop:
+  merge_all(cli_events, daemon_events, heartbeat, external)
+    -&gt; handle_event()
+    -&gt; update state
+    -&gt; persist to store (if redb)
+    -&gt; send replies
+</code></pre>
+<p><strong>关键类型：</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// State
+RunningDataflow { uuid, name, descriptor, daemons, node_metrics, ... }
+RunningBuild    { build_id, errors, log_subscribers, pending_results, ... }
+DaemonConnection { sender, pending_replies, last_heartbeat }
+
+// Store trait
+trait CoordinatorStore: Send + Sync {
+    fn put_dataflow(&amp;self, record: &amp;DataflowRecord) -&gt; Result&lt;()&gt;;
+    fn get_dataflow(&amp;self, uuid: &amp;Uuid) -&gt; Result&lt;Option&lt;DataflowRecord&gt;&gt;;
+    fn list_dataflows(&amp;self) -&gt; Result&lt;Vec&lt;DataflowRecord&gt;&gt;;
+    // ... daemon and build methods
+}
+<span class="boring">}</span></code></pre>
+<p><strong>存储后端：</strong></p>
+<ul>
+<li><code>memory</code>（默认）：存于内存中，重启后丢失。</li>
+<li><code>redb</code>：持久化到磁盘（<code>~/.dora/coordinator.redb</code>），可在崩溃后恢复，需要 <code>redb-backend</code> 特性。</li>
+</ul>
+<pre><code class="language-bash">dora coordinator --store redb
+dora coordinator --store redb:/custom/path.redb
+</code></pre>
+<h3 id="daemon-internals"><a class="header" href="cli.html#daemon-internals">守护进程内部原理</a></h3>
+<p>守护进程负责管理单台机器上的节点进程：</p>
+<pre><code>Per Node:
+  1. Build (if build command specified)
+  2. Spawn process with DORA_NODE_CONFIG env var
+  3. Node registers via TCP/shmem handshake
+  4. Route inputs/outputs between nodes
+  5. Collect metrics (CPU, memory, I/O)
+  6. Handle restart policy on exit
+  7. Forward logs to coordinator
+
+Communication:
+  - Shared memory for messages &gt; 4KB (zero-copy)
+  - TCP for control messages and small data
+  - flume channels for internal event routing
+</code></pre>
+<p><strong>指标采集：</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct NodeMetrics {
+    pid: u32,
+    cpu_usage: f32,      // per-core percentage
+    memory_mb: f64,
+    disk_read_mb_s: Option&lt;f64&gt;,
+    disk_write_mb_s: Option&lt;f64&gt;,
+    status: NodeStatus,  // Running | Restarting | Degraded | Failed
+    restart_count: u32,
+    pending_messages: u64,
+}
+<span class="boring">}</span></code></pre>
+<h3 id="message-types"><a class="header" href="cli.html#message-types">消息类型</a></h3>
+<p>所有组件间消息都定义在 <code>libraries/message/</code> 中：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Node identification
+struct NodeId(String);      // [a-zA-Z0-9_.-], no leading `.`, not `dora`
+struct DataId(String);      // same validation
+type DataflowId = uuid::Uuid;
+
+// Data metadata
+struct Metadata {
+    timestamp: uhlc::Timestamp,    // hybrid logical clock
+    type_info: ArrowTypeInfo,      // Arrow schema
+    parameters: MetadataParameters, // custom key-value pairs
+}
+
+// Node events (daemon -&gt; node)
+enum NodeEvent {
+    Stop,
+    Reload { operator_id },
+    Input { id, metadata, data },
+    InputClosed { id },
+    InputRecovered { id },
+    NodeRestarted { id },
+    AllInputsClosed,
+}
+<span class="boring">}</span></code></pre>
+<h3 id="timestamping"><a class="header" href="cli.html#timestamping">时间戳</a></h3>
+<p>Dora 使用<strong>统一混合逻辑时钟</strong>（UHLC）来处理分布式因果关系。每条消息都携带一个 <code>uhlc::Timestamp</code>，可在没有同步时钟的情况下跨机器保持因果顺序。</p>
+<h3 id="zero-copy-shared-memory"><a class="header" href="cli.html#zero-copy-shared-memory">零拷贝共享内存</a></h3>
+<p>对于较大的消息（&gt; 4KB），守护进程会使用共享内存区域：</p>
+<ol>
+<li>发送方节点向守护进程请求一个共享内存槽位</li>
+<li>守护进程分配一个区域并返回其 ID</li>
+<li>发送方将 Arrow 数据直接写入共享内存</li>
+<li>守护进程将该区域 ID 通知给接收方节点</li>
+<li>接收方直接从共享内存读取（零拷贝）</li>
+<li>接收方处理完成后发送一个释放令牌（drop token）</li>
+</ol>
+<p>这使大负载场景下的延迟比 ROS2 低 10 到 17 倍。</p>
+<hr/>
+<h2 id="writing-nodes"><a class="header" href="cli.html#writing-nodes">编写节点</a></h2>
+<h3 id="rust-node"><a class="header" href="cli.html#rust-node">Rust 节点</a></h3>
+<pre class="playground"><code class="language-rust">use dora_node_api::{DoraNode, Event, IntoArrow};
+use dora_core::config::DataId;
+
+fn main() -&gt; eyre::Result&lt;()&gt; {
+    let (mut node, mut events) = DoraNode::init_from_env()?;
+
+    let output = DataId::from("result".to_owned());
+
+    while let Some(event) = events.recv() {
+        match event {
+            Event::Input { id, metadata, data } =&gt; {
+                // Process input data (Arrow array)
+                let result: u64 = 42;
+                node.send_output(
+                    output.clone(),
+                    metadata.parameters,
+                    result.into_arrow(),
+                )?;
+            }
+            Event::Stop(_) =&gt; break,
+            Event::InputClosed { id } =&gt; {
+                eprintln!("input {id} closed");
+            }
+            Event::InputRecovered { id } =&gt; {
+                eprintln!("input {id} recovered");
+            }
+            _ =&gt; {}
+        }
+    }
+    Ok(())
+}</code></pre>
+<p><strong>Cargo.toml：</strong></p>
+<pre><code class="language-toml">[dependencies]
+dora-node-api = { workspace = true }
+eyre = "0.6"
+</code></pre>
+<h3 id="python-node"><a class="header" href="cli.html#python-node">Python 节点</a></h3>
+<pre><code class="language-python">import pyarrow as pa
+from dora import Node
+
+node = Node()
+
+for event in node:
+    if event["type"] == "INPUT":
+        # event["value"] is a PyArrow array
+        values = event["value"].to_pylist()
+        result = pa.array([sum(values)])
+        node.send_output("result", result)
+    elif event["type"] == "STOP":
+        break
+</code></pre>
+<h3 id="c-node"><a class="header" href="cli.html#c-node">C 节点</a></h3>
+<pre><code class="language-c">#include "node_api.h"
+
+int main() {
+    void *ctx = init_dora_context_from_env();
+    // ... event loop using dora_next_event / dora_send_output
+    free_dora_context(ctx);
+    return 0;
+}
+</code></pre>
+<h3 id="node-logging"><a class="header" href="cli.html#node-logging">节点日志</a></h3>
+<p>节点可以输出结构化日志：</p>
+<p><strong>Rust：</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Via tracing (recommended)
+tracing::info!("processing frame {}", frame_id);
+
+// Via node API
+node.log_info("processing complete");
+node.log_with_fields("info", "reading", None, Some(&amp;fields));
+<span class="boring">}</span></code></pre>
+<p><strong>Python：</strong></p>
+<pre><code class="language-python">import logging
+logging.info("processing frame %d", frame_id)
+
+# Or via node API
+node.log("info", "processing complete")
+</code></pre>
+<hr/>
+<h2 id="writing-operators"><a class="header" href="cli.html#writing-operators">编写算子</a></h2>
+<p>算子在共享运行时内以进程内方式运行，避免了启动新进程的开销。</p>
+<h3 id="rust-operator"><a class="header" href="cli.html#rust-operator">Rust 算子</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_operator_api::{register_operator, DoraOperator, DoraOutputSender, DoraStatus, Event};
+
+#[register_operator]
+#[derive(Default)]
+pub struct MyOperator {
+    counter: u32,
+}
+
+impl DoraOperator for MyOperator {
+    fn on_event(
+        &amp;mut self,
+        event: &amp;Event,
+        output_sender: &amp;mut DoraOutputSender,
+    ) -&gt; Result&lt;DoraStatus, String&gt; {
+        match event {
+            Event::Input { id, data } =&gt; {
+                self.counter += 1;
+                output_sender.send(
+                    "count".to_string(),
+                    arrow::array::UInt32Array::from(vec![self.counter]),
+                )?;
+                Ok(DoraStatus::Continue)
+            }
+            Event::Stop =&gt; Ok(DoraStatus::Stop),
+            _ =&gt; Ok(DoraStatus::Continue),
+        }
+    }
+}
+<span class="boring">}</span></code></pre>
+<p><strong>Cargo.toml：</strong></p>
+<pre><code class="language-toml">[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+dora-operator-api = { workspace = true }
+arrow = "53"
+</code></pre>
+<h3 id="python-operator"><a class="header" href="cli.html#python-operator">Python 算子</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: my-node
+    operator:
+      python: my_operator.py
+      inputs:
+        data: source/output
+      outputs:
+        - result
+</code></pre>
+<pre><code class="language-python"># my_operator.py
+class Operator:
+    def __init__(self):
+        self.counter = 0
+
+    def on_event(self, event, send_output):
+        if event["type"] == "INPUT":
+            self.counter += 1
+            send_output("result", pa.array([self.counter]))
+</code></pre>
+<hr/>
+<h2 id="distributed-deployments"><a class="header" href="cli.html#distributed-deployments">分布式部署</a></h2>
+<h3 id="setup"><a class="header" href="cli.html#setup">设置</a></h3>
+<pre><code class="language-bash"># Machine A (coordinator + daemon, listening on the LAN address so B and C can reach it)
+dora up --interface 192.168.1.10
+
+# Machine B (daemon only; runs the `robot` nodes — camera + actuator)
+dora daemon --coordinator-addr 192.168.1.10 --machine-id robot
+
+# Machine C (daemon only; runs the `gpu-server` node — inference)
+dora daemon --coordinator-addr 192.168.1.10 --machine-id gpu-server
+</code></pre>
+<h3 id="dataflow-with-machine-assignment"><a class="header" href="cli.html#dataflow-with-machine-assignment">带机器分配的数据流</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: camera
+    deploy:
+      machine: robot
+    path: ./camera-driver
+    outputs:
+      - frames
+
+  - id: inference
+    deploy:
+      machine: gpu-server
+    path: ./ml-model
+    inputs:
+      frames: camera/frames
+    outputs:
+      - predictions
+
+  - id: actuator
+    deploy:
+      machine: robot
+    path: ./actuator-driver
+    inputs:
+      commands: inference/predictions
+</code></pre>
+<h3 id="build-and-start"><a class="header" href="cli.html#build-and-start">构建与启动</a></h3>
+<pre><code class="language-bash"># Point the CLI at the coordinator (otherwise it connects to 127.0.0.1 and
+# fails once the coordinator is bound to the LAN address with --interface)
+export DORA_COORDINATOR_ADDR=192.168.1.10
+
+# From any machine with coordinator access
+dora build dataflow.yml       # distributed build on target machines
+dora start dataflow.yml --name my-robot --attach
+</code></pre>
+<h3 id="monitor"><a class="header" href="cli.html#monitor">监控</a></h3>
+<pre><code class="language-bash"># Resource usage across all machines
+dora top
+
+# Logs from any node regardless of machine
+dora logs my-robot --node inference --follow
+
+# List all dataflows
+dora list
+</code></pre>
+<h3 id="coordinator-persistence"><a class="header" href="cli.html#coordinator-persistence">协调器持久化</a></h3>
+<p>在生产环境中，请使用 redb 存储后端，以便协调器在重启后仍能保留状态：</p>
+<pre><code class="language-bash">dora coordinator --store redb
+</code></pre>
+<p>状态会持久化到 <code>~/.dora/coordinator.redb</code>。重启后，陈旧的数据流会被标记为失败，协调器会恢复正常运行。</p>
+<blockquote>
+<p>对于受管理的集群部署（cluster.yml、基于 SSH 的生命周期管理、标签调度、systemd 服务、滚动升级），请参阅<a href="https://dora-rs.ai/dora/operations/distributed-deployment.html">分布式部署指南</a>。</p>
+</blockquote>
+<hr/>
+<h2 id="troubleshooting"><a class="header" href="cli.html#troubleshooting">故障排查</a></h2>
+<blockquote>
+<p>若需涵盖录制/回放流程、话题检查、资源监控以及端到端调试场景的完整调试指南，请参阅<a href="debugging.html">调试与可观测性指南</a>。</p>
+</blockquote>
+<h3 id="common-issues"><a class="header" href="cli.html#common-issues">常见问题</a></h3>
+<p><strong>“无法连接到 dora-coordinator”</strong></p>
+<ul>
+<li>先运行 <code>dora up</code>，或检查 <code>DORA_COORDINATOR_ADDR</code> / <code>DORA_COORDINATOR_PORT</code></li>
+<li>用 <code>dora status</code> 验证</li>
+</ul>
+<p><strong>“未启用 enable_debug_inspection”</strong></p>
+<ul>
+<li>使用 <code>--debug</code> 参数：<code>dora start dataflow.yml --debug</code> 或 <code>dora run dataflow.yml --debug</code></li>
+<li><span>或者添加到你的 dataflow YAML 中：</span><pre><code class="language-yaml">debug:
+  enable_debug_inspection: true
+</code></pre>
+</li>
+<li><code>topic echo</code>、<code>topic hz</code>、<code>topic info</code> 需要此项</li>
+</ul>
+<p><strong>“<code>dora top</code> 需要交互式终端”</strong></p>
+<ul>
+<li>这些 TUI 命令需要真实终端（不能是管道输出）</li>
+<li><code>topic hz</code> 同理</li>
+</ul>
+<p><strong>节点未收到输入</strong></p>
+<ul>
+<li>检查输出名称是否匹配：<code>source_node/output_id</code></li>
+<li>确认源节点的 <code>outputs:</code> 数组中列出了该输出</li>
+<li>用 <code>dora topic list</code> 检查可用话题</li>
+</ul>
+<p><strong>日志未出现</strong></p>
+<ul>
+<li>检查 <code>--log-level</code> 设置（默认 <code>stdout</code> 会显示所有内容）</li>
+<li>检查 YAML 中的 <code>min_log_level</code>（在源头过滤）</li>
+<li>分布式场景下：验证协调器 / 守护进程的连通性</li>
+</ul>
+<p><strong>使用 git 来源构建失败</strong></p>
+<ul>
+<li>确认 <code>git:</code> URL 可访问</li>
+<li>检查 <code>branch</code>、<code>tag</code> 或 <code>rev</code> 是否存在</li>
+<li>构建命令是从 git 仓库根目录运行的，而不是数据流目录</li>
+</ul>
+<h3 id="debug-workflow"><a class="header" href="cli.html#debug-workflow">调试工作流</a></h3>
+<pre><code class="language-bash"># 1. Full environment diagnosis
+dora doctor --dataflow dataflow.yml
+
+# 2. Start with verbose logging and debug topics
+dora run dataflow.yml --log-level trace --debug
+
+# 3. Inspect a specific node
+dora node info -d my-dataflow problem-node
+
+# 4. Monitor specific node logs
+dora logs my-dataflow --node problem-node --follow --level debug
+
+# 5. Check resource usage
+dora top
+
+# 6. Inspect topic data
+dora topic echo -d my-dataflow problem-node/output
+
+# 7. Publish test data to a topic
+dora topic pub -d my-dataflow problem-node/input '[1, 2, 3]'
+
+# 8. Measure frequencies
+dora topic hz -d my-dataflow --window 5
+
+# 9. View/modify runtime parameters
+dora param list -d my-dataflow problem-node
+dora param set -d my-dataflow problem-node threshold 42
+
+# 10. Restart a misbehaving node without stopping the dataflow
+dora node restart -d my-dataflow problem-node
+
+# 11. View coordinator traces (no external infra needed)
+dora trace list
+dora trace view &lt;trace-id-prefix&gt;
+
+# 12. Visualize dataflow graph
+dora graph dataflow.yml --open
+</code></pre>
+<h3 id="log-file-locations"><a class="header" href="cli.html#log-file-locations">日志文件位置</a></h3>
+<pre><code>out/
+  &lt;dataflow-uuid&gt;/
+    log_&lt;node-id&gt;.jsonl          # current log
+    log_&lt;node-id&gt;.1.jsonl        # rotated (previous)
+    log_&lt;node-id&gt;.2.jsonl        # rotated (older)
+</code></pre>
+<p>直接读取：</p>
+<pre><code class="language-bash">dora logs --local --all-nodes
+dora logs --local &lt;node-name&gt; --tail 50
+</code></pre>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/operations/cli.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="../languages/cpp.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="logging.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="../languages/cpp.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="logging.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/operations/cli.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

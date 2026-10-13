@@ -1,0 +1,960 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>Python - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/languages/python.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="python-api-reference"><a class="header" href="python.html#python-api-reference">Python API 参考</a></h1>
+<p>本文档介绍用于构建 dora 节点、算子和数据流的 Python API。可通过以下方式安装：</p>
+<pre><code class="language-bash">pip install dora-rs
+</code></pre>
+<hr/>
+<h2 id="table-of-contents"><a class="header" href="python.html#table-of-contents">目录</a></h2>
+<ul>
+<li><a href="python.html#node-api">Node API</a>
+<ul>
+<li><a href="python.html#node-class">Node 类</a></li>
+<li><a href="python.html#event-dictionary">事件字典</a></li>
+<li><a href="python.html#dorastatus-enum">DoraStatus 枚举</a></li>
+</ul>
+</li>
+<li><a href="python.html#operator-api">Operator API</a>
+<ul>
+<li><a href="python.html#operator-class-user-defined">Operator 类（用户自定义）</a></li>
+<li><a href="python.html#send_output-callback">send_output 回调</a></li>
+</ul>
+</li>
+<li><a href="python.html#dataflowbuilder">DataflowBuilder</a>
+<ul>
+<li><a href="python.html#dataflowbuilder-class">DataflowBuilder 类</a></li>
+<li><a href="python.html#node-class-builder">Node 类（构建器）</a></li>
+<li><a href="python.html#output-class-builder">Output 类（构建器）</a></li>
+<li><a href="python.html#operator-class-builder">Operator 类（构建器）</a></li>
+</ul>
+</li>
+<li><a href="python.html#cuda-module">CUDA 模块</a></li>
+<li><a href="python.html#quick-start-example">快速开始示例</a></li>
+<li><a href="python.html#dataflowbuilder-example">DataflowBuilder 示例</a></li>
+</ul>
+<hr/>
+<h2 id="node-api"><a class="header" href="python.html#node-api">Node API</a></h2>
+<pre><code class="language-python">from dora import Node
+</code></pre>
+<p><code>Node</code> 类是自定义节点的主要接口。它连接到正在运行的数据流，接收输入事件并发送输出。</p>
+<h3 id="node-class"><a class="header" href="python.html#node-class">Node 类</a></h3>
+<h4 id="__init__node_idnone"><a class="header" href="python.html#__init__node_idnone"><code>__init__(node_id=None)</code></a></h4>
+<p>创建一个新节点并连接到正在运行的数据流。</p>
+<pre><code class="language-python"># Standard: node ID is read from environment variables set by the daemon
+node = Node()
+
+# Dynamic: connect to a running dataflow by explicit node ID
+node = Node(node_id="my-dynamic-node")
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>node_id</code>（str，可选）——动态节点的显式节点 ID。省略时，节点会从 dora 守护进程设置的环境变量中读取自身身份。</li>
+</ul>
+<p><strong>异常：</strong> 若节点无法连接到数据流，将抛出 <code>RuntimeError</code>。</p>
+<hr/>
+<h4 id="nexttimeoutnone"><a class="header" href="python.html#nexttimeoutnone"><code>next(timeout=None)</code></a></h4>
+<p>从事件流中获取下一个事件。会阻塞，直到有事件可用或超时。</p>
+<pre><code class="language-python">event = node.next()              # block indefinitely
+event = node.next(timeout=2.0)   # block up to 2 seconds
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>timeout</code>（float，可选）——最长等待时间（秒）。</li>
+</ul>
+<p><strong>返回：</strong> <code>dict</code>——一个<a href="python.html#event-dictionary">事件字典</a>；若所有发送方均已被丢弃或超时，则返回 <code>None</code>。</p>
+<hr/>
+<h4 id="drain"><a class="header" href="python.html#drain"><code>drain()</code></a></h4>
+<p>非阻塞地获取所有已缓冲的事件。</p>
+<pre><code class="language-python">events = node.drain()
+for event in events:
+    print(event["type"])
+</code></pre>
+<p><strong>返回：</strong> <code>list[dict]</code>——一个<a href="python.html#event-dictionary">事件字典</a>列表。如果没有缓冲的事件，则返回空列表。</p>
+<hr/>
+<h4 id="try_recv"><a class="header" href="python.html#try_recv"><code>try_recv()</code></a></h4>
+<p>非阻塞接收。如果有可用的事件，返回下一个缓冲的事件。</p>
+<pre><code class="language-python">event = node.try_recv()
+if event is not None:
+    print(event["type"])
+</code></pre>
+<p><strong>返回：</strong> <code>dict | None</code>——一个<a href="python.html#event-dictionary">事件字典</a>；若没有缓冲的事件，则返回 <code>None</code>。</p>
+<hr/>
+<h4 id="recv_asynctimeoutnone"><a class="header" href="python.html#recv_asynctimeoutnone"><code>recv_async(timeout=None)</code></a></h4>
+<p>异步接收。供 <code>asyncio</code> 使用。</p>
+<pre><code class="language-python">event = await node.recv_async()
+event = await node.recv_async(timeout=5.0)
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>timeout</code>（float，可选）——最长等待时间（秒）。达到超时时返回错误。</li>
+</ul>
+<p><strong>返回：</strong> <code>dict | None</code>——一个<a href="python.html#event-dictionary">事件字典</a>；若所有发送方均已被丢弃，则返回 <code>None</code>。</p>
+<blockquote>
+<p><strong>注意：</strong> 此方法为实验性功能。pyo3 异步（Rust-Python FFI）集成仍在开发中。</p>
+</blockquote>
+<hr/>
+<h4 id="is_empty"><a class="header" href="python.html#is_empty"><code>is_empty()</code></a></h4>
+<p>检查事件流中是否有缓冲的事件。</p>
+<pre><code class="language-python">if not node.is_empty():
+    event = node.try_recv()
+</code></pre>
+<p><strong>返回：</strong> <code>bool</code></p>
+<hr/>
+<h4 id="send_outputoutput_id-data-metadatanone"><a class="header" href="python.html#send_outputoutput_id-data-metadatanone"><code>send_output(output_id, data, metadata=None)</code></a></h4>
+<p>在输出通道上发送数据。</p>
+<pre><code class="language-python">import pyarrow as pa
+
+# Send raw bytes
+node.send_output("status", b"OK")
+
+# Send an Apache Arrow array (zero-copy capable)
+node.send_output("values", pa.array([1, 2, 3]))
+
+# Send with metadata
+node.send_output("image", pa.array(pixels), {"camera_id": "front"})
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>output_id</code>（str）——数据流 YAML 中声明的输出名称。</li>
+<li><code>data</code>（bytes | pyarrow.Array）——消息负载。简单数据使用 <code>bytes</code>，零拷贝共享内存传输使用 <code>pyarrow.Array</code>。</li>
+<li><code>metadata</code>（dict，可选）——附加在消息上的键值对。支持的值类型：<code>bool</code>、<code>int</code>、<code>float</code>、<code>str</code>、<code>list[int]</code>、<code>list[float]</code>、<code>list[str]</code>、<code>datetime.datetime</code>。</li>
+</ul>
+<p><strong>异常：</strong> 如果 <code>data</code> 既不是 <code>bytes</code> 也不是 <code>pyarrow.Array</code>，则抛出 <code>RuntimeError</code>。</p>
+<h5 id="service-action-and-streaming-patterns"><a class="header" href="python.html#service-action-and-streaming-patterns">服务、动作与流式传输模式</a></h5>
+<p>Python 节点与 Rust 一样，在<a href="https://dora-rs.ai/dora/languages/patterns.html">通信模式</a>中使用相同的元数据键约定。参数是以字符串为键的普通字典。</p>
+<p><strong>常用元数据键：</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>键</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"request_id"</code></td><td>服务（Service）请求 / 响应关联（UUID v7）</td></tr>
+<tr><td><code>"goal_id"</code></td><td>动作（Action）目标标识（UUID v7）</td></tr>
+<tr><td><code>"goal_status"</code></td><td>动作结果状态：<code>"succeeded"</code>、<code>"aborted"</code> 或 <code>"canceled"</code></td></tr>
+<tr><td><code>"session_id"</code></td><td>流式会话标识符</td></tr>
+<tr><td><code>"segment_id"</code></td><td>会话内的流式片段（整数）</td></tr>
+<tr><td><code>"seq"</code></td><td>流式数据块的序号（整数）</td></tr>
+<tr><td><code>"fin"</code></td><td>流式片段的最后一个数据块（布尔值）</td></tr>
+<tr><td><code>"flush"</code></td><td>在输入端丢弃较旧的排队消息（布尔值）</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>服务客户端示例：</strong></p>
+<pre><code class="language-python">import uuid
+
+# Send a request with a unique request_id
+request_id = str(uuid.uuid7())  # Python 3.13+; use uuid_utils or uuid.uuid4() on older versions
+node.send_output("request", data, {"request_id": request_id})
+</code></pre>
+<p><strong>服务服务端示例：</strong></p>
+<pre><code class="language-python"># Pass through the metadata (includes request_id) from the incoming request
+node.send_output("response", result, event["metadata"])
+</code></pre>
+<p><strong>动作客户端示例：</strong></p>
+<pre><code class="language-python">goal_id = str(uuid.uuid7())
+node.send_output("goal", data, {"goal_id": goal_id})
+</code></pre>
+<p><strong>流式示例</strong>（用户中断时清空下游队列）：</p>
+<pre><code class="language-python"># `metadata` is a flat dict of parameter name -&gt; value; there is no
+# enclosing "parameters" key.
+node.send_output(
+    "text",
+    data,
+    metadata={
+        "session_id": session_id,
+        "segment_id": 1,
+        "seq": 0,
+        "fin": False,
+        "flush": True,
+    },
+)
+</code></pre>
+<p>完整指南请参见 <a href="https://dora-rs.ai/dora/languages/patterns.html">patterns.md</a>。</p>
+<hr/>
+<h4 id="logging"><a class="header" href="python.html#logging">日志记录</a></h4>
+<p>Python 节点可以使用 Python 内置的 <code>logging</code> 模块（推荐）或显式的节点 API 来记录日志。</p>
+<p><strong>Python <code>logging</code> 模块（自动桥接）：</strong></p>
+<p>创建 <code>Node()</code> 时，会自动安装一个处理器，将 Python 的 <code>logging</code> 模块路由到 dora 守护进程。无需任何配置：</p>
+<pre><code class="language-python">import logging
+from dora import Node
+
+node = Node()  # Installs the logging bridge
+
+logging.info("Sensor initialized")       # -&gt; structured "info" log entry
+logging.warning("High temperature")      # -&gt; structured "warn" log entry
+logging.debug("Raw bytes: %s", data)     # -&gt; structured "debug" log entry
+</code></pre>
+<p>这些日志条目会连同完整的元数据（级别、消息、文件路径、行号）一起被捕获，并可配合 <code>min_log_level</code> 过滤、<code>send_logs_as</code> 路由以及 <code>dora/logs</code> 订阅者使用。</p>
+<blockquote>
+<p><strong>注意：</strong> 不要在创建 <code>Node()</code> 之前调用 <code>logging.basicConfig()</code>。构造函数会设置好桥接；如果先调用 <code>basicConfig()</code>，可能会安装一个冲突的处理器。</p>
+</blockquote>
+<p><strong>显式节点 API：</strong></p>
+<h4 id="loglevel-message-targetnone-fieldsnone"><a class="header" href="python.html#loglevel-message-targetnone-fieldsnone"><code>log(level, message, target=None, fields=None)</code></a></h4>
+<p>发出一条结构化日志消息，可带可选的 target 和键值字段。</p>
+<pre><code class="language-python">node.log("info", "Processing frame", target="vision")
+node.log("error", "Sensor timeout", fields={"sensor": "lidar", "retry": "3"})
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>level</code> (str)——日志级别：<code>"error"</code>、<code>"warn"</code>、<code>"info"</code>、<code>"debug"</code> 或 <code>"trace"</code>。</li>
+<li><code>message</code> (str)——日志消息。</li>
+<li><code>target</code> (str, optional)——目标模块或子系统名称。</li>
+<li><code>fields</code> (dict[str, str], optional)——结构化的键值上下文字段。</li>
+</ul>
+<p>可配合守护进程的 <code>min_log_level</code> 过滤、<code>send_logs_as</code> 路由以及 <code>dora/logs</code> 订阅者使用。</p>
+<hr/>
+<h4 id="log_errormessage-log_warnmessage-log_infomessage-log_debugmessage-log_tracemessage"><a class="header" href="python.html#log_errormessage-log_warnmessage-log_infomessage-log_debugmessage-log_tracemessage"><code>log_error(message)</code>, <code>log_warn(message)</code>, <code>log_info(message)</code>, <code>log_debug(message)</code>, <code>log_trace(message)</code></a></h4>
+<p>常用日志级别的便捷方法：</p>
+<pre><code class="language-python">node.log_error("Connection failed")
+node.log_warn("Temperature elevated")
+node.log_info("Sensor initialized")
+node.log_debug("Raw bytes received")
+node.log_trace("Entering loop iteration")
+</code></pre>
+<p>每个方法都等价于 <code>node.log(level, message)</code>。</p>
+<p><strong>何时使用哪种方式：</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方法</th><th>是否结构化？</th><th>是否支持字段？</th><th>最适用于</th></tr>
+</thead>
+<tbody>
+<tr><td><code>logging.info()</code></td><td>是</td><td>否</td><td>通用日志记录</td></tr>
+<tr><td><code>node.log("info", msg, fields={...})</code></td><td>是</td><td>是</td><td>结构化上下文（sensor_id 等）</td></tr>
+<tr><td><code>node.log_info(msg)</code></td><td>是</td><td>否</td><td>快速一行记录</td></tr>
+<tr><td><code>print()</code></td><td>否</td><td>否</td><td>旧代码、快速调试</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h4 id="dataflow_descriptor"><a class="header" href="python.html#dataflow_descriptor"><code>dataflow_descriptor()</code></a></h4>
+<p>以 Python 字典形式返回完整的数据流描述符（解析后的 dataflow YAML）。</p>
+<pre><code class="language-python">descriptor = node.dataflow_descriptor()
+print(descriptor["nodes"])
+</code></pre>
+<p><strong>返回：</strong> <code>dict</code></p>
+<hr/>
+<h4 id="node_config"><a class="header" href="python.html#node_config"><code>node_config()</code></a></h4>
+<p>从数据流描述符中返回该节点的配置块。</p>
+<pre><code class="language-python">config = node.node_config()
+model_path = config.get("model", "default.pt")
+</code></pre>
+<p><strong>返回：</strong> <code>dict</code></p>
+<hr/>
+<h4 id="dataflow_id"><a class="header" href="python.html#dataflow_id"><code>dataflow_id()</code></a></h4>
+<p>返回正在运行的数据流的唯一标识符。</p>
+<pre><code class="language-python">print(node.dataflow_id())  # e.g. "a1b2c3d4-..."
+</code></pre>
+<p><strong>返回：</strong> <code>str</code></p>
+<hr/>
+<h4 id="is_restart"><a class="header" href="python.html#is_restart"><code>is_restart()</code></a></h4>
+<p>检查该节点是否在之前退出或失败后被重启。用于决定是否恢复已保存的状态还是重新开始。</p>
+<pre><code class="language-python">if node.is_restart():
+    restore_checkpoint()
+</code></pre>
+<p><strong>返回：</strong> <code>bool</code></p>
+<hr/>
+<h4 id="restart_count"><a class="header" href="python.html#restart_count"><code>restart_count()</code></a></h4>
+<p>返回该节点已被重启的次数。首次运行返回 <code>0</code>，第一次重启后返回 <code>1</code>，依此类推。</p>
+<pre><code class="language-python">print(f"Restart #{node.restart_count()}")
+</code></pre>
+<p><strong>返回：</strong> <code>int</code></p>
+<hr/>
+<h4 id="merge_external_eventssubscription-idnone"><a class="header" href="python.html#merge_external_eventssubscription-idnone"><code>merge_external_events(subscription, id=None)</code></a></h4>
+<p>将一个 ROS2 订阅流合并到节点的主事件循环中。调用此方法后，ROS2 消息会作为事件到达，其 <code>kind</code> 设为 <code>"external"</code>，<code>id</code> 设为该订阅的 <code>id</code>（默认为其 ROS2 话题名称）。每个订阅调用一次此方法，即可在一个节点中处理多个话题。</p>
+<pre><code class="language-python">from dora import Node, Ros2Context, Ros2NodeOptions, Ros2QosPolicies
+
+node = Node()
+ros2_context = Ros2Context()
+ros2_node = ros2_context.new_node("listener", "/", Ros2NodeOptions())
+qos = Ros2QosPolicies()
+chatter = ros2_node.create_subscription(
+    ros2_node.create_topic("/chatter", "std_msgs/String", qos)
+)
+pose = ros2_node.create_subscription(
+    ros2_node.create_topic("/turtle1/pose", "turtlesim/Pose", qos)
+)
+
+node.merge_external_events(chatter)            # id defaults to "/chatter"
+node.merge_external_events(pose, id="pose")    # or choose your own label
+
+for event in node:
+    if event["kind"] == "external":
+        print("ROS2", event["id"], event["value"])
+    elif event["type"] == "INPUT":
+        print("Dora:", event["id"])
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>subscription</code> (<code>dora.Ros2Subscription</code>)——通过 dora ROS2 桥接创建的 ROS2 订阅。</li>
+<li><code>id</code> (<code>str</code>, optional)——来自该订阅的事件标签，以 <code>event["id"]</code> 形式返回。默认为该订阅话题的名称，与传给 <code>create_topic</code> 的名称完全一致（不进行命名空间解析）。不能为空。</li>
+</ul>
+<hr/>
+<h4 id="iteration-support"><a class="header" href="python.html#iteration-support">迭代支持</a></h4>
+<p><code>Node</code> 类实现了 <code>__iter__</code> 和 <code>__next__</code>，因此可以直接对其进行迭代：</p>
+<pre><code class="language-python">for event in node:
+    match event["type"]:
+        case "INPUT":
+            process(event["value"])
+        case "STOP":
+            break
+</code></pre>
+<p>该迭代器在每次迭代时都以不设超时的方式调用 <code>next()</code>。当事件流关闭时，它会返回 <code>None</code>，从而终止循环。</p>
+<hr/>
+<h3 id="event-dictionary"><a class="header" href="python.html#event-dictionary">事件字典</a></h3>
+<p>事件以普通 Python 字典的形式返回，其结构取决于事件类型。</p>
+<h4 id="input"><a class="header" href="python.html#input">INPUT</a></h4>
+<p>来自另一个节点的输入消息到达。</p>
+<pre><code class="language-python">{
+    "type": "INPUT",
+    "id": "camera_image",          # input ID as declared in the dataflow YAML
+    "kind": "dora",               # "dora" for dataflow events, "external" for ROS2
+    "value": &lt;pyarrow.Array&gt;,      # the payload as an Apache Arrow array
+    "metadata": {
+        "timestamp": datetime,     # UTC-aware datetime.datetime
+        "open_telemetry_context": "...",  # tracing context (if enabled)
+        ...                        # any user-supplied metadata
+    },
+}
+</code></pre>
+<p>访问数据：</p>
+<pre><code class="language-python">values = event["value"].to_pylist()     # convert to Python list
+array = event["value"].to_numpy()       # convert to NumPy array
+</code></pre>
+<h4 id="input_closed"><a class="header" href="python.html#input_closed">INPUT_CLOSED</a></h4>
+<p>某个输入通道已关闭（上游节点已结束）。</p>
+<pre><code class="language-python">{
+    "type": "INPUT_CLOSED",
+    "id": "camera_image",
+    "kind": "dora",
+}
+</code></pre>
+<h4 id="stop"><a class="header" href="python.html#stop">STOP</a></h4>
+<p>数据流正在关闭。</p>
+<pre><code class="language-python">{
+    "type": "STOP",
+    "id": "MANUAL" | "ALL_INPUTS_CLOSED",   # stop cause
+    "kind": "dora",
+}
+</code></pre>
+<h4 id="error"><a class="header" href="python.html#error">ERROR</a></h4>
+<p>运行时中发生了错误。</p>
+<pre><code class="language-python">{
+    "type": "ERROR",
+    "error": "description of the error",
+    "kind": "dora",
+}
+</code></pre>
+<h4 id="external-ros2"><a class="header" href="python.html#external-ros2">External（ROS2）</a></h4>
+<p>使用 <code>merge_external_events</code> 时，ROS2 消息会以如下形式到达：</p>
+<pre><code class="language-python">{
+    "kind": "external",
+    "id": "/turtle1/pose",      # the `id` given to merge_external_events, or the topic name
+    "value": &lt;pyarrow.Array&gt;,   # the ROS2 message as an Arrow array
+}
+</code></pre>
+<hr/>
+<h3 id="dorastatus-enum"><a class="header" href="python.html#dorastatus-enum">DoraStatus 枚举</a></h3>
+<p>用作算子 <code>on_event</code> 方法的返回值，以控制事件循环。</p>
+<pre><code class="language-python">from dora import DoraStatus
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>值</th><th>含义</th></tr>
+</thead>
+<tbody>
+<tr><td><code>DoraStatus.CONTINUE</code></td><td>继续处理事件（值为 <code>0</code>）</td></tr>
+<tr><td><code>DoraStatus.STOP</code></td><td>停止该算子（值为 <code>1</code>）</td></tr>
+<tr><td><code>DoraStatus.STOP_ALL</code></td><td>停止整个数据流（值为 <code>2</code>）</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="operator-api"><a class="header" href="python.html#operator-api">算子 API</a></h2>
+<p>算子运行在 dora 运行时进程内（不单独起操作系统进程）。它们被定义为一个名为 <code>Operator</code> 的 Python 类，并带有一个 <code>on_event</code> 方法。</p>
+<h3 id="operator-class-user-defined"><a class="header" href="python.html#operator-class-user-defined">Operator 类（用户自定义）</a></h3>
+<p>创建一个包含 <code>Operator</code> 类的 Python 文件：</p>
+<pre><code class="language-python">from dora import DoraStatus
+
+class Operator:
+    def __init__(self):
+        # Initialize state here
+        self.count = 0
+
+    def on_event(self, dora_event, send_output) -&gt; DoraStatus:
+        if dora_event["type"] == "INPUT":
+            self.count += 1
+            # Process the input and optionally send output
+            send_output("result", b"processed", dora_event["metadata"])
+        return DoraStatus.CONTINUE
+</code></pre>
+<p><strong>方法：</strong></p>
+<ul>
+<li><code>__init__(self)</code>——算子加载时调用一次。在此初始化状态或模型。</li>
+<li><code>on_event(self, dora_event, send_output) -&gt; DoraStatus</code>——每个到来的事件都会调用一次。必须返回一个 <code>DoraStatus</code> 值。</li>
+</ul>
+<p><strong><code>on_event</code> 的参数：</strong></p>
+<ul>
+<li><code>dora_event</code> (dict)——一个<a href="python.html#event-dictionary">事件字典</a>。</li>
+<li><code>send_output</code> (callable)——用于发送输出数据的回调函数（见下文）。</li>
+</ul>
+<p>运行时还会在算子实例上设置 <code>self.dataflow_descriptor</code>，其值为解析后的 dataflow YAML 字典。</p>
+<h3 id="send_output-callback"><a class="header" href="python.html#send_output-callback">send_output 回调</a></h3>
+<p><code>send_output</code> 回调会传给 <code>on_event</code>，用于从算子中发送数据。</p>
+<pre><code class="language-python">send_output(output_id, data, metadata=None)
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>output_id</code>（str）——数据流 YAML 中声明的输出名称。</li>
+<li><code>data</code> (bytes | pyarrow.Array)——数据负载。</li>
+<li><code>metadata</code> (dict, optional)——要附加的元数据。传入 <code>dora_event["metadata"]</code> 以传递追踪上下文。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre><code class="language-python">import pyarrow as pa
+from dora import DoraStatus
+
+class Operator:
+    def on_event(self, dora_event, send_output) -&gt; DoraStatus:
+        if dora_event["type"] == "INPUT":
+            result = pa.array([42], type=pa.int64())
+            send_output("output", result, dora_event["metadata"])
+        return DoraStatus.CONTINUE
+</code></pre>
+<hr/>
+<h2 id="dataflowbuilder"><a class="header" href="python.html#dataflowbuilder">DataflowBuilder</a></h2>
+<pre><code class="language-python">from dora.builder import DataflowBuilder, Node, Operator, Output
+</code></pre>
+<p>以编程方式构建 dataflow YAML。</p>
+<h3 id="dataflowbuilder-class"><a class="header" href="python.html#dataflowbuilder-class">DataflowBuilder 类</a></h3>
+<h4 id="__init__namedora-dataflow"><a class="header" href="python.html#__init__namedora-dataflow"><code>__init__(name="dora-dataflow")</code></a></h4>
+<p>创建一个新的数据流构建器。</p>
+<pre><code class="language-python">flow = DataflowBuilder("my-robot")
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>name</code> (str, optional)——数据流的名称，默认为 <code>"dora-dataflow"</code>。</li>
+</ul>
+<h4 id="add_nodeid-kwargs---node"><a class="header" href="python.html#add_nodeid-kwargs---node"><code>add_node(id, **kwargs) -&gt; Node</code></a></h4>
+<p>向数据流添加一个节点。返回一个 <code>Node</code> 对象以供进一步配置。</p>
+<pre><code class="language-python">sender = flow.add_node("sender")
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>id</code> (str)——唯一的节点标识符。</li>
+<li><code>**kwargs</code>——传递给 YAML 的额外节点配置。</li>
+</ul>
+<p><strong>返回：</strong> <code>Node</code>（构建器）</p>
+<h4 id="to_yamlpathnone---str--none"><a class="header" href="python.html#to_yamlpathnone---str--none"><code>to_yaml(path=None) -&gt; str | None</code></a></h4>
+<p>生成数据流的 YAML 表示。若指定了 <code>path</code>，则写入文件并返回 <code>None</code>；否则返回 YAML 字符串。</p>
+<pre><code class="language-python"># Write to file
+flow.to_yaml("dataflow.yml")
+
+# Get as string
+yaml_str = flow.to_yaml()
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>path</code> (str, optional)——写入 YAML 的文件路径。</li>
+</ul>
+<p><strong>返回：</strong> <code>str | None</code></p>
+<h4 id="context-manager"><a class="header" href="python.html#context-manager">上下文管理器</a></h4>
+<p><code>DataflowBuilder</code> 支持 <code>with</code> 语句：</p>
+<pre><code class="language-python">with DataflowBuilder("my-flow") as flow:
+    flow.add_node("sender").path("sender.py")
+    flow.to_yaml("dataflow.yml")
+</code></pre>
+<hr/>
+<h3 id="node-class-builder"><a class="header" href="python.html#node-class-builder">Node 类（构建器）</a></h3>
+<p>由 <code>DataflowBuilder.add_node()</code> 返回。所有 setter 方法都返回 <code>self</code> 以支持链式调用。</p>
+<h4 id="pathpath---node"><a class="header" href="python.html#pathpath---node"><code>path(path) -&gt; Node</code></a></h4>
+<p>设置节点可执行文件或脚本的路径。</p>
+<pre><code class="language-python">node.path("my_node.py")
+</code></pre>
+<h4 id="argsargs---node"><a class="header" href="python.html#argsargs---node"><code>args(args) -&gt; Node</code></a></h4>
+<p>设置节点的命令行参数。</p>
+<pre><code class="language-python">node.args("--verbose --port 8080")
+</code></pre>
+<h4 id="envenv---node"><a class="header" href="python.html#envenv---node"><code>env(env) -&gt; Node</code></a></h4>
+<p>设置节点的环境变量。</p>
+<pre><code class="language-python">node.env({"MODEL_PATH": "/models/yolo.pt"})
+</code></pre>
+<h4 id="buildcommand---node"><a class="header" href="python.html#buildcommand---node"><code>build(command) -&gt; Node</code></a></h4>
+<p>设置节点的构建命令（在启动前运行）。</p>
+<pre><code class="language-python">node.build("pip install -r requirements.txt")
+</code></pre>
+<h4 id="giturl-branchnone-tagnone-revnone---node"><a class="header" href="python.html#giturl-branchnone-tagnone-revnone---node"><code>git(url, branch=None, tag=None, rev=None) -&gt; Node</code></a></h4>
+<p>将一个 Git 仓库设为节点的来源。</p>
+<pre><code class="language-python">node.git("https://github.com/org/repo.git", branch="main")
+</code></pre>
+<h4 id="add_operatoroperator---node"><a class="header" href="python.html#add_operatoroperator---node"><code>add_operator(operator) -&gt; Node</code></a></h4>
+<p>为此节点附加一个 <code>Operator</code>。</p>
+<pre><code class="language-python">op = Operator("detector", python="object_detection.py")
+node.add_operator(op)
+</code></pre>
+<h4 id="add_outputoutput_id---output"><a class="header" href="python.html#add_outputoutput_id---output"><code>add_output(output_id) -&gt; Output</code></a></h4>
+<p>在此节点上声明一个输出，并返回一个 <code>Output</code> 引用，供作为输入来源使用。</p>
+<pre><code class="language-python">output = sender.add_output("data")
+</code></pre>
+<h4 id="add_inputinput_id-source-queue_sizenone-queue_policynone---node"><a class="header" href="python.html#add_inputinput_id-source-queue_sizenone-queue_policynone---node"><code>add_input(input_id, source, queue_size=None, queue_policy=None) -&gt; Node</code></a></h4>
+<p>将此节点订阅到另一个节点的输出。</p>
+<pre><code class="language-python"># Using an Output object
+output = sender.add_output("data")
+receiver.add_input("data", output)
+
+# Using a string reference
+receiver.add_input("tick", "dora/timer/millis/100")
+
+# With a custom queue size
+receiver.add_input("images", camera_output, queue_size=2)
+
+# Lossless input (blocks sender when full)
+receiver.add_input("commands", cmd_output, queue_size=100, queue_policy="backpressure")
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>input_id</code> (str)——此节点上输入的名称。</li>
+<li><code>source</code> (str | Output)——可以是字符串（<code>"node_id/output_id"</code>）或一个 <code>Output</code> 对象。</li>
+<li><code>queue_size</code> (int, optional)——此输入缓冲消息的最大数量。</li>
+<li><code>queue_policy</code> (str, optional)——<code>"drop_oldest"</code>（默认）或 <code>"backpressure"</code>（在丢弃前最多缓冲 10 倍 <code>queue_size</code>）。</li>
+</ul>
+<h4 id="to_dict---dict"><a class="header" href="python.html#to_dict---dict"><code>to_dict() -&gt; dict</code></a></h4>
+<p>返回该节点用于 YAML 序列化的字典表示。</p>
+<hr/>
+<h3 id="output-class-builder"><a class="header" href="python.html#output-class-builder">Output 类（构建器）</a></h3>
+<p>由 <code>Node.add_output()</code> 返回。表示对节点输出的引用，用作 <code>add_input()</code> 中的来源。</p>
+<pre><code class="language-python">output = sender.add_output("data")
+receiver.add_input("sensor_data", output)
+str(output)  # "sender/data"
+</code></pre>
+<hr/>
+<h3 id="operator-class-builder"><a class="header" href="python.html#operator-class-builder">Operator 类（构建器）</a></h3>
+<p>定义一个用于嵌入节点 YAML 配置中的算子。</p>
+<h4 id="__init__id-namenone-descriptionnone-buildnone-pythonnone-shared_librarynone-send_stdout_asnone"><a class="header" href="python.html#__init__id-namenone-descriptionnone-buildnone-pythonnone-shared_librarynone-send_stdout_asnone"><code>__init__(id, name=None, description=None, build=None, python=None, shared_library=None, send_stdout_as=None)</code></a></h4>
+<pre><code class="language-python">op = Operator(
+    id="detector",
+    python="object_detection.py",
+    send_stdout_as="detection_text",
+)
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>id</code> (str)——唯一的算子标识符。</li>
+<li><code>name</code> (str, optional)——显示名称。</li>
+<li><code>description</code> (str, optional)——人类可读的描述。</li>
+<li><code>build</code> (str, optional)——加载前运行的构建命令。</li>
+<li><code>python</code> (str, optional)——Python 算子文件的路径。</li>
+<li><code>shared_library</code> (str, optional)——共享库算子的路径。</li>
+<li><code>send_stdout_as</code> (str, optional)——将算子的 stdout 路由为具有此 ID 的输出。</li>
+</ul>
+<h4 id="to_dict---dict-1"><a class="header" href="python.html#to_dict---dict-1"><code>to_dict() -&gt; dict</code></a></h4>
+<p>返回用于 YAML 序列化的字典表示。</p>
+<hr/>
+<h2 id="cuda-module-opt-in-extension"><a class="header" href="python.html#cuda-module-opt-in-extension">CUDA 模块（可选扩展）</a></h2>
+<blockquote>
+<p><strong>不属于 1.0 API。</strong>这些辅助函数在 1.0 之前已从 <code>dora</code> 包移出到 <code>dora_tensor_pool</code> 扩展中——它们的存在是为了服务于位于扩展接缝之外的张量池传输，不受 dora 1.0 兼容性保证的覆盖。请从 <code>libraries/extensions/tensor-pool/python</code> 安装。</p>
+</blockquote>
+<pre><code class="language-python">from dora_tensor_pool import torch_to_ipc_buffer, ipc_buffer_to_ipc_handle, open_ipc_handle
+</code></pre>
+<p>用于在节点之间通过 CUDA IPC 实现 GPU 张量零拷贝共享的工具。需要支持 CUDA 的 PyTorch 和支持 CUDA 的 Numba。</p>
+<h3 id="torch_to_ipc_buffertensor---tuplepyarrowarray-dict"><a class="header" href="python.html#torch_to_ipc_buffertensor---tuplepyarrowarray-dict"><code>torch_to_ipc_buffer(tensor) -&gt; tuple[pyarrow.Array, dict]</code></a></h3>
+<p>将一个 PyTorch CUDA 张量转换为包含 CUDA IPC handle 的 Arrow 数组，以及一个元数据字典。将两者一起通过数据流发送，即可在不拷贝的情况下共享 GPU 内存。</p>
+<pre><code class="language-python">import torch
+import pyarrow as pa
+from dora import Node
+from dora_tensor_pool import torch_to_ipc_buffer
+
+node = Node()
+tensor = torch.randn(1024, 768, device="cuda")
+ipc_buffer, metadata = torch_to_ipc_buffer(tensor)
+node.send_output("gpu_data", ipc_buffer, metadata)
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>tensor</code> (torch.Tensor)——一个 CUDA 张量。</li>
+</ul>
+<p><strong>返回：</strong> <code>tuple[pyarrow.Array, dict]</code>——以 int8 Arrow 数组形式表示的 IPC handle，以及包含 shape、strides、dtype、size、offset 和来源信息的元数据。</p>
+<hr/>
+<h3 id="ipc_buffer_to_ipc_handlehandle_buffer-metadata---ipchandle"><a class="header" href="python.html#ipc_buffer_to_ipc_handlehandle_buffer-metadata---ipchandle"><code>ipc_buffer_to_ipc_handle(handle_buffer, metadata) -&gt; IpcHandle</code></a></h3>
+<p>从接收到的 Arrow 缓冲区和元数据重建一个 CUDA IPC handle。</p>
+<pre><code class="language-python">from dora_tensor_pool import ipc_buffer_to_ipc_handle
+
+event = node.next()
+ipc_handle = ipc_buffer_to_ipc_handle(event["value"], event["metadata"])
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>handle_buffer</code> (pyarrow.Array)——来自 <code>event["value"]</code> 的 Arrow 数组。</li>
+<li><code>metadata</code> (dict)——来自 <code>event["metadata"]</code> 的元数据。</li>
+</ul>
+<p><strong>返回：</strong> <code>dora_tensor_pool.IpcHandle</code>（一个围绕 <code>cudaIpcMemHandle_t</code> 的轻量封装；调用 <code>.open()</code> 将该 handle 映射到当前进程并获得设备指针，调用 <code>.close()</code> 释放它）。</p>
+<hr/>
+<h3 id="open_ipc_handleipc_handle-metadata---contextmanagertorchtensor"><a class="header" href="python.html#open_ipc_handleipc_handle-metadata---contextmanagertorchtensor"><code>open_ipc_handle(ipc_handle, metadata) -&gt; ContextManager[torch.Tensor]</code></a></h3>
+<p>打开一个 CUDA IPC handle 并生成一个 PyTorch 张量。请作为上下文管理器使用，以确保正确清理。</p>
+<pre><code class="language-python">from dora_tensor_pool import ipc_buffer_to_ipc_handle, open_ipc_handle
+
+event = node.next()
+ipc_handle = ipc_buffer_to_ipc_handle(event["value"], event["metadata"])
+
+with open_ipc_handle(ipc_handle, event["metadata"]) as tensor:
+    result = tensor * 2  # use the GPU tensor directly
+</code></pre>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>ipc_handle</code> (<code>IpcHandle</code>)——来自 <code>ipc_buffer_to_ipc_handle</code> 的 handle。</li>
+<li><code>metadata</code> (dict)——包含 shape、strides 和 dtype 信息的元数据字典。</li>
+</ul>
+<p><strong>返回：</strong> 生成 CUDA 上的 <code>torch.Tensor</code> 的上下文管理器。</p>
+<hr/>
+<h2 id="quick-start-example"><a class="header" href="python.html#quick-start-example">快速开始示例</a></h2>
+<p>一个完整的节点，用于接收图像、处理图像并发送结果：</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+"""Example node: receives messages, transforms them, and sends output."""
+
+import logging
+
+import pyarrow as pa
+from dora import Node
+
+
+def main():
+    node = Node()
+
+    for event in node:
+        if event["type"] == "INPUT":
+            input_id = event["id"]
+
+            if input_id == "message":
+                values = event["value"].to_pylist()
+                number = values[0]
+
+                # Create a struct array with multiple fields
+                result = pa.StructArray.from_arrays(
+                    [
+                        pa.array([number * 2]),
+                        pa.array([f"Message #{number}"]),
+                    ],
+                    names=["doubled", "description"],
+                )
+                node.send_output("transformed", result)
+                logging.info("Transformed message %d", number)
+
+        elif event["type"] == "STOP":
+            logging.info("Node stopping")
+            break
+
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+<p>运行方式：</p>
+<pre><code class="language-bash">dora run dataflow.yml
+</code></pre>
+<hr/>
+<h2 id="dataflowbuilder-example"><a class="header" href="python.html#dataflowbuilder-example">DataflowBuilder 示例</a></h2>
+<p>以编程方式构建数据流，而不是手写 YAML：</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+"""Build a simple sender -&gt; receiver dataflow."""
+
+from dora.builder import DataflowBuilder, Operator
+
+flow = DataflowBuilder("example-flow")
+
+# Add a timer-driven sender node
+sender = flow.add_node("sender")
+sender.path("sender.py")
+tick_output = sender.add_output("message")
+
+# Add a receiver that subscribes to the sender
+receiver = flow.add_node("receiver")
+receiver.path("receiver.py")
+receiver.add_input("message", tick_output)
+
+# Add a node with a timer input
+timed_node = flow.add_node("periodic")
+timed_node.path("periodic.py")
+timed_node.add_input("tick", "dora/timer/millis/100")
+
+# Add a node with an operator
+runtime_node = flow.add_node("runtime-node")
+op = Operator("detector", python="object_detection.py")
+runtime_node.add_operator(op)
+runtime_node.add_input("image", "camera/image")
+
+# Write or print the YAML
+flow.to_yaml("dataflow.yml")
+print(flow.to_yaml())
+</code></pre>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/languages/python.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="rust.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="c.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="rust.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="c.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/languages/python.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>

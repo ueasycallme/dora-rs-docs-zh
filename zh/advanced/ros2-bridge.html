@@ -1,0 +1,1259 @@
+<!DOCTYPE HTML>
+<html class="ayu sidebar-visible" dir="ltr" lang="zh-CN">
+<head><meta content="noindex, nofollow" name="robots"/>
+<!-- Book generated using mdBook -->
+<meta charset="utf-8"/>
+<title>ROS2 桥接 - Dora 用户指南</title>
+<!-- Custom HTML head -->
+<meta content="" name="description"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<link href="../favicon-de23e50b.svg" rel="icon"/>
+<link href="../favicon-8114d1fc.png" rel="shortcut icon"/>
+<link href="../css/variables-8adf115d.css" rel="stylesheet"/>
+<link href="../css/general-e96d0476.css" rel="stylesheet"/>
+<link href="../css/chrome-d279d366.css" rel="stylesheet"/>
+<link href="../css/print-9e4910d8.css" media="print" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="../fonts/fonts-9644e21d.css" rel="stylesheet"/>
+<!-- Highlight.js Stylesheets -->
+<link href="../highlight-493f70e1.css" id="mdbook-highlight-css" rel="stylesheet"/>
+<link href="../tomorrow-night-4c0ae647.css" id="mdbook-tomorrow-night-css" rel="stylesheet"/>
+<link href="../ayu-highlight-3fdfc3ac.css" id="mdbook-ayu-highlight-css" rel="stylesheet"/>
+<!-- Custom theme stylesheets -->
+<link href="../theme/dora-a2d2e799.css" rel="stylesheet"/>
+<!-- Provide site root and default themes to javascript -->
+<script>
+            const path_to_root = "../";
+            const default_light_theme = "ayu";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+        </script>
+<!-- Start loading toc.js asap -->
+<script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
+</head>
+<body>
+<div id="mdbook-help-container">
+<div id="mdbook-help-popup">
+<h2 class="mdbook-help-title">键盘快捷键</h2>
+<div>
+<p>按 <kbd>←</kbd> 或 <kbd>→</kbd> 可在章节间切换</p>
+<p>按 <kbd>S</kbd> 或 <kbd>/</kbd> 可在本书中搜索</p>
+<p>按 <kbd>?</kbd> 显示此帮助</p>
+<p>按 <kbd>Esc</kbd> 隐藏此帮助</p>
+</div>
+</div>
+</div>
+<div id="mdbook-body-container">
+<!-- Work around some values being stored in localStorage wrapped in quotes -->
+<script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+<!-- Set the theme before any content is loaded, prevents flash -->
+<script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+<input class="hidden" id="mdbook-sidebar-toggle-anchor" type="checkbox"/>
+<!-- Hide / unhide sidebar before it is displayed -->
+<script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+<nav aria-label="目录" class="sidebar" id="mdbook-sidebar">
+<!-- populated by js -->
+<mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+<noscript>
+<iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+</noscript>
+<div class="sidebar-resize-handle" id="mdbook-sidebar-resize-handle">
+<div class="sidebar-resize-indicator"></div>
+</div>
+</nav>
+<div class="page-wrapper" id="mdbook-page-wrapper">
+<div class="page">
+<div id="mdbook-menu-bar-hover-placeholder"></div>
+<div class="menu-bar sticky" id="mdbook-menu-bar">
+<div class="left-buttons">
+<label aria-controls="mdbook-sidebar" aria-label="切换目录" class="icon-button" for="mdbook-sidebar-toggle-anchor" id="mdbook-sidebar-toggle" title="切换目录">
+<span class="fa-svg"><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg></span>
+</label>
+<button aria-controls="mdbook-theme-list" aria-expanded="false" aria-haspopup="true" aria-label="切换主题" class="icon-button" id="mdbook-theme-toggle" title="切换主题" type="button">
+<span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"></path></svg></span>
+</button>
+<ul aria-label="主题" class="theme-popup" id="mdbook-theme-list" role="menu">
+<li role="none"><button class="theme" id="mdbook-theme-default_theme" role="menuitem">自动</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-light" role="menuitem">浅色</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-rust" role="menuitem">Rust</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-coal" role="menuitem">Coal</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-navy" role="menuitem">Navy</button></li>
+<li role="none"><button class="theme" id="mdbook-theme-ayu" role="menuitem">Ayu</button></li>
+</ul>
+<button aria-controls="mdbook-searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-label="切换搜索栏" class="icon-button" id="mdbook-search-toggle" title="搜索（`/`）" type="button">
+<span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"></path></svg></span>
+</button>
+</div>
+<h1 class="menu-title">Dora 用户指南</h1>
+<div class="right-buttons">
+<a aria-label="打印本书" href="../print.html" title="打印本书">
+<span class="fa-svg" id="print-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"></path></svg></span>
+</a>
+<a aria-label="Git 仓库" href="https://github.com/dora-rs/dora" title="Git 仓库">
+<span class="fa-svg"><svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg></span>
+</a>
+<a aria-label="建议修改" href="https://github.com/dora-rs/dora/edit/main/guide/src/advanced/ros2-bridge.md" rel="edit" title="建议修改">
+<span class="fa-svg" id="git-edit-button"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"></path></svg></span>
+</a>
+</div>
+</div>
+<div class="hidden" id="mdbook-search-wrapper">
+<form class="searchbar-outer" id="mdbook-searchbar-outer">
+<div class="search-wrapper">
+<input aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header" id="mdbook-searchbar" name="searchbar" placeholder="搜索本书 ..." type="search"/>
+<div class="spinner-wrapper">
+<span class="fa-svg" id="fa-spin"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"></path></svg></span>
+</div>
+</div>
+</form>
+<div class="searchresults-outer hidden" id="mdbook-searchresults-outer">
+<div class="searchresults-header" id="mdbook-searchresults-header"></div>
+<ul id="mdbook-searchresults">
+</ul>
+</div>
+</div>
+<!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+<script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+<div class="content" id="mdbook-content">
+<main>
+<h1 id="ros2-bridge"><a class="header" href="ros2-bridge.html#ros2-bridge">ROS2 桥接</a></h1>
+<p>dora 通过显式选择的传输方式与 ROS2 生态（话题、服务（Service）、动作（Action）、参数）通信。DDS 使用纯 Rust 的 <code>ros2-client</code> + <code>rustdds</code> 技术栈，并仍是默认选项。原生 Zenoh 直接使用 <code>rmw_zenoh_cpp</code> 线路协议。这两条路径都不链接 <code>rcl</code>/<code>rclcpp</code>；数据以 Apache Arrow 的 <code>StructArray</code> 形式传递，在边界处与 ROS2 CDR 相互转换。</p>
+<h2 id="transport-selection"><a class="header" href="ros2-bridge.html#transport-selection">传输选择</a></h2>
+<p>省略 <code>transport</code> 将保留 DDS 行为。原生 Zenoh 必须显式选择一个身份配置文件：</p>
+<pre><code class="language-yaml">ros2:
+  transport:
+    kind: zenoh
+    compatibility: humble # legacy TypeHashNotSupported identity
+    config_uri: /etc/zenoh/session.json5 # optional
+  topic: /chatter
+  message_type: std_msgs/String
+  direction: subscribe
+</code></pre>
+<p>对 Humble 版本的 <code>rmw_zenoh_cpp</code> 分支使用 <code>compatibility: humble</code>，对发布 REP-2016 类型哈希的发行版使用 <code>compatibility: rep2016</code>。该配置文件从不自动检测：故意选错会得到一个空图，而不是去猜测一个不兼容的线路身份。</p>
+<p>线路契约遵循上游的 <a href="https://github.com/ros2/rmw_zenoh/blob/rolling/docs/design.md"><code>rmw_zenoh</code> 设计</a>，包括 CDR 载荷、附件、键以及存活性令牌（liveliness token）。现代配置文件从 <a href="https://www.ros.org/reps/rep-2016.html">REP-2016</a> 类型描述哈希中派生身份。</p>
+<p>在启动数据流之前启动该发行版的 <code>rmw_zenohd</code>。Zenoh 配置的优先级依次为：显式的 <code>config_uri</code>，然后是 <code>ZENOH_SESSION_CONFIG_URI</code>，最后是内嵌的默认值。显式设置为空的 URI 是无效的。<code>ROS_DOMAIN_ID</code> 默认为 <code>0</code>；图（graph）和数据键按域（domain）划分范围，命名空间仍是 ROS 完全限定端点名称的一部分。</p>
+<p>支持的中立 QoS 包括 reliability（可靠性）、volatile/transient-local durability（持久性）、keep-last/keep-all history（历史记录）以及 automatic/manual liveliness（活跃性）。transient-local 的回放受所配置历史记录的限制。<code>zenoh-bridge-ros2dds</code> 进程不能替代此模式：它桥接的是 DDS 图，而原生模式必须直接匹配 <code>rmw_zenoh_cpp</code> 的数据键、活跃性令牌、附件以及类型标识。</p>
+<p>使用该桥接有<strong>两种方式</strong>，本指南将予以介绍：</p>
+<ol>
+<li><strong>YAML / 动态桥接</strong>——在节点上添加 <code>ros2:</code> 键，框架便会启动一个桥接二进制程序；你的节点代码保持与 ROS2 无关，只交换纯 Arrow 数据。与语言无关，无需编写代码。这是本指南的主要内容。</li>
+<li><strong>原生代码 API</strong>——在节点代码中通过类型化的、按语言区分的 API 直接调用 ROS2：Python（<code>dora.Ros2Context</code>）接口，以及代码生成产生的 Rust / C++ 接口。当你想从节点以命令式方式驱动 ROS2 时，可使用这些接口。参见下文的<a href="ros2-bridge.html#native-code-apis-rust--python--c">原生代码 API</a>。</li>
+</ol>
+<h2 id="features-at-a-glance"><a class="header" href="ros2-bridge.html#features-at-a-glance">功能概览</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>功能</th><th>配置</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>话题订阅</td><td><code>topic</code> + <code>direction: subscribe</code></td><td>从 ROS2 接收，转发为 Arrow</td></tr>
+<tr><td>话题发布</td><td><code>topic</code> + <code>direction: publish</code></td><td>接收 Arrow，发布到 ROS2</td></tr>
+<tr><td>多话题</td><td><code>topics</code></td><td>单个 ROS2 节点上的多个话题</td></tr>
+<tr><td>服务（Service）客户端</td><td><code>service</code> + <code>role: client</code></td><td>发送请求，接收响应</td></tr>
+<tr><td>服务（Service）服务端</td><td><code>service</code> + <code>role: server</code></td><td>接收请求，发送响应</td></tr>
+<tr><td>动作（Action）客户端</td><td><code>action</code> + <code>role: client</code></td><td>发送目标，接收反馈 + 结果</td></tr>
+<tr><td>动作（Action）服务端</td><td><code>action</code> + <code>role: server</code></td><td>接收目标，发送反馈 + 结果</td></tr>
+<tr><td>QoS 策略</td><td><code>qos</code></td><td>可靠性、持久性、历史记录、活跃性</td></tr>
+<tr><td>自动启动</td><td>自动</td><td>由守护进程以 Custom 节点方式启动的桥接二进制程序</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="two-surfaces-one-stack"><a class="header" href="ros2-bridge.html#two-surfaces-one-stack">两种接口，一套协议栈</a></h2>
+<p>Dora 节点如何连接到 ROS2 通信线路，以及每种接口提供的能力：</p>
+<pre><code>┌──────────────────────────────────────────────────────────────────────────┐
+│  USER CODE  (dora node)          Rust  ·  C++  ·  Python                   │
+└───────────────┬──────────────────────────────────┬───────────────────────┘
+                │                                   │
+   ┌────────────▼─────────────┐       ┌─────────────▼──────────────────────┐
+   │  (a) NATIVE CODE API      │       │  (b) YAML / DYNAMIC BRIDGE          │
+   │  compile-time typed        │       │  YAML-driven, language-agnostic     │
+   │  structs from .msg/.srv/   │       │  dora-ros2-bridge-node binary       │
+   │  .action  (codegen)        │       │  + pyo3 (Python, in-process)        │
+   │  →  Rust / C++             │       │  Apache Arrow + thread-local        │
+   │  + pyo3 classes (Python)   │       │  TypeInfo                           │
+   └────────────┬─────────────┘       └─────────────┬──────────────────────┘
+                │                                    │
+                └──────────────┬─────────────────────┘
+                               │  serialize ↔ Arrow ↔ CDR
+                 ┌─────────────▼────────────────────────┐
+                 │ selected transport                    │
+                 │ DDS: ros2-client/rustdds              │
+                 │ Zenoh: native rmw_zenoh wire adapter  │
+                 └─────────────┬────────────────────────┘
+                               │  RTPS or Zenoh
+        ╔══════════════════════▼═══════════════════════════════════╗
+        ║  ROS2 ECOSYSTEM (rclcpp / rclpy nodes, CLI, Nav2, ...)   ║
+        ╚═══════════════════════════════════════════════════════════╝
+</code></pre>
+<p>两种接口默认都保留 DDS。选择原生 Zenoh 时会使用其自身的图与端点实现。“客户端”指 Dora 节点调用 ROS2（dora→ROS2）；“服务端”指 Dora 节点为 ROS2 客户端提供服务（ROS2→dora）。</p>
+<p><strong>能力 × 接口（均受支持）：</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th>话题发布/订阅</th><th>服务（Service）客户端</th><th>服务（Service）服务端</th><th>动作（Action）客户端</th><th>动作（Action）服务端</th><th>参数</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>YAML 桥接</strong></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>（节点托管）</td></tr>
+<tr><td><strong>Rust</strong>（代码生成）</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>通过 <code>ros2-client</code></td></tr>
+<tr><td><strong>C++</strong>（代码生成）</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>通过 <code>ros2-client</code></td></tr>
+<tr><td><strong>Python</strong>（pyo3）</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+</tbody>
+</table>
+</div>
+<p>每个单元格对应的可运行示例都位于 <a href="https://github.com/dora-rs/dora/tree/main/examples/ros2-bridge"><code>examples/ros2-bridge/</code></a> 下（<code>rust/</code>、<code>python/</code>、<code>c++/</code>，以及 <code>yaml-bridge*</code> 数据流）。</p>
+<hr/>
+<h2 id="architecture"><a class="header" href="ros2-bridge.html#architecture">架构</a></h2>
+<p>当 Dora 描述文件解析器在节点上遇到 <code>ros2:</code> 键时，会将其转换为指向 <code>dora-ros2-bridge-node</code> 二进制程序的 <code>Custom</code> 节点。桥接配置会被序列化为 JSON，存入 <code>DORA_ROS2_BRIDGE_CONFIG</code> 环境变量。</p>
+<pre><code>User Node &lt;--(Arrow/SharedMem)--&gt; Bridge Binary &lt;--(CDR over DDS or Zenoh)--&gt; ROS2
+</code></pre>
+<p>该桥接二进制程序会：</p>
+<ol>
+<li>读取 <code>AMENT_PREFIX_PATH</code> 以定位已安装的 ROS2 消息包</li>
+<li>在启动时解析消息/服务/动作定义</li>
+<li>创建一个中立的桥接节点，以及特定后端的发布者、订阅者、客户端或服务端</li>
+<li>将接收到的 ROS2 CDR 消息转换为 Arrow <code>StructArray</code>（订阅/响应/反馈）</li>
+<li>将接收到的 Arrow <code>StructArray</code> 转换为 ROS2 CDR 消息（发布/请求/目标）</li>
+</ol>
+<p>你的用户节点永远不会链接 ROS2——所有 ROS2 通信都隔离在桥接二进制程序内。</p>
+<h3 id="native-zenoh-troubleshooting"><a class="header" href="ros2-bridge.html#native-zenoh-troubleshooting">原生 Zenoh 故障排查</a></h3>
+<ul>
+<li><strong>图为空：</strong>确认 <code>rmw_zenohd</code> 正在运行，两个进程使用相同的 <code>ROS_DOMAIN_ID</code>，并且 Dora 选择了与对端分布匹配的 profile。</li>
+<li><strong>缺少类型哈希：</strong><code>rep2016</code> 需要 <code>AMENT_PREFIX_PATH</code> 中该软件包已安装的 JSON 类型描述。Humble 版本则会改为公布旧版的 <code>TypeHashNotSupported</code> 标识。</li>
+<li><strong>路由不可用：</strong>检查所配置的端点以及配置文件的权限。显式指定的 <code>config_uri</code> 会覆盖 <code>ZENOH_SESSION_CONFIG_URI</code>。</li>
+<li><strong>端点可见但调用挂起：</strong>确认 ROS 对端确实使用了 <code>rmw_zenoh_cpp</code>；DDS RMW 或 <code>zenoh-bridge-ros2dds</code> 图是不同的通信线路约定。设置 <code>DORA_ROS2_ZENOH_TRACE=1</code> 可打印原生活跃性活动。</li>
+</ul>
+<hr/>
+<h2 id="prerequisites"><a class="header" href="ros2-bridge.html#prerequisites">前置条件</a></h2>
+<ul>
+<li><strong>已加载 ROS2 环境</strong>：必须设置 <code>AMENT_PREFIX_PATH</code>，并指向包含所需消息包的工作空间</li>
+<li><strong>已安装消息包</strong>：例如 <code>turtlesim</code>、<code>geometry_msgs</code>、<code>example_interfaces</code></li>
+<li><strong>对于服务客户端</strong>：必须有正在运行的 ROS2 服务服务端（或使用配套的服务端数据流）</li>
+<li><strong>对于动作客户端</strong>：在启动数据流<em>之前</em>必须有正在运行的 ROS2 动作服务端（没有 <code>wait_for_action_server</code> 机制）</li>
+<li><strong>对于动作服务端</strong>：需要有 ROS2 动作客户端向桥接发送目标（例如使用 <code>ros2 action send_goal</code>）</li>
+</ul>
+<h3 id="building-for-your-ros-distro"><a class="header" href="ros2-bridge.html#building-for-your-ros-distro">为你的 ROS 发行版构建</a></h3>
+<p>已发布的桥接构建针对 Humble。在其他发行版上，须先用匹配的 feature 构建后再运行数据流，否则桥接会输出日志 <code>ROS_DISTRO='jazzy' but ros2-client was built for 'humble'</code>。</p>
+<p><code>ros2-humble</code>（默认）、<code>ros2-iron</code>、<code>ros2-jazzy</code> 和 <code>ros2-kilted</code> 这几个 feature 对整个构建来说是单选项，而不是可叠加的集合。<code>ros2-client</code> 会按它所见到的最新发行版 feature 进行编译，所以 <code>ros2-jazzy</code> 会用 Jazzy 的 16 字节 <code>Gid</code> 替换 Humble 的 24 字节版本，而不是在 Humble 之外再加上 Jazzy 支持，且没有任何 dora feature 能把它切换回去。由于 Cargo 会在整个构建中统一 <code>ros2-client</code> 的 feature，在任何其他 crate 中启用更新的发行版也会一并切换桥接——即便是那个以默认 feature 依赖 <code>ros2-client</code> 的 crate 也不例外，因为它自身的默认值就是 <code>jazzy</code>。Humble 只是工作区固定的下限，因此无法强制恰好使用 Humble。构建期不会有任何警告；请检查启动时的 <code>ROS_DISTRO</code> 日志——<code>ros2-client</code> 在不匹配时会记录为 error，在 <code>ROS_DISTRO</code> 未设置时会记录为 warning。</p>
+<ul>
+<li>
+<p><strong>YAML 桥接</strong>：<code>dora-ros2-bridge-node</code> 并未随 CLI 一起分发，因此需要为你的发行版单独安装它，并保留在 <code>PATH</code> 中（解析器会按名称启动它）：</p>
+<pre><code class="language-bash">cargo install --git https://github.com/dora-rs/dora dora-ros2-bridge-node --features ros2-jazzy
+</code></pre>
+</li>
+<li>
+<p><strong>进程内 Python（<code>from dora import Ros2Context</code>）</strong>：<code>dora-rs</code> wheel 链接了该桥接，因此需要用 maturin 重新构建它：</p>
+<pre><code class="language-bash">maturin build -m apis/python/node/Cargo.toml --features ros2-jazzy
+</code></pre>
+</li>
+<li>
+<p><strong>C++ 节点</strong>：<code>dora-node-api-cxx</code> 本身没有任何 <code>ros2-*</code> feature，会得到 Humble 默认值，因此若要面向其他发行版，需要直接启用 <code>dora-ros2-bridge/ros2-jazzy</code>。</p>
+</li>
+</ul>
+<hr/>
+<h2 id="topic-bridge"><a class="header" href="ros2-bridge.html#topic-bridge">话题桥接</a></h2>
+<h3 id="single-topic-subscribe"><a class="header" href="ros2-bridge.html#single-topic-subscribe">单一话题（订阅）</a></h3>
+<p>订阅一个 ROS2 话题，并把消息作为 Arrow 数据转发给下游的 Dora 节点。</p>
+<pre><code class="language-yaml">nodes:
+  - id: pose_bridge
+    ros2:
+      topic: /turtle1/pose
+      message_type: turtlesim/Pose
+      direction: subscribe       # default, can be omitted
+    outputs:
+      - pose
+</code></pre>
+<p>该桥接在 <code>/turtle1/pose</code> 上创建一个 ROS2 订阅，把每条收到的 <code>turtlesim/Pose</code> 消息反序列化为 Arrow 的 <code>StructArray</code>，然后通过 <code>pose</code> 输出发送出去。</p>
+<h3 id="single-topic-publish"><a class="header" href="ros2-bridge.html#single-topic-publish">单一话题（发布）</a></h3>
+<p>从 Dora 节点接收 Arrow 数据，并发布到一个 ROS2 话题。</p>
+<pre><code class="language-yaml">nodes:
+  - id: cmd_bridge
+    ros2:
+      topic: /turtle1/cmd_vel
+      message_type: geometry_msgs/Twist
+      direction: publish
+    inputs:
+      cmd_vel: planner/cmd_vel
+</code></pre>
+<p>该桥接在 <code>cmd_vel</code> 输入上接收 Arrow 数据，将其序列化为 <code>geometry_msgs/Twist</code> CDR 格式，并发布到 <code>/turtle1/cmd_vel</code>。</p>
+<h3 id="multi-topic"><a class="header" href="ros2-bridge.html#multi-topic">多话题</a></h3>
+<p>在单个 ROS2 节点上下文中桥接多个话题，可混合订阅和发布方向。</p>
+<pre><code class="language-yaml">nodes:
+  - id: turtle_bridge
+    ros2:
+      topics:
+        - topic: /turtle1/pose
+          message_type: turtlesim/Pose
+          direction: subscribe
+          output: pose
+        - topic: /turtle1/cmd_vel
+          message_type: geometry_msgs/Twist
+          direction: publish
+          input: velocity
+      qos:
+        reliable: true
+        keep_last: 10
+    inputs:
+      velocity: planner/cmd_vel
+    outputs:
+      - pose
+</code></pre>
+<p>多话题模式下，每个桥接节点最多支持 64 个话题。</p>
+<h3 id="inputoutput-id-mapping"><a class="header" href="ros2-bridge.html#inputoutput-id-mapping">输入/输出 ID 映射</a></h3>
+<p>话题名称会通过去掉开头的 <code>/</code> 并把剩余的 <code>/</code> 替换为 <code>_</code>，映射为一个<em>派生</em>出来的 Dora ID：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ROS2 话题</th><th>派生出的 Dora ID</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/turtle1/pose</code></td><td><code>turtle1_pose</code></td></tr>
+<tr><td><code>/camera/image_raw</code></td><td><code>camera_image_raw</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>在多话题模式下，可以用明确的 <code>output</code>（用于订阅）或 <code>input</code>（用于发布）字段覆盖这个映射；若未覆盖，派生出的 id 必须是该节点已声明的端口之一，否则该数据流会被拒绝。</p>
+<p>在单一话题模式下不存在 <code>output</code>/<code>input</code> 字段，因此会直接使用该节点已声明的端口：<code>topic: /turtle1/pose</code> 配合 <code>outputs: [pose]</code> 会绑定到 <code>pose</code>。当节点声明了多个端口时，这个选择就会产生歧义，该数据流会被拒绝——除非其中有一个端口<em>正好是</em>派生出的 id，这时它会被优先采用（这样桥接节点仍可以额外声明一个 <code>send_stdout_as</code> 输出）。当你需要多个端口并使用自定义名称时，请使用带明确映射的多话题模式。</p>
+<hr/>
+<h2 id="service-bridge"><a class="header" href="ros2-bridge.html#service-bridge">服务（Service）桥接</a></h2>
+<h3 id="service-client"><a class="header" href="ros2-bridge.html#service-client">服务（Service）客户端</a></h3>
+<p>从 Dora 向外部 ROS2 服务发送请求并接收响应。</p>
+<pre><code class="language-yaml">nodes:
+  - id: add_client
+    ros2:
+      service: /add_two_ints
+      service_type: example_interfaces/AddTwoInts
+      role: client
+    inputs:
+      request: requester/data
+    outputs:
+      - response
+</code></pre>
+<p>该桥接会等待服务变为可用状态（最多重试 10 次，每次间隔 2 秒），然后对每个收到的 Arrow 输入执行：</p>
+<ol>
+<li>将 Arrow 数据序列化为 <code>AddTwoInts_Request</code> CDR 消息</li>
+<li>将请求发送到 ROS2 服务</li>
+<li>等待响应（超时时间 30 秒）</li>
+<li>把响应反序列化为 Arrow 数据，并通过 <code>response</code> 输出发送出去</li>
+</ol>
+<h3 id="service-server"><a class="header" href="ros2-bridge.html#service-server">服务（Service）服务端</a></h3>
+<p>将一个 Dora 处理节点暴露为 ROS2 服务，供外部 ROS2 客户端调用。</p>
+<pre><code class="language-yaml">nodes:
+  - id: add_server
+    ros2:
+      service: /dora_add_two_ints
+      service_type: example_interfaces/AddTwoInts
+      role: server
+    inputs:
+      response: handler/result
+    outputs:
+      - request
+
+  - id: handler
+    path: path/to/handler-node
+    inputs:
+      request: add_server/request
+    outputs:
+      - result
+</code></pre>
+<p>该桥接接收 ROS2 服务请求，为每个请求分配一个唯一的 <code>request_id</code>（UUID v7），将请求数据作为 Arrow 通过 <code>request</code> 输出转发出去，并在元数据中携带 <code>request_id</code>，然后等待处理节点在 <code>response</code> 输入上以相同的 <code>request_id</code> 发回响应。随后该响应会被返回给正确的 ROS2 客户端。</p>
+<p>可参考 <code>examples/ros2-bridge/yaml-bridge-service/</code> 中的可运行示例。</p>
+<h3 id="request-id-correlation"><a class="header" href="ros2-bridge.html#request-id-correlation">请求 ID 关联</a></h3>
+<p>每个收到的 ROS2 请求都会被赋予一个 <code>request_id</code> 元数据参数。处理节点在发送响应时<strong>必须在元数据中带上相同的 <code>request_id</code></strong>。最简单的做法是透传 <code>metadata.parameters</code>：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Event::Input { id, metadata, data } =&gt; {
+    // metadata.parameters contains request_id
+    let result = compute(data);
+    node.send_service_response("response".into(), metadata.parameters, result)?;
+}
+<span class="boring">}</span></code></pre>
+<p>响应可以以任意顺序到达——桥接是按 <code>request_id</code> 而不是按到达顺序来关联它们的。超过 30 秒未处理的挂起请求会被清除。挂起请求队列的最大长度为 64——队列满时额外的请求会被丢弃。</p>
+<h3 id="service-wait-and-timeouts"><a class="header" href="ros2-bridge.html#service-wait-and-timeouts">服务等待与超时</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>行为</th><th>值</th></tr>
+</thead>
+<tbody>
+<tr><td>服务客户端：等待可用性</td><td>重试 10 次，每次 2 秒（共 20 秒）</td></tr>
+<tr><td>服务客户端：响应超时</td><td>30 秒</td></tr>
+<tr><td>服务服务端：挂起请求上限</td><td>64</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="action-bridge"><a class="header" href="ros2-bridge.html#action-bridge">动作（Action）桥接</a></h2>
+<h3 id="action-client"><a class="header" href="ros2-bridge.html#action-client">动作（Action）客户端</a></h3>
+<p>从 Dora 向外部 ROS2 动作服务器发送目标，并接收反馈和结果。</p>
+<pre><code class="language-yaml">nodes:
+  - id: fib_client
+    ros2:
+      action: /fibonacci
+      action_type: example_interfaces/Fibonacci
+      role: client
+    inputs:
+      goal: goal_sender/goal
+    outputs:
+      - feedback
+      - result
+</code></pre>
+<p>对每个 Arrow 目标输入：</p>
+<ol>
+<li>将 Arrow 数据序列化为 <code>Fibonacci_Goal</code> CDR 消息</li>
+<li>将目标发送到动作服务器（超时时间 30 秒）</li>
+<li>若被接受，则启动后台线程来处理反馈和结果</li>
+<li>反馈消息在流式到达时会通过 <code>feedback</code> 输出发出</li>
+<li>最终结果会在 <code>result</code> 输出上到达（5 分钟超时）</li>
+</ol>
+<h3 id="feedback-and-result-streams"><a class="header" href="ros2-bridge.html#feedback-and-result-streams">反馈与结果流</a></h3>
+<p>动作桥接在不同的输出上分别发送反馈和结果：</p>
+<ul>
+<li><strong><code>feedback</code></strong>：每当动作服务器发来一条反馈消息时就流式发送。以 Arrow 形式包含该动作的反馈消息（例如 Fibonacci 的 <code>{partial_sequence: int32[]}</code>）</li>
+<li><strong><code>result</code></strong>：动作完成时发送一次。以 Arrow 形式包含该动作的结果消息（例如 Fibonacci 的 <code>{sequence: int32[]}</code>）</li>
+</ul>
+<h3 id="concurrent-goals"><a class="header" href="ros2-bridge.html#concurrent-goals">并发目标（Goals）</a></h3>
+<p>该桥接最多支持 8 个并发在途目标（<code>MAX_CONCURRENT_GOALS</code>）。超出的目标会被丢弃并记录警告。每个目标都会启动专用的反馈和结果读取线程。</p>
+<h3 id="timeouts"><a class="header" href="ros2-bridge.html#timeouts">超时</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>行为</th><th>值</th></tr>
+</thead>
+<tbody>
+<tr><td>目标发送超时</td><td>30 秒</td></tr>
+<tr><td>结果获取超时</td><td>5 分钟</td></tr>
+<tr><td>反馈（Feedback）</td><td>无超时（持续流式传输直到动作完成）</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="action-server"><a class="header" href="ros2-bridge.html#action-server">动作服务器</a></h3>
+<p>将一个 Dora 处理节点暴露为 ROS2 动作服务器，供外部 ROS2 客户端调用。</p>
+<pre><code class="language-yaml">nodes:
+  - id: fib_server
+    ros2:
+      action: /fibonacci
+      action_type: example_interfaces/Fibonacci
+      role: server
+    inputs:
+      feedback: handler/feedback
+      result: handler/result
+    outputs:
+      - goal
+
+  - id: handler
+    path: path/to/handler-node
+    inputs:
+      goal: fib_server/goal
+    outputs:
+      - feedback
+      - result
+</code></pre>
+<p>该桥接从 ROS2 客户端接收目标，自动接受，并在 <code>goal</code> 输出上转发目标数据。处理程序计算反馈和结果后，通过 <code>feedback</code> 和 <code>result</code> 输入把它们发回。</p>
+<p>一个可运行的 Fibonacci 示例参见 <code>examples/ros2-bridge/yaml-bridge-action-server/</code>。</p>
+<h3 id="goal-id-metadata"><a class="header" href="ros2-bridge.html#goal-id-metadata">Goal ID 元数据</a></h3>
+<p>每个目标由一个以 <code>goal_id</code> 元数据参数传递的 UUID 字符串标识。桥接程序会在每个 <code>goal</code> 输出上设置 <code>goal_id</code>。处理函数在发送 <code>feedback</code> 和 <code>result</code> 时<strong>必须在元数据中包含相同的 <code>goal_id</code></strong>，以便桥接程序能将它们与正确的目标关联起来。</p>
+<p>最简单的做法是直接把 goal 事件中的 <code>metadata.parameters</code> 原样传递下去：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>Event::Input { id, metadata, data } =&gt; match id.as_str() {
+    "goal" =&gt; {
+        let params = metadata.parameters; // contains goal_id
+        // ... compute ...
+        node.send_output("feedback".into(), params.clone(), feedback)?;
+        node.send_output("result".into(), params, result)?;
+    }
+    // ...
+}
+<span class="boring">}</span></code></pre>
+<h3 id="action-server-lifecycle"><a class="header" href="ros2-bridge.html#action-server-lifecycle">动作服务器生命周期</a></h3>
+<ol>
+<li>ROS2 客户端发送一个目标请求</li>
+<li>桥接自动接受该目标并开始执行</li>
+<li>桥接在 <code>goal</code> 输出上发送目标数据，元数据中带有 <code>goal_id</code></li>
+<li>处理程序发送 <code>feedback</code>（零次或多次），使用相同的 <code>goal_id</code></li>
+<li>处理程序发送 <code>result</code>（一次），使用相同的 <code>goal_id</code>；桥接将其返回给 ROS2 客户端</li>
+<li>如果客户端从未请求结果，结果发送会在 5 分钟后超时</li>
+</ol>
+<p>不包含任何数据或无法转发给处理程序的目标会被自动中止——桥接会向 ROS2 客户端返回 <code>Aborted</code> 状态，以避免其无限期挂起。</p>
+<h3 id="goal-status"><a class="header" href="ros2-bridge.html#goal-status">目标状态</a></h3>
+<p>默认情况下，结果以 <code>Succeeded</code> 状态返回。处理程序可以通过在结果输出上设置 <code>goal_status</code> 元数据参数来覆盖这一行为：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th><code>goal_status</code> 取值</th><th>ROS2 状态</th><th>使用场景</th></tr>
+</thead>
+<tbody>
+<tr><td><code>"succeeded"</code>（或省略）</td><td><code>Succeeded</code></td><td>目标成功完成</td></tr>
+<tr><td><code>"aborted"</code></td><td><code>Aborted</code></td><td>目标在执行过程中失败</td></tr>
+<tr><td><code>"canceled"</code></td><td><code>Canceled</code></td><td>目标被处理程序取消</td></tr>
+</tbody>
+</table>
+</div>
+<p>无法识别的 <code>goal_status</code> 取值默认视为 <code>Aborted</code>，并记录警告。完全省略 <code>goal_status</code> 默认视为 <code>Succeeded</code>。</p>
+<p>Rust 示例：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_node_api::{GOAL_STATUS, GOAL_STATUS_ABORTED, Parameter};
+
+let mut params = metadata.parameters; // contains goal_id
+params.insert(GOAL_STATUS.to_string(), Parameter::String(GOAL_STATUS_ABORTED.to_string()));
+node.send_output("result".into(), params, error_result)?;
+<span class="boring">}</span></code></pre>
+<h3 id="action-server-limits"><a class="header" href="ros2-bridge.html#action-server-limits">动作服务器限制</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>行为</th><th>值</th></tr>
+</thead>
+<tbody>
+<tr><td>最大并发目标数</td><td>8（超出的目标会收到 <code>Aborted</code> 状态）</td></tr>
+<tr><td>自动接受</td><td>所有目标均自动接受</td></tr>
+<tr><td>结果发送超时</td><td>5 分钟</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="python-action-server-handler"><a class="header" href="ros2-bridge.html#python-action-server-handler">Python 动作服务器处理程序</a></h3>
+<p>Python 节点以 PyArrow 数组形式接收目标数据，<code>goal_id</code> 位于元数据字典中。在反馈 / 结果输出中原样传递它：</p>
+<pre><code class="language-python">for event in node:
+    if event["type"] == "INPUT" and event["id"] == "goal":
+        goal_id = event["metadata"]["goal_id"]
+        order = event["value"]["order"][0].as_py()
+
+        # Send feedback
+        node.send_output("feedback", feedback_array, {"goal_id": goal_id})
+
+        # Send result (with optional status)
+        node.send_output("result", result_array, {
+            "goal_id": goal_id,
+            "goal_status": "succeeded",  # or "aborted", "canceled"
+        })
+</code></pre>
+<h3 id="c-action-server-handler"><a class="header" href="ros2-bridge.html#c-action-server-handler">C++ 动作服务器处理程序</a></h3>
+<p>C++ 节点通过类型安全的元数据访问器访问 <code>goal_id</code>：</p>
+<pre><code class="language-cpp">auto goal_id = metadata-&gt;get_str("goal_id");
+
+// Send feedback with goal_id
+auto fb_metadata = new_metadata();
+fb_metadata-&gt;set_string("goal_id", goal_id);
+send_arrow_output_with_metadata("feedback", feedback_data, fb_metadata);
+
+// Send result with goal_id
+auto res_metadata = new_metadata();
+res_metadata-&gt;set_string("goal_id", goal_id);
+send_arrow_output_with_metadata("result", result_data, res_metadata);
+</code></pre>
+<hr/>
+<h2 id="quality-of-service-qos"><a class="header" href="ros2-bridge.html#quality-of-service-qos">服务质量（Quality of Service, QoS）</a></h2>
+<h3 id="configuration"><a class="header" href="ros2-bridge.html#configuration">配置</a></h3>
+<p>可以在桥接级别设置 QoS（适用于所有话题 / 通道），也可以在多话题模式下按话题单独设置。</p>
+<pre><code class="language-yaml">nodes:
+  - id: my_bridge
+    ros2:
+      topic: /sensor/data
+      message_type: sensor_msgs/LaserScan
+      qos:
+        reliable: true
+        durability: transient_local
+        keep_last: 10
+        liveliness: automatic
+        lease_duration: 5.0
+        max_blocking_time: 0.5
+</code></pre>
+<h3 id="defaults"><a class="header" href="ros2-bridge.html#defaults">默认值</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>默认值</th></tr>
+</thead>
+<tbody>
+<tr><td><code>reliable</code></td><td><code>false</code>（尽力而为）</td></tr>
+<tr><td><code>durability</code></td><td><code>volatile</code></td></tr>
+<tr><td><code>liveliness</code></td><td><code>automatic</code></td></tr>
+<tr><td><code>lease_duration</code></td><td>无限</td></tr>
+<tr><td><code>max_blocking_time</code></td><td>100ms（仅在 <code>reliable: true</code> 时适用）</td></tr>
+<tr><td><code>keep_last</code></td><td><code>1</code></td></tr>
+<tr><td><code>keep_all</code></td><td><code>false</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="per-topic-qos-override"><a class="header" href="ros2-bridge.html#per-topic-qos-override">按话题覆盖 QoS</a></h3>
+<p>在多话题模式下，每个话题可以覆盖桥接级别的 QoS：</p>
+<pre><code class="language-yaml">nodes:
+  - id: sensor_bridge
+    ros2:
+      topics:
+        - topic: /fast_sensor
+          message_type: sensor_msgs/Imu
+          direction: subscribe
+          qos:
+            reliable: false          # override: best effort for this topic
+            keep_last: 1
+        - topic: /cmd
+          message_type: geometry_msgs/Twist
+          direction: publish
+          # inherits bridge-level QoS (reliable: true)
+      qos:
+        reliable: true               # default for all topics
+        keep_last: 10
+    inputs:
+      cmd: planner/cmd               # the `/cmd` publish topic's dora input
+    outputs:
+      - fast_sensor                  # the `/fast_sensor` subscribe topic's dora output
+</code></pre>
+<p>两个话题都没有设置 <code>output:</code> / <code>input:</code>，所以两者都使用由话题派生出的 id（<code>fast_sensor</code>、<code>cmd</code>）——和其他地方一样，这些 id 必须在节点上声明，否则配置会被拒绝。</p>
+<h3 id="validation-rules"><a class="header" href="ros2-bridge.html#validation-rules">验证规则</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段</th><th>有效值</th></tr>
+</thead>
+<tbody>
+<tr><td><code>reliable</code></td><td><code>true</code>, <code>false</code></td></tr>
+<tr><td><code>durability</code></td><td><code>"volatile"</code>, <code>"transient_local"</code></td></tr>
+<tr><td><code>liveliness</code></td><td><code>"automatic"</code>, <code>"manual_by_participant"</code>, <code>"manual_by_topic"</code></td></tr>
+<tr><td><code>keep_last</code></td><td><code>1</code> 到 <code>10000</code></td></tr>
+<tr><td><code>keep_all</code></td><td><code>true</code>、<code>false</code>（与 <code>keep_last</code> 的意图互斥）</td></tr>
+<tr><td><code>lease_duration</code></td><td>有限非负浮点数（秒）</td></tr>
+<tr><td><code>max_blocking_time</code></td><td>有限非负浮点数（秒）</td></tr>
+</tbody>
+</table>
+</div>
+<hr/>
+<h2 id="data-format-arrow-structs"><a class="header" href="ros2-bridge.html#data-format-arrow-structs">数据格式：Arrow 结构体</a></h2>
+<p>节点与桥接之间交换的所有数据都使用只有一行的 Arrow <code>StructArray</code>。ROS2 消息中的每个字段都会成为结构体中的一列。</p>
+<h3 id="how-to-build-arrow-messages"><a class="header" href="ros2-bridge.html#how-to-build-arrow-messages">如何构建 Arrow 消息</a></h3>
+<p>Rust 示例：构建一个 <code>AddTwoInts_Request</code>（<code>{a: i64, b: i64}</code>）：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::sync::Arc;
+use arrow::array::{Array, Int64Array, StructArray};
+use arrow::datatypes::{DataType, Field};
+
+fn make_add_request(a: i64, b: i64) -&gt; StructArray {
+    let fields = vec![
+        Arc::new(Field::new("a", DataType::Int64, false)),
+        Arc::new(Field::new("b", DataType::Int64, false)),
+    ];
+    let arrays: Vec&lt;Arc&lt;dyn Array&gt;&gt; = vec![
+        Arc::new(Int64Array::from(vec![a])),
+        Arc::new(Int64Array::from(vec![b])),
+    ];
+    StructArray::try_new(fields.into(), arrays, None)
+        .expect("failed to create struct array")
+}
+<span class="boring">}</span></code></pre>
+<p>读取响应（<code>{sum: i64}</code>）：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use arrow::array::{Int64Array, StructArray};
+
+fn read_response(data: &amp;dyn arrow::array::Array) -&gt; i64 {
+    let struct_array = data
+        .as_any()
+        .downcast_ref::&lt;StructArray&gt;()
+        .expect("expected struct array");
+    struct_array
+        .column_by_name("sum")
+        .expect("missing 'sum' field")
+        .as_any()
+        .downcast_ref::&lt;Int64Array&gt;()
+        .expect("expected Int64Array")
+        .value(0)
+}
+<span class="boring">}</span></code></pre>
+<h3 id="mapping-ros2-types-to-arrow-types"><a class="header" href="ros2-bridge.html#mapping-ros2-types-to-arrow-types">ROS2 类型到 Arrow 类型的映射</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ROS2 类型</th><th>Arrow 类型</th><th>Rust Arrow 数组</th></tr>
+</thead>
+<tbody>
+<tr><td><code>bool</code></td><td><code>Boolean</code></td><td><code>BooleanArray</code></td></tr>
+<tr><td><code>int8</code></td><td><code>Int8</code></td><td><code>Int8Array</code></td></tr>
+<tr><td><code>int16</code></td><td><code>Int16</code></td><td><code>Int16Array</code></td></tr>
+<tr><td><code>int32</code></td><td><code>Int32</code></td><td><code>Int32Array</code></td></tr>
+<tr><td><code>int64</code></td><td><code>Int64</code></td><td><code>Int64Array</code></td></tr>
+<tr><td><code>uint8</code> / <code>byte</code> / <code>char</code></td><td><code>UInt8</code></td><td><code>UInt8Array</code></td></tr>
+<tr><td><code>uint16</code></td><td><code>UInt16</code></td><td><code>UInt16Array</code></td></tr>
+<tr><td><code>uint32</code></td><td><code>UInt32</code></td><td><code>UInt32Array</code></td></tr>
+<tr><td><code>uint64</code></td><td><code>UInt64</code></td><td><code>UInt64Array</code></td></tr>
+<tr><td><code>float32</code></td><td><code>Float32</code></td><td><code>Float32Array</code></td></tr>
+<tr><td><code>float64</code></td><td><code>Float64</code></td><td><code>Float64Array</code></td></tr>
+<tr><td><code>string</code></td><td><code>Utf8</code></td><td><code>StringArray</code></td></tr>
+<tr><td><code>wstring</code></td><td><code>Utf8</code>（在 CDR 一侧编码为 UTF-16）</td><td><code>StringArray</code></td></tr>
+<tr><td>嵌套消息</td><td><code>Struct</code></td><td><code>StructArray</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="sequences-and-arrays"><a class="header" href="ros2-bridge.html#sequences-and-arrays">序列与数组</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>ROS2 类型</th><th>Arrow 类型</th><th>Rust Arrow 数组</th></tr>
+</thead>
+<tbody>
+<tr><td>可变长度序列（<code>int32[]</code>）</td><td><code>List</code></td><td><code>ListArray</code></td></tr>
+<tr><td>有界序列（<code>int32[&lt;=10]</code>）</td><td><code>List</code>（长度会被校验）</td><td><code>ListArray</code></td></tr>
+<tr><td>固定大小数组（<code>int32[3]</code>）</td><td><code>FixedSizeList</code></td><td><code>FixedSizeListArray</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>示例：从 Fibonacci 反馈（<code>{partial_sequence: int32[]}</code>）中读取 <code>ListArray</code>：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use arrow::array::{Int32Array, ListArray, StructArray};
+
+let struct_array = data.as_any().downcast_ref::&lt;StructArray&gt;().unwrap();
+let list = struct_array
+    .column_by_name("partial_sequence")
+    .unwrap()
+    .as_any()
+    .downcast_ref::&lt;ListArray&gt;()
+    .unwrap();
+let values = list
+    .value(0)
+    .as_any()
+    .downcast_ref::&lt;Int32Array&gt;()
+    .unwrap()
+    .values()
+    .to_vec();
+<span class="boring">}</span></code></pre>
+<hr/>
+<h2 id="complete-yaml-reference"><a class="header" href="ros2-bridge.html#complete-yaml-reference">完整 YAML 参考</a></h2>
+<pre><code class="language-yaml">nodes:
+  - id: my_bridge
+    ros2:
+      # --- Mode (exactly one required) ---
+
+      # Single topic mode
+      topic: /topic_name               # ROS2 topic name
+      message_type: package/TypeName    # ROS2 message type
+      direction: subscribe             # subscribe (default) | publish
+
+      # Multi-topic mode (mutually exclusive with topic)
+      topics:
+        - topic: /topic_a
+          message_type: package/TypeA
+          direction: subscribe
+          output: custom_output_id     # override default ID mapping
+          qos:                         # per-topic QoS override
+            reliable: true
+        - topic: /topic_b
+          message_type: package/TypeB
+          direction: publish
+          input: custom_input_id       # override default ID mapping
+
+      # Service mode (mutually exclusive with topic/topics/action)
+      service: /service_name           # ROS2 service name
+      service_type: package/TypeName   # ROS2 service type
+      role: client                     # client | server
+
+      # Action mode (mutually exclusive with topic/topics/service)
+      action: /action_name             # ROS2 action name
+      action_type: package/TypeName    # ROS2 action type
+      role: client                     # client | server
+
+      # --- QoS (optional, applies to all channels) ---
+      qos:
+        reliable: false                # true | false (default: false = best effort)
+        durability: volatile           # volatile (default) | transient_local
+        liveliness: automatic          # automatic | manual_by_participant | manual_by_topic
+        lease_duration: 5.0            # seconds (default: infinity)
+        max_blocking_time: 0.1         # seconds (default: 0.1, reliable only)
+        keep_last: 1                   # 1-10000 (default: 1)
+        keep_all: false                # true | false (default: false)
+
+      # --- Optional ROS2 node config ---
+      namespace: /                     # ROS2 namespace (default: "/")
+      node_name: my_ros_node           # ROS2 node name (default: dora node id)
+
+    # --- Standard Dora node fields ---
+    inputs:
+      input_id: source_node/output_id
+    outputs:
+      - output_id
+</code></pre>
+<hr/>
+<h2 id="use-case-scenarios"><a class="header" href="ros2-bridge.html#use-case-scenarios">使用场景</a></h2>
+<h3 id="1-subscribe-to-sensor-data-turtlesim-pose"><a class="header" href="ros2-bridge.html#1-subscribe-to-sensor-data-turtlesim-pose">1. 订阅传感器数据（turtlesim 位姿）</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: pose_bridge
+    ros2:
+      topic: /turtle1/pose
+      message_type: turtlesim/Pose
+    outputs:
+      - pose
+
+  - id: my_processor
+    path: ./target/debug/my-processor
+    inputs:
+      pose: pose_bridge/pose
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// In my_processor: receive turtlesim/Pose as Arrow
+Event::Input { id, data, .. } if id.as_str() == "pose" =&gt; {
+    let s = data.as_any().downcast_ref::&lt;StructArray&gt;().unwrap();
+    let x = s.column_by_name("x").unwrap()
+        .as_any().downcast_ref::&lt;Float32Array&gt;().unwrap().value(0);
+    let y = s.column_by_name("y").unwrap()
+        .as_any().downcast_ref::&lt;Float32Array&gt;().unwrap().value(0);
+    println!("Turtle at ({x}, {y})");
+}
+<span class="boring">}</span></code></pre>
+<h3 id="2-publish-velocity-commands"><a class="header" href="ros2-bridge.html#2-publish-velocity-commands">2. 发布速度命令</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: planner
+    path: ./target/debug/planner
+    inputs:
+      tick: dora/timer/millis/100
+    outputs:
+      - cmd_vel
+
+  - id: cmd_bridge
+    ros2:
+      topic: /turtle1/cmd_vel
+      message_type: geometry_msgs/Twist
+      direction: publish
+    inputs:
+      cmd_vel: planner/cmd_vel
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// In planner: send geometry_msgs/Twist as Arrow
+// Twist has nested Vector3 fields: linear {x,y,z} and angular {x,y,z}
+fn make_twist(linear_x: f64, angular_z: f64) -&gt; StructArray {
+    let vec3_fields = vec![
+        Arc::new(Field::new("x", DataType::Float64, false)),
+        Arc::new(Field::new("y", DataType::Float64, false)),
+        Arc::new(Field::new("z", DataType::Float64, false)),
+    ];
+    let linear = StructArray::try_new(
+        vec3_fields.clone().into(),
+        vec![
+            Arc::new(Float64Array::from(vec![linear_x])) as _,
+            Arc::new(Float64Array::from(vec![0.0])) as _,
+            Arc::new(Float64Array::from(vec![0.0])) as _,
+        ],
+        None,
+    ).unwrap();
+    let angular = StructArray::try_new(
+        vec3_fields.into(),
+        vec![
+            Arc::new(Float64Array::from(vec![0.0])) as _,
+            Arc::new(Float64Array::from(vec![0.0])) as _,
+            Arc::new(Float64Array::from(vec![angular_z])) as _,
+        ],
+        None,
+    ).unwrap();
+
+    let fields = vec![
+        Arc::new(Field::new("linear", linear.data_type().clone(), false)),
+        Arc::new(Field::new("angular", angular.data_type().clone(), false)),
+    ];
+    StructArray::try_new(
+        fields.into(),
+        vec![Arc::new(linear) as _, Arc::new(angular) as _],
+        None,
+    ).unwrap()
+}
+<span class="boring">}</span></code></pre>
+<h3 id="3-multi-topic-bidirectional-bridge"><a class="header" href="ros2-bridge.html#3-multi-topic-bidirectional-bridge">3. 多话题双向桥接</a></h3>
+<p>在单个 ROS2 节点上订阅位姿并发布速度。</p>
+<pre><code class="language-yaml">nodes:
+  - id: turtle_bridge
+    ros2:
+      topics:
+        - topic: /turtle1/pose
+          message_type: turtlesim/Pose
+          direction: subscribe
+          output: pose
+        - topic: /turtle1/cmd_vel
+          message_type: geometry_msgs/Twist
+          direction: publish
+          input: velocity
+      qos:
+        reliable: true
+        keep_last: 10
+    inputs:
+      velocity: planner/cmd_vel
+    outputs:
+      - pose
+
+  - id: planner
+    path: ./target/debug/planner
+    inputs:
+      pose: turtle_bridge/pose
+      tick: dora/timer/millis/100
+    outputs:
+      - cmd_vel
+</code></pre>
+<h3 id="4-service-client-call-an-external-ros2-service"><a class="header" href="ros2-bridge.html#4-service-client-call-an-external-ros2-service">4. 服务客户端：调用外部 ROS2 服务</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: requester
+    path: ./target/debug/requester
+    inputs:
+      tick: dora/timer/millis/1000
+      response: add_client/response
+    outputs:
+      - request
+
+  - id: add_client
+    ros2:
+      service: /add_two_ints
+      service_type: example_interfaces/AddTwoInts
+      role: client
+    inputs:
+      request: requester/request
+    outputs:
+      - response
+</code></pre>
+<p>前提条件：先运行一个 ROS2 服务：</p>
+<pre><code class="language-bash">ros2 run examples_rclcpp_minimal_service service_main
+</code></pre>
+<h3 id="5-service-server-expose-an-dora-handler-as-ros2-service"><a class="header" href="ros2-bridge.html#5-service-server-expose-an-dora-handler-as-ros2-service">5. 服务服务器：将 Dora 处理程序暴露为 ROS2 服务</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: add_server
+    ros2:
+      service: /add_two_ints
+      service_type: example_interfaces/AddTwoInts
+      role: server
+    inputs:
+      response: handler/response
+    outputs:
+      - request
+
+  - id: handler
+    path: ./target/debug/handler
+    inputs:
+      request: add_server/request
+    outputs:
+      - response
+</code></pre>
+<p>处理程序以 Arrow 形式接收 <code>{a: i64, b: i64}</code>，计算结果后将 <code>{sum: i64}</code> 发回。外部 ROS2 客户端可以调用该服务：</p>
+<pre><code class="language-bash">ros2 service call /add_two_ints example_interfaces/srv/AddTwoInts "{a: 3, b: 5}"
+</code></pre>
+<h3 id="6-action-client-long-running-fibonacci-goal"><a class="header" href="ros2-bridge.html#6-action-client-long-running-fibonacci-goal">6. 动作客户端：长时间运行的 Fibonacci 目标</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: goal_sender
+    path: ./target/debug/goal-sender
+    inputs:
+      tick: dora/timer/millis/5000
+      feedback: fib_client/feedback
+      result: fib_client/result
+    outputs:
+      - goal
+
+  - id: fib_client
+    ros2:
+      action: /fibonacci
+      action_type: example_interfaces/Fibonacci
+      role: client
+    inputs:
+      goal: goal_sender/goal
+    outputs:
+      - feedback
+      - result
+</code></pre>
+<p>前提条件：在启动数据流<strong>之前</strong>启动动作服务器：</p>
+<pre><code class="language-bash">ros2 run examples_rclcpp_action_server fibonacci_action_server
+</code></pre>
+<p>目标节点发送 <code>{order: int32}</code>，接收流式的 <code>{partial_sequence: int32[]}</code> 反馈，以及最终的 <code>{sequence: int32[]}</code> 结果。</p>
+<h3 id="7-action-server-expose-an-dora-handler-as-ros2-action"><a class="header" href="ros2-bridge.html#7-action-server-expose-an-dora-handler-as-ros2-action">7. 动作服务器：将 Dora Handler 暴露为 ROS2 动作（Action）</a></h3>
+<pre><code class="language-yaml">nodes:
+  - id: fib_server
+    ros2:
+      action: /fibonacci
+      action_type: example_interfaces/Fibonacci
+      role: server
+    inputs:
+      feedback: handler/feedback
+      result: handler/result
+    outputs:
+      - goal
+
+  - id: handler
+    path: ./target/debug/handler
+    inputs:
+      goal: fib_server/goal
+    outputs:
+      - feedback
+      - result
+</code></pre>
+<p>该 handler 接收带有 metadata 中 <code>goal_id</code> 的 <code>{order: int32}</code> 目标，发送 <code>{partial_sequence: int32[]}</code> 反馈，以及最终的 <code>{sequence: int32[]}</code> 结果——这些都在 metadata 中携带相同的 <code>goal_id</code>。外部 ROS2 客户端可以发送目标：</p>
+<pre><code class="language-bash">ros2 action send_goal /fibonacci example_interfaces/action/Fibonacci "{order: 10}"
+</code></pre>
+<hr/>
+<h2 id="native-code-apis-rust--python--c"><a class="header" href="ros2-bridge.html#native-code-apis-rust--python--c">原生代码 API（Rust / Python / C++）</a></h2>
+<p>上面的 YAML 桥接与语言无关，节点代码中不需要任何 ROS2 代码。如果你希望改为在节点代码中<strong>命令式</strong>地驱动 ROS2——使用带类型的结构体、显式的请求/响应、目标句柄——请使用各语言对应的原生 API。它们封装的是同一套 <code>ros2-client</code> 技术栈；消息类型是在构建时，根据 <code>AMENT_PREFIX_PATH</code> 上的 <code>.msg</code>/<code>.srv</code>/<code>.action</code> 文件生成的。</p>
+<p>这三种语言都支持话题的发布/订阅、服务客户端 + 服务器、以及动作客户端 + 服务器。完整可运行的示例见 <a href="https://github.com/dora-rs/dora/tree/main/examples/ros2-bridge"><code>examples/ros2-bridge/{rust,python,c++}/</code></a>。</p>
+<h3 id="python-doraros2context"><a class="header" href="ros2-bridge.html#python-doraros2context">Python（<code>dora.Ros2Context</code>）</a></h3>
+<p>Python 节点先创建一个 ROS2 的 context 和 node，然后创建 publisher/subscription、服务/动作客户端/服务器，或参数。数据类型为 PyArrow。</p>
+<pre><code class="language-python">from dora import Node, Ros2Context, Ros2NodeOptions, Ros2QosPolicies
+import pyarrow as pa
+
+dora_node = Node()                       # connect to the dora daemon FIRST
+ctx = Ros2Context()
+node = ctx.new_node("my_node", "/", Ros2NodeOptions(rosout=True))
+
+qos = Ros2QosPolicies(reliable=True, keep_last=1)
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方法</th><th>用途</th></tr>
+</thead>
+<tbody>
+<tr><td><code>ctx.new_node(name, namespace, options, parameters=None)</code></td><td>创建 ROS2 节点；<code>parameters</code> 用于声明初始的 ROS2 参数</td></tr>
+<tr><td><code>node.create_topic(name, type, qos)</code> / <code>create_publisher(topic)</code> / <code>create_subscription(topic)</code></td><td>话题的发布/订阅</td></tr>
+<tr><td><code>node.create_service_client(name, type, qos=None)</code> → <code>Ros2ServiceClient</code></td><td><code>.call(request, timeout_s=None)</code></td></tr>
+<tr><td><code>node.create_service_server(name, type, qos=None)</code> → <code>Ros2ServiceServer</code></td><td><code>.take_request()</code> → <code>(id, req)</code> / <code>None</code>，然后调用 <code>.send_response(id, resp)</code></td></tr>
+<tr><td><code>node.create_action_client(name, type, qos)</code> → <code>Ros2ActionClient</code></td><td><code>.send_goal(goal)</code> → <code>goal_id</code>, <code>.take_feedback(goal_id)</code>, <code>.take_result(goal_id)</code>, <code>.cancel(goal_id=None)</code></td></tr>
+<tr><td><code>node.create_action_server(name, type, qos)</code> → <code>Ros2ActionServer</code></td><td><code>.take_goal()</code> → <code>(goal_id, goal)</code>, <code>.send_feedback(goal_id, fb)</code>, <code>.send_result(goal_id, result, status=None)</code>, <code>.take_cancel()</code></td></tr>
+<tr><td><code>node.set_parameter</code> / <code>get_parameter</code> / <code>list_parameters</code> / <code>has_parameter</code></td><td>运行时参数（同时提供给 <code>ros2 param</code>）</td></tr>
+</tbody>
+</table>
+</div>
+<p>服务客户端示例（调用外部 ROS2 的 <code>AddTwoInts</code>）：</p>
+<pre><code class="language-python">client = node.create_service_client("/add_two_ints", "example_interfaces/AddTwoInts", qos)
+client.wait_for_service()
+resp = client.call(pa.array([{"a": 2, "b": 3}]))
+print(resp[0]["sum"].as_py())            # 5
+</code></pre>
+<p>参数（在创建节点时声明，随后提供给 <code>ros2 param</code>）：</p>
+<pre><code class="language-python">node = ctx.new_node("demo", "/", Ros2NodeOptions(rosout=True),
+                    parameters={"speed": 1.5, "name": "robot"})
+node.set_parameter("speed", 2.0)
+print(node.get_parameter("speed"), node.list_parameters())
+</code></pre>
+<p>阻塞调用（<code>call</code>、<code>take_*</code>）在等待期间会释放 GIL。参见 <code>examples/ros2-bridge/python/{service-client,service-server,action-client,action-server,parameter}/</code>。</p>
+<h3 id="rust-dora-ros2-bridge"><a class="header" href="ros2-bridge.html#rust-dora-ros2-bridge">Rust（<code>dora-ros2-bridge</code>）</a></h3>
+<p>Rust 节点直接使用 <code>ros2-client</code>，配合 <code>dora_ros2_bridge::messages::&lt;package&gt;</code> 生成的消息结构体。话题、服务、动作的客户端/服务器都是原生的 <code>ros2-client</code> 调用；动作服务器使用 <code>AsyncActionServer&lt;A&gt;</code>（无需额外的代码生成）。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use dora_ros2_bridge::{ros2_client, messages::example_interfaces::action::Fibonacci};
+
+let server = ros_node.create_action_server::&lt;Fibonacci&gt;(
+    ros2_client::ServiceMapping::Enhanced,
+    &amp;ros2_client::Name::new("/", "fibonacci").unwrap(),
+    &amp;ros2_client::ActionTypeName::new("example_interfaces", "Fibonacci"),
+    action_qos,
+)?;
+<span class="boring">}</span></code></pre>
+<p>参见 <code>examples/ros2-bridge/rust/{topic-pub,topic-sub,service-client,service-server,action-client,action-server,turtle}/</code>。</p>
+<h3 id="c-cxx-codegen"><a class="header" href="ros2-bridge.html#c-cxx-codegen">C++（cxx 代码生成）</a></h3>
+<p>C++ 节点包含生成的头文件，并调用带包命名空间的创建函数；数据类型为 <code>rust::Box</code> 或生成的结构体。服务和动作服务器由 <code>matches</code> / <code>downcast</code> 事件循环驱动，与客户端的方式类似。</p>
+<pre><code class="language-cpp">#include "ros2-bridge/msg/example_interfaces.h"
+
+auto server = example_interfaces::create_Fibonacci_action_server(
+    *node, "/", "fibonacci", qos, merged_events);
+// in the event loop:
+if (server-&gt;matches(event)) {
+    auto goal_event = server-&gt;downcast(std::move(event));
+    auto goal = goal_event-&gt;get_goal();
+    // ... compute ...
+    server-&gt;publish_feedback(goal_event-&gt;get_goal_id(), feedback);
+    server-&gt;send_result(goal_event-&gt;get_goal_id(), ActionStatusEnum::Succeeded, result);
+}
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ 接口</th><th>创建函数</th></tr>
+</thead>
+<tbody>
+<tr><td>话题</td><td><code>create_topic_&lt;pkg&gt;_&lt;Type&gt;</code> + <code>create_publisher</code> / <code>create_subscription</code></td></tr>
+<tr><td>服务（Service）客户端</td><td><code>create_client_&lt;pkg&gt;_&lt;Name&gt;</code> → <code>wait_for_service</code> / <code>send_request</code> / <code>matches</code> / <code>downcast</code></td></tr>
+<tr><td>服务（Service）服务端</td><td><code>create_service_server_&lt;pkg&gt;_&lt;Name&gt;</code> → <code>matches</code> / <code>downcast</code> (<code>get_request</code> / <code>get_id</code>) / <code>send_response</code></td></tr>
+<tr><td>动作（Action）客户端</td><td><code>&lt;pkg&gt;::create_&lt;Name&gt;_action_client</code> → <code>wait_for_action</code> / <code>send_goal</code> / <code>request_result</code> / <code>matches_*</code> / <code>downcast_*</code></td></tr>
+<tr><td>动作（Action）服务端</td><td><code>&lt;pkg&gt;::create_&lt;Name&gt;_action_server</code> → <code>matches</code> / <code>downcast</code> (<code>get_goal</code> / <code>get_goal_id</code>) / <code>publish_feedback</code> / <code>send_result</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>参见 <code>examples/ros2-bridge/c++/{turtle,service-server,action-client,action-server}/</code>。</p>
+<h3 id="discovery--rmw-notes-native-servers"><a class="header" href="ros2-bridge.html#discovery--rmw-notes-native-servers">发现与 RMW 说明（原生服务器）</a></h3>
+<ul>
+<li><strong>对于<em>动作（action）</em>而言，由 Dora 托管的<em>服务器</em>无法被真实的 <code>rcl</code>/<code>rclcpp</code>/<code>rclpy</code> 客户端发现</strong>（<a href="https://github.com/jhelovuo/ros2-client/issues/4">ros2-client#4</a>）：动作示例是在同一个数据流中，将 Dora 服务器与 Dora 客户端配对使用。相比之下，<em>服务（service）</em>服务器可以被真实的 <code>ros2</code> 客户端正常发现。</li>
+<li><strong>RMW 必须匹配。</strong>服务/动作的关联方式在 Fast-DDS（<code>Enhanced</code>）和 Cyclone 的映射之间有所不同；桥接会根据 <code>RMW_IMPLEMENTATION</code> 选择对应的映射（原生代码在代码生成时确定，YAML 桥接在运行时确定）。不匹配会导致调用挂起。请在两端一致地设置 <code>RMW_IMPLEMENTATION</code>。</li>
+<li><code>ros2-client</code> 中<strong>没有 <code>wait_for_action_server</code></strong>；如果没有服务器存在，客户端首次调用 <code>send_goal</code> 只会直接超时。</li>
+</ul>
+<hr/>
+<h2 id="limitations-and-known-constraints"><a class="header" href="ros2-bridge.html#limitations-and-known-constraints">限制与已知约束</a></h2>
+<p>以下约束适用于 <strong>YAML / 动态桥接</strong>。原生代码 API 有其自己的说明，见<a href="ros2-bridge.html#discovery--rmw-notes-native-servers">发现与 RMW 说明</a>（值得注意的是：Python 的动作客户端/服务器<em>确实</em>支持取消）。</p>
+<ul>
+<li><strong>动作服务器自动接受</strong>：所有传入的目标都会被自动接受。handler 无法在执行开始前拒绝目标。</li>
+<li><strong>不支持动作取消（YAML 桥接）</strong>：YAML 动作桥接不处理 ROS2 的取消请求（Python 原生动作 API 支持）。</li>
+<li><strong>没有 <code>wait_for_action_server</code></strong>：<code>ros2_client</code> 库不提供此 API。请在启动数据流之前先启动动作服务器。如果服务器不可用，第一个目标会在 30 秒后超时。</li>
+<li><strong>原生动作服务器的发现问题（ros2-client#4）</strong>：由 Dora 托管的<em>动作</em>服务器无法被基于真实 <code>rcl</code> 的客户端发现；请将其与 Dora 客户端配对使用。服务服务器不受此影响。</li>
+<li><strong>服务客户端单次并发</strong>：服务客户端按顺序处理请求——每个请求都会阻塞，直到收到响应（或在 30 秒后超时）。</li>
+<li><strong>服务/动作通道的 QoS 是统一的</strong>：<code>qos</code> 配置适用于所有服务/动作子通道（goal、result、cancel、feedback、status）。无法针对单个通道单独配置 QoS。</li>
+<li><strong>需要设置 <code>AMENT_PREFIX_PATH</code></strong>：如果找不到 ROS2 消息定义，桥接会在启动时失败。</li>
+<li><strong>最多 64 个话题</strong>：多话题模式下每个桥接节点最多支持 64 个话题。</li>
+<li><strong>最多 8 个并发动作目标</strong>：达到上限后，新增目标会收到 <code>Aborted</code> 状态。</li>
+<li><strong>最多 64 个待处理服务请求（服务端）</strong>：队列满时请求会被丢弃。</li>
+</ul>
+<hr/>
+<h2 id="best-practices"><a class="header" href="ros2-bridge.html#best-practices">最佳实践</a></h2>
+<p><strong>运行前请先 source 你的 ROS2 环境。</strong>确保已设置 <code>AMENT_PREFIX_PATH</code>，并包含所有所需的消息包。若未找到任何定义，桥接会记录一条错误日志。</p>
+<p><strong>请在数据流启动前先启动动作（Action）服务端。</strong>目前没有针对动作服务端的等待机制。如果服务端未就绪，首次发送目标会在 30 秒后超时。</p>
+<p><strong>对相关话题使用多话题模式。</strong>在同一个桥接节点上桥接 <code>/turtle1/pose</code>（订阅）和 <code>/turtle1/cmd_vel</code>（发布），比使用两个独立的桥接节点更能降低资源占用。</p>
+<p><strong>确保 Arrow 字段名与消息定义完全一致。</strong>桥接会校验 Arrow 结构体字段名是否与 ROS2 消息定义匹配。缺失的字段会使用默认值（数字为零、字符串为空）。多余的字段会导致错误。</p>
+<p><strong>在多话题模式下显式指定 <code>output</code>/<code>input</code>。</strong>默认的 ID 映射方式（去掉 <code>/</code>，再把 <code>/</code> 替换为 <code>_</code>）对于层级较深的话题名容易产生混淆。显式指定 ID 可以让 dataflow YAML 更具自说明性。</p>
+<p><strong>将 QoS 设置为与 ROS2 发布者 / 订阅者一致。</strong>QoS 不匹配（例如 reliable 的订阅者对应 best-effort 的发布者）会导致通信静默失败。可以用 <code>ros2 topic info -v /topic_name</code> 查看现有的 QoS 设置。</p>
+<p><strong>在服务响应中传递 <code>request_id</code>。</strong>桥接通过 <code>request_id</code> 元数据参数将响应与请求对应起来。如果处理函数的响应元数据中没有包含 <code>request_id</code>，桥接就无法将该响应匹配到对应的原始 ROS2 请求。</p>
+<p class="i18n-notice" style="margin:2.5rem 0 1rem;padding:.5rem .8rem;border-left:3px solid var(--links,#0a4bff);font-size:.85rem;opacity:.8">本页为 dora 官方文档的非官方中文翻译，内容以<a href="https://dora-rs.ai/dora/advanced/ros2-bridge.html" rel="noopener" target="_blank">官方原文</a>为准。 原文 © dora-rs contributors，依 <a href="https://www.apache.org/licenses/LICENSE-2.0" rel="noopener" target="_blank">Apache License 2.0</a> 发布；本页为翻译修改后的版本。</p></main>
+<nav aria-label="页面导航" class="nav-wrapper">
+<!-- Mobile navigation buttons -->
+<a aria-keyshortcuts="Left" aria-label="上一章" class="mobile-nav-chapters previous" href="../operations/dynamic-topology.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="mobile-nav-chapters next" href="ws-control.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+<div style="clear: both"></div>
+</nav>
+</div>
+</div>
+<nav aria-label="页面导航" class="nav-wide-wrapper">
+<a aria-keyshortcuts="Left" aria-label="上一章" class="nav-chapters previous" href="../operations/dynamic-topology.html" rel="prev" title="上一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span>
+</a>
+<a aria-keyshortcuts="Right" aria-label="下一章" class="nav-chapters next" href="ws-control.html" rel="next prefetch" title="下一章">
+<span class="fa-svg"><svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span>
+</a>
+</nav>
+</div>
+<template id="fa-eye"><span class="fa-svg"><svg viewbox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"></path></svg></span></template>
+<template id="fa-eye-slash"><span class="fa-svg"><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"></path></svg></span></template>
+<template id="fa-copy"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"></path></svg></span></template>
+<template id="fa-play"><span class="fa-svg"><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"></path></svg></span></template>
+<template id="fa-clock-rotate-left"><span class="fa-svg"><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"></path></svg></span></template>
+<script>
+            window.playground_copyable = true;
+        </script>
+<script src="../elasticlunr-ef4e11c1.min.js"></script>
+<script src="../mark-09e88c2c.min.js"></script>
+<script src="../zh-search.js?v=87af68366e"></script>
+<script src="../clipboard-1626706a.min.js"></script>
+<script src="../highlight-abc7f01d.js"></script>
+<script src="../book-609e4cb8.js?v=a965335801"></script>
+<!-- Custom JS scripts -->
+</div>
+
+<div id="i18n-fab" style="position:fixed;right:16px;bottom:16px;z-index:9999;font:14px/1.4 sans-serif">
+<div id="i18n-menu" role="menu" hidden style="position:absolute;min-width:150px;padding:4px;border-radius:8px;
+ background:var(--theme-popup-bg,var(--bg,#fff));color:var(--fg,#222);
+ box-shadow:0 4px 16px rgba(0,0,0,.25);border:1px solid var(--theme-popup-border,#ddd)">
+<a id="i18n-toggle" role="menuitem" href="#" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">切换到英文</a>
+<a id="i18n-src" role="menuitem" href="https://dora-rs.ai/dora/advanced/ros2-bridge.html" target="_blank" rel="noopener" style="display:block;padding:6px 10px;border-radius:6px;color:inherit;text-decoration:none">查看官方原文</a></div>
+<button id="i18n-fab-btn" type="button" title="语言 / 官方原文（可拖动）" aria-haspopup="menu" aria-expanded="false"
+ style="width:44px;height:44px;border-radius:50%;border:none;background:var(--links,#0a4bff);color:#fff;font-weight:600;
+ box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:grab;touch-action:none;user-select:none;opacity:.85">中</button>
+</div>
+<style>#i18n-menu a:hover{background:rgba(128,128,128,.2)} #i18n-fab-btn:hover{opacity:1}</style><script>(function(){
+var fab=document.getElementById("i18n-fab"), btn=document.getElementById("i18n-fab-btn"),
+    menu=document.getElementById("i18n-menu"), STORE="i18n-fab-pos", M=8;
+if(!fab||!btn) return;
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function place(x,y){  /* x,y 为左上角像素，限制在视口内 */
+  var w=fab.offsetWidth, h=fab.offsetHeight;
+  x=clamp(x,M,window.innerWidth-w-M); y=clamp(y,M,window.innerHeight-h-M);
+  fab.style.left=x+"px"; fab.style.top=y+"px"; fab.style.right="auto"; fab.style.bottom="auto";
+}
+function save(){try{var r=fab.getBoundingClientRect();
+  localStorage.setItem(STORE,JSON.stringify({xr:r.left/Math.max(1,window.innerWidth-r.width),
+                                             yr:r.top/Math.max(1,window.innerHeight-r.height)}));}catch(e){}}
+function restore(){try{var p=JSON.parse(localStorage.getItem(STORE)||"null");
+  if(p) place(p.xr*(window.innerWidth-fab.offsetWidth), p.yr*(window.innerHeight-fab.offsetHeight));}catch(e){}}
+restore();
+window.addEventListener("resize",function(){if(fab.style.left){var r=fab.getBoundingClientRect(); place(r.left,r.top);}});
+/* 拖动：移动超过 5px 才算拖动，否则算点击 */
+var sx,sy,ox,oy,dragging=false,pressed=false,suppress=false;
+btn.addEventListener("pointerdown",function(e){if(e.button!==0)return; pressed=true; dragging=false;
+  var r=fab.getBoundingClientRect(); sx=e.clientX; sy=e.clientY; ox=r.left; oy=r.top; btn.setPointerCapture(e.pointerId);});
+btn.addEventListener("pointermove",function(e){if(!pressed)return;
+  var dx=e.clientX-sx, dy=e.clientY-sy;
+  if(!dragging&&Math.abs(dx)+Math.abs(dy)>5){dragging=true; close(); btn.style.cursor="grabbing";}
+  if(dragging) place(ox+dx,oy+dy);});
+btn.addEventListener("pointerup",function(){if(!pressed)return; pressed=false; btn.style.cursor="grab";
+  if(dragging){suppress=true; save();}});
+/* 菜单：朝有空间的方向展开 */
+function open(){var r=btn.getBoundingClientRect(); menu.hidden=false; btn.setAttribute("aria-expanded","true");
+  var up=r.top>window.innerHeight/2, right=r.left>window.innerWidth/2;
+  menu.style.top=up?"auto":"52px"; menu.style.bottom=up?"52px":"auto";
+  menu.style.left=right?"auto":"0"; menu.style.right=right?"0":"auto";}
+function close(){menu.hidden=true; btn.setAttribute("aria-expanded","false");}
+btn.addEventListener("click",function(){if(suppress){suppress=false;return;} menu.hidden?open():close();});
+document.addEventListener("click",function(e){if(!fab.contains(e.target))close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+})();</script><script>(function(){
+var OFF=90, KEY="_pos", link=document.getElementById("i18n-toggle");
+if(!link) return;
+function target(){
+  /* 当前屏幕顶部所在的锚点：小节 / API 条目 / 标签。中英文页面锚点一致 */
+  var els=document.querySelectorAll("main h1[id],main h2[id],main h3[id],main h4[id],main h5[id]") /* ADAPTER: 正文锚点选择器 */, best=null, ratio=0;
+  for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect(); if(r.top<=OFF){best=els[i];}}
+  if(best){var r=best.getBoundingClientRect(); ratio=r.height>0?Math.min(1,Math.max(0,(OFF-r.top)/r.height)):0;}
+  var q=new URLSearchParams(location.search); q.delete(KEY);
+  if(best) q.set(KEY, ratio.toFixed(3));
+  var qs=q.toString();
+  return location.pathname.replace("/zh/","/en/")+(qs?"?"+qs:"")+(best?"#"+encodeURIComponent(best.id):"");
+}
+link.href=location.pathname.replace("/zh/","/en/");
+link.addEventListener("mousedown",function(){link.href=target();});
+link.addEventListener("click",function(){link.href=target();});
+/* 从另一种语言切过来：定位到同一锚点，再按比例滚到节内相同位置 */
+var q=new URLSearchParams(location.search), pos=parseFloat(q.get(KEY));
+if(!isNaN(pos)&&location.hash){
+  var go=function(){var el=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(el){var r=el.getBoundingClientRect(); window.scrollTo(0, window.scrollY+r.top+pos*r.height-OFF+1);}};
+  window.addEventListener("load",function(){go(); setTimeout(go,300);});
+  q.delete(KEY); var qs=q.toString();
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:"")+location.hash);
+}
+})();</script></body>
+</html>
