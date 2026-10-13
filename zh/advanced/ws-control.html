@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -460,7 +460,7 @@ pub enum WsMessage {
 <p>当收到 <code>Close</code> 帧时：</p>
 <ul>
 <li><strong>Control 处理器</strong>：退出处理循环，释放日志订阅通道</li>
-<li><strong>Daemon 处理器</strong>：退出循环，然后发出 <code>Event::DaemonExit { daemon_id }</code> 以立即清理</li>
+<li><strong>守护进程处理器</strong>：跳出循环，然后发出 <code>Event::DaemonExit { daemon_id }</code> 以立即清理</li>
 </ul>
 <h3 id="cleanup-on-disconnect"><a class="header" href="ws-control.html#cleanup-on-disconnect">断开连接时的清理</a></h3>
 <p><strong>Control 连接</strong>：</p>
@@ -468,11 +468,11 @@ pub enum WsMessage {
 <li><code>log_tx</code> 通道被释放，停止向该客户端转发日志</li>
 <li>无需清理协调器状态（control 连接是无状态的）</li>
 </ul>
-<p><strong>Daemon 连接</strong>：</p>
+<p><strong>守护进程连接</strong>：</p>
 <ul>
 <li>如果已跟踪某个 <code>daemon_id</code>，则发出 <code>DaemonExit</code> 事件</li>
 <li><code>cmd_tx</code> 和 <code>pending_replies</code> 被释放</li>
-<li>协调器将该 daemon 从其连接映射表中移除</li>
+<li>协调器将该守护进程从其连接映射中移除</li>
 </ul>
 <p><strong>WsSession（CLI 客户端）</strong>：</p>
 <ul>
@@ -499,7 +499,7 @@ pub enum WsMessage {
  │                              │                              │
  │&lt;── ControlRequestReply ─────│                              │
 </code></pre>
-<h3 id="daemon-registration"><a class="header" href="ws-control.html#daemon-registration">Daemon 注册</a></h3>
+<h3 id="daemon-registration"><a class="header" href="ws-control.html#daemon-registration">守护进程注册</a></h3>
 <pre><code>Daemon                                    Coordinator
   │                                           │
   │── WsRequest ─────────────────────────────&gt;│
@@ -545,7 +545,7 @@ pub enum WsMessage {
 <tr><td>单元测试（protocol）</td><td><code>libraries/message/src/ws_protocol.rs</code></td><td>10</td><td>往返序列化、无标签分发（untagged dispatch）、错误场景</td></tr>
 <tr><td>单元（客户端）</td><td><code>binaries/cli/src/ws_client.rs</code></td><td>6</td><td>响应路由、subscribe 确认、topic subscribe 确认、孤儿处理（orphan handling）、断开连接</td></tr>
 <tr><td>集成测试（control）</td><td><code>binaries/coordinator/tests/ws_control_tests.rs</code></td><td>11</td><td>健康检查、List、无效 JSON/参数、Destroy、DaemonConnected、ping/pong、并发请求、连接关闭、日志订阅</td></tr>
-<tr><td>集成测试（daemon）</td><td><code>binaries/coordinator/tests/ws_daemon_tests.rs</code></td><td>4</td><td>Register、register 后 status、断开清理、ping/pong</td></tr>
+<tr><td>集成（守护进程）</td><td><code>binaries/coordinator/tests/ws_daemon_tests.rs</code></td><td>4</td><td>Register、register 后 status、断开清理、ping/pong</td></tr>
 <tr><td>端到端测试（WsSession）</td><td><code>tests/ws-cli-e2e.rs</code></td><td>4</td><td>WsSession + 协调器：list、status、stop、多重请求</td></tr>
 <tr><td><strong>总计</strong></td><td></td><td><strong>35</strong></td><td></td></tr>
 </tbody>
@@ -554,7 +554,7 @@ pub enum WsMessage {
 <h3 id="key-test-patterns"><a class="header" href="ws-control.html#key-test-patterns">关键测试模式</a></h3>
 <p><strong>带超时的轮询（Poll-with-timeout）</strong>：集成测试以 2 秒的截止时间和 20ms 的休眠间隔轮询协调器状态（例如 <code>DaemonConnected</code>），避免不稳定的时序假设。</p>
 <p><strong>不嵌套运行时（No nested runtimes）</strong>：端到端测试在带有独立 tokio 运行时的后台 <code>std::thread</code> 上运行协调器，而 <code>WsSession</code>（它会创建自己的 current-thread 运行时）则运行在测试的主线程上。这样可以避免“cannot start a runtime from within a runtime”的 panic。</p>
-<p><strong>测试中的 u128 变通方案</strong>：Daemon 测试辅助函数通过 <code>format!()</code> + <code>serde_json::to_string()</code>（而非 <code>serde_json::to_value()</code>）手动构造 WsRequest JSON 字符串，以便在传输中保留 <code>uhlc::ID</code> 的 u128 值。</p>
+<p><strong>测试中的 u128 变通方案</strong>：守护进程测试辅助函数通过 <code>format!()</code> + <code>serde_json::to_string()</code>（而非 <code>serde_json::to_value()</code>）手动构造 WsRequest JSON 字符串，以在传输中保留 <code>uhlc::ID</code> 的 u128 值。</p>
 <p><strong>测试协调器搭建</strong>：集成测试和端到端测试都使用 <code>dora_coordinator::start_testing_with_store()</code>，它绑定到端口 0（由操作系统分配），接受一个空的外部事件流，并接收一个注入的 store（通常是 <code>Arc::new(InMemoryStore::new())</code>）。</p>
 <hr/>
 <h2 id="configuration-reference"><a class="header" href="ws-control.html#configuration-reference">配置参考</a></h2>

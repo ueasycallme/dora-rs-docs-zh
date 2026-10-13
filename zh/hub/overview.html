@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -190,14 +190,14 @@ hub: dora-rs/dora-yolo@^0.5  # the same, written out
 hub: acme/lidar@~2.1         # a third-party namespace
 hub: dora-vad                # no @req → any version (the latest non-yanked)
 </code></pre>
-<p><strong>bare name</strong>（裸名称）是官方 <code>dora-rs/</code> 命名空间的简写。版本要求是标准的 semver/Cargo 范围（<code>^0.5</code>、<code>~2.1</code>、<code>&gt;=0.5, &lt;0.7</code>、<code>=1.2.3</code>、<code>*</code>）；解析时会选取满足该要求的<strong>最高未撤回</strong>版本。完整语法参见 <a href="using-nodes.html">Using Hub Nodes</a>。</p>
+<p><strong>裸名称</strong>是官方 <code>dora-rs/</code> 命名空间的简写形式。版本要求是标准的 semver/Cargo 范围（<code>^0.5</code>、<code>~2.1</code>、<code>&gt;=0.5, &lt;0.7</code>、<code>=1.2.3</code>、<code>*</code>）；解析时会选取满足条件的<strong>最高未撤回（non-yanked）</strong>版本。完整语法请参见<a href="using-nodes.html">使用 Hub 节点</a>。</p>
 <h2 id="what-this-section-covers"><a class="header" href="overview.html#what-this-section-covers">本节内容</a></h2>
 <ul>
-<li><strong><a href="using-nodes.html">Using Hub Nodes</a></strong>——引用节点、搜索目录、查看某个包的契约。</li>
-<li><strong><a href="node-manifest.html">Writing a Node Manifest</a></strong>——用一行配置把你自己的代码变成他人可用的节点。</li>
-<li><strong><a href="reproducible-builds.html">Reproducible Builds</a></strong>——锁文件、<code>--locked</code>、检查并应用更新、离线构建以及镜像源。</li>
-<li><strong><a href="publishing.html">Publishing a Node</a></strong>——把你的节点加入目录、管理版本，以及命名空间/所有权模型。</li>
-<li><strong><a href="indexes.html">Custom &amp; Enterprise Indexes</a></strong>——通过 <code>hub.toml</code> 使用私有/镜像目录、命名空间绑定以及二进制分发。</li>
+<li><strong><a href="using-nodes.html">使用 Hub 节点</a></strong>——引用节点、搜索目录、检查包的契约。</li>
+<li><strong><a href="node-manifest.html">编写节点清单</a></strong>——用一行代码把你自己的代码变成其他人可以使用的节点。</li>
+<li><strong><a href="reproducible-builds.html">可复现构建</a></strong>——锁文件、<code>--locked</code>、检查并应用更新、离线构建以及镜像源。</li>
+<li><strong><a href="publishing.html">发布节点</a></strong>——将节点添加到目录、管理版本，以及命名空间/所有权模型。</li>
+<li><strong><a href="indexes.html">自定义与企业索引</a></strong>——通过 <code>hub.toml</code> 实现私有/镜像目录、命名空间绑定以及二进制分发。</li>
 </ul>
 <h2 id="how-it-relates-to-path-and-git"><a class="header" href="overview.html#how-it-relates-to-path-and-git">它与 <code>path:</code> 和 <code>git:</code> 的关系</a></h2>
 <p><code>hub:</code> 是第四种节点来源，与同一节点上的 <code>path:</code>、<code>git:</code>、<code>build:</code> 互斥。在底层，Hub 会先把 <code>hub:</code> 节点<strong>脱糖（desugar）</strong>为一个普通的、已锚定提交的 <code>git:</code> 节点（或经过验证的二进制下载），然后才进行构建——所以你对 git 节点已知的一切仍然适用。Hub 的职责只是<em>解析</em>（名称 + 版本 → commit + 契约），仅此而已。</p>

@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -501,7 +501,7 @@ dora coordinator --store memory
 <tr><th>记录类型</th><th>键</th><th>持久化字段</th></tr>
 </thead>
 <tbody>
-<tr><td><code>DataflowRecord</code></td><td>UUID（16 字节）</td><td>uuid、name、descriptor（JSON）、status、守护进程 ID、生成计数器、创建/更新时间戳</td></tr>
+<tr><td><code>DataflowRecord</code></td><td>UUID（16 字节）</td><td>uuid、name、descriptor（JSON）、status、守护进程 ID、代计数（generation）、创建/更新时间戳</td></tr>
 <tr><td><code>BuildRecord</code></td><td>UUID（16 字节）</td><td>构建 ID、status、错误信息、创建/更新时间戳</td></tr>
 <tr><td><code>DaemonInfo</code></td><td>DaemonId（postcard）</td><td>守护进程 ID、机器 ID</td></tr>
 </tbody>
@@ -534,7 +534,7 @@ Spawn failure     --&gt;  Failed { error: "spawn failed: ..." }
 <li>通过 <code>store.list_dataflows()</code> 读取所有已持久化的数据流记录</li>
 <li><span>对于任何处于非终止状态（<code>Pending</code>、<code>Running</code>、<code>Stopping</code>）的记录：</span><ul>
 <li>将其标记为 <code>Failed { error: "coordinator restarted" }</code></li>
-<li>递增生成计数器</li>
+<li>递增代计数（generation）</li>
 <li>将更新后的记录写回存储</li>
 </ul>
 </li>

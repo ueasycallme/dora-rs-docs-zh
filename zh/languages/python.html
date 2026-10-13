@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -389,14 +389,14 @@ node.log_trace("Entering loop iteration")
 </div>
 <hr/>
 <h4 id="dataflow_descriptor"><a class="header" href="python.html#dataflow_descriptor"><code>dataflow_descriptor()</code></a></h4>
-<p>以 Python 字典形式返回完整的数据流描述符（解析后的 dataflow YAML）。</p>
+<p>以 Python 字典形式返回完整的数据流描述文件（已解析的 dataflow YAML）。</p>
 <pre><code class="language-python">descriptor = node.dataflow_descriptor()
 print(descriptor["nodes"])
 </code></pre>
 <p><strong>返回：</strong> <code>dict</code></p>
 <hr/>
 <h4 id="node_config"><a class="header" href="python.html#node_config"><code>node_config()</code></a></h4>
-<p>从数据流描述符中返回该节点的配置块。</p>
+<p>从数据流描述文件中返回该节点的配置块。</p>
 <pre><code class="language-python">config = node.node_config()
 model_path = config.get("model", "default.pt")
 </code></pre>

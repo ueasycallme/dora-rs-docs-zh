@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -169,7 +169,7 @@
 <tr><th>场景</th><th>之前（直接使用 Zenoh）</th><th>之后（WS 代理）</th></tr>
 </thead>
 <tbody>
-<tr><td>CLI 与 daemon 在同一台机器上</td><td>可行</td><td>可行</td></tr>
+<tr><td>CLI 与守护进程在同一台机器上</td><td>可行</td><td>可行</td></tr>
 <tr><td>CLI 远程，Zenoh 可达</td><td>可行</td><td>可行</td></tr>
 <tr><td>CLI 远程，无法访问 Zenoh</td><td>失败</td><td>可行</td></tr>
 <tr><td>基于浏览器的 Web UI</td><td>无法实现</td><td>可以实现</td></tr>
@@ -235,7 +235,7 @@
   }
 }
 </code></pre>
-<p><strong>Unsubscribe</strong>（CLI -&gt; Coordinator）：</p>
+<p><strong>取消订阅</strong>（CLI -&gt; 协调器）：</p>
 <pre><code class="language-json">{
   "id": "def-456",
   "method": "control",

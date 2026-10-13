@@ -28,7 +28,7 @@
             const path_to_root = "";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -1015,7 +1015,7 @@ logging.info("Processing item %d", i)
 </ul>
 <h3 id="health-monitoring"><a class="header" href="print.html#health-monitoring">健康监控</a></h3>
 <ul>
-<li><strong>心跳间隔：</strong>5 秒（daemon → coordinator）</li>
+<li><strong>心跳间隔：</strong>5 秒（守护进程 → 协调器）</li>
 <li><strong>健康检查间隔：</strong>5 秒（可按数据流配置）</li>
 <li><strong>指标采集：</strong>间隔 2 秒（CPU、内存、磁盘、待处理消息）</li>
 </ul>
@@ -1046,9 +1046,9 @@ logging.info("Processing item %d", i)
     pub circuit_breaker_recoveries: u64,
 }
 <span class="boring">}</span></code></pre>
-<p>通过心跳事件按 daemon 上报，可通过 <code>dora inspect top</code> 查看。</p>
+<p>通过心跳事件按守护进程上报。可通过 <code>dora inspect top</code> 查看。</p>
 <h2 id="distributed-deployment"><a class="header" href="print.html#distributed-deployment">分布式部署</a></h2>
-<h3 id="multi-daemon-architecture"><a class="header" href="print.html#multi-daemon-architecture">多 Daemon 架构</a></h3>
+<h3 id="multi-daemon-architecture"><a class="header" href="print.html#multi-daemon-architecture">多守护进程架构</a></h3>
 <pre><code>  ┌──────────┐       Zenoh        ┌──────────┐
   │ Daemon A │◄──────────────────►│ Daemon B │
   │ Machine 1│    pub/sub         │ Machine 2│
@@ -1075,9 +1075,9 @@ logging.info("Processing item %d", i)
 <h3 id="build-distribution"><a class="header" href="print.html#build-distribution">构建分发</a></h3>
 <p>通过 <code>DistributeStrategy</code> 提供三种策略：</p>
 <ul>
-<li><strong>Local</strong>——每个 daemon 各自从源码构建（默认）</li>
+<li><strong>Local</strong>——每个守护进程从源代码构建（默认）</li>
 <li><strong>Scp</strong>——CLI 通过 SSH/SCP 推送已构建的二进制文件</li>
-<li><strong>Http</strong>——daemon 从 coordinator 的 <code>/api/artifacts</code> 端点拉取</li>
+<li><strong>Http</strong>——守护进程从协调器的 <code>/api/artifacts</code> 端点拉取</li>
 </ul>
 <h3 id="machine-labels"><a class="header" href="print.html#machine-labels">机器标签</a></h3>
 <p>节点可以通过标签指定目标机器：</p>
@@ -1178,7 +1178,7 @@ impl&lt;R: Read&gt; RecordingReader&lt;R&gt; {
 </thead>
 <tbody>
 <tr><td><code>DORA_COORDINATOR_PORT_WS_DEFAULT</code></td><td>6013</td><td>协调器 WebSocket 端口</td></tr>
-<tr><td><code>DORA_DAEMON_LOCAL_LISTEN_PORT_DEFAULT</code></td><td>53291</td><td>Daemon TCP 监听端口</td></tr>
+<tr><td><code>DORA_DAEMON_LOCAL_LISTEN_PORT_DEFAULT</code></td><td>53291</td><td>守护进程 TCP 监听端口</td></tr>
 <tr><td><code>ZERO_COPY_THRESHOLD</code></td><td>4096 字节</td><td>共享内存启用</td></tr>
 <tr><td><code>MAX_MESSAGE_BYTES</code></td><td>64 MiB</td><td>最大 TCP/postcard 消息</td></tr>
 <tr><td><code>MAX_CONTROL_MESSAGE_BYTES</code></td><td>1 MiB</td><td>最大控制平面 JSON 消息</td></tr>
@@ -1188,11 +1188,11 @@ impl&lt;R: Read&gt; RecordingReader&lt;R&gt; {
 <tr><td><code>MAX_TOPICS_PER_SUBSCRIBE</code></td><td>64</td><td>话题批处理上限</td></tr>
 <tr><td><code>MAX_SUBSCRIPTIONS_PER_CONNECTION</code></td><td>16</td><td>单连接上限</td></tr>
 <tr><td><code>MAX_BINARY_PAYLOAD_BYTES</code></td><td>64 MiB</td><td>话题数据帧上限</td></tr>
-<tr><td><code>WATCHDOG_INTERVAL</code></td><td>5 秒</td><td>向 coordinator 发送心跳</td></tr>
+<tr><td><code>WATCHDOG_INTERVAL</code></td><td>5 秒</td><td>向协调器发送心跳</td></tr>
 <tr><td><code>METRICS_INTERVAL</code></td><td>2 秒</td><td>指标采集</td></tr>
 <tr><td><code>HEALTH_CHECK_INTERVAL</code></td><td>5 秒</td><td>默认节点健康检查</td></tr>
 <tr><td><code>MAX_BUFFERED_LOG_MESSAGES</code></td><td>10,000</td><td>日志缓冲区容量</td></tr>
-<tr><td><code>MAX_PENDING_REPLIES</code></td><td>256</td><td>待处理的 coordinator 回复</td></tr>
+<tr><td><code>MAX_PENDING_REPLIES</code></td><td>256</td><td>待处理的协调器回复</td></tr>
 <tr><td><code>MAX_ERROR_BYTES</code></td><td>4096</td><td>最大错误消息大小</td></tr>
 <tr><td>默认输入队列大小</td><td>10</td><td>单个输入的消息缓冲区</td></tr>
 </tbody>
@@ -1245,11 +1245,11 @@ impl&lt;R: Read&gt; RecordingReader&lt;R&gt; {
 <tr><th>通道</th><th>格式</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td>CLI ↔ Coordinator</td><td>JSON 文本帧</td><td>为 HLC 时间戳保留 u128 类型</td></tr>
-<tr><td>Coordinator ↔ Daemon</td><td>JSON 文本帧</td><td>直接字符串序列化</td></tr>
-<tr><td>Daemon ↔ Node（TCP）</td><td>基于长度前缀帧的 postcard</td><td>8 字节小端长度前缀</td></tr>
-<tr><td>Daemon ↔ Node（shmem）</td><td>通过共享内存传输的 postcard</td><td>原子同步</td></tr>
-<tr><td>Daemon ↔ Daemon</td><td>基于 Zenoh 的 postcard</td><td>Apache Arrow 数据格式</td></tr>
+<tr><td>CLI ↔ 协调器</td><td>JSON 文本帧</td><td>为 HLC 时间戳保留 u128 类型</td></tr>
+<tr><td>协调器 ↔ 守护进程</td><td>JSON 文本帧</td><td>直接字符串序列化</td></tr>
+<tr><td>守护进程 ↔ 节点（TCP）</td><td>基于长度前缀帧的 postcard</td><td>8 字节小端长度前缀</td></tr>
+<tr><td>守护进程 ↔ 节点（shmem）</td><td>通过共享内存传输的 postcard</td><td>原子同步</td></tr>
+<tr><td>守护进程 ↔ 守护进程</td><td>基于 Zenoh 的 postcard</td><td>Apache Arrow 数据格式</td></tr>
 <tr><td>录制</td><td>.drec 中的 postcard 条目</td><td>自定义二进制容器</td></tr>
 </tbody>
 </table>
@@ -2727,14 +2727,14 @@ node.log_trace("Entering loop iteration")
 </div>
 <hr/>
 <h4 id="dataflow_descriptor"><a class="header" href="print.html#dataflow_descriptor"><code>dataflow_descriptor()</code></a></h4>
-<p>以 Python 字典形式返回完整的数据流描述符（解析后的 dataflow YAML）。</p>
+<p>以 Python 字典形式返回完整的数据流描述文件（已解析的 dataflow YAML）。</p>
 <pre><code class="language-python">descriptor = node.dataflow_descriptor()
 print(descriptor["nodes"])
 </code></pre>
 <p><strong>返回：</strong> <code>dict</code></p>
 <hr/>
 <h4 id="node_config"><a class="header" href="print.html#node_config"><code>node_config()</code></a></h4>
-<p>从数据流描述符中返回该节点的配置块。</p>
+<p>从数据流描述文件中返回该节点的配置块。</p>
 <pre><code class="language-python">config = node.node_config()
 model_path = config.get("model", "default.pt")
 </code></pre>
@@ -4167,7 +4167,7 @@ cmake --build .
 <li><a href="print.html#quick-start-3">快速开始</a></li>
 <li><a href="print.html#installation-1">安装</a></li>
 <li><a href="print.html#core-concepts">核心概念</a></li>
-<li><a href="print.html#dataflow-descriptor">数据流描述符</a></li>
+<li><a href="print.html#dataflow-descriptor">数据流描述文件</a></li>
 <li><a href="print.html#command-reference">命令参考</a>
 <ul>
 <li><a href="print.html#lifecycle-commands">生命周期</a></li>
@@ -4248,7 +4248,7 @@ dora status
 <h3 id="data-format"><a class="header" href="print.html#data-format">数据格式</a></h3>
 <p>系统内所有数据均以 <strong>Apache Arrow</strong> 列式数组的形式流动。这使得同机节点之间可以实现零拷贝共享内存传输，且没有序列化开销。</p>
 <hr/>
-<h2 id="dataflow-descriptor"><a class="header" href="print.html#dataflow-descriptor">数据流描述符</a></h2>
+<h2 id="dataflow-descriptor"><a class="header" href="print.html#dataflow-descriptor">数据流描述文件</a></h2>
 <p>数据流定义在 YAML 文件中。完整的模式如下：</p>
 <h3 id="minimal-example"><a class="header" href="print.html#minimal-example">最小示例</a></h3>
 <pre><code class="language-yaml">nodes:
@@ -4405,7 +4405,7 @@ debug:
 <tr><td><code>--uv</code></td><td>false</td><td>使用 <code>uv</code> 进行 Python 节点管理</td></tr>
 <tr><td><code>--debug</code></td><td>false</td><td>启用调试话题（等效于 <code>enable_debug_inspection: true</code>）</td></tr>
 <tr><td><code>--allow-shell-nodes</code></td><td>false</td><td>启用基于 shell 的节点执行</td></tr>
-<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述符</td><td>当所有节点都结束后退出，将 <code>dora/timer/...</code> 类输入视为时钟而非工作任务。会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略此项则由 YAML 决定</td></tr>
+<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述文件</td><td>当所有节点都结束后退出，将 <code>dora/timer/...</code> 类输入视为时钟而非工作任务。会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略此项则由 YAML 决定</td></tr>
 <tr><td><code>--log-level &lt;LEVEL&gt;</code></td><td><code>stdout</code></td><td>最低显示级别：<code>error|warn|info|debug|trace|stdout</code></td></tr>
 <tr><td><code>--log-format &lt;FORMAT&gt;</code></td><td><code>pretty</code></td><td>输出格式：<code>pretty|json|compact</code>；<code>json</code> 会输出 JSON Lines 格式（每条日志消息一个对象）</td></tr>
 <tr><td><code>--log-filter &lt;FILTER&gt;</code></td><td></td><td>按节点覆盖级别：<code>"node1=debug,node2=warn"</code></td></tr>
@@ -4486,7 +4486,7 @@ DORA_COORDINATOR_PORT=6113 dora down     # touches only this instance
 <tr><th>标志</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件路径</td></tr>
 <tr><td><code>--uv</code></td><td>false</td><td>Python 构建使用 <code>uv</code></td></tr>
 <tr><td><code>--local</code></td><td>false</td><td>强制本地构建（跳过协调器）</td></tr>
 <tr><td><code>--strict-types</code></td><td>false</td><td>将类型警告视为错误（返回非零退出码）</td></tr>
@@ -4508,14 +4508,14 @@ DORA_COORDINATOR_PORT=6113 dora down     # touches only this instance
 <tr><th>标志</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件路径</td></tr>
 <tr><td><code>--name &lt;NAME&gt;</code>, <code>-n</code></td><td></td><td>为数据流指定一个名称</td></tr>
 <tr><td><code>--attach</code></td><td>auto</td><td>附加到日志流并等待完成</td></tr>
 <tr><td><code>--detach</code></td><td>auto</td><td>启动后立即返回</td></tr>
 <tr><td><code>--debug</code></td><td>false</td><td>启用调试话题（等效于 <code>enable_debug_inspection: true</code>）</td></tr>
 <tr><td><code>--hot-reload</code></td><td>false</td><td>监视 Python 文件变化并自动重新加载</td></tr>
 <tr><td><code>--uv</code></td><td>false</td><td>Python 节点使用 <code>uv</code></td></tr>
-<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述符</td><td>等所有节点都完成后才结束，将 <code>dora/timer/...</code> 输入视为时钟而非工作任务。该选项会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略该选项则由 YAML 决定。</td></tr>
+<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述文件</td><td>等所有节点都完成后才结束，将 <code>dora/timer/...</code> 输入视为时钟而非工作任务。该选项会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略该选项则由 YAML 决定。</td></tr>
 <tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
 <tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
 </tbody>
@@ -4659,7 +4659,7 @@ dora restart a1b2c3d4-... --force
 </tbody>
 </table>
 </div>
-<p><strong>被移除的内容：</strong><code>dataflow_results</code> 中已完全结束的数据流记录及其归档的描述符，以及任何仅存在于磁盘（redb 中）持久化存储、但不在内存中的已持久化 Succeeded/Failed 记录——这些通常是协调器重启之前遗留的历史记录，因为恢复流程特意不会把已完成的数据流重新加载进内存。协调器会<em>先</em>从持久化存储中删除每一条被清理的记录，然后才将其从内存状态中移除——因此只有当两边都确实被清理后，该数据流才会出现在命令的输出中。持久化存储的删除操作会级联清除属于该已清理数据流的每一行 <code>dora param</code> 记录，以避免状态文件无限增长。缓存的构建结果（<code>finished_builds</code>）会被特意保留——清除它们会破坏并发的 <code>dora build</code> 调用。</p>
+<p><strong>清理内容：</strong>来自 <code>dataflow_results</code> 的已完全完成数据流的记录及其已归档的描述文件，以及任何仅存在于持久化存储中（redb 中落盘）而不在内存中的 Succeeded/Failed 记录——这通常是协调器重启之前的历史记录行，因为恢复循环有意不会将已完成的数据流重新加载到内存中。协调器会<em>先</em>从持久化存储中删除每条已清理的条目，然后才将其从内存状态中移除——因此一个数据流只有在两侧都真正被清理后才会出现在该命令的输出中。持久化存储的删除会级联到属于该已清理数据流的每一行 <code>dora param</code>，以避免状态文件无限增长。缓存的构建结果（<code>finished_builds</code>）会被有意保留——清除它们会破坏并发的 <code>dora build</code> 调用。</p>
 <p><strong>部分失败时的行为：</strong>如果持久化存储删除对一个或多个数据流失败，这些数据流会保留其内存中的记录，以便之后的 <code>dora clean</code> 可以重试。CLI 会针对每个失败在 stderr 上打印一行 <code>warning:</code>，并以非零状态退出，以区分“部分故障”和“没有符合清理条件的对象”这两种情况。如果持久化存储<em>枚举</em>本身失败（例如 redb 文件不可读），协调器会以错误回复直接使该请求彻底失败，并保持所有状态不变——待存储恢复正常后，下一次清理会重试。</p>
 <p><strong>会丢失的内容：</strong>清理之后，<code>dora logs &lt;uuid&gt;</code> 对已清理的数据流将不再有效，持久化记录也已消失（因此针对该已清理 UUID 的 <code>dora param</code> 也会失败）。在运行 <code>dora clean</code> 之前，请先保存任何以后可能需要参考的内容。</p>
 <p><strong>何时使用：</strong>当 <code>dora list</code> 中堆积了大量来自以往运行的已完成/失败数据流，或长期运行的协调器的 redb 状态文件已变得过大时。比 <code>dora down + dora up</code> 破坏性更小——协调器保持运行，守护进程也保持连接。</p>
@@ -5136,7 +5136,7 @@ dora expand --module modules/navigation.module.yml
 <tr><th>标志</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件路径</td></tr>
 <tr><td><code>--mermaid</code></td><td>false</td><td>输出 Mermaid 图表文本</td></tr>
 <tr><td><code>--open</code></td><td>false</td><td>在浏览器中打开 HTML</td></tr>
 </tbody>
@@ -5159,7 +5159,7 @@ dora graph dataflow.yml --mermaid
 <tr><th>标志</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件路径</td></tr>
 <tr><td><code>--strict-types</code></td><td>false</td><td>将警告视为错误（用于 CI 的非零退出码）</td></tr>
 </tbody>
 </table>
@@ -7352,9 +7352,9 @@ dora record dataflow.yml --proxy -o remote-capture.drec
 <h2 id="see-also"><a class="header" href="print.html#see-also">另请参阅</a></h2>
 <ul>
 <li><a href="print.html#dora-cli-reference">CLI 参考</a>——完整的命令参考</li>
-<li><a href="https://dora-rs.ai/dora/operations/websocket-control-plane.html">WebSocket Control Plane</a>——CLI 如何与协调器通信</li>
-<li><a href="https://dora-rs.ai/dora/operations/websocket-topic-data-channel.html">WebSocket Topic Data Channel</a>——话题数据如何被代理转发</li>
-<li><a href="https://dora-rs.ai/dora/operations/testing-guide.html">Testing Guide</a>——运行冒烟测试</li>
+<li><a href="https://dora-rs.ai/dora/operations/websocket-control-plane.html">WebSocket 控制平面</a>——CLI 如何与协调器通信</li>
+<li><a href="https://dora-rs.ai/dora/operations/websocket-topic-data-channel.html">WebSocket 话题数据通道</a>——话题数据如何被代理</li>
+<li><a href="https://dora-rs.ai/dora/operations/testing-guide.html">测试指南</a>——运行冒烟测试</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="fault-tolerance-2"><a class="header" href="print.html#fault-tolerance-2">容错</a></h1>
@@ -7698,7 +7698,7 @@ dora coordinator --store memory
 <tr><th>记录类型</th><th>键</th><th>持久化字段</th></tr>
 </thead>
 <tbody>
-<tr><td><code>DataflowRecord</code></td><td>UUID（16 字节）</td><td>uuid、name、descriptor（JSON）、status、守护进程 ID、生成计数器、创建/更新时间戳</td></tr>
+<tr><td><code>DataflowRecord</code></td><td>UUID（16 字节）</td><td>uuid、name、descriptor（JSON）、status、守护进程 ID、代计数（generation）、创建/更新时间戳</td></tr>
 <tr><td><code>BuildRecord</code></td><td>UUID（16 字节）</td><td>构建 ID、status、错误信息、创建/更新时间戳</td></tr>
 <tr><td><code>DaemonInfo</code></td><td>DaemonId（postcard）</td><td>守护进程 ID、机器 ID</td></tr>
 </tbody>
@@ -7731,7 +7731,7 @@ Spawn failure     --&gt;  Failed { error: "spawn failed: ..." }
 <li>通过 <code>store.list_dataflows()</code> 读取所有已持久化的数据流记录</li>
 <li><span>对于任何处于非终止状态（<code>Pending</code>、<code>Running</code>、<code>Stopping</code>）的记录：</span><ul>
 <li>将其标记为 <code>Failed { error: "coordinator restarted" }</code></li>
-<li>递增生成计数器</li>
+<li>递增代计数（generation）</li>
 <li>将更新后的记录写回存储</li>
 </ul>
 </li>
@@ -8812,8 +8812,8 @@ dora cluster status
 <ul>
 <li><strong>优先使用标签而非机器 ID</strong>，以提高灵活性。标签可将数据流与具体机器解耦，便于添加、移除或替换硬件。</li>
 <li><strong>生产环境使用 systemd 安装</strong>。守护进程服务可在重启后保留，并在失败时通过 <code>Restart=on-failure</code> 自动重启。</li>
-<li><strong>集群环境使用协调器持久化</strong>（<code>dora coordinator --store redb</code>），使协调器在重启后仍能恢复状态。参见 <a href="print.html#coordinator-state-persistence">Coordinator State Persistence</a>。</li>
-<li><strong>为节点设置重启策略</strong>，以实现单节点级别的容错。将其与自动恢复结合使用可形成多层防护。参见 <a href="print.html#restart-policies-1">Restart Policies</a>。</li>
+<li><strong>在集群中使用协调器持久化</strong>（<code>dora coordinator --store redb</code>），使协调器能够在重启后恢复。参见<a href="print.html#coordinator-state-persistence">协调器状态持久化</a>。</li>
+<li><strong>为节点设置重启策略</strong>以实现按节点的弹性恢复。将其与自动恢复结合使用可实现纵深防御。参见<a href="print.html#restart-policies-1">重启策略</a>。</li>
 <li><strong>结合多种工具进行监控</strong>：使用 <code>dora cluster status</code> 查看守护进程健康状态，使用 <code>dora top</code> 查看资源使用情况，使用 <code>dora logs</code> 查看节点输出。</li>
 <li><strong>先在本地测试</strong>。先用 <code>dora run dataflow.yml</code> 进行开发，再部署到集群。同一份 dataflow YAML 在两种模式下都适用——本地模式下 <code>deploy</code> 字段会被忽略。</li>
 <li><strong>使用滚动升级</strong>而不是停止整个集群。<code>dora cluster upgrade</code> 会逐台机器处理，以维持可用性。</li>
@@ -9001,7 +9001,7 @@ inputs:
 <li>尚不支持跨守护进程的动态拓扑</li>
 <li>动态节点在数据流重启后不会被持久化保留</li>
 </ul>
-<p>完整设计请参阅 <a href="https://dora-rs.ai/docs/plan-dynamic-topology.html">Dynamic Topology Plan</a>。</p>
+<p>完整设计请参见<a href="https://dora-rs.ai/docs/plan-dynamic-topology.html">动态拓扑方案</a>。</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="ros2-bridge-2"><a class="header" href="print.html#ros2-bridge-2">ROS2 桥接</a></h1>
 <p>dora 通过显式选择的传输方式与 ROS2 生态（话题、服务（Service）、动作（Action）、参数）通信。DDS 使用纯 Rust 的 <code>ros2-client</code> + <code>rustdds</code> 技术栈，并仍是默认选项。原生 Zenoh 直接使用 <code>rmw_zenoh_cpp</code> 线路协议。这两条路径都不链接 <code>rcl</code>/<code>rclcpp</code>；数据以 Apache Arrow 的 <code>StructArray</code> 形式传递，在边界处与 ROS2 CDR 相互转换。</p>
@@ -10289,7 +10289,7 @@ pub enum WsMessage {
 <p>当收到 <code>Close</code> 帧时：</p>
 <ul>
 <li><strong>Control 处理器</strong>：退出处理循环，释放日志订阅通道</li>
-<li><strong>Daemon 处理器</strong>：退出循环，然后发出 <code>Event::DaemonExit { daemon_id }</code> 以立即清理</li>
+<li><strong>守护进程处理器</strong>：跳出循环，然后发出 <code>Event::DaemonExit { daemon_id }</code> 以立即清理</li>
 </ul>
 <h3 id="cleanup-on-disconnect"><a class="header" href="print.html#cleanup-on-disconnect">断开连接时的清理</a></h3>
 <p><strong>Control 连接</strong>：</p>
@@ -10297,11 +10297,11 @@ pub enum WsMessage {
 <li><code>log_tx</code> 通道被释放，停止向该客户端转发日志</li>
 <li>无需清理协调器状态（control 连接是无状态的）</li>
 </ul>
-<p><strong>Daemon 连接</strong>：</p>
+<p><strong>守护进程连接</strong>：</p>
 <ul>
 <li>如果已跟踪某个 <code>daemon_id</code>，则发出 <code>DaemonExit</code> 事件</li>
 <li><code>cmd_tx</code> 和 <code>pending_replies</code> 被释放</li>
-<li>协调器将该 daemon 从其连接映射表中移除</li>
+<li>协调器将该守护进程从其连接映射中移除</li>
 </ul>
 <p><strong>WsSession（CLI 客户端）</strong>：</p>
 <ul>
@@ -10328,7 +10328,7 @@ pub enum WsMessage {
  │                              │                              │
  │&lt;── ControlRequestReply ─────│                              │
 </code></pre>
-<h3 id="daemon-registration"><a class="header" href="print.html#daemon-registration">Daemon 注册</a></h3>
+<h3 id="daemon-registration"><a class="header" href="print.html#daemon-registration">守护进程注册</a></h3>
 <pre><code>Daemon                                    Coordinator
   │                                           │
   │── WsRequest ─────────────────────────────&gt;│
@@ -10374,7 +10374,7 @@ pub enum WsMessage {
 <tr><td>单元测试（protocol）</td><td><code>libraries/message/src/ws_protocol.rs</code></td><td>10</td><td>往返序列化、无标签分发（untagged dispatch）、错误场景</td></tr>
 <tr><td>单元（客户端）</td><td><code>binaries/cli/src/ws_client.rs</code></td><td>6</td><td>响应路由、subscribe 确认、topic subscribe 确认、孤儿处理（orphan handling）、断开连接</td></tr>
 <tr><td>集成测试（control）</td><td><code>binaries/coordinator/tests/ws_control_tests.rs</code></td><td>11</td><td>健康检查、List、无效 JSON/参数、Destroy、DaemonConnected、ping/pong、并发请求、连接关闭、日志订阅</td></tr>
-<tr><td>集成测试（daemon）</td><td><code>binaries/coordinator/tests/ws_daemon_tests.rs</code></td><td>4</td><td>Register、register 后 status、断开清理、ping/pong</td></tr>
+<tr><td>集成（守护进程）</td><td><code>binaries/coordinator/tests/ws_daemon_tests.rs</code></td><td>4</td><td>Register、register 后 status、断开清理、ping/pong</td></tr>
 <tr><td>端到端测试（WsSession）</td><td><code>tests/ws-cli-e2e.rs</code></td><td>4</td><td>WsSession + 协调器：list、status、stop、多重请求</td></tr>
 <tr><td><strong>总计</strong></td><td></td><td><strong>35</strong></td><td></td></tr>
 </tbody>
@@ -10383,7 +10383,7 @@ pub enum WsMessage {
 <h3 id="key-test-patterns"><a class="header" href="print.html#key-test-patterns">关键测试模式</a></h3>
 <p><strong>带超时的轮询（Poll-with-timeout）</strong>：集成测试以 2 秒的截止时间和 20ms 的休眠间隔轮询协调器状态（例如 <code>DaemonConnected</code>），避免不稳定的时序假设。</p>
 <p><strong>不嵌套运行时（No nested runtimes）</strong>：端到端测试在带有独立 tokio 运行时的后台 <code>std::thread</code> 上运行协调器，而 <code>WsSession</code>（它会创建自己的 current-thread 运行时）则运行在测试的主线程上。这样可以避免“cannot start a runtime from within a runtime”的 panic。</p>
-<p><strong>测试中的 u128 变通方案</strong>：Daemon 测试辅助函数通过 <code>format!()</code> + <code>serde_json::to_string()</code>（而非 <code>serde_json::to_value()</code>）手动构造 WsRequest JSON 字符串，以便在传输中保留 <code>uhlc::ID</code> 的 u128 值。</p>
+<p><strong>测试中的 u128 变通方案</strong>：守护进程测试辅助函数通过 <code>format!()</code> + <code>serde_json::to_string()</code>（而非 <code>serde_json::to_value()</code>）手动构造 WsRequest JSON 字符串，以在传输中保留 <code>uhlc::ID</code> 的 u128 值。</p>
 <p><strong>测试协调器搭建</strong>：集成测试和端到端测试都使用 <code>dora_coordinator::start_testing_with_store()</code>，它绑定到端口 0（由操作系统分配），接受一个空的外部事件流，并接收一个注入的 store（通常是 <code>Arc::new(InMemoryStore::new())</code>）。</p>
 <hr/>
 <h2 id="configuration-reference"><a class="header" href="print.html#configuration-reference">配置参考</a></h2>
@@ -10430,7 +10430,7 @@ let (port, future) = dora_coordinator::start_testing_with_store(
 <tr><th>场景</th><th>之前（直接使用 Zenoh）</th><th>之后（WS 代理）</th></tr>
 </thead>
 <tbody>
-<tr><td>CLI 与 daemon 在同一台机器上</td><td>可行</td><td>可行</td></tr>
+<tr><td>CLI 与守护进程在同一台机器上</td><td>可行</td><td>可行</td></tr>
 <tr><td>CLI 远程，Zenoh 可达</td><td>可行</td><td>可行</td></tr>
 <tr><td>CLI 远程，无法访问 Zenoh</td><td>失败</td><td>可行</td></tr>
 <tr><td>基于浏览器的 Web UI</td><td>无法实现</td><td>可以实现</td></tr>
@@ -10496,7 +10496,7 @@ let (port, future) = dora_coordinator::start_testing_with_store(
   }
 }
 </code></pre>
-<p><strong>Unsubscribe</strong>（CLI -&gt; Coordinator）：</p>
+<p><strong>取消订阅</strong>（CLI -&gt; 协调器）：</p>
 <pre><code class="language-json">{
   "id": "def-456",
   "method": "control",
@@ -10733,14 +10733,14 @@ hub: dora-rs/dora-yolo@^0.5  # the same, written out
 hub: acme/lidar@~2.1         # a third-party namespace
 hub: dora-vad                # no @req → any version (the latest non-yanked)
 </code></pre>
-<p><strong>bare name</strong>（裸名称）是官方 <code>dora-rs/</code> 命名空间的简写。版本要求是标准的 semver/Cargo 范围（<code>^0.5</code>、<code>~2.1</code>、<code>&gt;=0.5, &lt;0.7</code>、<code>=1.2.3</code>、<code>*</code>）；解析时会选取满足该要求的<strong>最高未撤回</strong>版本。完整语法参见 <a href="print.html#using-hub-nodes">Using Hub Nodes</a>。</p>
+<p><strong>裸名称</strong>是官方 <code>dora-rs/</code> 命名空间的简写形式。版本要求是标准的 semver/Cargo 范围（<code>^0.5</code>、<code>~2.1</code>、<code>&gt;=0.5, &lt;0.7</code>、<code>=1.2.3</code>、<code>*</code>）；解析时会选取满足条件的<strong>最高未撤回（non-yanked）</strong>版本。完整语法请参见<a href="print.html#using-hub-nodes">使用 Hub 节点</a>。</p>
 <h2 id="what-this-section-covers"><a class="header" href="print.html#what-this-section-covers">本节内容</a></h2>
 <ul>
-<li><strong><a href="print.html#using-hub-nodes">Using Hub Nodes</a></strong>——引用节点、搜索目录、查看某个包的契约。</li>
-<li><strong><a href="print.html#writing-a-node-manifest">Writing a Node Manifest</a></strong>——用一行配置把你自己的代码变成他人可用的节点。</li>
-<li><strong><a href="print.html#reproducible-builds">Reproducible Builds</a></strong>——锁文件、<code>--locked</code>、检查并应用更新、离线构建以及镜像源。</li>
-<li><strong><a href="print.html#publishing-a-node">Publishing a Node</a></strong>——把你的节点加入目录、管理版本，以及命名空间/所有权模型。</li>
-<li><strong><a href="print.html#custom--enterprise-indexes">Custom &amp; Enterprise Indexes</a></strong>——通过 <code>hub.toml</code> 使用私有/镜像目录、命名空间绑定以及二进制分发。</li>
+<li><strong><a href="print.html#using-hub-nodes">使用 Hub 节点</a></strong>——引用节点、搜索目录、检查包的契约。</li>
+<li><strong><a href="print.html#writing-a-node-manifest">编写节点清单</a></strong>——用一行代码把你自己的代码变成其他人可以使用的节点。</li>
+<li><strong><a href="print.html#reproducible-builds">可复现构建</a></strong>——锁文件、<code>--locked</code>、检查并应用更新、离线构建以及镜像源。</li>
+<li><strong><a href="print.html#publishing-a-node">发布节点</a></strong>——将节点添加到目录、管理版本，以及命名空间/所有权模型。</li>
+<li><strong><a href="print.html#custom--enterprise-indexes">自定义与企业索引</a></strong>——通过 <code>hub.toml</code> 实现私有/镜像目录、命名空间绑定以及二进制分发。</li>
 </ul>
 <h2 id="how-it-relates-to-path-and-git"><a class="header" href="print.html#how-it-relates-to-path-and-git">它与 <code>path:</code> 和 <code>git:</code> 的关系</a></h2>
 <p><code>hub:</code> 是第四种节点来源，与同一节点上的 <code>path:</code>、<code>git:</code>、<code>build:</code> 互斥。在底层，Hub 会先把 <code>hub:</code> 节点<strong>脱糖（desugar）</strong>为一个普通的、已锚定提交的 <code>git:</code> 节点（或经过验证的二进制下载），然后才进行构建——所以你对 git 节点已知的一切仍然适用。Hub 的职责只是<em>解析</em>（名称 + 版本 → commit + 契约），仅此而已。</p>
@@ -11041,7 +11041,7 @@ dora hub fetch dora-yolo@0.5.2                    # mirror one package, live-res
 <ol>
 <li>在节点根目录下提交一个带有 <code>namespace</code> 和 <code>name</code> 的 <a href="print.html#writing-a-node-manifest"><code>dora-node.yml</code></a>。<strong>版本不属于清单内容</strong>——它会在锚定的 commit 处从 <code>[package].version</code>（Cargo）/ <code>[project].version</code>（pyproject）中读取，或通过 <code>--version</code> 指定。（在清单中添加 <code>version:</code> 会被拒绝——它使用了 <code>deny_unknown_fields</code>。）</li>
 <li>节点源码已推送到某个 git 远程仓库（索引条目会指向它）。</li>
-<li>你的 <code>namespace</code> 与你所控制的某个 GitHub 组织或用户一致（参见 <a href="print.html#namespaces--ownership">Namespaces &amp; ownership</a>）。</li>
+<li>你的 <code>namespace</code> 与你控制的 GitHub 组织或用户匹配（参见<a href="print.html#namespaces--ownership">命名空间与所有权</a>）。</li>
 </ol>
 <h2 id="preview-the-entry"><a class="header" href="print.html#preview-the-entry">预览条目</a></h2>
 <pre><code class="language-bash">cd my-node

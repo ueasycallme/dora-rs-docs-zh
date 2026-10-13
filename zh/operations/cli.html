@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -167,7 +167,7 @@
 <li><a href="cli.html#quick-start">快速开始</a></li>
 <li><a href="cli.html#installation">安装</a></li>
 <li><a href="cli.html#core-concepts">核心概念</a></li>
-<li><a href="cli.html#dataflow-descriptor">数据流描述符</a></li>
+<li><a href="cli.html#dataflow-descriptor">数据流描述文件</a></li>
 <li><a href="cli.html#command-reference">命令参考</a>
 <ul>
 <li><a href="cli.html#lifecycle-commands">生命周期</a></li>
@@ -248,7 +248,7 @@ dora status
 <h3 id="data-format"><a class="header" href="cli.html#data-format">数据格式</a></h3>
 <p>系统内所有数据均以 <strong>Apache Arrow</strong> 列式数组的形式流动。这使得同机节点之间可以实现零拷贝共享内存传输，且没有序列化开销。</p>
 <hr/>
-<h2 id="dataflow-descriptor"><a class="header" href="cli.html#dataflow-descriptor">数据流描述符</a></h2>
+<h2 id="dataflow-descriptor"><a class="header" href="cli.html#dataflow-descriptor">数据流描述文件</a></h2>
 <p>数据流定义在 YAML 文件中。完整的模式如下：</p>
 <h3 id="minimal-example"><a class="header" href="cli.html#minimal-example">最小示例</a></h3>
 <pre><code class="language-yaml">nodes:
@@ -405,7 +405,7 @@ debug:
 <tr><td><code>--uv</code></td><td>false</td><td>使用 <code>uv</code> 进行 Python 节点管理</td></tr>
 <tr><td><code>--debug</code></td><td>false</td><td>启用调试话题（等效于 <code>enable_debug_inspection: true</code>）</td></tr>
 <tr><td><code>--allow-shell-nodes</code></td><td>false</td><td>启用基于 shell 的节点执行</td></tr>
-<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述符</td><td>当所有节点都结束后退出，将 <code>dora/timer/...</code> 类输入视为时钟而非工作任务。会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略此项则由 YAML 决定</td></tr>
+<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述文件</td><td>当所有节点都结束后退出，将 <code>dora/timer/...</code> 类输入视为时钟而非工作任务。会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略此项则由 YAML 决定</td></tr>
 <tr><td><code>--log-level &lt;LEVEL&gt;</code></td><td><code>stdout</code></td><td>最低显示级别：<code>error|warn|info|debug|trace|stdout</code></td></tr>
 <tr><td><code>--log-format &lt;FORMAT&gt;</code></td><td><code>pretty</code></td><td>输出格式：<code>pretty|json|compact</code>；<code>json</code> 会输出 JSON Lines 格式（每条日志消息一个对象）</td></tr>
 <tr><td><code>--log-filter &lt;FILTER&gt;</code></td><td></td><td>按节点覆盖级别：<code>"node1=debug,node2=warn"</code></td></tr>
@@ -486,7 +486,7 @@ DORA_COORDINATOR_PORT=6113 dora down     # touches only this instance
 <tr><th>标志</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件路径</td></tr>
 <tr><td><code>--uv</code></td><td>false</td><td>Python 构建使用 <code>uv</code></td></tr>
 <tr><td><code>--local</code></td><td>false</td><td>强制本地构建（跳过协调器）</td></tr>
 <tr><td><code>--strict-types</code></td><td>false</td><td>将类型警告视为错误（返回非零退出码）</td></tr>
@@ -508,14 +508,14 @@ DORA_COORDINATOR_PORT=6113 dora down     # touches only this instance
 <tr><th>标志</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件路径</td></tr>
 <tr><td><code>--name &lt;NAME&gt;</code>, <code>-n</code></td><td></td><td>为数据流指定一个名称</td></tr>
 <tr><td><code>--attach</code></td><td>auto</td><td>附加到日志流并等待完成</td></tr>
 <tr><td><code>--detach</code></td><td>auto</td><td>启动后立即返回</td></tr>
 <tr><td><code>--debug</code></td><td>false</td><td>启用调试话题（等效于 <code>enable_debug_inspection: true</code>）</td></tr>
 <tr><td><code>--hot-reload</code></td><td>false</td><td>监视 Python 文件变化并自动重新加载</td></tr>
 <tr><td><code>--uv</code></td><td>false</td><td>Python 节点使用 <code>uv</code></td></tr>
-<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述符</td><td>等所有节点都完成后才结束，将 <code>dora/timer/...</code> 输入视为时钟而非工作任务。该选项会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略该选项则由 YAML 决定。</td></tr>
+<tr><td><code>--exit-when-nodes-finish[=BOOL]</code></td><td>描述文件</td><td>等所有节点都完成后才结束，将 <code>dora/timer/...</code> 输入视为时钟而非工作任务。该选项会覆盖 YAML 中的 <code>exit_when_nodes_finish:</code>；省略该选项则由 YAML 决定。</td></tr>
 <tr><td><code>--coordinator-addr &lt;IP&gt;</code></td><td><code>127.0.0.1</code></td><td>协调器地址</td></tr>
 <tr><td><code>--coordinator-port &lt;PORT&gt;</code></td><td><code>6013</code></td><td>协调器端口</td></tr>
 </tbody>
@@ -659,7 +659,7 @@ dora restart a1b2c3d4-... --force
 </tbody>
 </table>
 </div>
-<p><strong>被移除的内容：</strong><code>dataflow_results</code> 中已完全结束的数据流记录及其归档的描述符，以及任何仅存在于磁盘（redb 中）持久化存储、但不在内存中的已持久化 Succeeded/Failed 记录——这些通常是协调器重启之前遗留的历史记录，因为恢复流程特意不会把已完成的数据流重新加载进内存。协调器会<em>先</em>从持久化存储中删除每一条被清理的记录，然后才将其从内存状态中移除——因此只有当两边都确实被清理后，该数据流才会出现在命令的输出中。持久化存储的删除操作会级联清除属于该已清理数据流的每一行 <code>dora param</code> 记录，以避免状态文件无限增长。缓存的构建结果（<code>finished_builds</code>）会被特意保留——清除它们会破坏并发的 <code>dora build</code> 调用。</p>
+<p><strong>清理内容：</strong>来自 <code>dataflow_results</code> 的已完全完成数据流的记录及其已归档的描述文件，以及任何仅存在于持久化存储中（redb 中落盘）而不在内存中的 Succeeded/Failed 记录——这通常是协调器重启之前的历史记录行，因为恢复循环有意不会将已完成的数据流重新加载到内存中。协调器会<em>先</em>从持久化存储中删除每条已清理的条目，然后才将其从内存状态中移除——因此一个数据流只有在两侧都真正被清理后才会出现在该命令的输出中。持久化存储的删除会级联到属于该已清理数据流的每一行 <code>dora param</code>，以避免状态文件无限增长。缓存的构建结果（<code>finished_builds</code>）会被有意保留——清除它们会破坏并发的 <code>dora build</code> 调用。</p>
 <p><strong>部分失败时的行为：</strong>如果持久化存储删除对一个或多个数据流失败，这些数据流会保留其内存中的记录，以便之后的 <code>dora clean</code> 可以重试。CLI 会针对每个失败在 stderr 上打印一行 <code>warning:</code>，并以非零状态退出，以区分“部分故障”和“没有符合清理条件的对象”这两种情况。如果持久化存储<em>枚举</em>本身失败（例如 redb 文件不可读），协调器会以错误回复直接使该请求彻底失败，并保持所有状态不变——待存储恢复正常后，下一次清理会重试。</p>
 <p><strong>会丢失的内容：</strong>清理之后，<code>dora logs &lt;uuid&gt;</code> 对已清理的数据流将不再有效，持久化记录也已消失（因此针对该已清理 UUID 的 <code>dora param</code> 也会失败）。在运行 <code>dora clean</code> 之前，请先保存任何以后可能需要参考的内容。</p>
 <p><strong>何时使用：</strong>当 <code>dora list</code> 中堆积了大量来自以往运行的已完成/失败数据流，或长期运行的协调器的 redb 状态文件已变得过大时。比 <code>dora down + dora up</code> 破坏性更小——协调器保持运行，守护进程也保持连接。</p>
@@ -1136,7 +1136,7 @@ dora expand --module modules/navigation.module.yml
 <tr><th>标志</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件路径</td></tr>
 <tr><td><code>--mermaid</code></td><td>false</td><td>输出 Mermaid 图表文本</td></tr>
 <tr><td><code>--open</code></td><td>false</td><td>在浏览器中打开 HTML</td></tr>
 </tbody>
@@ -1159,7 +1159,7 @@ dora graph dataflow.yml --mermaid
 <tr><th>标志</th><th>默认值</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述符路径</td></tr>
+<tr><td><code>&lt;PATH&gt;</code></td><td>必需</td><td>数据流描述文件路径</td></tr>
 <tr><td><code>--strict-types</code></td><td>false</td><td>将警告视为错误（用于 CI 的非零退出码）</td></tr>
 </tbody>
 </table>

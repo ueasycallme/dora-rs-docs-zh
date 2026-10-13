@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -736,7 +736,7 @@
 </ul>
 <h3 id="health-monitoring"><a class="header" href="architecture.html#health-monitoring">健康监控</a></h3>
 <ul>
-<li><strong>心跳间隔：</strong>5 秒（daemon → coordinator）</li>
+<li><strong>心跳间隔：</strong>5 秒（守护进程 → 协调器）</li>
 <li><strong>健康检查间隔：</strong>5 秒（可按数据流配置）</li>
 <li><strong>指标采集：</strong>间隔 2 秒（CPU、内存、磁盘、待处理消息）</li>
 </ul>
@@ -767,9 +767,9 @@
     pub circuit_breaker_recoveries: u64,
 }
 <span class="boring">}</span></code></pre>
-<p>通过心跳事件按 daemon 上报，可通过 <code>dora inspect top</code> 查看。</p>
+<p>通过心跳事件按守护进程上报。可通过 <code>dora inspect top</code> 查看。</p>
 <h2 id="distributed-deployment"><a class="header" href="architecture.html#distributed-deployment">分布式部署</a></h2>
-<h3 id="multi-daemon-architecture"><a class="header" href="architecture.html#multi-daemon-architecture">多 Daemon 架构</a></h3>
+<h3 id="multi-daemon-architecture"><a class="header" href="architecture.html#multi-daemon-architecture">多守护进程架构</a></h3>
 <pre><code>  ┌──────────┐       Zenoh        ┌──────────┐
   │ Daemon A │◄──────────────────►│ Daemon B │
   │ Machine 1│    pub/sub         │ Machine 2│
@@ -796,9 +796,9 @@
 <h3 id="build-distribution"><a class="header" href="architecture.html#build-distribution">构建分发</a></h3>
 <p>通过 <code>DistributeStrategy</code> 提供三种策略：</p>
 <ul>
-<li><strong>Local</strong>——每个 daemon 各自从源码构建（默认）</li>
+<li><strong>Local</strong>——每个守护进程从源代码构建（默认）</li>
 <li><strong>Scp</strong>——CLI 通过 SSH/SCP 推送已构建的二进制文件</li>
-<li><strong>Http</strong>——daemon 从 coordinator 的 <code>/api/artifacts</code> 端点拉取</li>
+<li><strong>Http</strong>——守护进程从协调器的 <code>/api/artifacts</code> 端点拉取</li>
 </ul>
 <h3 id="machine-labels"><a class="header" href="architecture.html#machine-labels">机器标签</a></h3>
 <p>节点可以通过标签指定目标机器：</p>
@@ -899,7 +899,7 @@ impl&lt;R: Read&gt; RecordingReader&lt;R&gt; {
 </thead>
 <tbody>
 <tr><td><code>DORA_COORDINATOR_PORT_WS_DEFAULT</code></td><td>6013</td><td>协调器 WebSocket 端口</td></tr>
-<tr><td><code>DORA_DAEMON_LOCAL_LISTEN_PORT_DEFAULT</code></td><td>53291</td><td>Daemon TCP 监听端口</td></tr>
+<tr><td><code>DORA_DAEMON_LOCAL_LISTEN_PORT_DEFAULT</code></td><td>53291</td><td>守护进程 TCP 监听端口</td></tr>
 <tr><td><code>ZERO_COPY_THRESHOLD</code></td><td>4096 字节</td><td>共享内存启用</td></tr>
 <tr><td><code>MAX_MESSAGE_BYTES</code></td><td>64 MiB</td><td>最大 TCP/postcard 消息</td></tr>
 <tr><td><code>MAX_CONTROL_MESSAGE_BYTES</code></td><td>1 MiB</td><td>最大控制平面 JSON 消息</td></tr>
@@ -909,11 +909,11 @@ impl&lt;R: Read&gt; RecordingReader&lt;R&gt; {
 <tr><td><code>MAX_TOPICS_PER_SUBSCRIBE</code></td><td>64</td><td>话题批处理上限</td></tr>
 <tr><td><code>MAX_SUBSCRIPTIONS_PER_CONNECTION</code></td><td>16</td><td>单连接上限</td></tr>
 <tr><td><code>MAX_BINARY_PAYLOAD_BYTES</code></td><td>64 MiB</td><td>话题数据帧上限</td></tr>
-<tr><td><code>WATCHDOG_INTERVAL</code></td><td>5 秒</td><td>向 coordinator 发送心跳</td></tr>
+<tr><td><code>WATCHDOG_INTERVAL</code></td><td>5 秒</td><td>向协调器发送心跳</td></tr>
 <tr><td><code>METRICS_INTERVAL</code></td><td>2 秒</td><td>指标采集</td></tr>
 <tr><td><code>HEALTH_CHECK_INTERVAL</code></td><td>5 秒</td><td>默认节点健康检查</td></tr>
 <tr><td><code>MAX_BUFFERED_LOG_MESSAGES</code></td><td>10,000</td><td>日志缓冲区容量</td></tr>
-<tr><td><code>MAX_PENDING_REPLIES</code></td><td>256</td><td>待处理的 coordinator 回复</td></tr>
+<tr><td><code>MAX_PENDING_REPLIES</code></td><td>256</td><td>待处理的协调器回复</td></tr>
 <tr><td><code>MAX_ERROR_BYTES</code></td><td>4096</td><td>最大错误消息大小</td></tr>
 <tr><td>默认输入队列大小</td><td>10</td><td>单个输入的消息缓冲区</td></tr>
 </tbody>
@@ -966,11 +966,11 @@ impl&lt;R: Read&gt; RecordingReader&lt;R&gt; {
 <tr><th>通道</th><th>格式</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td>CLI ↔ Coordinator</td><td>JSON 文本帧</td><td>为 HLC 时间戳保留 u128 类型</td></tr>
-<tr><td>Coordinator ↔ Daemon</td><td>JSON 文本帧</td><td>直接字符串序列化</td></tr>
-<tr><td>Daemon ↔ Node（TCP）</td><td>基于长度前缀帧的 postcard</td><td>8 字节小端长度前缀</td></tr>
-<tr><td>Daemon ↔ Node（shmem）</td><td>通过共享内存传输的 postcard</td><td>原子同步</td></tr>
-<tr><td>Daemon ↔ Daemon</td><td>基于 Zenoh 的 postcard</td><td>Apache Arrow 数据格式</td></tr>
+<tr><td>CLI ↔ 协调器</td><td>JSON 文本帧</td><td>为 HLC 时间戳保留 u128 类型</td></tr>
+<tr><td>协调器 ↔ 守护进程</td><td>JSON 文本帧</td><td>直接字符串序列化</td></tr>
+<tr><td>守护进程 ↔ 节点（TCP）</td><td>基于长度前缀帧的 postcard</td><td>8 字节小端长度前缀</td></tr>
+<tr><td>守护进程 ↔ 节点（shmem）</td><td>通过共享内存传输的 postcard</td><td>原子同步</td></tr>
+<tr><td>守护进程 ↔ 守护进程</td><td>基于 Zenoh 的 postcard</td><td>Apache Arrow 数据格式</td></tr>
 <tr><td>录制</td><td>.drec 中的 postcard 条目</td><td>自定义二进制容器</td></tr>
 </tbody>
 </table>

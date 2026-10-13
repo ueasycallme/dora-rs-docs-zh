@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -866,8 +866,8 @@ dora cluster status
 <ul>
 <li><strong>优先使用标签而非机器 ID</strong>，以提高灵活性。标签可将数据流与具体机器解耦，便于添加、移除或替换硬件。</li>
 <li><strong>生产环境使用 systemd 安装</strong>。守护进程服务可在重启后保留，并在失败时通过 <code>Restart=on-failure</code> 自动重启。</li>
-<li><strong>集群环境使用协调器持久化</strong>（<code>dora coordinator --store redb</code>），使协调器在重启后仍能恢复状态。参见 <a href="fault-tolerance.html#coordinator-state-persistence">Coordinator State Persistence</a>。</li>
-<li><strong>为节点设置重启策略</strong>，以实现单节点级别的容错。将其与自动恢复结合使用可形成多层防护。参见 <a href="fault-tolerance.html#restart-policies">Restart Policies</a>。</li>
+<li><strong>在集群中使用协调器持久化</strong>（<code>dora coordinator --store redb</code>），使协调器能够在重启后恢复。参见<a href="fault-tolerance.html#coordinator-state-persistence">协调器状态持久化</a>。</li>
+<li><strong>为节点设置重启策略</strong>以实现按节点的弹性恢复。将其与自动恢复结合使用可实现纵深防御。参见<a href="fault-tolerance.html#restart-policies">重启策略</a>。</li>
 <li><strong>结合多种工具进行监控</strong>：使用 <code>dora cluster status</code> 查看守护进程健康状态，使用 <code>dora top</code> 查看资源使用情况，使用 <code>dora logs</code> 查看节点输出。</li>
 <li><strong>先在本地测试</strong>。先用 <code>dora run dataflow.yml</code> 进行开发，再部署到集群。同一份 dataflow YAML 在两种模式下都适用——本地模式下 <code>deploy</code> 字段会被忽略。</li>
 <li><strong>使用滚动升级</strong>而不是停止整个集群。<code>dora cluster upgrade</code> 会逐台机器处理，以维持可用性。</li>

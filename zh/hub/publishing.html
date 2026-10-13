@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=b7d3e937cf";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -166,7 +166,7 @@
 <ol>
 <li>在节点根目录下提交一个带有 <code>namespace</code> 和 <code>name</code> 的 <a href="node-manifest.html"><code>dora-node.yml</code></a>。<strong>版本不属于清单内容</strong>——它会在锚定的 commit 处从 <code>[package].version</code>（Cargo）/ <code>[project].version</code>（pyproject）中读取，或通过 <code>--version</code> 指定。（在清单中添加 <code>version:</code> 会被拒绝——它使用了 <code>deny_unknown_fields</code>。）</li>
 <li>节点源码已推送到某个 git 远程仓库（索引条目会指向它）。</li>
-<li>你的 <code>namespace</code> 与你所控制的某个 GitHub 组织或用户一致（参见 <a href="publishing.html#namespaces--ownership">Namespaces &amp; ownership</a>）。</li>
+<li>你的 <code>namespace</code> 与你控制的 GitHub 组织或用户匹配（参见<a href="publishing.html#namespaces--ownership">命名空间与所有权</a>）。</li>
 </ol>
 <h2 id="preview-the-entry"><a class="header" href="publishing.html#preview-the-entry">预览条目</a></h2>
 <pre><code class="language-bash">cd my-node
