@@ -13,8 +13,8 @@
 ```bash
 cd ~/wuql_ws/academy_ws/dora_rs_translate
 python3 scripts/rebuild.py && python3 scripts/build_search.py
-python3 scripts/publish.py --out ~/wuql_ws/dora-docs-zh
-cd ~/wuql_ws/dora-docs-zh && git add -A && git commit -m "Update docs" && git push
+python3 scripts/publish.py --out ~/wuql_ws/dora-rs-docs-zh
+cd ~/wuql_ws/dora-rs-docs-zh && git add -A && git commit -m "Update docs" && git push
 ```
 
 推送到 `main` 后，`.github/workflows/pages.yml` 把仓库静态文件直接发布到 GitHub Pages（无构建步骤），`CNAME` 绑定自定义域名。
