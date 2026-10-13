@@ -27,7 +27,7 @@
             const path_to_root = "../";
             const default_light_theme = "ayu";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../zh-searchindex.js?v=88caf96a07";
+            window.path_to_searchindex_js = "../zh-searchindex.js?v=2a3aee0e3b";
         </script>
 <!-- Start loading toc.js asap -->
 <script src="../toc-2e58062a.js?v=4f79bc8e05"></script>
@@ -174,7 +174,7 @@
 <pre><code>┌─────────────────────────────────────────────────┐
 │  CLI (dora)          Coordinator (orchestrator) │  Layer 4: Orchestration
 ├─────────────────────────────────────────────────┤
-│  Daemon (per-machine)    Runtime (operators)     │  Layer 3: Execution
+│  Daemon (per-machine)    Runtime (operators)    │  Layer 3: Execution
 ├─────────────────────────────────────────────────┤
 │  dora-core    zenoh SHM               Node API  │  Layer 2: Core Libraries
 ├─────────────────────────────────────────────────┤
@@ -272,9 +272,9 @@
 <h3 id="coordinator"><a class="header" href="architecture.html#coordinator">协调器</a></h3>
 <p>协调器是一个基于 Axum 的 WebSocket 服务器，负责编排分布式部署。</p>
 <pre><code>                          ┌──────────────────┐
-                          │   Coordinator     │
-            WS /api/control  │  ┌────────────┐  │  WS /api/daemon
-   CLI ◄──────────────────►  │  │   State    │  │ ◄──────────────────► Daemon(s)
+                          │   Coordinator    │
+         WS /api/control  │  ┌────────────┐  │  WS /api/daemon
+CLI ◄──────────────────►  │  │   State    │  │ ◄──────────────────► Daemon(s)
                           │  │   Store    │  │
                           │  └────────────┘  │
                           │  /api/artifacts  │
@@ -294,14 +294,14 @@
 <pre><code>┌──────────────────────────────────────────────────────┐
 │                     Daemon                           │
 │                                                      │
-│  ┌──────────┐  ┌───────────┐  ┌──────────────────┐  │
-│  │ Event    │  │ Spawner   │  │ Node Comm        │  │
-│  │ Loop     │──│ (nodes)   │  │ ┌──────────────┐ │  │
-│  │          │  └───────────┘  │ │ TCP listener │ │  │
-│  │ Sources: │  ┌───────────┐  │ │ Shmem server │ │  │
-│  │ • Coord  │  │ Fault     │  │ │ Unix socket  │ │  │
-│  │ • Nodes  │──│ Tolerance │  │ └──────────────┘ │  │
-│  │ • Zenoh  │  └───────────┘  └──────────────────┘  │
+│  ┌──────────┐  ┌───────────┐  ┌──────────────────┐   │
+│  │ Event    │  │ Spawner   │  │ Node Comm        │   │
+│  │ Loop     │──│ (nodes)   │  │ ┌──────────────┐ │   │
+│  │          │  └───────────┘  │ │ TCP listener │ │   │
+│  │ Sources: │  ┌───────────┐  │ │ Shmem server │ │   │
+│  │ • Coord  │  │ Fault     │  │ │ Unix socket  │ │   │
+│  │ • Nodes  │──│ Tolerance │  │ └──────────────┘ │   │
+│  │ • Zenoh  │  └───────────┘  └──────────────────┘   │
 │  │ • Timers │                                        │
 │  └──────────┘                                        │
 │                                                      │
@@ -566,11 +566,11 @@
 <pre><code>┌────────────────────────────────────────────────────┐
 │              Shared Memory Region                  │
 │                                                    │
-│  ┌──────────┐ ┌──────────┐ ┌──────┐ ┌────┐ ┌────┐│
-│  │ Server   │ │ Client   │ │Discon│ │Len │ │Data││
-│  │ Event    │ │ Event    │ │(bool)│ │(u64)│ │    ││
-│  └──────────┘ └──────────┘ └──────┘ └────┘ └────┘│
-│  (raw_sync_2)  (raw_sync_2) AtomicBool AtomicU64  │
+│  ┌──────────┐ ┌──────────┐ ┌──────┐ ┌────┐ ┌────┐  │
+│  │ Server   │ │ Client   │ │Discon│ │Len │ │Data│  │
+│  │ Event    │ │ Event    │ │(bool)│ │(u64)│ │    │ │
+│  └──────────┘ └──────────┘ └──────┘ └────┘ └────┘  │
+│  (raw_sync_2)  (raw_sync_2) AtomicBool AtomicU64   │
 └────────────────────────────────────────────────────┘
 </code></pre>
 <h3 id="shmemchannel"><a class="header" href="architecture.html#shmemchannel">ShmemChannel</a></h3>
