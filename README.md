@@ -1,6 +1,6 @@
 # dora 文档 · 非官方中文翻译
 
-在线阅读：<https://dora-rs.ai/dora/> 的中文版 → **<https://dora.kiloong.com>**
+在线阅读：<https://dora-rs.ai/dora/> 的中文版 → **<https://dora-rs.kiloong.com>**
 
 - `zh/`：中文译文；`en/`：英文对照。每页右下角的悬浮按钮可切换语言（保持阅读位置）或打开官方原文。
 - 译自 <https://dora-rs.ai/dora/>；原文 © dora-rs contributors，依 [Apache License 2.0](LICENSE) 发布。修改说明见 [NOTICE](NOTICE)。
